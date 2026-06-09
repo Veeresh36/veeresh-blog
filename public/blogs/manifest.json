@@ -1,0 +1,105 @@
+{
+  "posts": [
+    {
+      "slug": "22-year-old-startup-developer-life",
+      "title": "22 Years Old, -₹400 in My Bank Account...",
+      "tag": "Career",
+      "emoji": "💻",
+      "gradient": "from-[#E8F0FE] to-[#D4E4FC]",
+      "meta": "8 min read · May 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.png"
+    },
+    {
+      "slug": "13k-second-hand-cpu-mistake-in-20s",
+      "title": "The ₹13,000 Mistake I Made in My 20s",
+      "tag": "Life Lessons",
+      "emoji": "💸",
+      "gradient": "from-[#F5E8E8] to-[#E8D4D4]",
+      "meta": "8 min read · May 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.png"
+    },
+    {
+      "slug": "suffering-without-generational-wealth",
+      "title": "Why Suffering Without Generational Wealth Hits Different",
+      "tag": "Finance",
+      "emoji": "💰",
+      "gradient": "from-[#F8F5F1] to-[#EDE7DF]",
+      "meta": "7 min read · May 2025",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-suffering-without-generational-wealth-hits-different.png"
+    },
+    {
+      "slug": "working-for-others-but-born-to-build-my-own-kingdom",
+      "title": "I'm Building Someone Else's Dream — But My Mind is Already Designing My Own Kingdom",
+      "tag": "Career",
+      "emoji": "👑",
+      "gradient": "from-[#1A1612] to-[#2D2520]",
+      "meta": "10 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.png"
+    },
+    {
+      "slug": "childhood-mistake-changed-my-life",
+      "title": "They Forgave Me in 5 Minutes. I Haven't Forgiven Myself in 8 Years — How One Childhood Mistake Still Shapes Who I Am",
+      "tag": "Life Lessons",
+      "emoji": "🪞",
+      "gradient": "from-[#E8EEF5] to-[#D4DDE8]",
+      "meta": "9 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/forgiveness-and-personal-growth.png"
+    },
+    {
+      "slug": "money-mistakes-20s",
+      "title": "7 Money Mistakes I Made in My 20s (That Nobody Warned Me About)",
+      "tag": "Finance",
+      "emoji": "💸",
+      "gradient": "from-[#FFF3E0] to-[#FFE0B2]",
+      "meta": "7 min read · June 2026",
+      "image": "https://raw.githubusercontent.com/Veeresh36/bog_images/main/why-smart-people-stay-broke-in-their-20s.png"
+    },
+    {
+      "slug": "budgeting-for-beginners-india",
+      "title": "Budgeting for Beginners in India: The 3-Bucket Method That Actually Works",
+      "tag": "Finance",
+      "emoji": "📊",
+      "gradient": "from-[#E8F5E9] to-[#C8E6C9]",
+      "meta": "6 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.png"
+    },
+    {
+      "slug": "first-project-failure-lessons",
+      "title": "My First Project Failed Quietly. Here's What It Taught Me.",
+      "tag": "Career",
+      "emoji": "🔧",
+      "gradient": "from-[#EDE7F6] to-[#D1C4E9]",
+      "meta": "7 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.png"
+    },
+    {
+      "slug": "developer-setup-trap",
+      "title": "The Developer Setup Trap: Why Better Gear Won't Make You a Better Coder",
+      "tag": "Career",
+      "category": "Career",
+      "excerpt": "I wasted ₹13,000 chasing a setup upgrade. The projects I hadn't finished stayed unfinished. Here's what actually makes you a better developer.",
+      "emoji": "🖥️",
+      "gradient": "from-[#E3F2FD] to-[#BBDEFB]",
+      "meta": "6 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/developer-setup-trap-why-better-hardware-wont-make-you-a-better-developer.png"
+    },
+    {
+      "slug": "30-day-rule-impulse-buying",
+      "title": "The 30-Day Rule That Would Have Saved Me ₹13,000",
+      "tag": "Finance",
+      "emoji": "⏳",
+      "gradient": "from-[#FCE4EC] to-[#F8BBD9]",
+      "meta": "5 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.png"
+    },
+    {
+      "slug": "stop-comparing-yourself-social-media",
+      "title": "Stop Comparing Your Chapter 1 to Someone Else's Chapter 10",
+      "tag": "Life Lessons",
+      "emoji": "📱",
+      "gradient": "from-[#F3E5F5] to-[#E1BEE7]",
+      "meta": "6 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/stop-comparing-your-chapter-1-to-someone-elses-chapter-10.png"
+    }
+  ]
+}
