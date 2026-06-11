@@ -52,31 +52,88 @@ const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, 
   );
 };
 
+// ═══════════════════════════════════════════════
+// ADSTERRA AD UNITS
+// ═══════════════════════════════════════════════
 
-import { useEffect, useRef } from "react";
+// Generic banner using atOptions, isolated in an iframe so multiple
+// instances don't clash on the global `atOptions` variable.
+const AdsterraBanner = ({ adKey, width, height, className = "" }) => {
+  const srcDoc = `
+    <html><body style="margin:0;display:flex;align-items:center;justify-content:center;background:transparent;">
+    <script>
+      atOptions = { key: '${adKey}', format: 'iframe', height: ${height}, width: ${width}, params: {} };
+    </script>
+    <script src="https://www.highperformanceformat.com/${adKey}/invoke.js"></script>
+    </body></html>`;
 
-const AdsterraBanner = () => {
-  const containerRef = useRef(null);
+  return (
+    <div className={`ad-wrapper overflow-hidden clear-both my-6 text-center ${className}`}>
+      <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 mb-1.5 font-medium">
+        — Advertisement —
+      </span>
+      <iframe
+        title={`ad-${adKey}`}
+        srcDoc={srcDoc}
+        width={width}
+        height={height}
+        style={{ border: "none", maxWidth: "100%" }}
+        scrolling="no"
+      />
+    </div>
+  );
+};
+
+// Native Banner — script injects directly into a div by id
+const NativeBannerAd = ({ className = "" }) => {
+  const containerId = "container-a9c42fdb19c1a4ca2d8d9f4d549094b7";
+  const ref = useRef(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!ref.current) return;
+    if (ref.current.querySelector("script")) return; // avoid double-injection
 
     const script = document.createElement("script");
     script.async = true;
     script.setAttribute("data-cfasync", "false");
-    script.src =
-      "https://pl29704113.effectivecpmnetwork.com/a9c42fdb19c1a4ca2d8d9f4d549094b7/invoke.js";
-
-    containerRef.current.appendChild(script);
+    script.src = "https://pl29704113.effectivecpmnetwork.com/a9c42fdb19c1a4ca2d8d9f4d549094b7/invoke.js";
+    ref.current.appendChild(script);
   }, []);
 
   return (
-    <div
-      id={`ad-${Math.random()}`}
-      ref={containerRef}
-      style={{ minHeight: "250px" }}
-    />
+    <div className={`ad-wrapper overflow-hidden clear-both my-6 text-center ${className}`}>
+      <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 mb-1.5 font-medium">
+        — Advertisement —
+      </span>
+      <div ref={ref}>
+        <div id={containerId} />
+      </div>
+    </div>
   );
+};
+
+// Social Bar — sitewide sticky bar, injected once
+const SocialBarAd = () => {
+  useEffect(() => {
+    if (document.getElementById("social-bar-script")) return;
+    const script = document.createElement("script");
+    script.id = "social-bar-script";
+    script.src = "https://pl29704118.effectivecpmnetwork.com/64/f0/57/64f05701e44be65e51705b2780b515a3.js";
+    document.body.appendChild(script);
+  }, []);
+  return null;
+};
+
+// Popunder — sitewide, injected once
+const PopunderAd = () => {
+  useEffect(() => {
+    if (document.getElementById("popunder-script")) return;
+    const script = document.createElement("script");
+    script.id = "popunder-script";
+    script.src = "https://pl29704112.effectivecpmnetwork.com/43/15/ae/4315ae6464604174ae449863d52e4f7f.js";
+    document.body.appendChild(script);
+  }, []);
+  return null;
 };
 
 // ═══════════════════════════════════════════════
@@ -1550,7 +1607,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef })
         <meta itemProp="headline" content={fm.title} />
         <meta itemProp="datePublished" content={fm.date} />
         <meta itemProp="author" content={fm.author || SITE.name} />
-        <CarbonAdUnit slot="9876543210" format="fluid" responsive="true" className="mb-8" />
+        <NativeBannerAd className="mb-8" />
         <ReactMarkdown components={{
           h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
           h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
@@ -1560,10 +1617,9 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef })
             return <p>{children}</p>;
           }
         }}>{content}</ReactMarkdown>
-        <CarbonAdUnit slot="1122334455" format="rectangle" responsive="true" className="mt-8" />
+        <NativeBannerAd className="mt-8" />
         <ArticleTags tags={fm.tags} dark={dark} />
       </article>
-      <AdsterraBanner />
     </main>
     <aside className="w-full lg:w-[380px] lg:shrink-0 z-20 self-start lg:sticky lg:top-[96px] flex flex-col gap-4" aria-label="Article actions panel">
       {fm.pinterest && (
@@ -1573,7 +1629,9 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef })
           <PinterestIcon size={18} /> View on Pinterest
         </a>
       )}
-      <CarbonAdUnit slot="5566778899" format="rectangle" responsive="false" style={{ width: "100%", height: "250px" }} />
+      <div className="flex justify-center">
+        <AdsterraBanner adKey="506c346bb6db0c3c55b9ca7edcfd9361" width={160} height={300} />
+      </div>
       {Array.isArray(fm.products) && fm.products.length > 0 && (
         <div className="rounded-2xl overflow-hidden" style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
           <div className="px-5 py-3 text-[0.65rem] font-bold tracking-[0.13em] uppercase" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>Products in this post</div>
@@ -1817,10 +1875,6 @@ function useViewCount(slug) {
 }
 
 // ═══════════════════════════════════════════════
-// ICONS
-// ═══════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════
 // MAIN EXPORT
 // ═══════════════════════════════════════════════
 
@@ -2051,6 +2105,8 @@ export default function ReadBlog() {
       <SelectionToolbar tooltip={selTooltip} onClose={() => setSelTooltip(null)} dark={dark} onHighlight={saveHighlight} />
       <ScrollToTop show={showScrollTop} dark={dark} />
       <FloatingShareBar title={fm.title} dark={dark} />
+      <SocialBarAd />
+      <PopunderAd />
 
       <div style={{ background: bg, minHeight: "100vh" }}>
         <ProgressBar progress={progress} />
@@ -2089,7 +2145,7 @@ export default function ReadBlog() {
                 {/* NEW: Key Takeaways box — reads from fm.takeaways */}
                 <KeyTakeawaysBox takeaways={fm.takeaways} dark={dark} />
 
-                <CarbonAdUnit slot="4321098765" format="fluid" responsive="true" className="mb-6" />
+                <NativeBannerAd className="mb-6" />
 
                 <ReactMarkdown components={{
                   h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
@@ -2098,7 +2154,7 @@ export default function ReadBlog() {
                   {content}
                 </ReactMarkdown>
 
-                <CarbonAdUnit slot="8765432109" format="auto" responsive="true" className="mt-8" />
+                <NativeBannerAd className="mt-8" />
 
                 {/* NEW: Emoji reaction bar */}
                 <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_ANON_KEY} />
@@ -2108,7 +2164,6 @@ export default function ReadBlog() {
                 {/* NEW: FAQ accordion + schema — reads from fm.faqs */}
                 <FAQSection faqs={fm.faqs} dark={dark} border={border} />
               </article>
-              <AdsterraBanner />
             </main>
 
             {/* SIDEBAR */}
@@ -2126,7 +2181,9 @@ export default function ReadBlog() {
                 <HighlightsPanel slug={slug} dark={dark} border={border} />
 
                 <SidebarCard header="Sponsored" dark={dark} delay={40}>
-                  <CarbonAdUnit slot="2468101214" format="rectangle" responsive="false" style={{ width: "100%", height: "250px" }} />
+                  <div className="flex justify-center">
+                    <AdsterraBanner adKey="506c346bb6db0c3c55b9ca7edcfd9361" width={160} height={300} />
+                  </div>
                 </SidebarCard>
 
                 <SidebarCard header="About the Author" dark={dark} delay={80}>
@@ -2145,8 +2202,8 @@ export default function ReadBlog() {
           </div>
         )}
 
-        <div className="max-w-[1280px] mx-auto px-6 mb-10">
-          <CarbonAdUnit slot="1357911131" format="horizontal" responsive="true" />
+        <div className="max-w-[1280px] mx-auto px-6 mb-10 flex justify-center">
+          <AdsterraBanner adKey="5591d745b6b69486e0e89cb9875708e0" width={728} height={90} />
         </div>
 
         <PrevNextNav allPosts={allPosts} currentSlug={slug} dark={dark} />
