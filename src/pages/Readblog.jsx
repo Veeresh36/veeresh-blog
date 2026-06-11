@@ -48,9 +48,34 @@ const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, 
         data-ad-format={format}
         data-full-width-responsive={responsive}
       />
-      <script async="async" data-cfasync="false" src="https://pl29704113.effectivecpmnetwork.com/a9c42fdb19c1a4ca2d8d9f4d549094b7/invoke.js"></script>
-      <div id="container-a9c42fdb19c1a4ca2d8d9f4d549094b7"></div>
     </div>
+  );
+};
+
+
+import { useEffect, useRef } from "react";
+
+const AdsterraBanner = () => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.setAttribute("data-cfasync", "false");
+    script.src =
+      "https://pl29704113.effectivecpmnetwork.com/a9c42fdb19c1a4ca2d8d9f4d549094b7/invoke.js";
+
+    containerRef.current.appendChild(script);
+  }, []);
+
+  return (
+    <div
+      id={`ad-${Math.random()}`}
+      ref={containerRef}
+      style={{ minHeight: "250px" }}
+    />
   );
 };
 
@@ -1538,6 +1563,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef })
         <CarbonAdUnit slot="1122334455" format="rectangle" responsive="true" className="mt-8" />
         <ArticleTags tags={fm.tags} dark={dark} />
       </article>
+      <AdsterraBanner />
     </main>
     <aside className="w-full lg:w-[380px] lg:shrink-0 z-20 self-start lg:sticky lg:top-[96px] flex flex-col gap-4" aria-label="Article actions panel">
       {fm.pinterest && (
@@ -2082,6 +2108,7 @@ export default function ReadBlog() {
                 {/* NEW: FAQ accordion + schema — reads from fm.faqs */}
                 <FAQSection faqs={fm.faqs} dark={dark} border={border} />
               </article>
+              <AdsterraBanner />
             </main>
 
             {/* SIDEBAR */}
