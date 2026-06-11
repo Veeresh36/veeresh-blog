@@ -40,9 +40,16 @@ const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, 
       <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 mb-1.5 font-medium">
         — Advertisement —
       </span>
+      <ins
+        className="adsbygoogle block bg-neutral-50/50 dark:bg-neutral-900/30 rounded-xl"
+        style={{ minHeight: "90px", ...style }}
+        data-ad-client={ADSENSE_CLIENT}
+        data-ad-slot={slot}
+        data-ad-format={format}
+        data-full-width-responsive={responsive}
+      />
       <script async="async" data-cfasync="false" src="https://pl29704113.effectivecpmnetwork.com/a9c42fdb19c1a4ca2d8d9f4d549094b7/invoke.js"></script>
       <div id="container-a9c42fdb19c1a4ca2d8d9f4d549094b7"></div>
-
     </div>
   );
 };
