@@ -113,11 +113,13 @@ const TOPICS = [
 
 // ─── PINS DATA ───────────────────────────────────────────────
 const PINS = [
-    { emoji: "🚗", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/toycills-vintage-124-die-cast-car-review.png", title: "Toycills Vintage Die-Cast Car", desc: "A collectible 1:24 scale vintage car for any desk.", category: "Pinterest Picks", heightPx: 280, slug: "toycills-vintage-toy-car-review" },
+    { emoji: "🚗", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review.png", title: "This Expandable Backpack Might Be the Smartest Travel Upgrade of 2026", desc: "Discover why this WROGN expandable backpack is becoming a Pinterest favorite.", category: "Pinterest Picks", heightPx: 280, slug: "wrogn-expandable-backpack-review" },
 
-    { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/redragon-k630-dragonborn-review-banner.png", title: "Redragon K630 Dragonborn — Best Budget 60% Keyboard?", desc: "An in-depth evaluation of the Redragon K630 Dragonborn 60% mechanical keyboard.", category: "Pinterest Picks", heightPx: 280, slug: "redragon-k630-dragonborn-review" },
+    { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review.png", title: "This Compact Tech Organizer Keeps Every Cable and Charger in One Place", desc: "A small canvas pouch that ends the tangled-cable mess in your travel bag — chargers, power banks, and cards all sorted in one zip-around case.", category: "Pinterest Picks", heightPx: 280, slug: "dailyobjects-gadget-organizer-review" },
 
-    { emoji: "⌨️", image: "https://raw.githubusercontent.com/Veeresh36/bog_images/main/minimal-gaming-controller-setup-2026.png", title: "Minimal Gaming Setup Ideas That Look Expensive", desc: "Clean gaming setup inspiration featuring aesthetic desk layouts, RGB lighting, minimalist battlestations, compact keyboards, and modern gaming room ideas for 2026.", category: "Pinterest Picks", heightPx: 280, slug: "minimal-gaming-setup-ideas" },
+    { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/striff-webcam-cover-slide-review.png", title: "This Tiny Webcam Cover Quietly Fixes a Privacy Blind Spot on Your Laptop", desc: "STRIFF ultra-thin webcam cover slide attached over a laptop camera, sliding open and closed", category: "Pinterest Picks", heightPx: 280, slug: "striff-webcam-cover-slide-review" },
+
+    { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/biggie-bean-bag-review.png", title: "Why This Bean Bag Became My Favorite Spot in the House", desc: "After sinking into this printed bean bag daily for work breaks, gaming sessions, and lazy evenings, I can confidently say it's the coziest addition to my room", category: "Pinterest Picks", heightPx: 280, slug: "biggie-bean-bag-review" },
 ];
 
 // ─── MARQUEE TAGS ─────────────────────────────────────────────
@@ -278,6 +280,23 @@ function useMagneticHover(strength = 0.3) {
 // ════════════════════════════════════════════════════════════
 //  HOOK — useBlogPosts
 // ════════════════════════════════════════════════════════════
+function parseMetaString(meta) {
+    const match = /(\d+\s*min read)\s*·\s*([A-Za-z]+)\s+(\d{4})/.exec(meta || "");
+    if (!match) return { readingTime: meta || "5 min read", date: "" };
+    const [, readingTime, month, year] = match;
+    const parsed = new Date(`${month} 1, ${year}`);
+    return {
+        readingTime,
+        date: isNaN(parsed.getTime()) ? "" : parsed.toISOString(),
+    };
+}
+
+function parseGradientString(gradient) {
+    const match = /from-\[(#[0-9A-Fa-f]{3,8})\]\s*to-\[(#[0-9A-Fa-f]{3,8})\]/.exec(gradient || "");
+    if (!match) return { background: "#F2EDE4" };
+    return { background: `linear-gradient(135deg, ${match[1]}, ${match[2]})` };
+}
+
 function useBlogPosts() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -291,37 +310,30 @@ function useBlogPosts() {
                 if (!manifestRes.ok) throw new Error("manifest.json not found. See setup instructions.");
                 const manifestData = await manifestRes.json();
 
-                const slugs = Array.isArray(manifestData)
+                const rawPosts = Array.isArray(manifestData)
                     ? manifestData
-                    : (manifestData.posts || []).map(p => p.slug);
+                    : (manifestData.posts || []);
 
-                const results = await Promise.allSettled(
-                    slugs.map(async (slug, idx) => {
-                        const res = await fetch(`/blogs/${slug}.md`);
-                        if (!res.ok) throw new Error(`Could not load /blogs/${slug}.md`);
-                        const raw = await res.text();
-                        const { data } = parseFrontmatter(raw);
-                        return {
-                            slug: data.slug || slug,
-                            title: data.title || slug,
-                            excerpt: data.excerpt || data.description || "",
-                            date: data.date || "",
-                            category: data.category || (Array.isArray(data.tags) ? data.tags[0] : "") || "General",
-                            tags: Array.isArray(data.tags) ? data.tags : [],
-                            readingTime: data.readingTime || data["reading-time"] || "5 min read",
-                            featured: data.featured === true || data.featured === "true",
-                            emoji: data.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
-                            gradientStyle: GRADIENT_PRESETS[idx % GRADIENT_PRESETS.length],
-                            image: data.image || null,
-                            author: data.author || "Veeresh Bashetti",
-                            canonicalUrl: data.canonicalUrl || null,
-                        };
-                    })
-                );
+                const { readingTime: _unused } = { readingTime: null }; // no-op, keeps diff minimal
 
-                const loaded = results
-                    .filter(r => { if (r.status === "rejected") { console.warn("Blog load error:", r.reason); return false; } return true; })
-                    .map(r => r.value);
+                const loaded = rawPosts.map((p, idx) => {
+                    const { readingTime, date } = parseMetaString(p.meta);
+                    return {
+                        slug: p.slug,
+                        title: p.title || p.slug,
+                        excerpt: p.excerpt || "",
+                        date: p.date || date,
+                        category: p.category || p.tag || "General",
+                        tags: p.tag ? [p.tag] : [],
+                        readingTime,
+                        featured: p.featured === true || p.featured === "true",
+                        emoji: p.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
+                        gradientStyle: parseGradientString(p.gradient),
+                        image: p.image || null,
+                        author: p.author || "Veeresh Bashetti",
+                        canonicalUrl: p.canonicalUrl || null,
+                    };
+                });
 
                 loaded.sort((a, b) => {
                     if (a.featured && !b.featured) return -1;
@@ -488,6 +500,9 @@ const GlobalStyles = () => (
     @keyframes sectionFadeIn {
       from { opacity: 0; } to { opacity: 1; }
     }
+
+    /* ── Pinterest shelf: hide scrollbar ── */
+    #pinterest .pin-shelf-track::-webkit-scrollbar { display: none; }
   `}</style>
 );
 
@@ -1246,133 +1261,164 @@ const TopicCard = ({ topic, index }) => {
 };
 
 const TopicsSection = ({ posts }) => {
-    const [headerRef, headerVisible] = useScrollReveal();
-    const [showAll, setShowAll] = useState(false);
-
-    const LIMIT = 6;
+    const [headerRef] = useScrollReveal();
+    const trackRef = useRef(null);
+    const [progress, setProgress] = useState(8);
 
     const topics = useMemo(() => {
         const countMap = {};
         posts.forEach(p => {
-            const cat = p.category || "General";
+            const cat = (p.category || "General").trim();
             countMap[cat] = (countMap[cat] || 0) + 1;
         });
-        const result = TOPICS.map(t => ({ ...t, count: countMap[t.name] || 0 })).filter(t => t.count > 0);
-        Object.entries(countMap).forEach(([cat, count]) => {
-            if (!TOPICS.find(t => t.name === cat)) result.push({ icon: "📖", name: cat, count });
+
+        const normalize = (s) => s.trim().toLowerCase();
+        const usedCats = new Set();
+        const result = [];
+
+        TOPICS.forEach(t => {
+            let total = 0;
+            Object.keys(countMap).forEach(cat => {
+                if (normalize(cat) === normalize(t.name)) {
+                    total += countMap[cat];
+                    usedCats.add(cat);
+                }
+            });
+            if (total > 0) result.push({ ...t, count: total });
         });
-        return result;
+
+        Object.entries(countMap).forEach(([cat, count]) => {
+            if (!usedCats.has(cat)) {
+                result.push({ icon: "📖", name: cat, count });
+            }
+        });
+
+        return result.sort((a, b) => b.count - a.count);
     }, [posts]);
 
-    if (topics.length === 0) return null;
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
+        const updateProgress = () => {
+            const max = track.scrollWidth - track.clientWidth;
+            const pct = max > 0 ? (track.scrollLeft / max) * 100 : 0;
+            setProgress(Math.max(8, pct));
+        };
+        track.addEventListener("scroll", updateProgress, { passive: true });
+        updateProgress();
+        return () => track.removeEventListener("scroll", updateProgress);
+    }, [topics]);
 
-    const hasMore = topics.length > LIMIT;
-    const visibleTopics = showAll ? topics : topics.slice(0, LIMIT);
-    const hiddenCount = topics.length - LIMIT;
+    if (topics.length === 0) return null;
 
     return (
         <section id="topics" aria-labelledby="topics-heading" className="py-24 px-6">
             <div className="max-w-[1320px] mx-auto">
 
                 {/* Header */}
-                <div ref={headerRef} className={`mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4`}>
+                <div ref={headerRef} className="mb-7 flex items-end justify-between gap-4">
                     <div>
-                        <p className="text-xs font-bold tracking-[0.12em] uppercase text-[#E60023] mb-2">Explore</p>
-                        <h2 id="topics-heading" className="font-display text-[clamp(2rem,3.5vw,2.75rem)] text-[#1A1612]">
-                            Browse by <em className="text-[#8C7E74]">Topic</em>
+                        <p
+                            className="text-[11px] uppercase tracking-[0.14em] text-[#A6791E] mb-2"
+                            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                        >
+                            Explore
+                        </p>
+                        <h2
+                            id="topics-heading"
+                            className="text-[1.9rem] sm:text-[2.2rem] font-medium text-[#1A1612]"
+                            style={{ fontFamily: "'Fraunces', serif" }}
+                        >
+                            Browse by topic
                         </h2>
                     </div>
 
-                    {/* Show "View All Categories" link in header only when > 6 and collapsed */}
-                    {hasMore && !showAll && (
-                        <Link
-                            to="/categories"
-                            className="hidden sm:inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-[#8C7E74] hover:text-[#1A1612] transition-colors duration-200"
-                            style={{ textDecoration: "none" }}
+                    <div className="hidden sm:flex gap-2">
+                        <button
+                            type="button"
+                            onClick={() => trackRef.current?.scrollBy({ left: -256, behavior: "smooth" })}
+                            aria-label="Scroll left"
+                            className="flex-shrink-0 w-9 h-9 rounded-full border border-[#1A1612] text-[#1A1612] flex items-center justify-center hover:bg-[#1A1612] hover:text-[#FAF8F4] transition-colors duration-200"
                         >
-                            All {topics.length} categories
-                            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M15 6l-6 6 6 6" />
                             </svg>
-                        </Link>
-                    )}
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => trackRef.current?.scrollBy({ left: 256, behavior: "smooth" })}
+                            aria-label="Scroll right"
+                            className="flex-shrink-0 w-9 h-9 rounded-full border border-[#1A1612] text-[#1A1612] flex items-center justify-center hover:bg-[#1A1612] hover:text-[#FAF8F4] transition-colors duration-200"
+                        >
+                            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M9 6l6 6-6 6" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
-                {/* Grid */}
+                {/* Carousel track */}
                 <div
-                    className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-5"
-                    style={{ animation: "fadeUp 0.4s ease both" }}
+                    ref={trackRef}
+                    tabIndex={0}
+                    aria-label="Topic categories, scroll horizontally"
+                    className="flex gap-4 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                    style={{ scrollSnapType: "x mandatory" }}
                 >
-                    {visibleTopics.map((t, i) => (
-                        <TopicCard key={t.name} topic={t} index={i} />
+                    {topics.map((t, i) => (
+                        <Link
+                            key={t.name}
+                            to={`/category/${t.name.toLowerCase().replace(/\s+/g, "-")}`}
+                            aria-label={`Browse ${t.name} posts`}
+                            className="flex-shrink-0 w-[220px] h-[300px] rounded-2xl p-5 flex flex-col justify-between"
+                            style={{
+                                background: ["#1A1612", "#283B52", "#6B5B2E", "#7A4632", "#2F4A4A", "#5C2A35"][i % 6],
+                                scrollSnapAlign: "start",
+                                textDecoration: "none",
+                            }}
+                        >
+                            <span
+                                className="w-[34px] h-[34px] rounded-full border flex items-center justify-center text-[#FAF8F4]"
+                                style={{ borderColor: "rgba(250,248,244,0.35)" }}
+                            >
+                                <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg>
+                            </span>
+                            <div>
+                                <p
+                                    className="text-[25px] leading-tight text-[#FAF8F4]"
+                                    style={{ fontFamily: "'Fraunces', serif", letterSpacing: "-0.01em" }}
+                                >
+                                    {t.name}
+                                </p>
+                                <p
+                                    className="text-xs mt-2"
+                                    style={{ fontFamily: "'IBM Plex Mono', monospace", color: "rgba(250,248,244,0.65)" }}
+                                >
+                                    {t.count} {t.count === 1 ? "entry" : "entries"}
+                                </p>
+                            </div>
+                        </Link>
                     ))}
                 </div>
 
-                {/* Bottom CTA — only when topics > 6 */}
-                {hasMore && (
-                    <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-
-                        {!showAll ? (
-                            <>
-                                {/* Expand inline */}
-                                <button
-                                    type="button"
-                                    onClick={() => setShowAll(true)}
-                                    className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full border-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-                                    style={{ borderColor: "#1A1612", color: "#1A1612", background: "#FFFFFF" }}
-                                >
-                                    <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M12 5v14M5 12l7 7 7-7" />
-                                    </svg>
-                                    Show {hiddenCount} more topic{hiddenCount !== 1 ? "s" : ""}
-                                </button>
-
-                                <span className="text-[#C8BEB4] text-sm hidden sm:block">or</span>
-
-                                {/* Go to full categories page */}
-                                <Link
-                                    to="/categories"
-                                    className="inline-flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
-                                    style={{ background: "#1A1612", color: "#FAF8F4", textDecoration: "none" }}
-                                >
-                                    View All Categories
-                                    <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                        <path d="M5 12h14M12 5l7 7-7 7" />
-                                    </svg>
-                                </Link>
-                            </>
-                        ) : (
-                            /* Collapse + go to categories page */
-                            <div className="flex items-center gap-4 flex-wrap justify-center">
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setShowAll(false);
-                                        document.getElementById("topics")?.scrollIntoView({ behavior: "smooth" });
-                                    }}
-                                    className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full border transition-all duration-300 hover:opacity-70"
-                                    style={{ borderColor: "#E8E0D5", color: "#8C7E74", background: "#FFFFFF" }}
-                                >
-                                    <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M18 15l-6-6-6 6" />
-                                    </svg>
-                                    Show less
-                                </button>
-
-                                <Link
-                                    to="/categories"
-                                    className="inline-flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
-                                    style={{ background: "#E60023", color: "#fff", textDecoration: "none" }}
-                                >
-                                    Browse all categories
-                                    <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                        <path d="M5 12h14M12 5l7 7-7 7" />
-                                    </svg>
-                                </Link>
-                            </div>
-                        )}
+                {/* Progress + footer link */}
+                <div className="mt-6 flex items-center gap-6">
+                    <div className="flex-1 h-[2px] rounded-full bg-[#E8E0D5]">
+                        <div
+                            className="h-full rounded-full bg-[#A6791E] transition-[width] duration-150 ease-linear"
+                            style={{ width: `${progress}%` }}
+                        />
                     </div>
-                )}
+                    <Link
+                        to="/categories"
+                        className="flex-shrink-0 whitespace-nowrap text-xs text-[#8C7E74] hover:text-[#1A1612] transition-colors duration-200"
+                        style={{ fontFamily: "'IBM Plex Mono', monospace", textDecoration: "none" }}
+                    >
+                        browse all categories
+                    </Link>
+                </div>
 
             </div>
         </section>
@@ -1381,97 +1427,219 @@ const TopicsSection = ({ posts }) => {
 
 
 // ════════════════════════════════════════════════════════════
-//  PIN CARD — fixed: inline heights instead of dynamic classes
+//  PIN CARD — pinboard-tile layout for horizontal shelf
 // ════════════════════════════════════════════════════════════
-const PinCard = ({ pin, index }) => {
-    const [ref, isVisible] = useScrollReveal(0.05);
+const PinCard = ({ pin, large = false }) => {
+    const [imgError, setImgError] = useState(false);
+    const cardRef = useRef(null);
 
-    const cardClass = `pin-item block border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${isVisible ? `reveal-visible stagger-${Math.min(index + 1, 8)}` : "reveal-hidden"}`;
-    const cardStyle = {
-        background: "rgba(255,255,255,0.06)",
-        borderColor: "rgba(255,255,255,0.10)",
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        cardRef.current.style.transform = `perspective(900px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
+    };
+    const handleMouseLeave = () => {
+        if (!cardRef.current) return;
+        cardRef.current.style.transform = "perspective(900px) rotateX(0) rotateY(0)";
     };
 
     const inner = (
-        <>
-            <div style={{ height: pin.heightPx, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "3rem", background: "rgba(255,255,255,0.04)", overflow: "hidden" }}>
-                {pin.image
-                    ? <img src={pin.image} alt={pin.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
-                    : pin.emoji
-                }
-            </div>
-            <div className="p-4">
-                <strong className="block text-[0.88rem] font-semibold mb-1" style={{ color: "rgba(255,255,255,0.9)" }}>{pin.title}</strong>
-                <p className="text-[0.82rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>{pin.desc}</p>
-            </div>
-            <div className="flex items-center justify-between px-4 py-2.5" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-                <span className="text-[0.72rem] font-medium tracking-wider" style={{ color: "rgba(255,255,255,0.40)" }}>{pin.category}</span>
-                <span className="inline-flex items-center gap-1 text-white text-[0.7rem] font-bold px-3 py-1 rounded-full" style={{ background: "#E60023" }}>
-                    {pin.slug ? "Read →" : "📌 Save"}
+            <div
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                className="relative rounded-[20px] overflow-hidden group flex-shrink-0"
+                style={{
+                    width: large ? "min(78vw, 420px)" : "min(60vw, 280px)",
+                    height: "440px",
+                    transition: "transform 0.2s ease",
+                    border: "1px solid rgba(255,255,255,0.10)",
+                }}
+            >
+                {/* Image fills the whole tile */}
+                {pin.image && !imgError ? (
+                    <img
+                        src={pin.image}
+                        alt={pin.title}
+                        onError={() => setImgError(true)}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full"
+                        style={{ objectFit: "cover", transition: "transform 0.6s ease" }}
+                    />
+                ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-6xl" style={{ background: "rgba(255,255,255,0.04)" }}>
+                        {pin.emoji}
+                    </div>
+                )}
+
+                {/* Gradient scrim */}
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%)" }} />
+
+                {/* Pin-style save badge top right */}
+                <span
+                    className="absolute top-3 right-3 inline-flex items-center gap-1.5 text-white text-[0.68rem] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100"
+                    style={{ background: "#E60023", transition: "opacity 0.25s ease, transform 0.25s ease", transform: "translateY(-4px)" }}
+                >
+                    {pin.slug ? "Read" : "Save"} <PinIcon size={12} />
                 </span>
+
+                {/* Category eyebrow */}
+                <span
+                    className="absolute top-3 left-3 text-[0.62rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                    style={{ background: "rgba(255,255,255,0.16)", color: "#FFFFFF", backdropFilter: "blur(6px)" }}
+                >
+                    {pin.category}
+                </span>
+
+                {/* Text content pinned to bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <strong className={`block font-display text-white leading-snug mb-1.5 ${large ? "text-[1.4rem]" : "text-[1.05rem]"}`}>
+                        {pin.title}
+                    </strong>
+                    <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.72)" }}>
+                        {pin.desc}
+                    </p>
+                </div>
             </div>
-        </>
     );
 
     if (pin.slug) {
-        return <Link ref={ref} to={`/blog/${pin.slug}`} className={cardClass} style={{ ...cardStyle, textDecoration: "none" }} aria-label={`Read: ${pin.title}`}>{inner}</Link>;
+        return <Link to={`/blog/${pin.slug}`} aria-label={`Read: ${pin.title}`} style={{ textDecoration: "none" }}>{inner}</Link>;
     }
     return (
-        <a ref={ref} href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
-            className={cardClass} style={{ ...cardStyle, textDecoration: "none" }} aria-label={`Pinterest pin: ${pin.title}`}>
+        <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+            aria-label={`Pinterest pin: ${pin.title}`} style={{ textDecoration: "none" }}>
             {inner}
         </a>
     );
 };
 
 // ════════════════════════════════════════════════════════════
-//  PINTEREST SECTION
+//  PINTEREST SECTION — horizontal scroll-snap board shelf
 // ════════════════════════════════════════════════════════════
 const PinterestSection = () => {
     const [headerRef, headerVisible] = useScrollReveal();
+    const trackRef = useRef(null);
+
+    const scrollByAmount = (dir) => {
+        if (!trackRef.current) return;
+        const amount = trackRef.current.clientWidth * 0.7;
+        trackRef.current.scrollBy({ left: dir * amount, behavior: "smooth" });
+    };
+
     return (
-        <section id="pinterest" aria-labelledby="pinterest-heading" className="py-24 px-6 bg-[#1A1612]">
-            <div className="max-w-[1320px] mx-auto">
-                <div ref={headerRef} className={`flex items-end justify-between flex-wrap gap-8 mb-12 ${headerVisible ? "reveal-visible" : "reveal-hidden"}`}>
+        <section id="pinterest" aria-labelledby="pinterest-heading" className="py-24 bg-[#1A1612] overflow-hidden">
+            <div className="max-w-[1320px] mx-auto px-6">
+                <div ref={headerRef} className={`flex items-end justify-between flex-wrap gap-8 mb-10 ${headerVisible ? "reveal-visible" : "reveal-hidden"}`}>
                     <div>
                         <p className="text-xs font-bold tracking-[0.12em] uppercase mb-2" style={{ color: "#FF6B81" }}>Pinterest Picks</p>
                         <h2 id="pinterest-heading" className="font-display text-[clamp(2rem,3.5vw,2.75rem)]" style={{ color: "#FAF8F4" }}>
-                            Products &amp; <em style={{ color: "rgba(255,255,255,0.45)" }}>Ideas I Love</em>
+                            Pin the <em style={{ color: "rgba(255,255,255,0.45)" }}>board</em>
                         </h2>
                         <p className="mt-3 text-base max-w-[520px] leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-                            My curated pins — handpicked products, room ideas, recipes, and moments of beauty. Updated weekly.
+                            Scroll the shelf like you would a board — handpicked products, room ideas, and finds worth saving.
                         </p>
                     </div>
-                    <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
-                        className="btn-shimmer inline-flex items-center gap-3 text-white font-bold text-sm px-7 py-[0.85rem] rounded-full transition-all duration-300 hover:-translate-y-0.5"
-                        style={{ boxShadow: "0 4px 20px rgba(230,0,35,0.4)" }}>
-                        <PinIcon size={18} /> Follow on Pinterest
-                    </a>
-                </div>
 
-                <div className="pin-grid" role="list">
-                    {PINS.map((pin, i) => <PinCard key={pin.title} pin={pin} index={i} />)}
-                </div>
-
-                <div className="mt-12 p-8 rounded-3xl flex flex-wrap items-center justify-between gap-8"
-                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.10)" }}>
-                    <div className="flex items-center gap-5">
-                        <div className="w-[60px] h-[60px] rounded-full bg-[#E60023] flex items-center justify-center font-display text-2xl text-white flex-shrink-0">V</div>
-                        <div>
-                            <h3 className="font-display text-[1.2rem] mb-1" style={{ color: "#FAF8F4" }}>Veeresh Bashetti</h3>
-                            <p className="text-[0.82rem]" style={{ color: "rgba(255,255,255,0.50)" }}>Pinning ideas daily — home, food, travel, lifestyle &amp; more.</p>
-                            <p className="mt-1 text-[0.82rem]">
-                                <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "#FF6B81" }}>
-                                    pinterest.com/veereshbbashetti ↗
-                                </a>
-                            </p>
-                        </div>
+                    <div className="hidden sm:flex items-center gap-3">
+                        <button type="button" onClick={() => scrollByAmount(-1)} aria-label="Scroll pins left"
+                            className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#E60023]"
+                            style={{ border: "1px solid rgba(255,255,255,0.18)", color: "#FAF8F4" }}>
+                            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6" /></svg>
+                        </button>
+                        <button type="button" onClick={() => scrollByAmount(1)} aria-label="Scroll pins right"
+                            className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#E60023]"
+                            style={{ border: "1px solid rgba(255,255,255,0.18)", color: "#FAF8F4" }}>
+                            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 6l6 6-6 6" /></svg>
+                        </button>
+                        <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+                            className="btn-shimmer inline-flex items-center gap-2 text-white font-bold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 ml-2"
+                            style={{ boxShadow: "0 4px 20px rgba(230,0,35,0.4)" }}>
+                            <PinIcon size={16} /> Follow
+                        </a>
                     </div>
-                    <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
-                        className="btn-shimmer inline-flex items-center gap-2 text-white font-bold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5">
-                        <PinIcon size={16} /> Follow My Boards
-                    </a>
                 </div>
+            </div>
+
+            {/* ✅ FIXED TRACK — no px-6 class, padding via style only */}
+            <div
+                ref={trackRef}
+                role="list"
+                style={{
+                    display: "flex",
+                    gap: "20px",
+                    overflowX: "auto",
+                    scrollSnapType: "x mandatory",
+                    WebkitOverflowScrolling: "touch",
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                    marginLeft: "125px",
+                    paddingLeft: "max(24px, calc((100vw - 1320px) / 2 + 24px))",
+                    paddingRight: "24px",
+                    paddingBottom: "12px",
+                    // ✅ Critical: prevents flex from shrinking children
+                    flexWrap: "nowrap",
+                    alignItems: "flex-start",
+                }}
+            >
+                {PINS.map((pin, i) => (
+                    // ✅ flex-shrink: 0 on the WRAPPER, not just the inner card
+                    <div
+                        key={pin.title}
+                        role="listitem"
+                        style={{
+                            flexShrink: 0,
+                            scrollSnapAlign: "start",
+                        }}
+                    >
+                        <PinCard pin={pin} large={i === 0} />
+                    </div>
+                ))}
+
+                {/* Trailing follow tile */}
+                <a
+                    href="https://in.pinterest.com/veereshbbashetti/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    role="listitem"
+                    style={{
+                        flexShrink: 0,
+                        width: "min(60vw, 280px)",
+                        height: "440px",
+                        scrollSnapAlign: "start",
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px dashed rgba(255,255,255,0.22)",
+                        borderRadius: "20px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        gap: "16px",
+                        padding: "32px",
+                        textDecoration: "none",
+                    }}
+                >
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "#E60023" }}>
+                        <PinIcon size={22} className="text-white" />
+                    </div>
+                    <p className="font-display text-[1.2rem]" style={{ color: "#FAF8F4" }}>See the full board</p>
+                    <p className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.55)" }}>More pins live on Pinterest — updated weekly.</p>
+                    <span className="text-[0.78rem] font-bold uppercase tracking-widest" style={{ color: "#FF6B81" }}>Visit Pinterest ↗</span>
+                </a>
+
+                {/* Trailing spacer so last card doesn't clip */}
+                <div style={{ flexShrink: 0, width: "24px" }} aria-hidden="true" />
+            </div>
+
+            {/* Mobile follow CTA */}
+            <div className="sm:hidden px-6 mt-6">
+                <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+                    className="btn-shimmer inline-flex items-center justify-center gap-2 text-white font-bold text-sm px-6 py-3 rounded-full w-full">
+                    <PinIcon size={16} /> Follow on Pinterest
+                </a>
             </div>
         </section>
     );
@@ -1483,9 +1651,9 @@ const AboutSection = () => {
     const [rightRef, rightVisible] = useScrollReveal(0.08);
 
     const HIGHLIGHTS = [
-        { icon: "✍️", label: "Honest Stories", sub: "No highlight reels. Just real life." },
-        { icon: "🎯", label: "Intentional Living", sub: "Doing less, but doing it right." },
-        { icon: "💡", label: "Curated Ideas", sub: "Only what I'd actually use or do." },
+        { icon: "✍️", label: "Honest Stories", sub: "Real life, no highlight reels." },
+        { icon: "🎯", label: "Intentional Living", sub: "Doing less, but better." },
+        { icon: "💡", label: "Curated Ideas", sub: "Only what I'd actually use." },
     ];
 
     const TAGS = ["Failures", "Wins", "Mindset", "Gaming", "Productivity", "Life", "Growth", "Ideas"];
@@ -1494,118 +1662,82 @@ const AboutSection = () => {
         <section
             id="about"
             aria-labelledby="about-heading"
-            className="py-32 px-6"
+            className="py-24 px-6"
             style={{ background: "linear-gradient(180deg, #FAF8F5 0%, #F4EDE3 100%)" }}
         >
             <div className="max-w-[1320px] mx-auto">
 
                 {/* ── Section Label ── */}
-                <div ref={ref} className={`mb-16 text-center ${isVisible ? "reveal-visible" : "reveal-hidden"}`}>
-                    <span className="inline-flex items-center gap-2 bg-[#FFF0F0] border border-[#FFD6D6] text-[#E60023] text-[0.68rem] font-bold uppercase tracking-[0.18em] px-4 py-1.5 rounded-full mb-5">
+                <div ref={ref} className={`mb-14 text-center ${isVisible ? "reveal-visible" : "reveal-hidden"}`}>
+                    <span className="inline-flex items-center gap-2 bg-[#FFF0F0] border border-[#FFD6D6] text-[#E60023] text-[0.68rem] font-bold uppercase tracking-[0.18em] px-4 py-1.5 rounded-full">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#E60023] animate-pulseDot" />
                         The Person Behind The Blog
                     </span>
                 </div>
 
                 {/* ── Two Column Layout ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-                    {/* ─── LEFT: Story Content ─── */}
+                    {/* ─── LEFT ─── */}
                     <div ref={leftRef} className={leftVisible ? "reveal-visible" : "reveal-hidden"}>
 
                         <h2
                             id="about-heading"
-                            className="font-display text-[clamp(2.4rem,4.5vw,3rem)] leading-[1.06] tracking-tight text-[#1A1612] mb-7"
+                            className="font-display text-[clamp(2.2rem,4.5vw,2.8rem)] leading-[1.08] tracking-tight text-[#1A1612] mb-6"
                         >
-                            I'm Veeresh —{" "} <br />
-                            <em className="text-[#8C7E74]">a regular person</em>{" "}
-                            trying to figure life out, one honest post at a time.
+                            I'm Veeresh —{" "}<br />
+                            <em className="text-[#8C7E74]">still figuring it out,</em>{" "}
+                            one honest post at a time.
                         </h2>
 
                         {/* Pull Quote */}
-                        {/* Personal Story */}
                         <div
-                            className="relative rounded-2xl p-6 mb-8"
+                            className="rounded-2xl p-5 mb-7"
                             style={{
                                 background: "#FFFFFF",
                                 borderLeft: "3px solid #E60023",
                                 boxShadow: "0 4px 20px rgba(26,22,18,0.06)",
                             }}
                         >
-                            <p className="font-display text-[1.2rem] leading-[1.75] text-[#1A1612] italic">
+                            <p className="font-display text-[1.1rem] leading-[1.75] text-[#1A1612] italic">
                                 "I'm not sharing a success story. I'm documenting a journey that's still being written."
                             </p>
-
-                            <p className="text-[0.78rem] font-bold text-[#8C7E74] uppercase tracking-widest mt-4">
+                            <p className="text-[0.72rem] font-bold text-[#8C7E74] uppercase tracking-widest mt-3">
                                 — Veeresh Bashetti
                             </p>
                         </div>
 
-                        {/* Story Paragraphs */}
-                        <div className="space-y-5 mb-8">
-
-                            <p className="text-[1.02rem] leading-[1.95] text-[#5D534E]">
-                                Hi, I'm Veeresh, a 22-year-old web developer from India who enjoys building things,
-                                solving problems, and learning how technology works.
+                        {/* Short Bio */}
+                        <div className="space-y-4 mb-8">
+                            <p className="text-[1rem] leading-[1.9] text-[#5D534E]">
+                                22-year-old web developer from India. I graduated in 2024, spent a year in sales,
+                                and eventually followed my real interest — building things on the internet.
                             </p>
-
-                            <p className="text-[1.02rem] leading-[1.95] text-[#5D534E]">
-                                I graduated from college in 2024 and spent about a year working in sales.
-                                While that experience taught me valuable lessons about communication,
-                                confidence, and understanding people, I always felt drawn toward
-                                technology and creating things on the internet.
+                            <p className="text-[1rem] leading-[1.9] text-[#5D534E]">
+                                This blog is where I share what I learn — from code and tools to mistakes,
+                                random ideas, and things I find genuinely interesting. No filter, no facade.
                             </p>
-
-                            <p className="text-[1.02rem] leading-[1.95] text-[#5D534E]">
-                                That curiosity eventually led me to web development.
-                                I joined a web development course and started learning seriously.
-                                Since then, I've spent countless hours building projects, fixing bugs,
-                                exploring new technologies, and improving my skills every day.
+                            <p className="text-[1rem] leading-[1.9] text-[#5D534E]">
+                                If you're someone who's still figuring things out, you'll feel at home here.
                             </p>
-
-                            <p className="text-[1.02rem] leading-[1.95] text-[#5D534E]">
-                                This blog is where I document that journey.
-                                Some articles are about coding, some are about useful tools,
-                                some are lessons from mistakes I've made, and others are simply things
-                                I find interesting enough to share.
-                            </p>
-
-                            <p className="text-[1.02rem] leading-[1.95] text-[#5D534E]">
-                                I'm naturally a curious person. If something catches my interest,
-                                I tend to dive deep into it, learn everything I can, and experiment
-                                until I understand how it works.
-                            </p>
-
-                            <p className="text-[1.02rem] leading-[1.95] text-[#5D534E]">
-                                I don't claim to have everything figured out.
-                                I'm still learning, still building, and still growing.
-                                That's what makes this journey exciting.
-                            </p>
-
-                            <p className="text-[1.02rem] leading-[1.95] text-[#5D534E]">
-                                If you're someone who enjoys learning, building, exploring ideas,
-                                and figuring things out one step at a time, you'll probably feel
-                                at home here.
-                            </p>
-
                         </div>
 
                         {/* Highlight Pills */}
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+                        <div className="grid grid-cols-3 gap-3 mb-7">
                             {HIGHLIGHTS.map((h) => (
                                 <div
                                     key={h.label}
                                     className="p-4 rounded-xl border border-[#E8E0D5] bg-white flex flex-col gap-1 hover:border-[#1A1612] hover:-translate-y-0.5 transition-all duration-300"
                                 >
-                                    <span className="text-xl">{h.icon}</span>
+                                    <span className="text-lg">{h.icon}</span>
                                     <span className="text-sm font-semibold text-[#1A1612]">{h.label}</span>
-                                    <span className="text-[0.72rem] text-[#8C7E74]">{h.sub}</span>
+                                    <span className="text-[0.7rem] text-[#8C7E74]">{h.sub}</span>
                                 </div>
                             ))}
                         </div>
 
                         {/* Tags */}
-                        <div className="flex flex-wrap gap-2 mb-10">
+                        <div className="flex flex-wrap gap-2 mb-8">
                             {TAGS.map((tag) => (
                                 <span
                                     key={tag}
@@ -1616,112 +1748,97 @@ const AboutSection = () => {
                             ))}
                         </div>
 
-                        {/* Social Buttons */}
+                        {/* CTA Buttons */}
                         <div className="flex flex-wrap gap-3">
                             <a
                                 href="https://in.pinterest.com/veereshbbashetti/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 rounded-full border border-[#E7DDD2] bg-white px-5 py-3 text-sm font-semibold text-[#2E2723] transition-all duration-300 hover:bg-[#E60023] hover:text-white hover:border-[#E60023] hover:shadow-lg"
+                                className="inline-flex items-center gap-2 rounded-full border border-[#E7DDD2] bg-white px-5 py-2.5 text-sm font-semibold text-[#2E2723] transition-all duration-300 hover:bg-[#E60023] hover:text-white hover:border-[#E60023]"
                             >
-                                <PinIcon size={15} /> Follow on Pinterest
+                                <PinIcon size={15} /> Pinterest
                             </a>
                             <a
                                 href="mailto:hello@veereshbashetti.com"
-                                className="inline-flex items-center gap-2 rounded-full border border-[#E7DDD2] bg-white px-5 py-3 text-sm font-semibold text-[#2E2723] transition-all duration-300 hover:bg-[#1A1612] hover:text-white hover:border-[#1A1612]"
+                                className="inline-flex items-center gap-2 rounded-full border border-[#E7DDD2] bg-white px-5 py-2.5 text-sm font-semibold text-[#2E2723] transition-all duration-300 hover:bg-[#1A1612] hover:text-white hover:border-[#1A1612]"
                             >
                                 <EmailIcon /> Say Hello
                             </a>
                             <a
                                 href="/blog"
-                                className="inline-flex items-center gap-2 rounded-full bg-[#1A1612] text-[#FAF8F4] px-5 py-3 text-sm font-semibold transition-all duration-300 hover:bg-[#E60023] hover:-translate-y-0.5"
+                                className="inline-flex items-center gap-2 rounded-full bg-[#1A1612] text-[#FAF8F4] px-5 py-2.5 text-sm font-semibold transition-all duration-300 hover:bg-[#E60023] hover:-translate-y-0.5"
                             >
                                 Read the Blog →
                             </a>
                         </div>
                     </div>
 
-                    {/* ─── RIGHT: Visual + Floating Cards ─── */}
+                    {/* ─── RIGHT ─── */}
                     <div ref={rightRef} className={`relative ${rightVisible ? "reveal-visible stagger-2" : "reveal-hidden"}`}>
 
-                        {/* Main image */}
+                        {/* Main Image */}
                         <div
-                            className="overflow-hidden rounded-[32px] border border-[#E8DED2]"
+                            className="overflow-hidden rounded-[28px] border border-[#E8DED2]"
                             style={{ boxShadow: "0 24px 80px rgba(26,22,18,0.10)" }}
                         >
                             <img
                                 src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1200&auto=format&fit=crop"
-                                alt="Veeresh Bashetti writing at his desk — a lifestyle and personal blog"
+                                alt="Veeresh Bashetti writing at his desk"
                                 className="w-full"
-                                style={{ height: "520px", objectFit: "cover" }}
+                                style={{ height: "460px", objectFit: "cover" }}
                                 loading="lazy"
                             />
                         </div>
 
-                        {/* Floating stat cards */}
+                        {/* Floating Cards */}
                         <div
-                            className="absolute -left-6 top-10 bg-white rounded-2xl px-5 py-4 animate-floatA"
-                            style={{
-                                boxShadow: "0 8px 32px rgba(26,22,18,0.12)",
-                                border: "1px solid #E8E0D5",
-                            }}
+                            className="absolute -left-5 top-8 bg-white rounded-2xl px-5 py-3.5 animate-floatA"
+                            style={{ boxShadow: "0 8px 32px rgba(26,22,18,0.12)", border: "1px solid #E8E0D5" }}
                         >
                             <p className="font-display text-2xl text-[#1A1612]">Free</p>
-                            <p className="text-[0.72rem] font-bold text-[#8C7E74] uppercase tracking-wider mt-0.5">Always free to read</p>
+                            <p className="text-[0.68rem] font-bold text-[#8C7E74] uppercase tracking-wider mt-0.5">Always free to read</p>
                         </div>
 
                         <div
-                            className="absolute -right-4 bottom-36 bg-white rounded-2xl px-5 py-4 animate-floatB"
-                            style={{
-                                boxShadow: "0 8px 32px rgba(26,22,18,0.12)",
-                                border: "1px solid #E8E0D5",
-                            }}
+                            className="absolute -right-4 bottom-32 bg-white rounded-2xl px-5 py-3.5 animate-floatB"
+                            style={{ boxShadow: "0 8px 32px rgba(26,22,18,0.12)", border: "1px solid #E8E0D5" }}
                         >
                             <p className="font-display text-2xl text-[#1A1612]">Real</p>
-                            <p className="text-[0.72rem] font-bold text-[#8C7E74] uppercase tracking-wider mt-0.5">No filters, no fake</p>
+                            <p className="text-[0.68rem] font-bold text-[#8C7E74] uppercase tracking-wider mt-0.5">No filters, no fake</p>
                         </div>
 
-                        {/* Bottom glass card */}
+                        {/* Profile Card */}
                         <div
-                            className="mt-5 rounded-2xl p-6"
-                            style={{
-                                background: "#1A1612",
-                                border: "1px solid rgba(255,255,255,0.08)",
-                            }}
+                            className="mt-4 rounded-2xl p-5"
+                            style={{ background: "#1A1612", border: "1px solid rgba(255,255,255,0.08)" }}
                         >
                             <div className="flex items-center gap-4 mb-3">
-                                <div className="w-12 h-12 rounded-xl bg-[#E60023] flex items-center justify-center font-display text-xl text-white flex-shrink-0">
+                                <div className="w-11 h-11 rounded-xl bg-[#E60023] flex items-center justify-center font-display text-lg text-white flex-shrink-0">
                                     V
                                 </div>
                                 <div>
-                                    <p className="text-[0.95rem] font-semibold text-[#FAF8F4]">Veeresh Bashetti</p>
-                                    <p className="text-[0.75rem]" style={{ color: "rgba(255,255,255,0.50)" }}>Writer · Curator · Overthinker 🫠</p>
+                                    <p className="text-[0.92rem] font-semibold text-[#FAF8F4]">Veeresh Bashetti</p>
+                                    <p className="text-[0.72rem]" style={{ color: "rgba(255,255,255,0.50)" }}>Developer · Writer · Overthinker 🫠</p>
                                 </div>
                             </div>
-                            <p
-                                className="text-[0.88rem] leading-relaxed"
-                                style={{ color: "rgba(255,255,255,0.68)" }}
-                            >
-                                Based in India. Writing about life, setups, and everything in between. If something resonates, you're welcome here.
+                            <p className="text-[0.85rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+                                Based in India. Writing about dev life, setups, and everything in between.
                             </p>
-                            <div className="flex items-center gap-3 mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                            <div className="flex items-center gap-3 mt-4 pt-3.5" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
                                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulseDot" />
-                                <span className="text-[0.72rem] font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>
+                                <span className="text-[0.7rem] font-medium" style={{ color: "rgba(255,255,255,0.42)" }}>
                                     Actively writing · New posts every week
                                 </span>
                             </div>
                         </div>
 
                     </div>
-                    {/* ── END RIGHT COLUMN ── */}
 
-                </div >
-                {/* ── END GRID ── */}
+                </div>
 
-            </div >
-            {/* ── END max-w container ── */}
+            </div>
 
-        </section >
+        </section>
     );
 };
 

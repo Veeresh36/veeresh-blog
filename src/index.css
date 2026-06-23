@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+
+/* ── Pinterest shelf padding fix ── */
+.pin-shelf-track {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@media (min-width: 1368px) {
+    .pin-shelf-track {
+        padding-left: calc((100vw - 1320px) / 2 + 24px);
+    }
+}
+
+/* ── Pinterest shelf: hide scrollbar + left padding ── */
+.pin-shelf-track::-webkit-scrollbar {
+    display: none;
+}
+
+.pin-shelf-track {
+    padding-left: 24px;
+}
+
+@media (min-width: 1368px) {
+    .pin-shelf-track {
+        padding-left: calc((100vw - 1320px) / 2 + 24px);
+    }
+}

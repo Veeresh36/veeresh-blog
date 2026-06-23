@@ -148,9 +148,9 @@ A physical list works differently than a digital one. There's something about th
 That pause is part of the mechanism. Use it.
 
 **On Amazon India:**
-- [Leuchtturm1917 A5 Hardcover Notebook](https://www.amazon.in/dp/B002TSIMW4?tag=veeresh0308-21) — numbered pages and an index make it easy to maintain a running list over months; this is the notebook I'd actually recommend keeping long-term
-- [Moleskine Classic Pocket Notebook](https://www.amazon.in/dp/B00DHI4IDS?tag=veeresh0308-21) — compact enough to always have on your desk or in a bag; good if you want something small and always available
-- [Classmate Pulse A5 Notebook](https://www.amazon.in/dp/B08CZ6MW3X?tag=veeresh0308-21) — budget option that does the job; if you want to test the habit before committing to a nicer notebook, start here
+- [Classmate Soft Cover A5 Notebook](https://amzn.to/4otJvvQ) — numbered pages and an index make it easy to maintain a running list over months; this is the notebook I'd actually recommend keeping long-term
+- [Navneet Youva A5 Journal Notebook](https://amzn.to/43GKpf7) — compact enough to always have on your desk or in a bag; good if you want something small and always available
+- [Classmate Pulse A5 Notebook](https://amzn.to/4ecTRgn) — budget option that does the job; if you want to test the habit before committing to a nicer notebook, start here
 
 ---
 
@@ -161,8 +161,8 @@ The moment you feel an impulse purchase coming, one of the most effective things
 A physical timer that you flip or twist — rather than your phone — keeps you off the screen that probably generated the desire in the first place.
 
 **On Amazon India:**
-- [TickTime Cube Timer](https://www.amazon.in/dp/B09B8XY9X4?tag=veeresh0308-21) — flip to set your time, no apps, no distractions; genuinely useful for building any timed habit
-- [Maisonet Mechanical Countdown Timer](https://www.amazon.in/dp/B08G6ZHTTG?tag=veeresh0308-21) — simple wind-and-go, no batteries needed, does one thing well
+- [Portronics Timeout, Smart 1, 5, 7, 9 Minute Count Down Timer](https://amzn.to/4eeEnIN) — flip to set your time, no apps, no distractions; genuinely useful for building any timed habit
+- [Baseus Heyo Rotation Countdown Timer Kitchen Timer ](https://amzn.to/4fJJotX) — simple wind-and-go, no batteries needed, does one thing well
 
 ---
 
@@ -172,15 +172,15 @@ Most personal finance books give you systems. The best ones give you a different
 
 **On Amazon India:**
 
-- [The Psychology of Money — Morgan Housel](https://www.amazon.in/dp/9390166268?tag=veeresh0308-21) — the most important money book I've read, and it's not a how-to at all. It explains *why* we make bad financial decisions, which is the only way to actually stop making them. The chapter on "reasonable vs rational" directly explains impulse buying better than any finance blog. Read this first.
+- [The Psychology of Money — Morgan Housel](https://amzn.to/4goXjWw) — the most important money book I've read, and it's not a how-to at all. It explains *why* we make bad financial decisions, which is the only way to actually stop making them. The chapter on "reasonable vs rational" directly explains impulse buying better than any finance blog. Read this first.
 
-- [Let's Talk Money — Monika Halan](https://www.amazon.in/dp/0062996461?tag=veeresh0308-21) — the best India-specific personal finance book. Written for real Indian lives with real Indian financial products. If you want to understand savings accounts, insurance, mutual funds, and emergency funds in the Indian context — this is it. Not theoretical. Immediately practical.
+- [Let's Talk Money — Monika Halan](https://amzn.to/3ScE5JR) — the best India-specific personal finance book. Written for real Indian lives with real Indian financial products. If you want to understand savings accounts, insurance, mutual funds, and emergency funds in the Indian context — this is it. Not theoretical. Immediately practical.
 
-- [Atomic Habits — James Clear](https://www.amazon.in/dp/1847941834?tag=veeresh0308-21) — directly applicable to this post. The 30-day rule is a habit system, and Clear's framework for building and breaking habits is the clearest explanation of why some rules stick and others don't. The chapter on making bad habits difficult to perform is exactly the psychology behind the waiting period.
+- [Atomic Habits — James Clear](https://amzn.to/4fKtfED) — directly applicable to this post. The 30-day rule is a habit system, and Clear's framework for building and breaking habits is the clearest explanation of why some rules stick and others don't. The chapter on making bad habits difficult to perform is exactly the psychology behind the waiting period.
 
-- [I Will Teach You to Be Rich — Ramit Sethi](https://www.amazon.in/dp/1529306582?tag=veeresh0308-21) — written specifically for people in their 20s, irreverent, and deeply practical. US-centric in places but the psychology chapters on guilt-free spending and automating good decisions translate completely.
+- [I Will Teach You to Be Rich — Ramit Sethi](https://amzn.to/4vNmS85) — written specifically for people in their 20s, irreverent, and deeply practical. US-centric in places but the psychology chapters on guilt-free spending and automating good decisions translate completely.
 
-- [Your Money or Your Life — Vicki Robin](https://www.amazon.in/dp/0143115766?tag=veeresh0308-21) — the book that introduced the core idea behind delayed gratification in personal finance. Dense in places, but the central concept — that every purchase costs you hours of your life, not just rupees — permanently changes how you evaluate what something is actually worth.
+- [Your Money or Your Life — Vicki Robin](https://amzn.to/4eecxMD) — the book that introduced the core idea behind delayed gratification in personal finance. Dense in places, but the central concept — that every purchase costs you hours of your life, not just rupees — permanently changes how you evaluate what something is actually worth.
 
 ---
 
@@ -189,8 +189,8 @@ Most personal finance books give you systems. The best ones give you a different
 If your notebook is buried in a drawer, you won't use it. Keeping your waiting list notebook visibly on your desk — where you see it every day — is part of the friction that makes the habit stick.
 
 **On Amazon India:**
-- [Deli Desktop Organiser with Drawers](https://www.amazon.in/dp/B07D9R9L9L?tag=veeresh0308-21) — keeps notebooks, pens, and documents on the surface without creating clutter
-- [Solo Mesh Desk Organiser](https://www.amazon.in/dp/B07WGPX2M5?tag=veeresh0308-21) — open design means you can see the notebook at a glance; harder to let it disappear out of sight
+- [Deli Desktop Organiser with Drawers](https://amzn.to/3Q6gw4R) — keeps notebooks, pens, and documents on the surface without creating clutter
+- [Solo Mesh Desk Organiser](https://amzn.to/4uIa2Y6) — open design means you can see the notebook at a glance; harder to let it disappear out of sight
 
 ---
 

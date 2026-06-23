@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-
+import { hasConsent } from '../pages/CookieBanner'
 // ═══════════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════════
@@ -25,15 +25,25 @@ const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX";
 // GOOGLE ADSENSE
 // ═══════════════════════════════════════════════
 
-
 const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, className = "" }) => {
+  const [consent, setConsent] = useState(hasConsent());
+
   useEffect(() => {
+    const onChange = (e) => setConsent(e.detail === "accepted");
+    window.addEventListener("cookieConsentChanged", onChange);
+    return () => window.removeEventListener("cookieConsentChanged", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!consent) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
       console.error("AdSense error:", e.message);
     }
-  }, [slot]);
+  }, [slot, consent]);
+
+  if (!consent) return null;
 
   return (
     <div className={`ad-wrapper overflow-hidden clear-both my-6 text-center ${className}`}>
@@ -50,90 +60,6 @@ const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, 
       />
     </div>
   );
-};
-
-// ═══════════════════════════════════════════════
-// ADSTERRA AD UNITS
-// ═══════════════════════════════════════════════
-
-// Generic banner using atOptions, isolated in an iframe so multiple
-// instances don't clash on the global `atOptions` variable.
-const AdsterraBanner = ({ adKey, width, height, className = "" }) => {
-  const srcDoc = `
-    <html><body style="margin:0;display:flex;align-items:center;justify-content:center;background:transparent;">
-    <script>
-      atOptions = { key: '${adKey}', format: 'iframe', height: ${height}, width: ${width}, params: {} };
-    </script>
-    <script src="https://www.highperformanceformat.com/${adKey}/invoke.js"></script>
-    </body></html>`;
-
-  return (
-    <div className={`ad-wrapper overflow-hidden clear-both my-6 text-center ${className}`}>
-      <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 mb-1.5 font-medium">
-        — Advertisement —
-      </span>
-      <iframe
-        title={`ad-${adKey}`}
-        srcDoc={srcDoc}
-        width={width}
-        height={height}
-        style={{ border: "none", maxWidth: "100%" }}
-        scrolling="no"
-      />
-    </div>
-  );
-};
-
-// Native Banner — script injects directly into a div by id
-const NativeBannerAd = ({ className = "" }) => {
-  const containerId = "container-a9c42fdb19c1a4ca2d8d9f4d549094b7";
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    if (ref.current.querySelector("script")) return; // avoid double-injection
-
-    const script = document.createElement("script");
-    script.async = true;
-    script.setAttribute("data-cfasync", "false");
-    script.src = "https://pl29704113.effectivecpmnetwork.com/a9c42fdb19c1a4ca2d8d9f4d549094b7/invoke.js";
-    ref.current.appendChild(script);
-  }, []);
-
-  return (
-    <div className={`ad-wrapper overflow-hidden clear-both my-6 text-center ${className}`}>
-      <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 mb-1.5 font-medium">
-        — Advertisement —
-      </span>
-      <div ref={ref}>
-        <div id={containerId} />
-      </div>
-    </div>
-  );
-};
-
-// Social Bar — sitewide sticky bar, injected once
-const SocialBarAd = () => {
-  useEffect(() => {
-    if (document.getElementById("social-bar-script")) return;
-    const script = document.createElement("script");
-    script.id = "social-bar-script";
-    script.src = "https://pl29704118.effectivecpmnetwork.com/64/f0/57/64f05701e44be65e51705b2780b515a3.js";
-    document.body.appendChild(script);
-  }, []);
-  return null;
-};
-
-// Popunder — sitewide, injected once
-const PopunderAd = () => {
-  useEffect(() => {
-    if (document.getElementById("popunder-script")) return;
-    const script = document.createElement("script");
-    script.id = "popunder-script";
-    script.src = "https://pl29704112.effectivecpmnetwork.com/43/15/ae/4315ae6464604174ae449863d52e4f7f.js";
-    document.body.appendChild(script);
-  }, []);
-  return null;
 };
 
 // ═══════════════════════════════════════════════
@@ -246,6 +172,25 @@ function normalizeTags(tags) {
       return null;
     })
     .filter(Boolean);
+}
+
+// ── Marketplace link detection ──────────────────────────────
+const AFFILIATE_PLATFORMS = {
+  amazon: { match: /amazon\.[a-z.]+|amzn\.to|amzn\.in/i, label: "Amazon", color: "#FF9900", bg: "#FFF6E5", icon: "📦" },
+  flipkart: { match: /flipkart\.com|fkrt\.(it|co|cc)/i, label: "Flipkart", color: "#2874F0", bg: "#EAF1FF", icon: "🛍️" },
+  myntra: { match: /myntra\.com/i, label: "Myntra", color: "#FF3F6C", bg: "#FFEFF3", icon: "👗" },
+  meesho: { match: /meesho\.com|meesho\.onelink\.me/i, label: "Meesho", color: "#9F2089", bg: "#FBEEFA", icon: "🧺" },
+};
+
+function getPlatform(href = "") {
+  for (const key in AFFILIATE_PLATFORMS) {
+    if (AFFILIATE_PLATFORMS[key].match.test(href)) return { key, ...AFFILIATE_PLATFORMS[key] };
+  }
+  return { key: "default", label: "View", color: "#1A1612", bg: "#F0EBE3", icon: "🔗" };
+}
+
+function isAffiliateLink(href = "") {
+  return Object.values(AFFILIATE_PLATFORMS).some(p => p.match.test(href));
 }
 
 // ═══════════════════════════════════════════════
@@ -371,8 +316,6 @@ function useFadeIn(delay = 0) {
   return ref;
 }
 
-// ─── NEW: Enhanced useSEO ────────────────────────────────────────────
-// Adds: wordCount, timeRequired, per-tag meta, FAQ schema, prev/next links
 function useSEO(frontmatter, slug, content = "", morePosts = []) {
   useEffect(() => {
     if (!frontmatter.title) return;
@@ -404,8 +347,16 @@ function useSEO(frontmatter, slug, content = "", morePosts = []) {
     if (img) setMeta("og:image", img, true);
     if (frontmatter.date) setMeta("article:published_time", frontmatter.date, true);
     if (frontmatter.author) setMeta("article:author", frontmatter.author, true);
-    // Per-tag meta (NEW)
-    normalizeTags(frontmatter.tags).forEach(t => setMeta("article:tag", t, true));
+
+    // article:tag needs one <meta> per tag — querySelector by attribute alone
+    // can't target a specific tag, so clear and rebuild the whole set each time.
+    document.querySelectorAll('meta[property="article:tag"]').forEach(el => el.remove());
+    normalizeTags(frontmatter.tags).forEach(t => {
+      const el = document.createElement("meta");
+      el.setAttribute("property", "article:tag");
+      el.setAttribute("content", t);
+      document.head.appendChild(el);
+    });
 
     setMeta("twitter:card", "summary_large_image");
     setMeta("twitter:title", frontmatter.title);
@@ -416,7 +367,6 @@ function useSEO(frontmatter, slug, content = "", morePosts = []) {
     if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
     canonical.href = url;
 
-    // NEW: prev/next link tags for crawlers
     ["prev", "next"].forEach(rel => {
       const existing = document.querySelector(`link[rel="${rel}"]`);
       if (existing) existing.remove();
@@ -433,7 +383,6 @@ function useSEO(frontmatter, slug, content = "", morePosts = []) {
       document.head.appendChild(el);
     }
 
-    // JSON-LD schema with wordCount + timeRequired (NEW)
     const graph = [
       {
         "@type": "BlogPosting",
@@ -462,7 +411,6 @@ function useSEO(frontmatter, slug, content = "", morePosts = []) {
       },
     ];
 
-    // NEW: FAQ schema — add `faqs: [{q, a}]` to frontmatter to enable rich snippets
     if (Array.isArray(frontmatter.faqs) && frontmatter.faqs.length) {
       graph.push({
         "@type": "FAQPage",
@@ -514,7 +462,6 @@ function useSyncedSidebarScroll(containerRef, layoutRef) {
   }, [containerRef, layoutRef]);
 }
 
-// ─── NEW: useReadingStreak ────────────────────────────────────────────
 function useReadingStreak() {
   const [streak, setStreak] = useState(0);
   useEffect(() => {
@@ -538,7 +485,6 @@ function useReadingStreak() {
   return streak;
 }
 
-// ─── NEW: useReadingMode ──────────────────────────────────────────────
 function useReadingMode() {
   const [on, setOn] = useState(false);
   useEffect(() => {
@@ -548,7 +494,6 @@ function useReadingMode() {
   return [on, () => setOn(o => !o)];
 }
 
-// ─── NEW: useFinishTime ───────────────────────────────────────────────
 function useFinishTime(readTime, progress) {
   return useMemo(() => {
     if (!readTime || progress >= 100) return null;
@@ -558,7 +503,6 @@ function useFinishTime(readTime, progress) {
   }, [readTime, progress]);
 }
 
-// ─── NEW: useHighlights ───────────────────────────────────────────────
 function useHighlights(slug) {
   const [highlights, setHighlights] = useState(() => {
     try { return JSON.parse(localStorage.getItem(`highlights:${slug}`) || "[]"); }
@@ -585,7 +529,6 @@ function useHighlights(slug) {
   return { highlights, save, remove };
 }
 
-// ─── NEW: useReactions ────────────────────────────────────────────────
 function useReactions(slug, supabaseUrl, supabaseKey) {
   const [counts, setCounts] = useState({});
   const [myVotes, setMyVotes] = useState(() => {
@@ -632,20 +575,14 @@ function useReactions(slug, supabaseUrl, supabaseKey) {
 }
 
 // ─── VOICE CONFIG ─────────────────────────────────────────────────────
-// Pick ONE voice ID from the selector above and paste it here
 const VOICE_CONFIG = {
-  // Liam — warm, emotional, perfect rhythm for personal essays (recommended)
   voiceId: "TX3LPaxmHKxFdv7VOQHJ",
-
-  // Settings tuned for max emotional storytelling:
-  stability: 0.30,        // lower = more expressive, human, emotional
-  similarity_boost: 0.82, // how true it stays to the voice character
-  style: 0.60,            // storytelling intensity — the "reading aloud" energy
-  use_speaker_boost: true,// richer, fuller sound output
+  stability: 0.30,
+  similarity_boost: 0.82,
+  style: 0.60,
+  use_speaker_boost: true,
 };
 
-// ─── CLAUDE NARRATION PROMPT ──────────────────────────────────────────
-// This transforms your blog into warm spoken prose before ElevenLabs reads it
 const NARRATION_PROMPT = `You are converting a blog post into a warm, emotionally resonant spoken narration.
 
 Rules:
@@ -660,7 +597,6 @@ Rules:
 
 Blog content:`;
 
-// ─── HOOK ─────────────────────────────────────────────────────────────
 function useTextToSpeech(content) {
   const [speaking, setSpeaking] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -680,7 +616,6 @@ function useTextToSpeech(content) {
     setLoading(false);
   }, []);
 
-  // Step 1 — Claude rewrites your blog as warm spoken narration
   const rewriteForStorytelling = useCallback(async (text) => {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -698,7 +633,6 @@ function useTextToSpeech(content) {
     return data.content?.[0]?.text?.trim() || text;
   }, []);
 
-  // Step 2 — ElevenLabs speaks it with emotional depth
   const speakWithElevenLabs = useCallback(async (text) => {
     const ELEVENLABS_KEY = import.meta.env.VITE_ELEVENLABS_API_KEY;
     if (!ELEVENLABS_KEY) throw new Error("No ElevenLabs key");
@@ -742,9 +676,7 @@ function useTextToSpeech(content) {
     setSpeaking(true);
   }, []);
 
-  // Fallback — browser TTS if ElevenLabs is unavailable
   const speakFallback = useCallback((rawText) => {
-    // Strip markdown before speaking
     const plain = rawText
       .replace(/#{1,6}\s+/g, "")
       .replace(/\*\*?([^*]+)\*\*?/g, "$1")
@@ -754,7 +686,6 @@ function useTextToSpeech(content) {
       .slice(0, 4000);
 
     const voices = window.speechSynthesis.getVoices();
-    // Try to find a natural male English voice
     const voice =
       voices.find(v => v.name.includes("Google UK English Male")) ||
       voices.find(v => v.name.includes("Daniel")) ||
@@ -765,8 +696,8 @@ function useTextToSpeech(content) {
 
     const utt = new SpeechSynthesisUtterance(plain);
     if (voice) utt.voice = voice;
-    utt.rate = 0.80;   // slightly slower = more weight, more feeling
-    utt.pitch = 0.95;   // slightly lower = warmer, more experienced
+    utt.rate = 0.80;
+    utt.pitch = 0.95;
     utt.volume = 1;
     utt.lang = "en-IN";
     utt.onend = () => setSpeaking(false);
@@ -832,7 +763,6 @@ const ProgressBar = ({ progress }) => (
   </div>
 );
 
-// ─── NEW: Navbar with ReadingMode + TTS buttons ──────────────────────
 const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, toggleReadingMode, content }) => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -872,14 +802,12 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Font size */}
           <div className="hidden md:flex items-center gap-0.5 px-2 py-1 rounded-lg border" style={{ borderColor: dark ? "rgba(255,255,255,0.1)" : "rgba(26,22,18,0.12)" }}>
             <button onClick={decFont} className="w-7 h-7 flex items-center justify-center text-[0.68rem] font-bold rounded-md transition-all hover:opacity-60" style={{ color: dark ? "#FAF8F4" : "#3D3530" }} aria-label="Decrease font size">A−</button>
             <div className="w-px h-3 mx-0.5" style={{ background: dark ? "rgba(255,255,255,0.15)" : "rgba(26,22,18,0.15)" }} />
             <button onClick={incFont} className="w-7 h-7 flex items-center justify-center text-[0.82rem] font-bold rounded-md transition-all hover:opacity-60" style={{ color: dark ? "#FAF8F4" : "#3D3530" }} aria-label="Increase font size">A+</button>
           </div>
 
-          {/* Dark mode */}
           <button onClick={toggleDark}
             className="w-9 h-9 flex items-center justify-center rounded-lg border transition-all duration-200 hover:opacity-70"
             style={{ borderColor: dark ? "rgba(255,255,255,0.1)" : "rgba(26,22,18,0.12)", color: dark ? "#FAF8F4" : "#3D3530" }}
@@ -887,7 +815,6 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
             {dark ? <SunIcon /> : <MoonIcon />}
           </button>
 
-          {/* NEW: Text-to-speech */}
           {supported && (
             <button
               onClick={toggleTTS}
@@ -924,7 +851,6 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
             </button>
           )}
 
-          {/* NEW: Focus / Reading mode */}
           <button onClick={toggleReadingMode}
             className="hidden md:flex items-center gap-1.5 text-[0.75rem] font-semibold px-3 py-2 rounded-lg border transition-all duration-200 hover:opacity-70"
             style={{
@@ -937,7 +863,6 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
             {readingMode ? "✕ Exit focus" : "⊡ Focus"}
           </button>
 
-          {/* Share */}
           <button onClick={shareUrl}
             className="hidden md:flex items-center gap-1.5 text-[0.78rem] font-semibold px-3.5 py-2 rounded-lg border transition-all duration-200 hover:opacity-70"
             style={{ borderColor: dark ? "rgba(255,255,255,0.1)" : "rgba(26,22,18,0.12)", color: dark ? "#FAF8F4" : "#3D3530" }}
@@ -945,14 +870,12 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
             {copied ? <><CheckIcon /> Copied!</> : <><ShareIcon /> Share</>}
           </button>
 
-          {/* Pinterest */}
           <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-1.5 text-[0.78rem] font-bold px-4 py-2 rounded-full transition-all duration-300 hover:-translate-y-px hover:opacity-90"
             style={{ background: "#E60023", color: "#fff" }}>
             <PinterestIcon size={13} /> Follow
           </a>
 
-          {/* Mobile hamburger */}
           <button className="lg:hidden flex flex-col gap-1.5 p-2" onClick={() => setOpen(o => !o)} aria-label={open ? "Close menu" : "Open menu"}>
             <span className={`block w-5 h-0.5 transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""}`} style={{ background: dark ? "#FAF8F4" : "#1A1612" }} />
             <span className={`block w-5 h-0.5 transition-all duration-300 ${open ? "opacity-0" : ""}`} style={{ background: dark ? "#FAF8F4" : "#1A1612" }} />
@@ -994,7 +917,6 @@ const Breadcrumb = ({ category, title, dark }) => (
   </nav>
 );
 
-// ─── NEW: ArticleHeader with FinishTimeBadge + streak ────────────────
 const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime, streak, views }) => {
   const [copied, setCopied] = useState(false);
   const share = useCallback(async () => {
@@ -1049,7 +971,6 @@ const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime,
                   <span>{views.toLocaleString()} views</span>
                 </>
               )}
-              {/* NEW: Finish time badge */}
               {finishTime && (
                 <span className="inline-flex items-center gap-1 text-[0.68rem] font-semibold px-2 py-0.5 rounded-full"
                   style={{ background: dark ? "rgba(255,255,255,0.07)" : "#F0EBE3", color: dark ? "rgba(250,248,244,0.5)" : "#7A6E64" }}>
@@ -1061,7 +982,6 @@ const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime,
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
-          {/* NEW: Reading streak badge */}
           {streak > 1 && (
             <div className="flex items-center gap-1.5 text-[0.72rem] font-semibold px-3 py-1.5 rounded-full"
               style={{ background: dark ? "rgba(255,180,0,0.12)" : "#FFFBEC", color: "#B97A00", border: "1px solid rgba(245,199,80,0.3)" }}>
@@ -1080,18 +1000,24 @@ const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime,
   );
 };
 
-const HeroImage = ({ src, alt }) => {
+const HeroImage = ({ src, alt, pinterest }) => {
   if (!src) return null;
   return (
     <div className="max-w-[1280px] mx-auto px-6 mb-14">
-      <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9", maxHeight: "640px" }}>
-        <img src={src} alt={alt || "Article hero"} className="w-full h-full object-cover" loading="eager" />
+      <div
+        className={`rounded-2xl overflow-hidden max-w-[1200px] mx-auto ${pinterest ? "aspect-[16/9] md:aspect-[21/9]" : ""
+          }`}
+      >
+        <img
+          src={src}
+          alt={alt || "Article hero"}
+          className={`w-full block ${pinterest ? "h-full object-cover" : "h-auto"}`}
+          loading="eager"
+        />
       </div>
     </div>
   );
 };
-
-// ─── NEW: EnhancedSelectionToolbar with Highlight button ─────────────
 const SelectionToolbar = ({ tooltip, onClose, dark, onHighlight }) => {
   const [copied, setCopied] = useState(false);
   const [highlighted, setHighlighted] = useState(false);
@@ -1220,8 +1146,6 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }
   );
 };
 
-
-
 const SidebarCard = ({ header, children, dark, delay = 0 }) => {
   const ref = useFadeIn(delay);
   return (
@@ -1280,22 +1204,21 @@ const MorePostItem = ({ post, dark, isLast }) => (
 
 const ArticleTags = ({ tags, dark }) => {
   const normalized = normalizeTags(tags);
-  if (!normalized.length) return null; return (
+  if (!normalized.length) return null;
+  return (
     <div className="mt-12 pt-8 flex items-center gap-2.5 flex-wrap" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
       <span className="text-[0.72rem] font-bold uppercase tracking-[0.07em]" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>Tags:</span>
       {normalized.map(tag => (
-        <Link key={tag} to={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}`}
+        <span key={tag} to={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}`}
           className="inline-block text-[0.73rem] font-semibold px-3.5 py-1.5 rounded-full border transition-all duration-200 hover:opacity-70"
           style={{ background: dark ? "rgba(255,255,255,0.05)" : "#F5F1EB", color: dark ? "rgba(250,248,244,0.7)" : "#3D3530", borderColor: dark ? "rgba(255,255,255,0.09)" : "#DDD7CE" }}>
           {tag}
-        </Link>
+        </span>
       ))}
     </div>
   );
 };
 
-// ─── NEW: KeyTakeawaysBox ─────────────────────────────────────────────
-// Add `takeaways: ["Point 1", "Point 2"]` to frontmatter to enable
 const KeyTakeawaysBox = ({ takeaways, dark }) => {
   if (!takeaways?.length) return null;
   return (
@@ -1324,7 +1247,6 @@ const KeyTakeawaysBox = ({ takeaways, dark }) => {
   );
 };
 
-// ─── NEW: ReactionBar ─────────────────────────────────────────────────
 const ReactionBar = ({ slug, dark, border, supabaseUrl, supabaseKey }) => {
   const { counts, myVotes, react } = useReactions(slug, supabaseUrl, supabaseKey);
   return (
@@ -1358,8 +1280,6 @@ const ReactionBar = ({ slug, dark, border, supabaseUrl, supabaseKey }) => {
   );
 };
 
-// ─── NEW: FAQSection ──────────────────────────────────────────────────
-// Add `faqs: [{q: "Question?", a: "Answer."}]` to frontmatter to enable
 const FAQSection = ({ faqs, dark, border }) => {
   const [open, setOpen] = useState(null);
   if (!faqs?.length) return null;
@@ -1399,7 +1319,6 @@ const FAQSection = ({ faqs, dark, border }) => {
   );
 };
 
-// ─── NEW: AISummaryCard ───────────────────────────────────────────────
 const AISummaryCard = ({ content, dark, border }) => {
   const [state, setState] = useState("idle");
   const [summary, setSummary] = useState("");
@@ -1428,7 +1347,6 @@ const AISummaryCard = ({ content, dark, border }) => {
       setSummary(text);
       setState("done");
     } catch { setState("error"); }
-
   };
 
   return (
@@ -1488,7 +1406,6 @@ const AISummaryCard = ({ content, dark, border }) => {
   );
 };
 
-// ─── NEW: HighlightsPanel ─────────────────────────────────────────────
 const HighlightsPanel = ({ slug, dark, border }) => {
   const { highlights, remove } = useHighlights(slug);
   if (!highlights.length) return null;
@@ -1580,44 +1497,138 @@ const ErrorState = ({ slug, dark }) => (
   </div>
 );
 
-const ProductCard = ({ product, dark }) => (
-  <a href={product.link || "#"} target="_blank" rel="noopener noreferrer"
-    className="flex items-center gap-4 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-    style={{ background: dark ? "rgba(255,255,255,0.04)" : "#FFFFFF", borderColor: dark ? "rgba(255,255,255,0.08)" : "#EAE4DC" }}>
-    <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
-      style={{ background: dark ? "rgba(255,255,255,0.07)" : "#F5F1EB" }}>🛒</div>
-    <div className="flex-1 min-w-0">
-      <div className="text-[0.88rem] font-semibold leading-snug mb-0.5 truncate" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{product.name}</div>
-      <div className="flex items-center gap-2 flex-wrap">
-        {product.rating && <span className="text-[0.72rem] font-bold text-amber-500">★ {product.rating}</span>}
-        {product.price && <span className="text-[0.75rem] font-semibold" style={{ color: "#E60023" }}>{product.price}</span>}
-        {String(product.link || "").includes("amzn.to") && (
-          <span className="text-[0.6rem] font-bold px-1.5 py-0.5 rounded" style={{ background: "#FF9900", color: "#000" }}>amazon</span>
-        )}
+const SmartLink = ({ href = "", children }) => {
+  const isInternal = href.startsWith("/") || href.startsWith("#");
+  if (!isAffiliateLink(href)) {
+    return <a href={href} target={isInternal ? undefined : "_blank"} rel={isInternal ? undefined : "noopener noreferrer"}>{children}</a>;
+  }
+  const p = getPlatform(href);
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="sponsored noopener noreferrer"
+      className="affiliate-chip"
+      style={{
+        display: "inline-flex", alignItems: "center", gap: "5px",
+        padding: "2px 10px 2px 7px", margin: "0 2px",
+        borderRadius: "999px", background: p.bg, color: p.color,
+        fontWeight: 700, fontSize: "0.86em", textDecoration: "none",
+        border: `1px solid ${p.color}33`, whiteSpace: "nowrap", verticalAlign: "middle",
+      }
+      }
+    >
+      <span aria-hidden="true">{p.icon}</span>
+      {children}
+      <span aria-hidden="true" style={{ fontSize: "0.8em" }}>↗</span>
+    </a >
+  );
+};
+
+const ProductCard = ({ product, dark }) => {
+  const platform = getPlatform(product.link);
+  const icon = product.icon || platform.icon; // product-specific icon wins over the platform default
+  return (
+    <a href={product.link || "#"} target="_blank" rel="sponsored noopener noreferrer"
+      className="flex items-center gap-4 p-4 rounded-2xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+      style={{ background: dark ? "rgba(255,255,255,0.04)" : "#FFFFFF", borderColor: dark ? "rgba(255,255,255,0.08)" : "#EAE4DC" }}>
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
+        style={{ background: dark ? "rgba(255,255,255,0.07)" : "#F5F1EB" }}>{icon}</div>
+      <div className="flex-1 min-w-0">
+        <div className="text-[0.88rem] font-semibold leading-snug mb-0.5 truncate" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{product.name}</div>
+        <div className="flex items-center gap-2 flex-wrap">
+          {product.rating && <span className="text-[0.72rem] font-bold text-amber-500">★ {product.rating}</span>}
+          {product.price && <span className="text-[0.75rem] font-semibold" style={{ color: "#E60023" }}>{product.price}</span>}
+          {platform.key !== "default" && (
+            <span className="text-[0.6rem] font-bold px-1.5 py-0.5 rounded" style={{ background: platform.color, color: "#fff" }}>{platform.label}</span>
+          )}
+        </div>
+      </div>
+      <div className="flex-shrink-0 text-[0.72rem] font-bold px-3 py-1.5 rounded-full" style={{ background: "#E60023", color: "#fff" }}>Buy →</div>
+    </a>
+  );
+};
+
+const AffiliateLinksSidebar = ({ content, dark, border, fallbackIcon }) => {
+  // Extract markdown links from content
+  const links = useMemo(() => {
+    const regex = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g;
+    const found = [];
+    let match;
+    while ((match = regex.exec(content)) !== null) {
+      const href = match[2];
+      if (isAffiliateLink(href)) {
+        const platform = getPlatform(href);
+        found.push({ label: match[1], href, platform });
+      }
+    }
+    // Deduplicate by href
+    return found.filter((v, i, a) => a.findIndex(x => x.href === v.href) === i).slice(0, 8);
+  }, [content]);
+
+  if (!links.length) return null;
+
+  return (
+    <div className="rounded-2xl overflow-hidden mb-4"
+      style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
+      <div className="px-5 py-3 text-[0.65rem] font-bold tracking-[0.13em] uppercase"
+        style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
+        🛒 Links in this post
+      </div>
+      <div className="p-4 flex flex-col gap-2.5">
+        {links.map((item, i) => {
+          const p = item.platform;
+          return (
+            <a key={i} href={item.href} target="_blank" rel="sponsored noopener noreferrer"
+              className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm"
+              style={{ background: p.bg, borderColor: `${p.color}33`, textDecoration: "none" }}>
+              <span className="text-base flex-shrink-0">{p.icon}</span>
+              <span className="flex-1 text-[0.78rem] font-semibold leading-snug truncate"
+                style={{ color: p.color }}>
+                {item.label}
+              </span>
+              <span className="flex-shrink-0 text-[0.65rem] font-bold px-2 py-0.5 rounded-full"
+                style={{ background: p.color, color: "#fff" }}>
+                {p.label} ↗
+              </span>
+            </a>
+          );
+        })}
+      </div>
+      <div className="px-5 pb-4 text-[0.65rem] leading-relaxed"
+        style={{ color: dark ? "rgba(250,248,244,0.3)" : "#9C8E84" }}>
+        🔗 Affiliate links — same price for you, small commission for me.
       </div>
     </div>
-    <div className="flex-shrink-0 text-[0.72rem] font-bold px-3 py-1.5 rounded-full" style={{ background: "#E60023", color: "#fff" }}>Buy →</div>
-  </a>
-);
+  );
+};
 
-const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef }) => (
+const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, tocItems, activeId, sectionProgress, progress }) => (
   <div ref={layoutRef} className="max-w-[1280px] mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 items-start justify-between relative">
     <main id="main-content" className="w-full lg:max-w-[calc(100%-446px)] min-w-0 flex-1">
       <article className="prose w-full" itemScope itemType="https://schema.org/BlogPosting">
         <meta itemProp="headline" content={fm.title} />
         <meta itemProp="datePublished" content={fm.date} />
         <meta itemProp="author" content={fm.author || SITE.name} />
-        <NativeBannerAd className="mb-8" />
-        <ReactMarkdown components={{
-          h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
-          h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
-          p: ({ children }) => {
-            if (typeof children === "string" && (children.startsWith("*-") || children.trim().startsWith("*")))
-              return <span className="block my-1 font-light text-[0.92rem] opacity-80">{children}</span>;
-            return <p>{children}</p>;
-          }
-        }}>{content}</ReactMarkdown>
-        <NativeBannerAd className="mt-8" />
+        {(() => {
+          const paragraphs = content.split("\n\n");
+          const mid = Math.floor(paragraphs.length / 2);
+          const firstHalf = paragraphs.slice(0, mid).join("\n\n");
+          const secondHalf = paragraphs.slice(mid).join("\n\n");
+          const mdComponents = {
+            h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
+            h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
+            a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
+
+          };
+          return (
+            <>
+              <ReactMarkdown components={mdComponents}>{firstHalf}</ReactMarkdown>
+              <CarbonAdUnit slot="YOUR_SLOT_2" />
+              <ReactMarkdown components={mdComponents}>{secondHalf}</ReactMarkdown>
+            </>
+          );
+        })()}
         <ArticleTags tags={fm.tags} dark={dark} />
       </article>
     </main>
@@ -1629,11 +1640,18 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef })
           <PinterestIcon size={18} /> View on Pinterest
         </a>
       )}
-      <div className="flex justify-center">
-        <AdsterraBanner adKey="506c346bb6db0c3c55b9ca7edcfd9361" width={160} height={300} />
-      </div>
+
+      <SidebarCard header="In This Post" dark={dark} delay={0}>
+        <SmartTOC tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
+      </SidebarCard>
+
+      <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
+
+      <CarbonAdUnit slot="YOUR_SLOT_PINTEREST_SIDEBAR" style={{ minHeight: "250px" }} />
+
       {Array.isArray(fm.products) && fm.products.length > 0 && (
         <div className="rounded-2xl overflow-hidden" style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
+
           <div className="px-5 py-3 text-[0.65rem] font-bold tracking-[0.13em] uppercase" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>Products in this post</div>
           <div className="p-4 flex flex-col gap-3">
             {fm.products.map((p, i) => <ProductCard key={i} product={p} dark={dark} />)}
@@ -1850,7 +1868,7 @@ function useViewCount(slug) {
   const [views, setViews] = useState(null);
 
   useEffect(() => {
-    if (!slug || !SUPABASE_URL || !SUPABASE_ANON_KEY) return;
+    if (!slug || !SUPABASE_URL || !SUPABASE_ANON_KEY || !hasConsent()) return;
 
     const track = async () => {
       try {
@@ -1895,22 +1913,17 @@ export default function ReadBlog() {
   const [morePosts, setMorePosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
 
-
-  // ── NEW hooks ──────────────────────────────────
   const [readingMode, toggleReadingMode] = useReadingMode();
   const streak = useReadingStreak();
   const { highlights, save: saveHighlight } = useHighlights(slug);
   const readTime = useMemo(() => content ? estimateReadTime(content) : null, [content]);
   const finishTime = useFinishTime(readTime, progress);
   const views = useViewCount(slug);
-  // ───────────────────────────────────────────────
 
   const layoutRef = useRef(null);
   const sidebarScrollRef = useRef(null);
 
   useSyncedSidebarScroll(sidebarScrollRef, layoutRef);
-
-  // Enhanced useSEO — now passes content + morePosts
   useSEO(fm, slug, content, morePosts);
 
   useEffect(() => {
@@ -1924,13 +1937,11 @@ export default function ReadBlog() {
         const currentRes = await fetch(`/blogs/${slug}.md`);
         if (!currentRes.ok) throw new Error("BLOG_NOT_FOUND");
 
-        // Guard: if Vite returns index.html fallback instead of .md file
         const contentType = currentRes.headers.get("content-type") || "";
         if (contentType.includes("text/html")) throw new Error("BLOG_NOT_FOUND");
 
         const raw = await currentRes.text();
 
-        // Guard: if the raw text looks like HTML (extra safety net)
         if (raw.trimStart().startsWith("<!doctype") || raw.trimStart().startsWith("<html")) {
           throw new Error("BLOG_NOT_FOUND");
         }
@@ -1951,7 +1962,7 @@ export default function ReadBlog() {
 
           const manifest = await manifestRes.json();
           const posts = manifest.posts || [];
-          setAllPosts(posts);  // store ALL posts for PrevNextNav
+          setAllPosts(posts);
           setMorePosts(posts.filter(p => p.slug && p.slug !== slug).slice(0, 6));
         } catch { setMorePosts([]); setAllPosts([]); }
       } catch (err) {
@@ -1987,10 +1998,10 @@ export default function ReadBlog() {
           from { opacity: 0; transform: translateY(18px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-          }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
         @keyframes ttsPulse {
           0%, 100% { opacity: 1; }
           50%       { opacity: 0.5; }
@@ -2009,7 +2020,6 @@ export default function ReadBlog() {
 
         ::selection { background: #E6002326; color: ${dark ? "#FAF8F4" : "#1A1612"}; }
 
-        /* ── Reading / Focus Mode ── */
         [data-reading-mode="on"] [data-floating-share],
         [data-reading-mode="on"] .ad-wrapper {
           display: none !important;
@@ -2026,7 +2036,6 @@ export default function ReadBlog() {
           line-height: 2.1 !important;
         }
 
-        /* ── Prose ── */
         .prose {
           font-size: ${fontSize}px;
           line-height: 1.85;
@@ -2093,6 +2102,11 @@ export default function ReadBlog() {
         .prose ul li::before { content: '—'; position: absolute; left: 0; color: #E60023; font-weight: 700; }
         .prose img { width: 100%; border-radius: 1rem; margin: 2rem 0; border: 1px solid ${border}; }
 
+        .affiliate-chip { transition: transform .15s ease, box-shadow .15s ease, filter .15s ease; }
+        .affiliate-chip:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,.15); filter: brightness(1.04); }
+        .affiliate-chip:active { transform: translateY(0); }
+        .affiliate-chip, .affiliate-chip * { color: red !important; }
+
         .no-scrollbar { scrollbar-width: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
 
@@ -2101,17 +2115,13 @@ export default function ReadBlog() {
         }
       `}</style>
 
-      {/* Enhanced selection toolbar with Highlight */}
       <SelectionToolbar tooltip={selTooltip} onClose={() => setSelTooltip(null)} dark={dark} onHighlight={saveHighlight} />
       <ScrollToTop show={showScrollTop} dark={dark} />
       <FloatingShareBar title={fm.title} dark={dark} />
-      <SocialBarAd />
-      <PopunderAd />
 
       <div style={{ background: bg, minHeight: "100vh" }}>
         <ProgressBar progress={progress} />
 
-        {/* Enhanced Navbar with TTS + Focus mode */}
         <Navbar
           dark={dark} toggleDark={toggleDark}
           fontSize={fontSize} incFont={incFont} decFont={decFont}
@@ -2121,17 +2131,24 @@ export default function ReadBlog() {
 
         <Breadcrumb category={fm.category} title={fm.title} dark={dark} />
 
-        {/* Enhanced header with finishTime + streak */}
         <ArticleHeader
           fm={fm} readTime={readTime} dark={dark}
           onBookmark={toggleBookmark} bookmarked={bookmarked}
           finishTime={finishTime} streak={streak} views={views}
         />
 
-        <HeroImage src={fm.image} alt={fm.imageAlt || fm.title} />
+        <HeroImage src={fm.image} alt={fm.imageAlt || fm.title} pinterest={fm.type === "pinterest"} />
+
+
+        <div className="max-w-[1280px] mx-auto px-6 mb-8">
+          <CarbonAdUnit slot="1234567890" format="horizontal" />
+        </div>
 
         {fm.type === "pinterest" ? (
-          <PinterestPostLayout fm={fm} content={content} dark={dark} fontSize={fontSize} border={border} layoutRef={layoutRef} />
+          <PinterestPostLayout
+            fm={fm} content={content} dark={dark} fontSize={fontSize} border={border} layoutRef={layoutRef}
+            tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} progress={progress}
+          />
         ) : (
           <div ref={layoutRef} className="max-w-[1280px] mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 items-start justify-between relative">
 
@@ -2142,26 +2159,23 @@ export default function ReadBlog() {
                 <meta itemProp="datePublished" content={fm.date} />
                 <meta itemProp="author" content={fm.author || SITE.name} />
 
-                {/* NEW: Key Takeaways box — reads from fm.takeaways */}
                 <KeyTakeawaysBox takeaways={fm.takeaways} dark={dark} />
-
-                <NativeBannerAd className="mb-6" />
 
                 <ReactMarkdown components={{
                   h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
                   h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
+                  a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,   // ← add this
+
                 }}>
                   {content}
                 </ReactMarkdown>
 
-                <NativeBannerAd className="mt-8" />
+                <CarbonAdUnit slot="YOUR_SLOT_3" />
 
-                {/* NEW: Emoji reaction bar */}
                 <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_ANON_KEY} />
 
                 <ArticleTags tags={fm.tags} dark={dark} />
 
-                {/* NEW: FAQ accordion + schema — reads from fm.faqs */}
                 <FAQSection faqs={fm.faqs} dark={dark} border={border} />
               </article>
             </main>
@@ -2174,17 +2188,14 @@ export default function ReadBlog() {
                   <SmartTOC tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
                 </SidebarCard>
 
-                {/* NEW: AI Summary card */}
                 <AISummaryCard content={content} dark={dark} border={border} />
 
-                {/* NEW: Highlights panel — appears when user has saved highlights */}
-                <HighlightsPanel slug={slug} dark={dark} border={border} />
+                <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
 
-                <SidebarCard header="Sponsored" dark={dark} delay={40}>
-                  <div className="flex justify-center">
-                    <AdsterraBanner adKey="506c346bb6db0c3c55b9ca7edcfd9361" width={160} height={300} />
-                  </div>
-                </SidebarCard>
+
+                <CarbonAdUnit slot="YOUR_SLOT_4" style={{ minHeight: "250px" }} />
+
+                <HighlightsPanel slug={slug} dark={dark} border={border} />
 
                 <SidebarCard header="About the Author" dark={dark} delay={80}>
                   <AuthorCard author={fm.author} dark={dark} />
@@ -2202,13 +2213,13 @@ export default function ReadBlog() {
           </div>
         )}
 
-        <div className="max-w-[1280px] mx-auto px-6 mb-10 flex justify-center">
-          <AdsterraBanner adKey="5591d745b6b69486e0e89cb9875708e0" width={728} height={90} />
-        </div>
-
         <PrevNextNav allPosts={allPosts} currentSlug={slug} dark={dark} />
 
         <CommentSection slug={slug} dark={dark} />
+
+        <div className="max-w-[1280px] mx-auto px-6 mb-4">
+          <CarbonAdUnit slot="YOUR_SLOT_5" format="horizontal" />
+        </div>
 
         {/* RELATED */}
         <section className="max-w-[1280px] mx-auto px-6 pt-16 pb-24 border-t z-30 relative" style={{ borderColor: border, background: bg }}>
@@ -2229,23 +2240,19 @@ export default function ReadBlog() {
                 : <div className="text-sm" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>No related posts available.</div>;
             })()}
           </div>
-
         </section>
 
         {/* FOOTER */}
         <footer className="relative z-10 overflow-hidden" style={{ background: "#0F0E0D" }}>
 
-          {/* Top gradient line */}
           <div className="h-px w-full"
             style={{ background: "linear-gradient(90deg, transparent, #E60023, transparent)" }} />
 
           <div className="max-w-[1280px] mx-auto px-6 pt-16 pb-10">
 
-            {/* ── Top section ── */}
             <div className="flex flex-col lg:flex-row justify-between gap-12 pb-12"
               style={{ borderBottom: "1px solid rgba(250,248,244,0.07)" }}>
 
-              {/* Brand column */}
               <div className="max-w-[320px]">
                 <Link to="/"
                   className="font-['DM_Serif_Display',serif] text-[2rem] mb-3 inline-block"
@@ -2256,7 +2263,6 @@ export default function ReadBlog() {
                   style={{ color: "rgba(250,248,244,0.4)" }}>
                   Writing about small things that make life better. Based in Hubballi, India.
                 </p>
-                {/* Social icons */}
                 <div className="flex items-center gap-3">
                   <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:opacity-90"
@@ -2276,10 +2282,8 @@ export default function ReadBlog() {
                 </div>
               </div>
 
-              {/* Links columns */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8 lg:gap-16">
 
-                {/* Explore */}
                 <div>
                   <div className="text-[0.65rem] font-bold tracking-[0.15em] uppercase mb-4"
                     style={{ color: "#E60023" }}>
@@ -2311,7 +2315,6 @@ export default function ReadBlog() {
                   </ul>
                 </div>
 
-                {/* Topics — your real tags from manifest */}
                 <div>
                   <div className="text-[0.65rem] font-bold tracking-[0.15em] uppercase mb-4"
                     style={{ color: "#E60023" }}>
@@ -2335,7 +2338,6 @@ export default function ReadBlog() {
                   </ul>
                 </div>
 
-                {/* Connect */}
                 <div>
                   <div className="text-[0.65rem] font-bold tracking-[0.15em] uppercase mb-4"
                     style={{ color: "#E60023" }}>
@@ -2370,7 +2372,6 @@ export default function ReadBlog() {
               </div>
             </div>
 
-            {/* ── Pinterest strip ── */}
             <div className="py-10 flex flex-col md:flex-row items-center justify-between gap-6"
               style={{ borderBottom: "1px solid rgba(250,248,244,0.07)" }}>
               <div>
@@ -2389,7 +2390,6 @@ export default function ReadBlog() {
               </a>
             </div>
 
-            {/* ── Bottom bar ── */}
             <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-[0.72rem]"
                 style={{ color: "rgba(250,248,244,0.25)" }}>
@@ -2409,7 +2409,7 @@ export default function ReadBlog() {
           </div>
         </footer>
 
-      </div>
+      </div >
     </>
   );
 }

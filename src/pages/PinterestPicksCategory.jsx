@@ -38,6 +38,17 @@ const GRADIENT_PRESETS = [
 
 const EMOJI_PRESETS = ["📌", "⭐", "⚡", "🎯", "🌿", "✨"];
 
+// ─── HEADER MOODBOARD CONFIG ─────────────────────────────────
+// Swap these 4 paths with your uploaded images (e.g. /blogs/images/your-file.jpg)
+const HEADER_IMAGES = [
+    { src: "/blogs/images/pin-header-1.jpg", alt: "Pinterest pick preview 1" },
+    { src: "/blogs/images/pin-header-2.jpg", alt: "Pinterest pick preview 2" },
+    { src: "/blogs/images/pin-header-3.jpg", alt: "Pinterest pick preview 3" },
+    { src: "/blogs/images/pin-header-4.jpg", alt: "Pinterest pick preview 4" },
+];
+
+const MOODBOARD_TILTS = [-9, 5, -4, 8];
+
 // ─── FRONTMATTER PARSER ENGINE ───────────────────────────────
 function parseFrontmatter(raw) {
     const normalized = raw.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
@@ -136,6 +147,42 @@ function useScrollReveal(threshold = 0.01) {
     return [ref, isVisible];
 }
 
+// ─── HEADER MOODBOARD (interactive 4-pin fan) ────────────────
+const HeaderMoodboard = ({ images }) => {
+    const [active, setActive] = useState(null);
+    const cleanImages = (images || []).slice(0, 4);
+    if (cleanImages.length === 0) return null;
+
+    return (
+        <div className="header-moodboard" role="group" aria-label="Featured Pinterest picks preview">
+            {cleanImages.map((img, i) => (
+                <button
+                    key={i}
+                    type="button"
+                    className={`moodboard-pin ${active === i ? "is-active" : active !== null ? "is-dimmed" : ""}`}
+                    style={{ "--tilt": `${MOODBOARD_TILTS[i % MOODBOARD_TILTS.length]}deg`, "--order": i }}
+                    onMouseEnter={() => setActive(i)}
+                    onMouseLeave={() => setActive(null)}
+                    onFocus={() => setActive(i)}
+                    onBlur={() => setActive(null)}
+                    onClick={() => setActive(active === i ? null : i)}
+                    aria-pressed={active === i}
+                >
+                    <span className="moodboard-pin-tack" aria-hidden="true">
+                        <PinIcon size={10} />
+                    </span>
+                    <img
+                        src={img.src}
+                        alt={img.alt || `Pinterest pick preview ${i + 1}`}
+                        loading="lazy"
+                        onError={(e) => { e.currentTarget.parentElement.style.display = "none"; }}
+                    />
+                </button>
+            ))}
+        </div>
+    );
+};
+
 // ─── AUTHENTIC PINTEREST PIN CARD COMPONENT ──────────────────
 const PinterestPinCard = ({ post, index }) => {
     const [ref, isVisible] = useScrollReveal(0.01);
@@ -200,7 +247,7 @@ const PinterestPinCard = ({ post, index }) => {
                     <h2 className="text-[#1A1612] font-display text-[0.92rem] font-semibold leading-tight tracking-tight group-hover:text-[#E60023] transition-colors duration-200 line-clamp-2">
                         {post.title}
                     </h2>
-                    
+
                     {post.excerpt && (
                         <p className="text-[0.78rem] text-[#7A6E65] leading-[1.4] mt-1.5 line-clamp-2 font-light">
                             {post.excerpt}
@@ -295,34 +342,37 @@ export default function PinterestPicksCategory() {
         const query = searchQuery.toLowerCase().trim();
         if (!query) return [];
 
-        const structuralMatches = new Set();
+        const seen = new Set();
+        const structuralMatches = [];
         posts.forEach(p => {
-            // Match structural tags
             p.tags?.forEach(t => {
-                if (t.toLowerCase().includes(query)) {
-                    structuralMatches.add({ type: "tag", label: t.toLowerCase(), value: t });
+                const key = `tag:${t.toLowerCase()}`;
+                if (t.toLowerCase().includes(query) && !seen.has(key)) {
+                    seen.add(key);
+                    structuralMatches.push({ type: "tag", label: t.toLowerCase(), value: t });
                 }
             });
-            // Match structural descriptive key titles
-            if (p.title.toLowerCase().includes(query)) {
-                structuralMatches.add({ type: "post", label: p.title, value: p.title });
+            const key = `post:${p.title.toLowerCase()}`;
+            if (p.title.toLowerCase().includes(query) && !seen.has(key)) {
+                seen.add(key);
+                structuralMatches.push({ type: "post", label: p.title, value: p.title });
             }
         });
 
-        return Array.from(structuralMatches).slice(0, 6);
+        return structuralMatches.slice(0, 6);
     }, [posts, searchQuery]);
 
     // Main layout results sorting mechanism
     const filteredPosts = useMemo(() => {
         const query = searchQuery.toLowerCase().trim();
         if (!query) return posts;
-        
-        return posts.filter(p => 
+
+        return posts.filter(p =>
             p.title.toLowerCase().includes(query) ||
             p.excerpt.toLowerCase().includes(query) ||
             p.tags.some(t => t.toLowerCase().includes(query))
         );
-  }, [posts, searchQuery]);
+    }, [posts, searchQuery]);
 
     // Closes suggestion panel layout safely when user clicks anywhere outside the input zone
     useEffect(() => {
@@ -352,7 +402,7 @@ export default function PinterestPicksCategory() {
                 @media (max-width: 1140px) { .pinterest-masonry-container { column-count: 3; } }
                 @media (max-width: 768px) { .pinterest-masonry-container { column-count: 2; column-gap: 0.85rem; } }
                 @media (max-width: 480px) { .pinterest-masonry-container { column-count: 1; } }
-                
+
                 .reveal-hidden { opacity: 0; transform: translateY(14px); }
                 .reveal-visible {
                     opacity: 1;
@@ -365,15 +415,106 @@ export default function PinterestPicksCategory() {
                 .stagger-4 { transition-delay: 0.19s; }
                 .stagger-5 { transition-delay: 0.24s; }
                 .stagger-6 { transition-delay: 0.29s; }
+
+                /* ── Header Moodboard ── */
+                .header-moodboard {
+                    display: flex;
+                    align-items: center;
+                    height: 108px;
+                    flex-shrink: 0;
+                    padding-left: 28px;
+                }
+                .moodboard-pin {
+                    position: relative;
+                    width: 78px;
+                    height: 96px;
+                    margin-left: -26px;
+                    padding: 5px 5px 8px;
+                    background: #fff;
+                    border: 1px solid #EAE3D2;
+                    border-radius: 7px;
+                    box-shadow: 0 3px 8px rgba(26,22,18,0.12);
+                    cursor: pointer;
+                    appearance: none;
+                    rotate: var(--tilt);
+                    translate: 0 0;
+                    transform: scale(1);
+                    transform-origin: center 70%;
+                    transition: rotate 0.45s cubic-bezier(0.16,1,0.3,1),
+                                translate 0.45s cubic-bezier(0.16,1,0.3,1),
+                                transform 0.45s cubic-bezier(0.16,1,0.3,1),
+                                box-shadow 0.45s ease,
+                                opacity 0.35s ease,
+                                filter 0.35s ease;
+                    animation: pin-float 6s ease-in-out infinite;
+                    animation-delay: calc(var(--order) * 0.55s);
+                    z-index: calc(10 - var(--order));
+                }
+                .moodboard-pin:first-child { margin-left: 0; }
+                .moodboard-pin img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 3px;
+                    display: block;
+                    pointer-events: none;
+                    background: #F4EFE6;
+                }
+                .moodboard-pin-tack {
+                    position: absolute;
+                    top: -7px;
+                    left: 50%;
+                    translate: -50% 0;
+                    rotate: 20deg;
+                    color: #E60023;
+                    background: #fff;
+                    border-radius: 50%;
+                    width: 15px;
+                    height: 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+                }
+                .moodboard-pin.is-active {
+                    rotate: 0deg;
+                    translate: 0 -10px;
+                    transform: scale(1.22);
+                    z-index: 50;
+                    box-shadow: 0 18px 32px -6px rgba(26,22,18,0.28);
+                    animation-play-state: paused;
+                }
+                .moodboard-pin.is-dimmed {
+                    opacity: 0.55;
+                    filter: saturate(0.8);
+                }
+                .moodboard-pin:focus-visible {
+                    outline: 2px solid #E60023;
+                    outline-offset: 2px;
+                }
+                @keyframes pin-float {
+                    0%, 100% { translate: 0 0; }
+                    50% { translate: 0 -5px; }
+                }
+                @media (max-width: 900px) {
+                    .header-moodboard { padding-left: 0; height: 92px; }
+                    .moodboard-pin { width: 62px; height: 78px; margin-left: -20px; }
+                }
+                @media (max-width: 640px) {
+                    .header-moodboard { display: none; }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .moodboard-pin { animation: none; }
+                }
             `}</style>
 
             {/* Pinterest Native Auto-Suggest Header Hub */}
             <header className="max-w-[1600px] mx-auto px-4 md:px-6 pt-10 md:pt-14 pb-6">
                 <div className="flex flex-col gap-6 md:gap-8 border-b border-[#EAE3D2] pb-6">
-                    
+
                     {/* Top Level Brand Row */}
-                    <div className="flex items-center justify-between">
-                        <div className="space-y-0.5">
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="space-y-0.5 shrink-0">
                             <div className="inline-flex items-center gap-1 text-[0.62rem] font-bold tracking-[0.25em] text-[#E60023] uppercase">
                                 <PinIcon size={10} /> Visual Architecture Index
                             </div>
@@ -382,9 +523,11 @@ export default function PinterestPicksCategory() {
                             </h1>
                         </div>
 
+                        <HeaderMoodboard images={HEADER_IMAGES} />
+
                         <Link
                           to="/"
-                          className="inline-flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wider text-[#7A6E65] hover:text-[#E60023] transition-colors duration-300 bg-white border border-[#EAE3D2] px-4 py-2 rounded-full shadow-sm"
+                          className="inline-flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wider text-[#7A6E65] hover:text-[#E60023] transition-colors duration-300 bg-white border border-[#EAE3D2] px-4 py-2 rounded-full shadow-sm shrink-0"
                           style={{ textDecoration: "none" }}
                         >
                             <ArrowLeft size={12} /> Workspace
@@ -395,7 +538,7 @@ export default function PinterestPicksCategory() {
                     <div ref={searchContainerRef} className="w-full max-w-xl mx-auto relative z-50">
                         <div className="relative w-full">
                             <SearchIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
-                            <input 
+                            <input
                                 type="text"
                                 value={searchQuery}
                                 onFocus={() => setShowSuggestions(true)}
@@ -407,7 +550,7 @@ export default function PinterestPicksCategory() {
                                 className="w-full text-sm pl-11 pr-12 py-3.5 rounded-2xl bg-[#FAF9F5] border border-[#EAE3D2] text-[#1A1612] outline-none transition-all duration-300 focus:border-[#1A1612] focus:bg-white placeholder:text-neutral-400 font-light shadow-sm"
                             />
                             {searchQuery && (
-                                <button 
+                                <button
                                     onClick={() => {
                                         setSearchQuery("");
                                         setShowSuggestions(false);
@@ -462,8 +605,8 @@ export default function PinterestPicksCategory() {
                                     onClick={() => setSearchQuery("")}
                                     type="button"
                                     className={`px-3 py-1 rounded-full text-xs font-medium border transition-all cursor-pointer ${
-                                        !searchQuery 
-                                            ? "bg-[#1A1612] text-white border-[#1A1612]" 
+                                        !searchQuery
+                                            ? "bg-[#1A1612] text-white border-[#1A1612]"
                                             : "bg-white text-[#5A4F43] border-[#EAE3D2] hover:border-[#1A1612]"
                                     }`}
                                 >
@@ -478,7 +621,7 @@ export default function PinterestPicksCategory() {
                                     >
                                         {tag}
                                     </button>
-                               
+
                                 ))}
                             </div>
                         )}

@@ -174,6 +174,7 @@ Since this is a practical guide, here are tools I've found genuinely useful — 
 
 ---
 
+
 ### A Dedicated Savings Account
 
 Before any app: open a second bank account you use only for Bucket 2. The physical separation between "spending money" and "future money" removes the temptation to mentally merge them.
@@ -182,25 +183,27 @@ Most Indian banks (SBI, Kotak, Fi, Jupiter) allow multiple savings accounts. Fi 
 
 ---
 
+
 ### A Notebook for Monthly Review
 
 I know this sounds old-fashioned. But there is something about writing a monthly summary by hand — income, three bucket totals, what happened, what I'm changing — that creates a different relationship with the numbers than scrolling through an app.
 
 **On Amazon India:**
-- [Classmate Pulse Single Line Notebook A5](https://www.amazon.in/dp/B08CZ6MW3X?tag=veeresh0308-21) — simple, affordable, exactly enough
-- [Leuchtturm1917 A5 Hardcover Notebook](https://www.amazon.in/dp/B002TSIMW4?tag=veeresh0308-21) — if you want something you'll actually enjoy writing in and keep long-term; the page numbers and index make monthly tracking easy to navigate
-- [Moleskine Classic Notebook Pocket](https://www.amazon.in/dp/B00DHI4IDS?tag=veeresh0308-21) — compact enough to carry, good for quick daily notes if that helps you
+- [Classmate Pulse Single Line Notebook A5](https://amzn.to/4ox0Jst) — simple, affordable, exactly enough
+- [Leuchtturm1917 A5 Hardcover Notebook](https://amzn.to/4goojFF) — if you want something you'll actually enjoy writing in and keep long-term; the page numbers and index make monthly tracking easy to navigate
+- [Moleskine Classic Notebook Pocket](https://amzn.to/4ezlZcC) — compact enough to carry, good for quick daily notes if that helps you
 
 ---
+
 
 ### A Simple Financial Habit Book
 
 Most personal finance books are written for people with salaries, investments, and more complexity than students need. These two are exceptions:
 
 **On Amazon India:**
-- [Let's Talk Money — Monika Halan](https://www.amazon.in/dp/0062996461?tag=veeresh0308-21) — the best India-specific personal finance book I've read. Written for real Indian lives, not US frameworks. Covers savings, insurance, and investing in plain language. I'd argue this is required reading for anyone in their 20s in India.
-- [The Psychology of Money — Morgan Housel](https://www.amazon.in/dp/9390166268?tag=veeresh0308-21) — not a how-to book, but a why-to book. It reframes your relationship with money at a fundamental level. The chapter on reasonable vs. rational financial decisions alone is worth the price.
-- [I Will Teach You to Be Rich — Ramit Sethi](https://www.amazon.in/dp/1529306582?tag=veeresh0308-21) — written for 20-somethings specifically, irreverent tone, actionable system. US-centric but the psychology and habit chapters translate well.
+- [Let's Talk Money — Monika Halan](https://amzn.to/4uFazd4) — the best India-specific personal finance book I've read. Written for real Indian lives, not US frameworks. Covers savings, insurance, and investing in plain language. I'd argue this is required reading for anyone in their 20s in India.
+- [The Psychology of Money — Morgan Housel](https://amzn.to/4glKAnt) — not a how-to book, but a why-to book. It reframes your relationship with money at a fundamental level. The chapter on reasonable vs. rational financial decisions alone is worth the price.
+- [I Will Teach You to Be Rich — Ramit Sethi](https://amzn.to/43Gl98N) — written for 20-somethings specifically, irreverent tone, actionable system. US-centric but the psychology and habit chapters translate well.
 
 ---
 
@@ -209,18 +212,20 @@ Most personal finance books are written for people with salaries, investments, a
 This is less obvious but genuinely helped me: having a physical space on my desk where bank statements, scholarship letters, and expense notes live — rather than buried in folders I forget exist — kept finances front of mind in a low-effort way.
 
 **On Amazon India:**
-- [Deli Desktop Organiser with Drawers](https://www.amazon.in/dp/B07D9R9L9L?tag=veeresh0308-21) — solid, multi-compartment, fits on a student desk without taking over it
-- [Solo Mesh Desk Organiser](https://www.amazon.in/dp/B07WGPX2M5?tag=veeresh0308-21) — open mesh design, easy to see what's in each section at a glance
+- [Deli Desktop Organiser with Drawers](https://amzn.to/44adTlF) — solid, multi-compartment, fits on a student desk without taking over it
+- [Solo Mesh Desk Organiser](https://amzn.to/4uKHIUR) — open mesh design, easy to see what's in each section at a glance
 
 ---
+
 
 ### A Pomodoro Timer for Budget Review Sessions
 
 This one might sound strange, but budgeting sessions are easy to avoid because they feel open-ended and slightly unpleasant. Giving them a fixed time — 25 minutes, once a month — removes the avoidance. You know exactly when it starts and when it ends.
 
 **On Amazon India:**
-- [TickTime Cube Timer](https://www.amazon.in/dp/B09B8XY9X4?tag=veeresh0308-21) — flip to set time, no buttons to press, genuinely improves focus sessions
-- [Maisonet Mechanical Countdown Timer](https://www.amazon.in/dp/B08G6ZHTTG?tag=veeresh0308-21) — simple wind-and-go, no batteries, does exactly one thing
+- [TickTime Cube Timer](https://amzn.to/4gprInz) — flip to set time, no buttons to press, genuinely improves focus sessions
+- [60-Minute Mechanical Countdown Timer](https://www.amazon.in/dp/B0G71NV37J?tag=veeresh0308-21) — simple wind-and-go, no batteries, does exactly one thing
+
 
 ---
 

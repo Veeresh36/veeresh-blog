@@ -16,6 +16,7 @@ import {
 } from "react-router-dom";
 
 import { useEffect } from "react";
+import CookieBanner from "../pages/CookieBanner";
 
 // ─────────────────────────────────────────────
 // Saved Context
@@ -113,8 +114,8 @@ const AppRouter = () => {
     return (
         <SavedContext.Provider value={contextValue}>
             <Router>
+                <CookieBanner />
                 <ScrollToTop />
-
                 <Suspense
                     fallback={
                         <div className="flex min-h-screen items-center justify-center">
