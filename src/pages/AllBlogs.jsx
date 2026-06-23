@@ -474,8 +474,10 @@ const PinCard = ({ post, index }) => {
               {post.title}
             </h3>
             {post.excerpt && (
-              <p style={{ fontSize: "0.8rem", color: "#8C7E74", lineHeight: 1.6, margin: "0 0 10px",
-                display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+              <p style={{
+                fontSize: "0.8rem", color: "#8C7E74", lineHeight: 1.6, margin: "0 0 10px",
+                display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden"
+              }}>
                 {post.excerpt}
               </p>
             )}
@@ -486,8 +488,10 @@ const PinCard = ({ post, index }) => {
             )}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #F0EBE3", paddingTop: 10, marginTop: 4 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                <div style={{ width: 26, height: 26, borderRadius: "50%", background: "#1A1612", color: "#FAF8F4",
-                  display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.6rem", fontWeight: 700, flexShrink: 0 }}>VB</div>
+                <div style={{
+                  width: 26, height: 26, borderRadius: "50%", background: "#1A1612", color: "#FAF8F4",
+                  display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.6rem", fontWeight: 700, flexShrink: 0
+                }}>VB</div>
                 <span style={{ fontSize: "0.72rem", color: "#8C7E74", fontWeight: 500 }}>{formattedDate}</span>
               </div>
               <span style={{ fontSize: "0.72rem", color: "#8C7E74", fontWeight: 500 }}>{post.readingTime}</span>
@@ -530,13 +534,17 @@ const ListCard = ({ post, index }) => {
             <span style={{ fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#E60023" }}>{post.category}</span>
             {post.featured && <span style={{ fontSize: "0.58rem", fontWeight: 700, textTransform: "uppercase", background: "#FFF0F2", color: "#E60023", padding: "2px 7px", borderRadius: 50 }}>Featured</span>}
           </div>
-          <h3 style={{ fontFamily: "'DM Serif Display',serif", fontSize: "1rem", color: "#1A1612", margin: "0 0 5px", lineHeight: 1.3,
-            overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          <h3 style={{
+            fontFamily: "'DM Serif Display',serif", fontSize: "1rem", color: "#1A1612", margin: "0 0 5px", lineHeight: 1.3,
+            overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"
+          }}>
             {post.title}
           </h3>
           {post.excerpt && (
-            <p style={{ fontSize: "0.78rem", color: "#8C7E74", lineHeight: 1.5, margin: "0 0 8px",
-              display: "-webkit-box", WebkitLineClamp: 1, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+            <p style={{
+              fontSize: "0.78rem", color: "#8C7E74", lineHeight: 1.5, margin: "0 0 8px",
+              display: "-webkit-box", WebkitLineClamp: 1, WebkitBoxOrient: "vertical", overflow: "hidden"
+            }}>
               {post.excerpt}
             </p>
           )}
@@ -566,8 +574,10 @@ const EmptyState = ({ query, onClear }) => (
       {query ? `No results for "${query}". Try a different search.` : "No posts in this category yet."}
     </p>
     <button type="button" onClick={onClear}
-      style={{ background: "#1A1612", color: "#FAF8F4", border: "none", borderRadius: 50, padding: "0.7rem 1.8rem",
-        fontFamily: "'Outfit',sans-serif", fontWeight: 600, fontSize: "0.85rem", cursor: "pointer" }}>
+      style={{
+        background: "#1A1612", color: "#FAF8F4", border: "none", borderRadius: 50, padding: "0.7rem 1.8rem",
+        fontFamily: "'Outfit',sans-serif", fontWeight: 600, fontSize: "0.85rem", cursor: "pointer"
+      }}>
       Clear filters
     </button>
   </div>
@@ -655,15 +665,19 @@ export default function AllBlogs() {
         <div style={{ paddingTop: 100, paddingBottom: 56, paddingLeft: 24, paddingRight: 24, maxWidth: 1400, margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 24, marginBottom: 40 }}>
             <div>
-              <div className="fade-up d-100" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#F2EDE4",
-                border: "1px solid #E8E0D5", borderRadius: 50, padding: "6px 16px", marginBottom: 16 }}>
+              <div className="fade-up d-100" style={{
+                display: "inline-flex", alignItems: "center", gap: 8, background: "#F2EDE4",
+                border: "1px solid #E8E0D5", borderRadius: 50, padding: "6px 16px", marginBottom: 16
+              }}>
                 <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: "50%", background: "#E60023", display: "inline-block" }} />
                 <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C7E74" }}>
                   All Posts
                 </span>
               </div>
-              <h1 className="fade-up d-200" style={{ fontFamily: "'DM Serif Display',serif", fontSize: "clamp(2rem,4vw,3.2rem)",
-                color: "#1A1612", margin: "0 0 10px", lineHeight: 1.08 }}>
+              <h1 className="fade-up d-200" style={{
+                fontFamily: "'DM Serif Display',serif", fontSize: "clamp(2rem,4vw,3.2rem)",
+                color: "#1A1612", margin: "0 0 10px", lineHeight: 1.08
+              }}>
                 Every story,<br /><em style={{ color: "#8C7E74" }}>in one place.</em>
               </h1>
               <p className="fade-up d-300" style={{ fontSize: "1rem", color: "#8C7E74", margin: 0 }}>
@@ -675,11 +689,16 @@ export default function AllBlogs() {
             <div className="fade-up d-400" style={{ width: "100%", maxWidth: 380 }}>
               <div className="search-wrap">
                 <SearchIcon size={17} />
+                <label htmlFor="blog-search" className="sr-only">
+                  Search Blog Posts
+                </label>
+
                 <input
+                  id="blog-search"
                   type="search"
                   placeholder="Search posts, topics, tags…"
                   value={query}
-                  onChange={e => setQuery(e.target.value)}
+                  onChange={(e) => setQuery(e.target.value)}
                   aria-label="Search blog posts"
                 />
               </div>
@@ -710,9 +729,11 @@ export default function AllBlogs() {
               {/* Active filter indicator */}
               {(query || activeCategory !== "All") && (
                 <button type="button" onClick={clearFilters}
-                  style={{ display: "flex", alignItems: "center", gap: 5, background: "#FFF0F2", color: "#E60023",
+                  style={{
+                    display: "flex", alignItems: "center", gap: 5, background: "#FFF0F2", color: "#E60023",
                     border: "1.5px solid #FFD0D8", borderRadius: 50, padding: "4px 12px",
-                    fontSize: "0.72rem", fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>
+                    fontSize: "0.72rem", fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap"
+                  }}>
                   <CloseIcon size={11} /> Clear
                 </button>
               )}
@@ -783,9 +804,11 @@ export default function AllBlogs() {
                 {hasMore ? (
                   <button type="button"
                     onClick={() => setVisibleCount(v => v + 16)}
-                    style={{ background: "#1A1612", color: "#FAF8F4", border: "none", borderRadius: 50,
+                    style={{
+                      background: "#1A1612", color: "#FAF8F4", border: "none", borderRadius: 50,
                       padding: "0.8rem 2.2rem", fontFamily: "'Outfit',sans-serif", fontWeight: 600,
-                      fontSize: "0.88rem", cursor: "pointer", transition: "background 0.2s" }}
+                      fontSize: "0.88rem", cursor: "pointer", transition: "background 0.2s"
+                    }}
                     onMouseEnter={e => e.target.style.background = "#E60023"}
                     onMouseLeave={e => e.target.style.background = "#1A1612"}>
                     Load more posts

@@ -554,11 +554,17 @@ export default function Sitemap() {
                                 className="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
                                 style={{ color: dark ? "rgba(250,248,244,0.3)" : "#AAA09A" }}
                             />
+                            <label htmlFor="sitemap-search" className="sr-only">
+                                Search articles
+                            </label>
+
                             <input
+                                id="sitemap-search"
                                 type="search"
                                 placeholder="Search articles…"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
+                                aria-label="Search articles"
                                 className="w-full pl-9 pr-4 py-2.5 text-[0.85rem] rounded-xl border outline-none transition-all duration-200"
                                 style={{
                                     background: dark ? "rgba(255,255,255,0.04)" : "#FFFFFF",
