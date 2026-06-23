@@ -1603,7 +1603,6 @@ const PinterestSection = () => {
                     href="https://in.pinterest.com/veereshbbashetti/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    role="listitem"
                     style={{
                         flexShrink: 0,
                         width: "min(60vw, 280px)",
