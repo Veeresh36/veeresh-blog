@@ -1567,6 +1567,7 @@ const PinterestSection = () => {
             <div
                 ref={trackRef}
                 role="list"
+                className="xl:ml-[110px] md:ml-5 sm:ml-4"
                 style={{
                     display: "flex",
                     gap: "20px",
@@ -1575,7 +1576,6 @@ const PinterestSection = () => {
                     WebkitOverflowScrolling: "touch",
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
-                    marginLeft: "125px",
                     paddingLeft: "max(24px, calc((100vw - 1320px) / 2 + 24px))",
                     paddingRight: "24px",
                     paddingBottom: "12px",
