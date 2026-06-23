@@ -1379,7 +1379,7 @@ const TopicsSection = ({ posts }) => {
                         >
                             <span
                                 className="w-[34px] h-[34px] rounded-full border flex items-center justify-center text-[#FAF8F4]"
-                                style={{ borderColor: "rgba(250,248,244,0.35)" }}
+                                style={{ borderColor: " rgba(250,248,244,0.6)" }}
                             >
                                 <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M7 17L17 7M7 7h10v10" />

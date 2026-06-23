@@ -301,7 +301,7 @@ const RecentPosts = ({ dark, border }) => {
     }
 
     if (!posts.length) return (
-        <p className="text-[0.84rem] font-light" style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>
+        <p className="text-[0.84rem] font-light" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
             No posts yet.
         </p>
     );
@@ -325,7 +325,7 @@ const RecentPosts = ({ dark, border }) => {
                             {post.title}
                         </div>
                         <div className="text-[0.72rem] mt-0.5 font-light"
-                            style={{ color: dark ? "rgba(250,248,244,0.38)" : "#9C8E84" }}>
+                            style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84" }}>
                             {post.category && <span className="font-semibold" style={{ color: "#E60023" }}>{post.category} · </span>}
                             {post.date && new Date(post.date).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}
                         </div>
@@ -363,7 +363,6 @@ export default function About() {
     return (
         <>
             <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -387,7 +386,7 @@ export default function About() {
 
                 {/* ── Breadcrumb ── */}
                 <nav className="max-w-[1280px] mx-auto px-6 pt-28 pb-0 flex items-center gap-2 text-xs font-medium"
-                    style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }} aria-label="Breadcrumb">
+                    style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }} aria-label="Breadcrumb">
                     <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
                     <span>›</span>
                     <span style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>About</span>
@@ -473,7 +472,7 @@ export default function About() {
                             {/* Location + links row */}
                             <div className="flex items-center flex-wrap gap-3 mt-8">
                                 <div className="flex items-center gap-1.5 text-[0.78rem]"
-                                    style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>
+                                    style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
                                     <Icon d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" size={14} />
                                     {SITE.location}
                                 </div>
@@ -553,7 +552,7 @@ export default function About() {
                                                     border: `2px solid ${i === 0 ? "#E60023" : border}`,
                                                 }}>
                                                 <span className="text-[0.65rem] font-bold"
-                                                    style={{ color: i === 0 ? "#fff" : (dark ? "rgba(250,248,244,0.4)" : "#9C8E84") }}>
+                                                    style={{ color: i === 0 ? "#fff" : (dark ? "rgba(250,248,244,0.65)" : "#9C8E84") }}>
                                                     {item.year.slice(2)}
                                                 </span>
                                             </div>
@@ -590,7 +589,7 @@ export default function About() {
                                                 <Icon d={item.icon} size={12} className="text-red-500" />
                                             </div>
                                             <span className="text-[0.68rem] font-bold uppercase tracking-widest"
-                                                style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
+                                                style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84" }}>
                                                 {item.label}
                                             </span>
                                         </div>
@@ -611,7 +610,7 @@ export default function About() {
                         <div className="rounded-2xl overflow-hidden"
                             style={{ background: dark ? "rgba(255,255,255,0.02)" : "#FFFFFF", border: `1px solid ${border}` }}>
                             <div className="px-5 py-3.5 text-[0.62rem] font-bold tracking-[0.14em] uppercase"
-                                style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
+                                style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
                                 Recent articles
                             </div>
                             <div className="px-5">
@@ -643,7 +642,7 @@ export default function About() {
                         <div className="rounded-2xl overflow-hidden"
                             style={{ background: dark ? "rgba(255,255,255,0.02)" : "#FFFFFF", border: `1px solid ${border}` }}>
                             <div className="px-5 py-3.5 text-[0.62rem] font-bold tracking-[0.14em] uppercase"
-                                style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
+                                style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
                                 Get in touch
                             </div>
                             <div className="p-5">
@@ -664,7 +663,7 @@ export default function About() {
                         <div className="rounded-2xl overflow-hidden"
                             style={{ background: dark ? "rgba(255,255,255,0.02)" : "#FFFFFF", border: `1px solid ${border}` }}>
                             <div className="px-5 py-3.5 text-[0.62rem] font-bold tracking-[0.14em] uppercase"
-                                style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
+                                style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
                                 Pages
                             </div>
                             <nav className="p-2">
@@ -727,12 +726,12 @@ export default function About() {
                                 style={{ color: "#FAF8F4" }}>
                                 Veeresh<span style={{ color: "#E60023" }}>.</span>
                             </Link>
-                            <span className="text-[0.72rem]" style={{ color: "rgba(250,248,244,0.25)" }}>
+                            <span className="text-[0.72rem]" style={{ color: "rgba(250,248,244,0.5)" }}>
                                 © {new Date().getFullYear()} All rights reserved.
                             </span>
                         </div>
                         <div className="flex items-center gap-4 text-[0.78rem]"
-                            style={{ color: "rgba(250,248,244,0.4)" }}>
+                            style={{ color: "rgba(250,248,244,0.65)" }}>
                             <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
                             <span style={{ color: "rgba(250,248,244,0.15)" }}>·</span>
                             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>

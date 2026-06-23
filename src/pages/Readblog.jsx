@@ -907,7 +907,7 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
 };
 
 const Breadcrumb = ({ category, title, dark }) => (
-  <nav className="max-w-[1280px] mx-auto px-6 pt-28 pb-0 flex items-center gap-2 text-xs font-medium flex-wrap" style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }} aria-label="Breadcrumb">
+  <nav className="max-w-[1280px] mx-auto px-6 pt-28 pb-0 flex items-center gap-2 text-xs font-medium flex-wrap" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }} aria-label="Breadcrumb">
     <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
     <span>›</span>
     <a href="/#blog" className="hover:text-red-500 transition-colors">Blog</a>
@@ -961,7 +961,7 @@ const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime,
           </div>
           <div>
             <div className="text-[0.88rem] font-semibold" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{fm.author || SITE.name}</div>
-            <div className="flex items-center gap-2 text-[0.73rem] flex-wrap" style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>
+            <div className="flex items-center gap-2 text-[0.73rem] flex-wrap" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
               {fm.date && <time dateTime={fm.date}>{formatDate(fm.date)}</time>}
               {fm.date && readTime && <span>·</span>}
               {readTime && <span>{readTime} min read</span>}
@@ -1069,7 +1069,7 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }
     activeElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [activeId]);
 
-  if (!tocItems.length) return <p className="text-sm" style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>No sections found.</p>;
+  if (!tocItems.length) return <p className="text-sm" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>No sections found.</p>;
 
   return (
     <div>
@@ -1088,7 +1088,7 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }
         </div>
         <div>
           <div className="text-[0.75rem] font-bold" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>Reading progress</div>
-          <div className="text-[0.68rem]" style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>{done}/{tocItems.length} sections done</div>
+          <div className="text-[0.68rem]" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>{done}/{tocItems.length} sections done</div>
         </div>
       </div>
 
@@ -1116,7 +1116,7 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-[0.8rem] font-medium leading-snug transition-colors duration-200"
-                    style={{ color: isActive ? (dark ? "#FAF8F4" : "#1A1612") : isDone ? (dark ? "rgba(250,248,244,0.35)" : "#AAA09A") : (dark ? "rgba(250,248,244,0.6)" : "#5A5046") }}>
+                    style={{ color: isActive ? (dark ? "#FAF8F4" : "#1A1612") : isDone ? (dark ? " rgba(250,248,244,0.6)" : "#AAA09A") : (dark ? "rgba(250,248,244,0.6)" : "#5A5046") }}>
                     {item.label}
                   </div>
                   {pct > 0 && (
@@ -1136,7 +1136,7 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }
         })}
       </ul>
 
-      <div className="mt-4 pt-4 flex items-center justify-between text-[0.68rem]" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}`, color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
+      <div className="mt-4 pt-4 flex items-center justify-between text-[0.68rem]" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}`, color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>
         <span>{tocItems.length} sections</span>
         {done === tocItems.length
           ? <span style={{ color: "#22543D", fontWeight: 700 }}>✓ Fully read!</span>
@@ -1152,7 +1152,7 @@ const SidebarCard = ({ header, children, dark, delay = 0 }) => {
     <div ref={ref} className="rounded-2xl overflow-hidden mb-4"
       style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
       <div className="px-5 py-3 text-[0.65rem] font-bold tracking-[0.13em] uppercase"
-        style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}` }}>
+        style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}` }}>
         {header}
       </div>
       <div className="p-5">{children}</div>
@@ -1169,7 +1169,7 @@ const AuthorCard = ({ author, dark }) => {
         {name[0]?.toUpperCase()}
       </div>
       <div className="font-['DM_Serif_Display',serif] text-[1rem] mb-1" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{name}</div>
-      <p className="text-[0.8rem] leading-relaxed mb-4" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>
+      <p className="text-[0.8rem] leading-relaxed mb-4" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>
         Writer and curator based in Hubballi, India. Writing about small things that make life better.
       </p>
       <div className="flex gap-2 flex-wrap">
@@ -1207,7 +1207,7 @@ const ArticleTags = ({ tags, dark }) => {
   if (!normalized.length) return null;
   return (
     <div className="mt-12 pt-8 flex items-center gap-2.5 flex-wrap" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
-      <span className="text-[0.72rem] font-bold uppercase tracking-[0.07em]" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>Tags:</span>
+      <span className="text-[0.72rem] font-bold uppercase tracking-[0.07em]" style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>Tags:</span>
       {normalized.map(tag => (
         <span key={tag} to={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}`}
           className="inline-block text-[0.73rem] font-semibold px-3.5 py-1.5 rounded-full border transition-all duration-200 hover:opacity-70"
@@ -1252,7 +1252,7 @@ const ReactionBar = ({ slug, dark, border, supabaseUrl, supabaseKey }) => {
   return (
     <div className="mt-10 pt-8 flex flex-col gap-3" style={{ borderTop: `1px solid ${border}` }}>
       <p className="text-[0.72rem] font-bold uppercase tracking-[0.07em]"
-        style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
+        style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>
         Did you find this helpful?
       </p>
       <div className="flex items-center gap-2 flex-wrap">
@@ -1301,7 +1301,7 @@ const FAQSection = ({ faqs, dark, border }) => {
               <span className="text-[0.88rem] font-semibold pr-4" itemProp="name"
                 style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{faq.q}</span>
               <span className="flex-shrink-0 text-lg transition-transform duration-200"
-                style={{ transform: open === i ? "rotate(45deg)" : "none", color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>
+                style={{ transform: open === i ? "rotate(45deg)" : "none", color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
                 +
               </span>
             </button>
@@ -1354,7 +1354,7 @@ const AISummaryCard = ({ content, dark, border }) => {
       style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
       <div className="px-5 py-3 flex items-center justify-between" style={{ borderBottom: `1px solid ${border}` }}>
         <span className="text-[0.65rem] font-bold tracking-[0.13em] uppercase"
-          style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
+          style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>
           ✦ AI Summary
         </span>
         {state === "idle" && (
@@ -1374,12 +1374,12 @@ const AISummaryCard = ({ content, dark, border }) => {
       </div>
       <div className="p-5">
         {state === "idle" && (
-          <p className="text-[0.8rem] leading-relaxed" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>
+          <p className="text-[0.8rem] leading-relaxed" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>
             Get a 3-bullet AI summary of this article.
           </p>
         )}
         {state === "loading" && (
-          <div className="flex items-center gap-2 text-[0.8rem]" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>
+          <div className="flex items-center gap-2 text-[0.8rem]" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>
             <span className="inline-block w-3.5 h-3.5 border-2 rounded-full border-t-transparent animate-spin"
               style={{ borderColor: "#E60023", borderTopColor: "transparent" }} />
             Summarizing…
@@ -1414,7 +1414,7 @@ const HighlightsPanel = ({ slug, dark, border }) => {
       style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
       <div className="px-5 py-3" style={{ borderBottom: `1px solid ${border}` }}>
         <span className="text-[0.65rem] font-bold tracking-[0.13em] uppercase"
-          style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
+          style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>
           ✎ Your Highlights ({highlights.length})
         </span>
       </div>
@@ -1451,7 +1451,7 @@ const RelatedCard = ({ post, delay, dark }) => {
       <div className="p-5 flex-1 flex flex-col">
         <div className="text-[0.65rem] font-bold uppercase tracking-[0.09em] mb-2" style={{ color: "#E60023" }}>{post.tag}</div>
         <h3 className="font-['DM_Serif_Display',serif] text-[1.0rem] leading-snug flex-1 mb-3" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{post.title}</h3>
-        <div className="text-[0.72rem] font-medium" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>{post.meta}</div>
+        <div className="text-[0.72rem] font-medium" style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>{post.meta}</div>
       </div>
     </Link>
   );
@@ -1572,7 +1572,7 @@ const AffiliateLinksSidebar = ({ content, dark, border, fallbackIcon }) => {
     <div className="rounded-2xl overflow-hidden mb-4"
       style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
       <div className="px-5 py-3 text-[0.65rem] font-bold tracking-[0.13em] uppercase"
-        style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
+        style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
         🛒 Links in this post
       </div>
       <div className="p-4 flex flex-col gap-2.5">
@@ -1652,14 +1652,14 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
       {Array.isArray(fm.products) && fm.products.length > 0 && (
         <div className="rounded-2xl overflow-hidden" style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
 
-          <div className="px-5 py-3 text-[0.65rem] font-bold tracking-[0.13em] uppercase" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>Products in this post</div>
+          <div className="px-5 py-3 text-[0.65rem] font-bold tracking-[0.13em] uppercase" style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>Products in this post</div>
           <div className="p-4 flex flex-col gap-3">
             {fm.products.map((p, i) => <ProductCard key={i} product={p} dark={dark} />)}
           </div>
         </div>
       )}
       {Array.isArray(fm.products) && fm.products.length > 0 && (
-        <p className="text-[0.68rem] leading-relaxed px-1 font-light" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
+        <p className="text-[0.68rem] leading-relaxed px-1 font-light" style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>
           🔗 Some links are affiliate links. You pay the same price — I earn a small commission. Thank you for your support!
         </p>
       )}
@@ -1798,7 +1798,7 @@ const CommentSection = ({ slug, dark }) => {
         ) : comments.length === 0 ? (
           <div className="text-center py-14 rounded-2xl" style={{ background: dark ? "rgba(255,255,255,0.02)" : "#F9F6F1", border: `1px dashed ${border}` }}>
             <div className="text-3xl mb-3">💬</div>
-            <p className="text-[0.88rem]" style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>No comments yet. Be the first!</p>
+            <p className="text-[0.88rem]" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>No comments yet. Be the first!</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -1808,7 +1808,7 @@ const CommentSection = ({ slug, dark }) => {
                   <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style={{ background: "#1A1612", color: "#FAF8F4" }}>{c.name[0]?.toUpperCase()}</div>
                   <div>
                     <div className="text-[0.85rem] font-semibold" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{c.name}</div>
-                    <div className="text-[0.72rem]" style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
+                    <div className="text-[0.72rem]" style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>
                       {new Date(c.created_at).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" })}
                     </div>
                   </div>
@@ -1844,7 +1844,7 @@ const PrevNextNav = ({ allPosts, currentSlug, dark }) => {
             className="group flex flex-col gap-2 p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1"
             style={{ background: bg, borderColor: border, textDecoration: "none" }}>
             <span className="text-[0.68rem] font-bold uppercase tracking-widest"
-              style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>← Older Post</span>
+              style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>← Older Post</span>
             <span className="font-['DM_Serif_Display',serif] text-[1rem] leading-snug group-hover:text-[#E60023] transition-colors"
               style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{prev.title}</span>
           </Link>
@@ -1854,7 +1854,7 @@ const PrevNextNav = ({ allPosts, currentSlug, dark }) => {
             className="group flex flex-col gap-2 p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 sm:text-right sm:items-end"
             style={{ background: bg, borderColor: border, textDecoration: "none" }}>
             <span className="text-[0.68rem] font-bold uppercase tracking-widest"
-              style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>Newer Post →</span>
+              style={{ color: dark ? " rgba(250,248,244,0.6)" : "#9C8E84" }}>Newer Post →</span>
             <span className="font-['DM_Serif_Display',serif] text-[1rem] leading-snug group-hover:text-[#E60023] transition-colors"
               style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{next.title}</span>
           </Link>
@@ -2205,7 +2205,7 @@ export default function ReadBlog() {
                   {morePosts.length > 0 ? (
                     morePosts.map((p, i) => <MorePostItem key={p.slug || i} post={p} dark={dark} isLast={i === morePosts.length - 1} />)
                   ) : (
-                    <div className="text-[0.8rem]" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>No more posts available.</div>
+                    <div className="text-[0.8rem]" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>No more posts available.</div>
                   )}
                 </SidebarCard>
               </div>
@@ -2237,7 +2237,7 @@ export default function ReadBlog() {
                 .slice(0, 3);
               return related.length > 0
                 ? related.map((p, i) => <RelatedCard key={p.slug || i} post={p} delay={i * 80} dark={dark} />)
-                : <div className="text-sm" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>No related posts available.</div>;
+                : <div className="text-sm" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>No related posts available.</div>;
             })()}
           </div>
         </section>
@@ -2260,7 +2260,7 @@ export default function ReadBlog() {
                   Veeresh<span style={{ color: "#E60023" }}>.</span>
                 </Link>
                 <p className="text-[0.82rem] leading-relaxed mb-6"
-                  style={{ color: "rgba(250,248,244,0.4)" }}>
+                  style={{ color: "rgba(250,248,244,0.65)" }}>
                   Writing about small things that make life better. Based in Hubballi, India.
                 </p>
                 <div className="flex items-center gap-3">
@@ -2300,13 +2300,13 @@ export default function ReadBlog() {
                         {link.external ? (
                           <a href={link.href} target="_blank" rel="noopener noreferrer"
                             className="text-[0.8rem] transition-all duration-200 hover:opacity-100 hover:translate-x-1 inline-block"
-                            style={{ color: "rgba(250,248,244,0.45)", textDecoration: "none" }}>
+                            style={{ color: "rgba(250,248,244,0.655)", textDecoration: "none" }}>
                             {link.label}
                           </a>
                         ) : (
                           <Link to={link.to}
                             className="text-[0.8rem] transition-all duration-200 hover:opacity-100 hover:translate-x-1 inline-block"
-                            style={{ color: "rgba(250,248,244,0.45)", textDecoration: "none" }}>
+                            style={{ color: "rgba(250,248,244,0.655)", textDecoration: "none" }}>
                             {link.label}
                           </Link>
                         )}
@@ -2330,7 +2330,7 @@ export default function ReadBlog() {
                       <li key={link.label}>
                         <Link to={link.to}
                           className="text-[0.8rem] transition-all duration-200 hover:opacity-100 hover:translate-x-1 inline-block"
-                          style={{ color: "rgba(250,248,244,0.45)", textDecoration: "none" }}>
+                          style={{ color: "rgba(250,248,244,0.655)", textDecoration: "none" }}>
                           {link.label}
                         </Link>
                       </li>
@@ -2354,13 +2354,13 @@ export default function ReadBlog() {
                         {link.href ? (
                           <a href={link.href}
                             className="text-[0.8rem] transition-all duration-200 hover:opacity-100 hover:translate-x-1 inline-block"
-                            style={{ color: "rgba(250,248,244,0.45)", textDecoration: "none" }}>
+                            style={{ color: "rgba(250,248,244,0.655)", textDecoration: "none" }}>
                             {link.label}
                           </a>
                         ) : (
                           <Link to={link.to}
                             className="text-[0.8rem] transition-all duration-200 hover:opacity-100 hover:translate-x-1 inline-block"
-                            style={{ color: "rgba(250,248,244,0.45)", textDecoration: "none" }}>
+                            style={{ color: "rgba(250,248,244,0.655)", textDecoration: "none" }}>
                             {link.label}
                           </Link>
                         )}
@@ -2379,7 +2379,7 @@ export default function ReadBlog() {
                   style={{ color: "#FAF8F4" }}>
                   Follow on Pinterest
                 </div>
-                <p className="text-[0.78rem]" style={{ color: "rgba(250,248,244,0.4)" }}>
+                <p className="text-[0.78rem]" style={{ color: "rgba(250,248,244,0.65)" }}>
                   Get visual inspiration and curated finds every day.
                 </p>
               </div>
@@ -2392,7 +2392,7 @@ export default function ReadBlog() {
 
             <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-[0.72rem]"
-                style={{ color: "rgba(250,248,244,0.25)" }}>
+                style={{ color: " rgba(250,248,244,0.5)" }}>
                 <span>© {new Date().getFullYear()} Veeresh Bashetti.</span>
                 <span className="w-1 h-1 rounded-full inline-block"
                   style={{ background: "rgba(250,248,244,0.2)" }} />

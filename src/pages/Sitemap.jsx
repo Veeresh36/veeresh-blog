@@ -314,7 +314,7 @@ const PostRow = ({ post, dark, border, isLast }) => {
                             className="text-[0.62rem] font-semibold px-2 py-0.5 rounded-full"
                             style={{
                                 background: dark ? "rgba(255,255,255,0.05)" : "#F0EBE3",
-                                color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64",
+                                color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64",
                             }}
                         >
                             {tag}
@@ -367,7 +367,7 @@ const SectionCard = ({ section, dark, border, children, count }) => (
                     className="text-[0.7rem] font-bold px-2.5 py-1 rounded-full"
                     style={{
                         background: dark ? "rgba(255,255,255,0.06)" : "#F0EBE3",
-                        color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64",
+                        color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64",
                     }}
                 >
                     {count}
@@ -474,7 +474,7 @@ export default function Sitemap() {
                 {/* ── Breadcrumb ── */}
                 <nav
                     className="max-w-[1280px] mx-auto px-6 pt-28 pb-0 flex items-center gap-2 text-xs font-medium"
-                    style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}
+                    style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}
                     aria-label="Breadcrumb"
                 >
                     <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
@@ -529,7 +529,7 @@ export default function Sitemap() {
                                 </span>
                                 <span
                                     className="text-[0.72rem] font-medium"
-                                    style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}
+                                    style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}
                                 >
                                     {stat.label}
                                 </span>
@@ -740,13 +740,13 @@ export default function Sitemap() {
                             >
                                 Veeresh<span style={{ color: "#E60023" }}>.</span>
                             </Link>
-                            <span className="text-[0.72rem]" style={{ color: "rgba(250,248,244,0.25)" }}>
+                            <span className="text-[0.72rem]" style={{ color: "rgba(250,248,244,0.5)" }}>
                                 © {new Date().getFullYear()} All rights reserved.
                             </span>
                         </div>
                         <div
                             className="flex items-center gap-4 text-[0.78rem]"
-                            style={{ color: "rgba(250,248,244,0.4)" }}
+                            style={{ color: "rgba(250,248,244,0.65)" }}
                         >
                             <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
                             <span style={{ color: "rgba(250,248,244,0.15)" }}>·</span>
