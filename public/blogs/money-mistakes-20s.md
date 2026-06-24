@@ -17,7 +17,7 @@ readingTime: "10 min read"
 featured: true
 emoji: "📉"
 
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-smart-people-stay-broke-in-their-20s.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-smart-people-stay-broke-in-their-20s.webp"
 coverImageAlt: "Why Smart People Stay Broke in Their 20s - Personal Finance Lessons"
 
 

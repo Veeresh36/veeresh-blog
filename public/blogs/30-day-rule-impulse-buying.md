@@ -24,7 +24,7 @@ featured: false
 emoji: "⏳"
 author: "Veeresh Bashetti"
 
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.webp"
 coverImageAlt: "The 30 Day Rule - The Only Spending Rule That Changed My Habits"
 
 authorUrl: "https://veereshbashetti.com/about"

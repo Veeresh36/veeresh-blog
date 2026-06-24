@@ -7,7 +7,7 @@ author: Veeresh Bashetti
 category: Finance
 excerpt: "Most people are fighting a battle that started before they were born. Here's what nobody tells you about building wealth from absolute zero — and what you can actually do about it."
 description: "Discover why generational wealth matters more than hard work alone, and what it really means to start from nothing in today's world. A raw, honest guide for first-generation wealth builders in India."
-image: https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-suffering-without-generational-wealth-hits-different.png
+image: https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-suffering-without-generational-wealth-hits-different.webp
 imageAlt: "A young person sitting alone at a desk thinking about money, bills, and the future — the reality of building wealth without generational support"
 readingTime: "8 min read"
 featured: true

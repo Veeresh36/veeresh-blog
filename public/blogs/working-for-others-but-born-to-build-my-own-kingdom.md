@@ -21,7 +21,7 @@ tags:
   - how to start your own business from job
   - solo founder journey India
   - developer entrepreneur mindset
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.webp"
 imageAlt: "A developer staring at a screen late at night — working for a startup but dreaming of building their own empire from scratch"
 readingTime: "10 min read"
 featured: true

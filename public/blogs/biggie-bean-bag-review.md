@@ -9,7 +9,7 @@ excerpt: "After sinking into this printed bean bag daily for work breaks, gaming
 date: "2026-06-22"
 author: "Veeresh Bashetti"
 featured: true
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/biggie-bean-bag-review-banner.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/biggie-bean-bag-review-banner.webp"
 imageAlt: "Biggie Bean Bag 4XL with loud prints, free cushion and footrest, beans filled"
 pinterest: "https://in.pinterest.com/veereshbbashetti/"
 gradient: "from-[#F0F4F5] to-[#D6E4E7]"

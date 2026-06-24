@@ -19,7 +19,7 @@ readingTime: "9 min read"
 featured: false
 emoji: "📱"
 
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/stop-comparing-your-chapter-1-to-someone-elses-chapter-10.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/stop-comparing-your-chapter-1-to-someone-elses-chapter-10.webp"
 coverImageAlt: "Stop Comparing Your Chapter 1 to Someone Else's Chapter 10"
 
 author: "Veeresh Bashetti"

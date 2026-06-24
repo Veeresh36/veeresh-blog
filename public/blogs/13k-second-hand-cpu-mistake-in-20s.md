@@ -22,7 +22,12 @@ readingTime: "9 min read"
 featured: true
 emoji: "💸"
 gradient: "from-[#F5E8E8] to-[#E8D4D4]"
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.png"
+
+
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
+
+
+
 imageAlt: "A second-hand CPU sitting unused in a corner — a symbol of impulsive buying regret in your 20s"
 author: "Veeresh Bashetti"
 authorUrl: "https://veereshbashetti.com/about"

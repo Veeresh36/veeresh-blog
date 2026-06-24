@@ -23,7 +23,7 @@ featured: false
 emoji: "📊"
 author: "Veeresh Bashetti"
 
-  image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.png"
+  image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp"
 coverImageAlt: "Budgeting for Beginners in India - The 3 Bucket Method"
 
 authorUrl: "https://veereshbashetti.com/about"

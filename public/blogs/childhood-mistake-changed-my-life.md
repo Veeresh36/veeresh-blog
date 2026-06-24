@@ -20,7 +20,7 @@ readingTime: "7 min read"
 featured: true
 emoji: "🪞"
 gradient: "from-[#E8EEF5] to-[#D4DDE8]"
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/forgiveness-and-personal-growth.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/forgiveness-and-personal-growth.webp"
 imageAlt: "Young boy seeking forgiveness after making a childhood mistake — a story about guilt, accountability and personal growth"
 author: "Veeresh Bashetti"
 metaTitle: "The Childhood Mistake That Changed My Life Forever | Veeresh Bashetti"

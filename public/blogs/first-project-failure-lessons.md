@@ -23,7 +23,7 @@ featured: false
 emoji: "🔧"
 author: "Veeresh Bashetti"
 
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.webp"
 coverImageAlt: "My Code Worked But The Project Still Failed"
 
 authorUrl: "https://veereshbashetti.com/about"

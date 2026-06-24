@@ -17,7 +17,7 @@ tags:
   - startup salary delay India
   - developer financial struggles
   - first job as developer
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.webp"
 imageAlt: "22-year-old software developer working at a startup with delayed salary and -₹400 bank balance — the reality of early startup life in India"
 readingTime: "9 min read"
 featured: true

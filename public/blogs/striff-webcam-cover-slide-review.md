@@ -9,7 +9,7 @@ excerpt: "After using the STRIFF Webcam Cover Slide, I realized how one tiny gad
 date: "2026-06-21"
 author: "Veeresh Bashetti"
 featured: true
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/striff-webcam-cover-slide-review-banner.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/striff-webcam-cover-slide-review-banner.webp"
 imageAlt: "STRIFF webcam cover slide privacy protection for laptops and webcams"
 pinterest: "https://in.pinterest.com/veereshbbashetti/"
 gradient: "from-[#F5F3F0] to-[#E7DED6]"

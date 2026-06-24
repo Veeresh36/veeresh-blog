@@ -24,7 +24,7 @@ featured: false
 emoji: "🖥️"
 author: "Veeresh Bashetti"
 
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/developer-setup-trap-why-better-hardware-wont-make-you-a-better-developer.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/developer-setup-trap-why-better-hardware-wont-make-you-a-better-developer.webp"
 coverImageAlt: "The Developer Setup Trap - Why Better Hardware Won't Make You a Better Developer"
 
 authorUrl: "https://veereshbashetti.com/about"

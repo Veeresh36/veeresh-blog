@@ -9,7 +9,7 @@ excerpt: "After using this DailyObjects organizer for my chargers, cables, and g
 date: "2026-06-21"
 author: "Veeresh Bashetti"
 featured: true
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review-banner.webp"
 imageAlt: "DailyObjects canvas gadget organizer pouch opened flat showing cable loops and pockets"
 pinterest: "https://in.pinterest.com/veereshbbashetti/"
 gradient: "from-[#F5F3F0] to-[#E7DED6]"
