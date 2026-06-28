@@ -1699,7 +1699,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
           return (
             <>
               <ReactMarkdown components={mdComponents}>{firstHalf}</ReactMarkdown>
-              <CarbonAdUnit slot="" />
+              <InArticleAd />
               <ReactMarkdown components={mdComponents}>{secondHalf}</ReactMarkdown>
             </>
           );
@@ -2292,7 +2292,7 @@ export default function ReadBlog() {
 
 
         <div className="max-w-[1280px] mx-auto px-6 mb-8">
-          <CarbonAdUnit slot="" format="horizontal" />
+          <CarbonAdUnit slot="3170555405" format="horizontal" />
         </div>
 
         {fm.type === "pinterest" ? (
@@ -2356,7 +2356,7 @@ export default function ReadBlog() {
                   {content}
                 </ReactMarkdown>
 
-                <CarbonAdUnit slot="3170555405" />
+                <InArticleAd />
 
                 <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_ANON_KEY} />
 
@@ -2404,7 +2404,7 @@ export default function ReadBlog() {
         <CommentSection slug={slug} dark={dark} />
 
         <div className="max-w-[1280px] mx-auto px-6 mb-4">
-          <CarbonAdUnit slot="" format="horizontal" />
+          <CarbonAdUnit slot="3170555405" format="horizontal" />
         </div>
 
         {/* RELATED */}
