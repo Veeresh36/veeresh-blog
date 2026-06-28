@@ -67,6 +67,49 @@ const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, 
   );
 };
 
+const InArticleAd = () => {
+  const [consent, setConsent] = useState(hasConsent());
+
+  useEffect(() => {
+    const onChange = (e) => setConsent(e.detail === "accepted");
+    window.addEventListener("cookieConsentChanged", onChange);
+    return () =>
+      window.removeEventListener("cookieConsentChanged", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!consent) return;
+
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.error(e);
+    }
+  }, [consent]);
+
+  if (!consent) return null;
+
+  return (
+    <div className="my-10">
+      <span className="block text-center text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 mb-2">
+        — Advertisement —
+      </span>
+
+      <ins
+        className="adsbygoogle"
+        style={{
+          display: "block",
+          textAlign: "center",
+        }}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
+        data-ad-client="ca-pub-4423608769058806"
+        data-ad-slot="3083346955"
+      />
+    </div>
+  );
+};
+
 // ═══════════════════════════════════════════════
 // FRONTMATTER PARSER
 // ═══════════════════════════════════════════════
