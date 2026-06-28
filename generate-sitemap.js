@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DOMAIN = "https://veeresh-blog.vercel.app";
+const DOMAIN = "https://veereshbashetti.com/";
 
 const blogsDir = path.join(__dirname, "public", "blogs");
 
