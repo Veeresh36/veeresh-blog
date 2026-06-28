@@ -9,7 +9,7 @@ excerpt: "After using this expandable backpack for work, travel, and everyday ca
 date: "2026-06-21"
 author: "Veeresh Bashetti"
 featured: true
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review-baner.png"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review-baner.webp"
 imageAlt: "WROGN expandable backpack with reflective strip and 23L to 35L expandable capacity"
 pinterest: "https://in.pinterest.com/veereshbbashetti/"
 gradient: "from-[#F5F3F0] to-[#E7DED6]"

@@ -2,8 +2,9 @@
 title: "The Biggest Money Mistakes People Make in Their 20s (And Why We All Make Them)"
 slug: "money-mistakes-20s"
 excerpt: "These aren't just financial errors. They're emotional ones — and understanding the feelings behind them is the only thing that actually changes the pattern."
+description: "The seven money mistakes that quietly keep smart, hardworking people broke in their 20s — emotional spending, no emergency fund, lifestyle inflation, and the high-interest debt trap — and the feeling underneath each one."
 date: "2026-05-20"
-lastModified: "2026-06-01"
+lastModified: "2026-06-28"
 category: "Personal Finance"
 tags:
   - money mistakes in 20s
@@ -18,8 +19,25 @@ featured: true
 emoji: "📉"
 
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-smart-people-stay-broke-in-their-20s.webp"
-coverImageAlt: "Why Smart People Stay Broke in Their 20s - Personal Finance Lessons"
+imageAlt: "Why Smart People Stay Broke in Their 20s - Personal Finance Lessons"
 
+takeaways:
+  - "Every money mistake in your 20s has a feeling underneath it — fear, identity, belonging — and fixing the feeling is what actually fixes the spending."
+  - "Save first, not last: removing money from the equation the moment it arrives is the only saving mechanism that reliably works."
+  - "High-interest debt cancels out almost any investment gain you could make — clearing it is the highest-yield financial move available to you."
+  - "Lifestyle inflation is not the problem on its own; spending 100% of every raise while saving the same absolute amount as before is."
+
+faqs:
+  - q: "What is the biggest money mistake people make in their 20s?"
+    a: "Spending before saving — waiting to see what is left at the end of the month instead of saving first, the moment money arrives. Since nothing is ever truly left over, this one habit underlies most of the other mistakes on this list."
+  - q: "Should I invest or pay off debt first in my 20s?"
+    a: "Pay off high-interest debt first. If you are paying 18-36% interest on a credit card or personal loan, no investment realistically returns more than that, so clearing the debt is the higher-yield move available to you."
+  - q: "How much should I save for an emergency fund in my 20s?"
+    a: "Aim for three to six months of essential expenses, kept somewhere you will not be tempted to touch for anything other than a genuine emergency — job loss, medical issue, or unavoidable travel."
+  - q: "What should I do with extra money like a bonus or scholarship?"
+    a: "Treat it exactly like earned income, not free money. Windfalls get spent faster and with less thought than money you worked for, so apply the same 30-day wait rule to unexpected money that you would to any large planned purchase."
+  - q: "Are money mistakes in your 20s mostly about discipline or about emotions?"
+    a: "Mostly emotions. Fear of falling behind, the need to belong, and the hope that a purchase will deliver an identity are usually driving the spending — discipline alone rarely fixes a pattern that starts with a feeling."
 
 author: "Veeresh Bashetti"
 authorUrl: "https://veereshbashetti.com/about"
@@ -123,6 +141,12 @@ And saying no feels like social death at 22.
 So you spend. You go. You split bills you can't cover. You look fine on the outside and feel anxious on the inside.
 
 The people who become financially stable in their 20s — genuinely stable, not just looking it — are the ones who get comfortable saying "I can't do that right now" without needing it to mean something about them. It takes practice. It's worth it.
+
+---
+
+If you want every mistake above confirmed by someone who deals with this professionally, not just lived experience, this conversation with Kirtan Shah — founder of Truvanta Wealth and one of India's more respected personal finance voices — covers almost the exact same ground from the advisor's side of the table:
+
+::youtube[swcn2SZ6kwQ]{caption="Kirtan Shah breaks down the money mistakes that keep people poor in their 20s"}
 
 ---
 

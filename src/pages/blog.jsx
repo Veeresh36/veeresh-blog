@@ -113,7 +113,7 @@ const TOPICS = [
 
 // ─── PINS DATA ───────────────────────────────────────────────
 const PINS = [
-    { emoji: "🚗", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review.png", title: "This Expandable Backpack Might Be the Smartest Travel Upgrade of 2026", desc: "Discover why this WROGN expandable backpack is becoming a Pinterest favorite.", category: "Pinterest Picks", heightPx: 280, slug: "wrogn-expandable-backpack-review" },
+    { emoji: "🚗", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review.webp", title: "This Expandable Backpack Might Be the Smartest Travel Upgrade of 2026", desc: "Discover why this WROGN expandable backpack is becoming a Pinterest favorite.", category: "Pinterest Picks", heightPx: 280, slug: "wrogn-expandable-backpack-review" },
 
     { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review.webp", title: "This Compact Tech Organizer Keeps Every Cable and Charger in One Place", desc: "A small canvas pouch that ends the tangled-cable mess in your travel bag — chargers, power banks, and cards all sorted in one zip-around case.", category: "Pinterest Picks", heightPx: 280, slug: "dailyobjects-gadget-organizer-review" },
 

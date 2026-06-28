@@ -2,7 +2,7 @@
 title: "Why Suffering Without Generational Wealth Hits Different"
 slug: suffering-without-generational-wealth
 date: 2025-05-30
-lastModified: "2026-06-03"
+lastModified: "2026-06-28"
 author: Veeresh Bashetti
 category: Finance
 excerpt: "Most people are fighting a battle that started before they were born. Here's what nobody tells you about building wealth from absolute zero — and what you can actually do about it."
@@ -95,6 +95,12 @@ It includes property that was paid off before you were born. It includes parents
 And perhaps most importantly: it includes **time**. The time you are not spending in your 20s just trying to keep your head above water.
 
 When your family has none of these things, you start at zero. And starting at zero in a world built for people who started well ahead of you is exhausting in a way that is genuinely very hard to explain to someone who has never lived it.
+
+If you want to see exactly what this looks like on the other side — the trusts, holding companies, and family systems that keep wealth compounding instead of evaporating across generations — this is one of the clearest breakdowns I have come across:
+
+::youtube[UMiAzkNEM4U]{caption="How families like the Rockefellers, Waltons, and Hearsts structured trusts, holding companies, and family systems to make wealth outlast a single generation"}
+
+It is not an India-specific video, and the legal structures it covers (trusts, holding companies) are not how most first-generation Indian families will build their first lakhs. But the underlying logic — designing money to survive you instead of just spending it — is exactly the mindset shift this post is really about.
 
 ---
 

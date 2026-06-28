@@ -2,8 +2,9 @@
 title: "What My First Freelance Project Failure Taught Me About Money, Trust, and Saying What You Don't Know"
 slug: "first-project-failure-lessons"
 excerpt: "I built a complete matrimony platform. The client loved it. Then one sentence — one wrong number I gave with full confidence — ended everything. Here's what I learned."
+description: "A real story of a freelance project failure in India — scope creep, a wrong hosting quote, and the lessons every junior developer needs to hear before their first client project."
 date: "2026-03-10"
-lastModified: "2026-06-01"
+lastModified: "2026-06-28"
 category: "Life Lessons"
 tags:
   - first project failure
@@ -24,10 +25,33 @@ emoji: "🔧"
 author: "Veeresh Bashetti"
 
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.webp"
-coverImageAlt: "My Code Worked But The Project Still Failed"
+imageAlt: "My Code Worked But The Project Still Failed — Freelance Lessons India"
 
 authorUrl: "https://veereshbashetti.com/about"
 canonicalUrl: "https://veereshbashetti.com/blog/first-project-failure-lessons"
+
+takeaways:
+  - "Research every cost before you quote it — one wrong number said with confidence can end a project that took months to build."
+  - "Shared hosting and VPS are not the same thing. Any full-stack app with a database, file uploads, or real traffic needs a VPS, not shared hosting."
+  - "Scope creep does not feel like a problem while it is happening — it feels like enthusiasm. A written scope document is the only thing that stops it."
+  - "The three sentences that make you look more professional, not less: I do not know. That is outside scope. I need time to give you an accurate number."
+  - "The code was not the failure. The communication was. Technical skills and honest communication are both required — neither replaces the other."
+
+faqs:
+  - q: "What is the most common reason freelance projects fail in India?"
+    a: "Poor communication around cost, scope, and hosting requirements — not bad code. Most junior developers in India lose projects because of unclear quotes or scope that expands without a written agreement, not because of technical skill gaps."
+  - q: "What is the difference between shared hosting and VPS in India?"
+    a: "Shared hosting (Rs 1,500-5,000 per year) works for static sites and simple blogs. A VPS (Rs 10,000-60,000 per year) is required for any full-stack application with a database, file uploads, real-time features, or more than a handful of concurrent users. Quoting shared hosting prices for a VPS project is one of the most expensive mistakes a junior developer can make."
+  - q: "How do I avoid scope creep on my first freelance project?"
+    a: "Write a scope document before writing a single line of code. List exactly what you are building and exactly what you are not building. Get the client to agree to both lists in writing. Any new feature request after that is a new conversation about budget and timeline."
+  - q: "Should I start coding immediately when a client agrees on a project?"
+    a: "No. Before writing any code, confirm the scope in writing, identify the hosting requirements, research all third-party costs, and get a signed agreement. Starting to code before these steps are done is how you end up building three times the work for the same money."
+  - q: "What VPS providers should Indian developers consider for full-stack projects?"
+    a: "DigitalOcean, Hostinger VPS, Hetzner, and Linode (now Akamai) are all reliable options. Budget Rs 800-1,500 per month for a basic setup, and Rs 3,000-5,000 per month for a production app with image storage and real traffic."
+  - q: "Is it unprofessional to say I don't know to a client?"
+    a: "The opposite. Saying I'll check and confirm by tomorrow is far more professional than guessing and being wrong. Every experienced developer uses this phrase. It shows you take accuracy seriously, which is exactly what a client needs to trust you with their money and time."
+
+author: "Veeresh Bashetti"
 ---
 
 # What My First Freelance Project Failure Taught Me About Money, Trust, and Saying What You Don't Know
@@ -44,15 +68,15 @@ This is the story of Sapthapadi Matrimony — and the lessons I will never forge
 
 ---
 
-## The Beginning: ₹25,000 and a Vision
+## The Beginning: Rs 25,000 and a Vision
 
 A client came to me with an idea for a matrimony platform. A proper one — profile matching, search filters, contact requests, the works. I was excited. This was a real project. A full-stack application with actual users, actual stakes, actual purpose.
 
-We agreed on ₹25,000. I thought that was fair. I thought I had calculated everything.
+We agreed on Rs 25,000. I thought that was fair. I thought I had calculated everything.
 
 I hadn't.
 
-I started building immediately, which — if you've read anything about project management — you'll already know is a warning sign. But I was young and eager and the vision felt clear enough.
+I started building immediately, which — if you have read anything about project management — you will already know is a warning sign. But I was young and eager and the vision felt clear enough.
 
 ---
 
@@ -81,7 +105,7 @@ But none of that is what killed the project.
 
 When the project was nearly done, we sat down to discuss deployment.
 
-I quoted ₹5,000 for hosting and domain for the year.
+I quoted Rs 5,000 for hosting and domain for the year.
 
 I said it casually, confidently — the way you say something when you want to appear like you know what you're talking about, even when you're not entirely sure.
 
@@ -91,7 +115,7 @@ A few days later, I actually looked into it.
 
 A full-stack matrimony platform — with a database, image uploads, real-time features, Aadhaar integration, and dozens of concurrent users — cannot run on shared hosting. It needs a **VPS**. A Virtual Private Server. A proper environment with dedicated resources, SSH access, and a server you can actually configure.
 
-The real annual cost? **₹55,000 to ₹60,000.**
+The real annual cost? **Rs 55,000 to Rs 60,000.**
 
 Eleven times what I had quoted.
 
@@ -110,7 +134,7 @@ I want to be precise about the mistake, because vague lessons don't help anyone.
 | | Shared Hosting | VPS Hosting |
 |---|---|---|
 | Resources | Shared with hundreds of others | Dedicated to your server |
-| Cost (India) | ₹1,500–₹5,000/year | ₹10,000–₹60,000/year |
+| Cost in India | Rs 1,500–5,000 per year | Rs 10,000–60,000 per year |
 | Best for | Static sites, simple blogs | Full-stack apps, databases, real traffic |
 | Custom config | Very limited | Full root access |
 
@@ -126,7 +150,7 @@ Four words — "let me check first" — would have saved everything.
 
 There's another lesson buried in this story that I almost glossed over.
 
-The project started at ₹25,000. By the time it was done, it had a chat system, Aadhaar verification, a full admin dashboard, and notification features that were never part of the original conversation.
+The project started at Rs 25,000. By the time it was done, it had a chat system, Aadhaar verification, a full admin dashboard, and notification features that were never part of the original conversation.
 
 I built all of it. Because the client asked, and I didn't have a contract, and I didn't know how to say: "That's a new feature. That's a new conversation about budget and timeline."
 
@@ -176,11 +200,17 @@ Since this post may reach other junior developers who might make the same mistak
 
 **Use shared hosting for:** Portfolio sites, static blogs, simple HTML/CSS pages, WordPress sites with low traffic.
 
-**Use VPS hosting for:** Django / Node.js / Laravel applications, anything with a database and real user traffic, apps with file uploads, real-time features, or third-party API integrations.
+**Use VPS hosting for:** Django, Node.js, or Laravel applications; anything with a database and real user traffic; apps with file uploads, real-time features, or third-party API integrations.
 
-**VPS providers worth knowing in India:** DigitalOcean, Hostinger VPS, Linode (now Akamai), Hetzner. Prices start around ₹800–₹1,500/month for a basic setup, which adds up to ₹10,000–₹18,000/year at minimum. A production app with image storage and decent traffic is closer to ₹3,000–₹5,000/month.
+**VPS providers worth knowing in India:** DigitalOcean, Hostinger VPS, Linode (now Akamai), Hetzner. Prices start around Rs 800–1,500 per month for a basic setup, which adds up to Rs 10,000–18,000 per year at minimum. A production app with image storage and decent traffic is closer to Rs 3,000–5,000 per month.
 
 Always calculate this before you quote. Always.
+
+---
+
+If you are early in your freelancing journey as a developer in India, this video is one of the most honest accounts of what those first two years actually look like — the real earnings, the real client dynamics, and what nobody tells you before you start:
+
+::youtube[XNHgOCoXfZk]{caption="Reality of Software Development Freelancing in India — 2 years of real experience, international clients, and what college students need to know before taking on projects"}
 
 ---
 
@@ -207,7 +237,7 @@ But I'm glad I learned it.
 ---
 
 **Related reading:**
-- [I Spent ₹13,000 of My Scholarship Money on a CPU — Here's What It Taught Me](/blog/13k-second-hand-cpu-mistake-in-20s)
+- [I Spent Rs 13,000 of My Scholarship Money on a CPU — Here's What It Taught Me](/blog/13k-second-hand-cpu-mistake-in-20s)
 - [The Developer Setup Trap: Why Better Hardware Won't Make You a Better Developer](/blog/developer-setup-trap)
 - [The Biggest Money Mistakes People Make in Their 20s](/blog/money-mistakes-20s)
 - [Stop Comparing Yourself to People Online. It Is Costing You More Than You Think.](/blog/stop-comparing-yourself-social-media)

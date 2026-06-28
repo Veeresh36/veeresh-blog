@@ -92,7 +92,10 @@ function parseFrontmatter(raw) {
         if (itemLine.match(/^[\w-]+:\s/) || itemLine.match(/^[\w-]+:\s*$/)) break;
         if (itemLine.match(/^\s{0,4}-\s/)) {
           const firstVal = itemLine.replace(/^\s*-\s*/, "").trim();
-          if (firstVal.includes(":")) {
+          // Only treat as object if it looks like "key: value" with a short key (no spaces before colon)
+          const isObjectEntry = firstVal.match(/^[\w-]+:\s/);
+
+          if (isObjectEntry) {
             const obj = {};
             const fc = firstVal.indexOf(":");
             obj[firstVal.slice(0, fc).trim()] = firstVal.slice(fc + 1).trim().replace(/^["']|["']$/g, "");
@@ -621,7 +624,7 @@ function useTextToSpeech(content) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-4-6",
         max_tokens: 1000,
         messages: [{
           role: "user",
@@ -1004,10 +1007,7 @@ const HeroImage = ({ src, alt, pinterest }) => {
   if (!src) return null;
   return (
     <div className="max-w-[1280px] mx-auto px-6 mb-14">
-      <div
-        className={`rounded-2xl overflow-hidden max-w-[1200px] mx-auto ${pinterest ? "aspect-[16/9] md:aspect-[21/9]" : ""
-          }`}
-      >
+      <div className="rounded-2xl overflow-hidden max-w-[1200px] mx-auto aspect-[16/9]">
         <img
           src={src}
           alt={alt || "Article hero"}
@@ -1232,16 +1232,22 @@ const KeyTakeawaysBox = ({ takeaways, dark }) => {
         </span>
       </div>
       <ul className="space-y-2.5 list-none m-0 p-0">
-        {takeaways.map((t, i) => (
-          <li key={i} className="flex items-start gap-3 text-[0.87rem] leading-relaxed"
-            style={{ color: dark ? "rgba(250,248,244,0.78)" : "#3D3530" }}>
-            <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[0.6rem] font-bold mt-0.5"
-              style={{ background: "#E60023", color: "#fff" }}>
-              {i + 1}
-            </span>
-            {t}
-          </li>
-        ))}
+        {takeaways.map((t, i) => {
+          // Guard: if parser returned an object instead of string, extract first value
+          const text = typeof t === "string" ? t : typeof t === "object" && t !== null
+            ? Object.values(t).join(": ")
+            : String(t);
+          return (
+            <li key={i} className="flex items-start gap-3 text-[0.87rem] leading-relaxed"
+              style={{ color: dark ? "rgba(250,248,244,0.78)" : "#3D3530" }}>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[0.6rem] font-bold mt-0.5"
+                style={{ background: "#E60023", color: "#fff" }}>
+                {i + 1}
+              </span>
+              {text}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -1619,7 +1625,28 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
             h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
             h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
             a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
+            p: ({ children }) => {
+              const flatten = (node) => {
+                if (node === null || node === undefined) return "";
+                if (typeof node === "string") return node;
+                if (typeof node === "number") return String(node);
+                if (Array.isArray(node)) return node.map(flatten).join("");
+                if (node?.props?.children !== undefined) return flatten(node.props.children);
+                return "";
+              };
 
+              const text = flatten(children).trim();
+
+              const youtubeMatch = text.match(
+                /^::youtube\[([a-zA-Z0-9_-]{11})\](?:\{caption="([^"]*)"\})?$/
+              );
+
+              if (youtubeMatch) {
+                return <YouTubeEmbed id={youtubeMatch[1]} caption={youtubeMatch[2] || ""} />;
+              }
+
+              return <p>{children}</p>;
+            },
           };
           return (
             <>
@@ -1879,7 +1906,7 @@ function useViewCount(slug) {
             Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ p_slug: slug }),
+          body: JSON.stringify({ slug: slug }),
         });
         const count = await res.json();
         if (typeof count === "number") setViews(count);
@@ -1891,6 +1918,78 @@ function useViewCount(slug) {
 
   return views;
 }
+
+// ═══════════════════════════════════════════════
+// YOUTUBE EMBED
+// ═══════════════════════════════════════════════
+
+const YouTubeEmbed = ({ id, caption }) => {
+  const [loaded, setLoaded] = useState(false);
+  const dark = document.documentElement.getAttribute("data-theme") === "dark";
+
+  if (!id) return null;
+
+  return (
+    <div className="my-8 rounded-2xl overflow-hidden"
+      style={{ border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
+
+      {/* Thumbnail click-to-load for performance */}
+      {!loaded ? (
+        <div
+          onClick={() => setLoaded(true)}
+          className="relative cursor-pointer group"
+          style={{ aspectRatio: "16/9", background: "#000" }}>
+
+          <img
+            src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
+            alt={caption || "YouTube video"}
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
+            onError={e => { e.currentTarget.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`; }}
+          />
+
+          {/* Play button */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style={{ background: "#E60023" }}>
+              <svg viewBox="0 0 24 24" fill="white" width={28} height={28}>
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+
+          {/* YouTube branding */}
+          <div className="absolute bottom-3 right-3">
+            <svg viewBox="0 0 90 20" width={72} height={16} fill="white" opacity={0.9}>
+              <text fontSize="16" fontWeight="bold" fontFamily="Arial">▶ YouTube</text>
+            </svg>
+          </div>
+        </div>
+      ) : (
+        <div style={{ aspectRatio: "16/9" }}>
+          <iframe
+            src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+            title={caption || "YouTube video"}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+            style={{ border: "none" }}
+          />
+        </div>
+      )}
+
+      {/* Caption */}
+      {caption && (
+        <div className="px-5 py-3 text-[0.78rem] text-center font-medium"
+          style={{
+            color: dark ? "rgba(250,248,244,0.55)" : "#7A6E64",
+            borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}`
+          }}>
+          {caption}
+        </div>
+      )}
+    </div>
+  );
+};
 
 // ═══════════════════════════════════════════════
 // MAIN EXPORT
@@ -1947,9 +2046,13 @@ export default function ReadBlog() {
         }
 
         const { data, content: body } = parseFrontmatter(raw);
+
+        // Strip HTML comments like <!-- ... -->
+        const cleanBody = body.replace(/<!--[\s\S]*?-->/g, "").trim();
+
         setFm(data);
-        setContent(body);
-        setTocItems(buildTOC(body));
+        setContent(cleanBody);
+        setTocItems(buildTOC(cleanBody));
         const storedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
         setBookmarked(storedBookmarks.includes(slug));
 
@@ -2161,12 +2264,47 @@ export default function ReadBlog() {
 
                 <KeyTakeawaysBox takeaways={fm.takeaways} dark={dark} />
 
-                <ReactMarkdown components={{
-                  h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
-                  h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
-                  a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,   // ← add this
+                <ReactMarkdown
+                  components={{
+                    h2: ({ children, ...props }) => {
+                      const id = slugToId(String(children).replace(/\s+/g, " ").trim());
+                      return <h2 id={id} {...props}>{children}</h2>;
+                    },
+                    h3: ({ children, ...props }) => {
+                      const id = slugToId(String(children).replace(/\s+/g, " ").trim());
+                      return <h3 id={id} {...props}>{children}</h3>;
+                    },
+                    a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
 
-                }}>
+                    // ← ADD THIS BLOCK
+                    p: ({ children }) => {
+                      const flatten = (node) => {
+                        if (node === null || node === undefined) return "";
+                        if (typeof node === "string") return node;
+                        if (typeof node === "number") return String(node);
+                        if (Array.isArray(node)) return node.map(flatten).join("");
+                        if (node?.props?.children !== undefined) return flatten(node.props.children);
+                        return "";
+                      };
+                      const text = flatten(children).trim();
+
+                      const youtubeMatch = text.match(
+                        /^::youtube\[([a-zA-Z0-9_-]{11})\](?:\{caption="([^"]*)"\})?$/
+                      );
+
+                      if (youtubeMatch) {
+                        return (
+                          <YouTubeEmbed
+                            id={youtubeMatch[1]}
+                            caption={youtubeMatch[2] || ""}
+                          />
+                        );
+                      }
+
+                      return <p>{children}</p>;
+                    },
+                  }}
+                >
                   {content}
                 </ReactMarkdown>
 

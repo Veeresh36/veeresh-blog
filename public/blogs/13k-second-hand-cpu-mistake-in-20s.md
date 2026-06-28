@@ -1,9 +1,11 @@
 ---
 title: "I Spent ₹13,000 of My Scholarship Money on a CPU. It's Still Sitting in the Corner of My Room."
 slug: "13k-second-hand-cpu-mistake-in-20s"
+description: "A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings — the psychology behind why it happened, and the 5 questions that now protect me from spending I'll regret."
 excerpt: "This is the story of how I convinced myself that buying a used CPU was a smart career investment — and how that single purchase taught me more about money, guilt, and growing up than any finance book ever could."
+author: "Veeresh Bashetti"
 date: "2026-05-27"
-lastModified: "2026-06-01"
+lastModified: "2026-06-28"
 category: "Life Lessons"
 tags:
   - money mistakes in 20s
@@ -18,25 +20,18 @@ tags:
   - emotional spending
   - scholarship money management
   - developer setup trap
-readingTime: "9 min read"
+readingTime: "10 min read"
 featured: true
 emoji: "💸"
-gradient: "from-[#F5E8E8] to-[#E8D4D4]"
-
-
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
-
-
-
 imageAlt: "A second-hand CPU sitting unused in a corner — a symbol of impulsive buying regret in your 20s"
-author: "Veeresh Bashetti"
 authorUrl: "https://veereshbashetti.com/about"
 canonicalUrl: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
-metaTitle: "I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used — Here's What It Taught Me"
-metaDescription: "A brutally honest story about buying a second-hand CPU on impulse with scholarship money. What happened next — and the 5 questions that now protect me from spending I'll regret."
+
 seo:
-  title: "I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used — Here's What It Taught Me"
+  title: "I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti"
   description: "A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings. What happened next — and the 5 questions that now protect me from spending I'll regret."
+  canonicalUrl: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
   keywords:
     - money mistakes in 20s
     - how to stop impulsive buying
@@ -53,33 +48,20 @@ seo:
     - 30 day rule spending
     - financial discipline young adults
     - student overspending India
-openGraph:
-  type: article
-  locale: en_IN
-  site_name: Veeresh Bashetti
-schema:
-  articleType: BlogPosting
-  wordCount: 2100
-  timeRequired: PT9M
-internalLinks:
-  - anchor: "biggest money mistakes people make in their 20s"
-    url: "/blog/money-mistakes-20s"
-  - anchor: "how I finally started budgeting"
-    url: "/blog/budgeting-for-beginners-india"
-  - anchor: "what I learned from failing my first project"
-    url: "/blog/first-project-failure-lessons"
-  - anchor: "developer setup obsession"
-    url: "/blog/developer-setup-trap"
-  - anchor: "the 30-day rule actually works"
-    url: "/blog/30-day-rule-impulse-buying"
-  - anchor: "stop comparing yourself to people online"
-    url: "/blog/stop-comparing-yourself-social-media"
-takeaways:
-  - "Excitement and necessity feel exactly the same in the moment — the difference only shows up weeks later when the thing sits unused."
-  - "You are not buying the product. You are buying the identity you think it gives you. That identity never arrives."
-  - "The 30-day rule is not a budgeting trick. It is an emotional reset button. Most impulse urges die within 72 hours."
-  - "When you waste someone else's trust — a parent's savings, a scholarship meant for your future — the guilt costs more than the money ever did."
-  - "No gadget, no setup, no tool has ever replaced discipline. The people doing real work are using whatever they have."
+
+og:
+  title: "I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti"
+  description: "A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings. What happened next — and the 5 questions that now protect me from spending I'll regret."
+  image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
+  type: "article"
+  url: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
+
+twitter:
+  card: "summary_large_image"
+  title: "I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti"
+  description: "A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings."
+  image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
+
 faqs:
   - q: "Is buying a second-hand CPU worth it in India?"
     a: "It can be — but only when you have a real, immediate use for it right now, not a hypothetical future use. Before buying, check socket compatibility with your existing motherboard, verify the CPU's thermal history, and compare the second-hand price against the new price. If the difference is less than ₹2,000–3,000, just buy new for the warranty. The biggest mistake people make is buying second-hand hardware they don't have a complete build plan for."
@@ -91,9 +73,203 @@ faqs:
     a: "Treat scholarship money like a salary with non-negotiable rules. Allocate a fixed percentage to essentials (rent, food, transport, books), a small portion to personal growth (online courses, tools you actually use), and keep a minimum emergency buffer of one month's expenses. Never spend scholarship money on wants in the first 30 days of receiving it — the 'windfall effect' makes us spend unexpected money much faster than earned money."
   - q: "Can emotional spending become a habit that you break?"
     a: "Yes — but you have to identify your personal trigger first. Most emotional spenders buy when they feel stagnant, anxious about falling behind, or overstimulated by aspirational content on social media. The fix is not willpower — it is awareness. Keep a simple spending journal for one month: every time you feel the urge to buy something non-essential, write down what you were feeling right before. The pattern becomes very obvious, very fast."
+
+faqSchema:
+  - q: "Is buying a second-hand CPU worth it in India?"
+    a: "It can be — but only when you have a real, immediate use for it right now, not a hypothetical future use. Before buying, check socket compatibility with your existing motherboard, verify the CPU's thermal history, and compare the second-hand price against the new price. If the difference is less than ₹2,000–3,000, just buy new for the warranty. The biggest mistake people make is buying second-hand hardware they don't have a complete build plan for."
+  - q: "How do I stop making impulsive purchases in my 20s?"
+    a: "The most effective method is the 30-day wait rule — add the item to a wishlist, set a reminder for 30 days later, and only buy it if you still want it AND it fits your budget. Most impulse urges die within 72 hours. Other tactics that work: delete your saved card details from shopping sites, unsubscribe from deal alerts and tech newsletters, and ask yourself one honest question before every purchase: 'Am I solving a problem I actually have right now?'"
+  - q: "What are the biggest money mistakes people make in their 20s?"
+    a: "The most common ones are lifestyle inflation (spending more as you earn more without saving the difference), impulse tech and gadget purchases, no emergency fund, investing before clearing high-interest debt, and spending on status symbols to impress people who aren't watching. The root cause behind all of them is almost always emotional — not mathematical. See our full breakdown of the biggest money mistakes in your 20s for more."
+  - q: "How should students manage scholarship money wisely?"
+    a: "Treat scholarship money like a salary with non-negotiable rules. Allocate a fixed percentage to essentials (rent, food, transport, books), a small portion to personal growth (online courses, tools you actually use), and keep a minimum emergency buffer of one month's expenses. Never spend scholarship money on wants in the first 30 days of receiving it — the 'windfall effect' makes us spend unexpected money much faster than earned money."
+  - q: "Can emotional spending become a habit that you break?"
+    a: "Yes — but you have to identify your personal trigger first. Most emotional spenders buy when they feel stagnant, anxious about falling behind, or overstimulated by aspirational content on social media. The fix is not willpower — it is awareness. Keep a simple spending journal for one month: every time you feel the urge to buy something non-essential, write down what you were feeling right before. The pattern becomes very obvious, very fast."
+
+takeaways:
+  - "Excitement and necessity feel exactly the same in the moment — the difference only shows up weeks later when the thing sits unused."
+  - "You are not buying the product. You are buying the identity you think it gives you. That identity never arrives."
+  - "The 30-day rule is not a budgeting trick. It is an emotional reset button. Most impulse urges die within 72 hours."
+  - "When you waste someone else's trust — a parent's savings, a scholarship meant for your future — the guilt costs more than the money ever did."
+  - "No gadget, no setup, no tool has ever replaced discipline. The people doing real work are using whatever they have."
+
+schema:
+  type: "Article"
+  headline: "I Spent ₹13,000 of My Scholarship Money on a CPU. It's Still Sitting in the Corner of My Room."
+  author:
+    type: "Person"
+    name: "Veeresh Bashetti"
+    url: "https://veereshbashetti.com"
+  datePublished: "2026-05-27"
+  dateModified: "2026-06-28"
+  image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
+  publisher:
+    type: "Person"
+    name: "Veeresh Bashetti"
+  mainEntityOfPage: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
 ---
 
+<!--
+  ============================================================
+  JSON-LD SCHEMA — paste this inside <head> of the page
+  ============================================================
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "I Spent ₹13,000 of My Scholarship Money on a CPU. It's Still Sitting in the Corner of My Room.",
+    "description": "A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings — the psychology behind why it happened, and the 5 questions that now protect me from spending I'll regret.",
+    "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp",
+    "author": {
+      "@type": "Person",
+      "name": "Veeresh Bashetti",
+      "url": "https://veereshbashetti.com"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Veeresh Bashetti"
+    },
+    "datePublished": "2026-05-27",
+    "dateModified": "2026-06-28",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is buying a second-hand CPU worth it in India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It can be — but only when you have a real, immediate use for it right now, not a hypothetical future use. Before buying, check socket compatibility with your existing motherboard, verify the CPU's thermal history, and compare the second-hand price against the new price. If the difference is less than ₹2,000–3,000, just buy new for the warranty. The biggest mistake people make is buying second-hand hardware they don't have a complete build plan for."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I stop making impulsive purchases in my 20s?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most effective method is the 30-day wait rule — add the item to a wishlist, set a reminder for 30 days later, and only buy it if you still want it AND it fits your budget. Most impulse urges die within 72 hours. Other tactics that work: delete your saved card details from shopping sites, unsubscribe from deal alerts and tech newsletters, and ask yourself one honest question before every purchase: 'Am I solving a problem I actually have right now?'"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the biggest money mistakes people make in their 20s?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most common ones are lifestyle inflation (spending more as you earn more without saving the difference), impulse tech and gadget purchases, no emergency fund, investing before clearing high-interest debt, and spending on status symbols to impress people who aren't watching. The root cause behind all of them is almost always emotional — not mathematical. See our full breakdown of the biggest money mistakes in your 20s for more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should students manage scholarship money wisely?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Treat scholarship money like a salary with non-negotiable rules. Allocate a fixed percentage to essentials (rent, food, transport, books), a small portion to personal growth (online courses, tools you actually use), and keep a minimum emergency buffer of one month's expenses. Never spend scholarship money on wants in the first 30 days of receiving it — the 'windfall effect' makes us spend unexpected money much faster than earned money."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can emotional spending become a habit that you break?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — but you have to identify your personal trigger first. Most emotional spenders buy when they feel stagnant, anxious about falling behind, or overstimulated by aspirational content on social media. The fix is not willpower — it is awareness. Keep a simple spending journal for one month: every time you feel the urge to buy something non-essential, write down what you were feeling right before. The pattern becomes very obvious, very fast."
+        }
+      }
+    ]
+  }
+]
+</script>
+
+  ============================================================
+  END JSON-LD SCHEMA
+  ============================================================
+-->
+
+<!--
+  ============================================================
+  OPEN GRAPH & TWITTER META TAGS — paste inside <head>
+  ============================================================
+
+  <meta property="og:title" content="I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti" />
+  <meta property="og:description" content="A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings. What happened next — and the 5 questions that now protect me from spending I'll regret." />
+  <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti" />
+  <meta name="twitter:description" content="A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings." />
+  <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp" />
+
+  ============================================================
+  END OPEN GRAPH & TWITTER META TAGS
+  ============================================================
+-->
+
+<!--
+  ============================================================
+  IMPLEMENTATION NOTES FOR YOUR NEXT.JS / VERCEL SITE
+  ============================================================
+
+  1. TITLE TAG
+     "I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti"
+     Make sure this is not falling back to a generic site title.
+
+  2. META DESCRIPTION (under 160 chars)
+     "A brutally honest story about buying a second-hand CPU on impulse
+     with scholarship money. The 5 questions that now protect me from
+     spending I'll regret."
+
+  3. H1 (done in body)
+     "I Spent ₹13,000 of My Scholarship Money on a CPU. It's Still Sitting in the Corner of My Room."
+     Leads with the rupee figure and "scholarship money" — strong keyword + emotional hook.
+
+  4. JSON-LD SCHEMA (paste into <head> — see block above)
+     Article schema + FAQPage schema.
+     The FAQPage block makes the 5 FAQs eligible to appear as rich results in Google.
+
+  5. OPEN GRAPH TAGS (paste into <head> — see block above)
+     Required for proper Pinterest previews — critical for your traffic source.
+     Without og:image, Pinterest picks a random image or shows nothing.
+
+  6. CANONICAL URL
+     <link rel="canonical" href="https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s" />
+     Already in frontmatter — make sure your layout is rendering it.
+
+  7. INTERNAL LINKS — verify these slugs exist before publishing:
+     - /blog/money-mistakes-20s
+     - /blog/budgeting-for-beginners-india
+     - /blog/first-project-failure-lessons
+     - /blog/developer-setup-trap          ← referenced three times in body
+     - /blog/30-day-rule-impulse-buying
+     - /blog/stop-comparing-yourself-social-media
+     If any of these return 404, remove the link — Google penalises broken internal links.
+
+  8. AFFILIATE LINKS — none in this post.
+     This is the anti-purchase story; adding amzn.to links here would undercut the message.
+     If you want a soft CTA, link out to the 30-Day Rule post instead — it carries the
+     notebook/timer/book recommendations.
+
+  9. VIDEO EMBED
+     Uses the ::youtube[ID]{caption="..."} directive (same as the 30-Day Rule post).
+     Confirm your MDX/remark-directive pipeline handles this before publishing —
+     if it doesn't render, it'll show as literal text.
+
+  10. SLUG — keep as-is:
+      /blog/13k-second-hand-cpu-mistake-in-20s
+
+  ============================================================
+-->
+
 # I Spent ₹13,000 of My Scholarship Money on a CPU. It's Still Sitting in the Corner of My Room.
+
+**Published:** May 27, 2026 · **10 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
 
 There is a specific kind of regret that does not go away.
 
@@ -123,7 +299,7 @@ That is the part that still stings.
 
 Money can be earned back. But when your mother hands over her savings because she believes in you — and you spend it on something you will never use — that is a different kind of debt. The kind that doesn't show up in your bank account.
 
-If you want to understand the [biggest money mistakes people make in their 20s](/blog/money-mistakes-20s), start here: it is almost never about the math. It is about who's money you are spending, and why.
+If you want to understand the [biggest money mistakes people make in their 20s](/blog/money-mistakes-20s), start here: it is almost never about the math. It is about whose money you are spending, and why.
 
 ---
 
@@ -174,6 +350,16 @@ But here is what surprised me — the cost did not end there.
 Every time money was tight (which, as a student, is most of the time), I thought about that CPU. Every time I had to skip buying something actually useful — a book, a course, a tool I was actively using — I thought about that CPU. Every time I felt guilty about not being more disciplined with my finances, I thought about that CPU.
 
 Impulsive purchases don't just take your money once. They tax you repeatedly, in the form of guilt that returns whenever your financial situation creates any friction at all.
+
+---
+
+## Watch: Why Your Brain Makes Impulse Purchases (And How to Stop It)
+
+That "clean dopamine rush" I mentioned isn't just a figure of speech — it's literally what's happening in your brain in that moment. Watch this short breakdown of the actual neuroscience behind why a purchase feels so good right before it feels so empty:
+
+::youtube[WjwoMMYdTvI]{caption="Before you buy something expensive, watch this. Ankur Warikoo explains the financial mistakes that quietly cost us the most."}
+
+The key insight from the video is the same one this post is built on: the post-hoc rationalisation I described above isn't a character flaw — it's brain chemistry. The dopamine spike fires *before* the logic does. Once you know that, every "investment in my career" argument your brain hands you in the moment gets a lot easier to question.
 
 ---
 
@@ -301,7 +487,32 @@ Those lessons? They do not leave.
 
 ---
 
-**You might also like:**
+## Frequently Asked Questions
+
+### Is buying a second-hand CPU worth it in India?
+
+It can be — but only when you have a real, immediate use for it right now, not a hypothetical future use. Before buying, check socket compatibility with your existing motherboard, verify the CPU's thermal history, and compare the second-hand price against the new price. If the difference is less than ₹2,000–3,000, just buy new for the warranty. The biggest mistake people make is buying second-hand hardware they don't have a complete build plan for.
+
+### How do I stop making impulsive purchases in my 20s?
+
+The most effective method is the 30-day wait rule — add the item to a wishlist, set a reminder for 30 days later, and only buy it if you still want it AND it fits your budget. Most impulse urges die within 72 hours. Other tactics that work: delete your saved card details from shopping sites, unsubscribe from deal alerts and tech newsletters, and ask yourself one honest question before every purchase: "Am I solving a problem I actually have right now?"
+
+### What are the biggest money mistakes people make in their 20s?
+
+The most common ones are lifestyle inflation (spending more as you earn more without saving the difference), impulse tech and gadget purchases, no emergency fund, investing before clearing high-interest debt, and spending on status symbols to impress people who aren't watching. The root cause behind all of them is almost always emotional — not mathematical. See our full breakdown of the biggest money mistakes in your 20s for more.
+
+### How should students manage scholarship money wisely?
+
+Treat scholarship money like a salary with non-negotiable rules. Allocate a fixed percentage to essentials (rent, food, transport, books), a small portion to personal growth (online courses, tools you actually use), and keep a minimum emergency buffer of one month's expenses. Never spend scholarship money on wants in the first 30 days of receiving it — the "windfall effect" makes us spend unexpected money much faster than earned money.
+
+### Can emotional spending become a habit that you break?
+
+Yes — but you have to identify your personal trigger first. Most emotional spenders buy when they feel stagnant, anxious about falling behind, or overstimulated by aspirational content on social media. The fix is not willpower — it is awareness. Keep a simple spending journal for one month: every time you feel the urge to buy something non-essential, write down what you were feeling right before. The pattern becomes very obvious, very fast.
+
+---
+
+## Related Reading
+
 - [The Biggest Money Mistakes People Make in Their 20s](/blog/money-mistakes-20s)
 - [The Developer Setup Trap: Why Better Hardware Won't Make You a Better Developer](/blog/developer-setup-trap)
 - [How I Finally Started Budgeting — And Why Everything I Tried Before Failed](/blog/budgeting-for-beginners-india)

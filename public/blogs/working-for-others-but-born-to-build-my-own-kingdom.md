@@ -1,69 +1,78 @@
 ---
-title: "I'm Building Someone Else's Dream — But My Mind is Already Designing My Own Kingdom"
+title: "Working in a Startup But Dreaming of Building My Own — The Developer's Dilemma"
 slug: "working-for-others-but-born-to-build-my-own-kingdom"
-description: "I show up every day, write clean code, ship features, and collect a salary. But at 2am something in me refuses to sleep — it's the version of me that was born to build something entirely my own. This is that story."
+description: "I show up every day, write clean code, ship features, and collect a salary. But at 2am something in me refuses to sleep. An honest story for every Indian developer who feels the pull to build their own thing."
 excerpt: "Every morning I open VS Code for someone else's product. Every night I open a blank doc and stare at the cursor blinking over my own idea — no name, no shape, but a pull I can't ignore anymore."
 author: "Veeresh Bashetti"
 date: "2026-06-01"
 lastModified: "2026-06-03"
-category: "Career"
+category: "Entrepreneurship"
+emoji: "🏗️"
+readingTime: "10 min read"
+featured: true
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.webp"
+imageAlt: "A developer staring at a screen late at night — working for a startup but dreaming of building their own business from scratch in India"
+authorUrl: "https://veereshbashetti.com/about"
+canonicalUrl: "https://veereshbashetti.com/blog/working-for-others-but-born-to-build-my-own-kingdom"
+
 tags:
   - Entrepreneurship
   - Startup Life
   - Self-Made
   - Developer Mindset
-  - Building Something
-  - Motivation
   - Solo Founder
+  - Motivation
   - Indian Developer
-  - working in startup but want own business
-  - developer who wants to start something
-  - how to start your own business from job
+  - Building Something
+  - developer entrepreneur India
+  - how to start own business while working
   - solo founder journey India
-  - developer entrepreneur mindset
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.webp"
-imageAlt: "A developer staring at a screen late at night — working for a startup but dreaming of building their own empire from scratch"
-readingTime: "10 min read"
-featured: true
+  - working in startup want own business
+  - developer who wants to be entrepreneur
+
 seo:
   title: "Working in a Startup But Dreaming of Building My Own — The Developer's Dilemma | Veeresh Bashetti"
-  description: "An honest, emotional account of showing up every day for someone else's startup while a quiet fire inside you wants to build something massive of your own. For every developer who feels the same pull."
+  description: "An honest account of showing up every day for someone else's startup while a quiet fire inside you wants to build something of your own. For every Indian developer who feels the same pull."
   keywords:
-    - working in startup want to start own business
-    - developer who wants to be entrepreneur
-    - how to start your own thing while working
+    - working in startup but want to start own business
+    - developer who wants to be entrepreneur India
+    - how to start your own business while working a job
     - solo founder from scratch India
-    - developer building own kingdom
     - when to quit job and start business India
     - startup employee turned founder India
-    - building something from nothing
     - developer entrepreneur journey India
-    - self-made mindset developer
-    - why am I not starting yet
     - fear of starting a business
-    - developer entrepreneur India
+    - how to build your own startup as a developer
+    - building something from nothing India
+    - self-made developer mindset
+    - developer entrepreneur India 2026
+    - solo founder India
+
 takeaways:
-  - "You are not confused about what you want. You are afraid of how badly you want it — and what it means if you try and fail."
-  - "Working for someone else's startup is not wasted time. Every system you build, every mistake you witness, every product decision you disagree with — it is all tuition for your own company."
-  - "'I don't know what to start' is rarely the real reason. The real reason is 'I'm not sure I'm enough to make it work.' You are."
-  - "The kingdom doesn't appear. It gets built — one decision, one line, one day at a time. The question is whether you start the clock today or keep postponing the beginning."
-  - "You don't need permission to start. You don't need the perfect idea. You need to stop treating 'someday' like it's a real date on the calendar."
+  - "You are not confused about what you want. You are afraid of how badly you want it."
+  - "Working for someone else's startup is not wasted time. Every system you build is tuition for your own company."
+  - "The real reason you have not started is not the idea or the money. It is the fear that trying will answer a question you are not ready to face."
+  - "The kingdom does not appear. It gets built one decision and one day at a time."
+  - "You do not need permission to start. You need to stop treating someday like it is a real date on the calendar."
+
 faqs:
   - q: "How do I start my own business while still working at a startup?"
-    a: "Start with 30 minutes a day — not on building, but on clarity. Write down what problem you would solve, for whom, and why you specifically are the right person to solve it. Do not build before you have validated that the idea exists outside your own head. Keep your job, reduce unnecessary spending to build a financial runway, and treat your evenings like office hours for your future company. The goal in the first 90 days is not a product — it is a single paying customer."
+    a: "Start with 30 minutes a day focused on clarity not building. Write down what problem you would solve and for whom. Keep your job, reduce spending to build financial runway, and treat evenings like office hours for your future company. The goal in the first 90 days is not a product but a single paying customer."
   - q: "What if I don't know what kind of business to start?"
-    a: "You do not find the idea. The idea finds you — but only if you start paying close attention to problems you personally encounter and problems the people around you complain about repeatedly. The best first businesses are built around a pain you have lived, not a market report you have read. Look at what frustrates you in your current job, your daily life, or your industry. That frustration is usually a business hiding in plain sight."
-  - q: "Is it worth starting something alone as a solo founder?"
-    a: "Entirely. Some of the most enduring companies started with one stubborn person who refused to wait for the right co-founder. Solo founding is harder in some ways — you carry everything — but it is also cleaner. You move faster. You make decisions without consensus. You own 100% of what you build. The loneliness is real, but it is also temporary. Build in public, document your journey, and you will find your people."
-  - q: "How do I stop overthinking and just start?"
-    a: "Give yourself a deadline that costs you something. Tell someone — a friend, the internet, anyone — that you will launch something specific by a specific date. Public commitment changes the psychology of starting. Also, lower your definition of starting. Starting is not launching a company. Starting is opening a document and writing the first draft of what you want to build. Do that today. Everything else follows."
+    a: "You do not find the idea. The idea finds you when you pay close attention to problems you personally face and problems people around you complain about repeatedly. The best first businesses are built around a pain you have lived. Look at what frustrates you in your current job or daily life. That frustration is usually a business hiding in plain sight."
+  - q: "Is it worth starting something alone as a solo founder in India?"
+    a: "Entirely. Some of the most enduring companies started with one stubborn person who refused to wait for the right co-founder. Solo founding is harder but also cleaner. You move faster, make decisions without consensus, and own 100% of what you build. The loneliness is real but temporary. Build in public and you will find your people."
+  - q: "How do I stop overthinking and just start building my own business?"
+    a: "Give yourself a deadline that costs you something. Tell someone you will launch something specific by a specific date. Public commitment changes the psychology of starting. Also lower your definition of starting. Starting is not launching a company. Starting is opening a document and writing the first draft of what you want to build. Do that today."
   - q: "What is the biggest mistake first-time founders make?"
-    a: "Building before validating. Most first-time founders spend months building something and zero days confirming that anyone actually wants it. Before you write a single line of product code, find five people who would genuinely pay for the solution you are proposing — not people who say cool idea, but people who say when can I use it. If you cannot find five, the idea needs refinement. If you can, you have something worth building."
+    a: "Building before validating. Most first-time founders spend months building something and zero days confirming anyone actually wants it. Before you write a single line of product code find five people who would genuinely pay for what you are proposing. If you cannot find five the idea needs refinement. If you can you have something worth building."
 ---
 
-# I'm Building Someone Else's Dream — But My Mind Is Already Designing My Own Kingdom
+# Working in a Startup But Building My Own Kingdom — Every Developer's Dilemma
 
 > *Every commit I push moves someone else's company forward. Every night I lie awake wondering when I start moving mine.*
+
+**Published:** June 1, 2026 · **10 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
 
 ---
 
@@ -107,7 +116,7 @@ And the exhausting part is that both of them show up to the same job every morni
 
 ---
 
-## Why You Have Not Started Yet — The Honest Answer
+## Why You Haven't Started Your Own Business Yet — The Honest Answer
 
 You have probably told yourself one of these at some point:
 
@@ -141,7 +150,17 @@ I know this. Not from a book — from sitting with -₹400 in my account at 22 a
 
 ---
 
-## What Your Startup Job Is Actually Giving You
+## Watch: The Psychology Behind Why Developers Fear Starting Their Own Thing
+
+Before we go further, this video captures something important about the fear of beginning — why talented people stay in jobs they have outgrown and what it actually takes to make the jump:
+
+::youtube[AAe_KuzE-Cs]{caption="The Fear of Starting — TEDx Talk by Mark Soderwall"}
+
+The core insight is simple: the gap between knowing you want to build something and actually beginning is not a knowledge gap. It is an identity gap. The video explains why — and it is worth 10 minutes before you read the rest of this.
+
+---
+
+## What Your Startup Job Is Actually Teaching You About Running a Business
 
 There is a narrative that says working for someone else is wasted time if you want to build your own thing. That every month inside someone else's company is a month stolen from your real future.
 
@@ -149,13 +168,13 @@ That narrative is wrong.
 
 Every day you spend inside this startup — if you are paying attention — is an education that no YouTube video, newsletter, or business book can replicate.
 
-You are learning how a product actually gets built under real constraints. Not the romanticised version. The version where scope creep is real, estimates are fictional, and the requirements change on Thursday.
+**You are learning how a product actually gets built under real constraints.** Not the romanticised version. The version where scope creep is real, estimates are fictional, and the requirements change on Thursday.
 
-You are learning how decisions get made — and why bad ones happen. You have been in the room. You have watched smart people choose wrong. You have seen how ego, politics, and fear shape products as much as logic does. That knowledge is worth an enormous amount when it is your company and your money on the line.
+**You are learning how decisions get made — and why bad ones happen.** You have been in the room. You have watched smart people choose wrong. You have seen how ego, politics, and fear shape products as much as logic does. That knowledge is worth an enormous amount when it is your company and your money on the line.
 
-You are learning what users actually do versus what they say they will do. You have seen the analytics. You have read the support tickets. You know the gap between the product that was designed and the product people actually use. Most first-time founders are completely blind to this. You are not.
+**You are learning what users actually do versus what they say they will do.** You have seen the analytics. You have read the support tickets. You know the gap between the product that was designed and the product people actually use. Most first-time founders are completely blind to this. You are not.
 
-You are learning how to ship under pressure. When your own company is on the line and a deadline is real, the ability to focus and execute — the muscle you have been building in this job — is what keeps things moving when the stakes are personal.
+**You are learning how to ship under pressure.** When your own company is on the line and a deadline is real, the ability to focus and execute — the muscle you have been building in this job — is what keeps things moving when the stakes are personal.
 
 You are not wasting time. You are loading the gun.
 
@@ -163,9 +182,9 @@ The question is when you are going to pull the trigger.
 
 ---
 
-## The Invisible Financial Work You Need to Do Now
+## How to Build Financial Runway While You're Still Employed
 
-Here is the part most posts like this skip — the boring, practical truth that makes starting possible.
+Here is the part most posts like this skip — the boring, practical truth that makes starting your own business possible.
 
 Building your own thing requires a runway. Not a fortune. A runway — enough months of covered expenses that you can take the risk without one bad week destroying everything.
 
@@ -201,7 +220,7 @@ You are the kind of person who needs to build something. Not because building is
 
 ---
 
-## The Uncomfortable Truth About Waiting for the Right Idea
+## Why Waiting for the "Perfect Business Idea" Is the Wrong Strategy
 
 The right idea is not coming. Not like that. Not as a sudden, fully-formed revelation that arrives on a Tuesday and solves everything.
 
@@ -219,7 +238,7 @@ Write that answer down. One sentence. Not a plan — a direction.
 
 ---
 
-## Building a Kingdom Alone — What That Actually Looks Like
+## Is Solo Founding Worth It? What Building Alone as an Indian Developer Actually Looks Like
 
 Some people need a co-founder. They work better with shared weight, built-in accountability, someone to argue with in the early mornings.
 
@@ -237,7 +256,7 @@ But the kingdom you are imagining — the one that is truly, completely, undenia
 
 ---
 
-## The One Question to Answer Before You Sleep Tonight
+## One Question to Answer Before You Sleep Tonight
 
 Not tomorrow. Tonight.
 
@@ -261,7 +280,7 @@ And real things can be built.
 
 ---
 
-## To the Version of You That Is Still Waiting
+## To the Developer Who Is Still Waiting
 
 You have been waiting for the right moment. For the savings to hit a certain number. For the idea to feel more solid. For the fear to shrink. For someone to tell you it is okay to begin.
 
@@ -285,12 +304,36 @@ Stop reading. Open a document. Write the first sentence of what you want to buil
 
 ---
 
+## Frequently Asked Questions
+
+### How do I start my own business while still working at a startup?
+
+Start with 30 minutes a day focused on clarity, not building. Write down what problem you would solve and for whom. Keep your job, reduce spending to build financial runway, and treat your evenings like office hours for your future company. The goal in the first 90 days is not a product — it is a single paying customer.
+
+### What if I don't know what kind of business to start?
+
+You do not find the idea. The idea finds you when you start paying close attention to problems you personally face and problems the people around you complain about repeatedly. The best first businesses are built around a pain you have lived. Look at what frustrates you in your current job or daily life. That frustration is usually a business hiding in plain sight.
+
+### Is it worth starting something alone as a solo founder in India?
+
+Entirely. Some of the most enduring companies started with one stubborn person who refused to wait for the right co-founder. Solo founding is harder in some ways but also cleaner. You move faster, make decisions without consensus, and own 100% of what you build. The loneliness is real but temporary. Build in public and you will find your people.
+
+### How do I stop overthinking and just start building my own business?
+
+Give yourself a deadline that costs you something. Tell someone you will launch something specific by a specific date. Public commitment changes the psychology of starting. Also lower your definition of starting. Starting is not launching a company — it is opening a document and writing the first draft of what you want to build. Do that today. Everything else follows.
+
+### What is the biggest mistake first-time founders make?
+
+Building before validating. Most first-time founders spend months building something and zero days confirming that anyone actually wants it. Before you write a single line of product code, find five people who would genuinely pay for what you are proposing. If you cannot find five, the idea needs refinement. If you can, you have something worth building.
+
+---
+
 ## Keep Reading
 
-- **[22 Years Old, -₹400 in My Bank Account, and Still Shipping Code](/blog/22-year-old-startup-developer-life)** — what it feels like to keep building when everything around you is uncertain
-- **[Why Suffering Without Generational Wealth Hits Different](/blog/suffering-without-generational-wealth)** — the honest financial reality of starting from zero, and what to actually do about it
-- **[The 30-Day Rule: The Only Spending Habit That Actually Changed My Life](/blog/30-day-rule-impulse-buying)** — how to stop financial leaks so you can actually build the runway you need
-- **[The Childhood Mistake That Changed My Life Forever](/blog/childhood-mistake-changed-my-life)** — on the small decisions that quietly shape the person you become
+- [22 Years Old, -400 in My Bank Account, and Still Shipping Code](/blog/22-year-old-startup-developer-life) — what it feels like to keep building when everything around you is uncertain
+- [Why Suffering Without Generational Wealth Hits Different](/blog/suffering-without-generational-wealth) — the honest financial reality of starting from zero, and what to actually do about it
+- [The 30-Day Rule: The Only Spending Habit That Actually Changed My Life](/blog/30-day-rule-impulse-buying) — how to stop financial leaks so you can actually build the runway you need
+- [The Childhood Mistake That Changed My Life Forever](/blog/childhood-mistake-changed-my-life) — on the small decisions that quietly shape the person you become
 
 ---
 
