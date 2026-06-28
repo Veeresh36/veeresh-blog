@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { hasConsent } from '../pages/CookieBanner'
 // ═══════════════════════════════════════════════
@@ -73,18 +73,14 @@ const InArticleAd = () => {
   useEffect(() => {
     const onChange = (e) => setConsent(e.detail === "accepted");
     window.addEventListener("cookieConsentChanged", onChange);
-    return () =>
-      window.removeEventListener("cookieConsentChanged", onChange);
+    return () => window.removeEventListener("cookieConsentChanged", onChange);
   }, []);
 
   useEffect(() => {
     if (!consent) return;
-
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) { /* silent */ }
   }, [consent]);
 
   if (!consent) return null;
@@ -94,13 +90,9 @@ const InArticleAd = () => {
       <span className="block text-center text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 mb-2">
         — Advertisement —
       </span>
-
       <ins
         className="adsbygoogle"
-        style={{
-          display: "block",
-          textAlign: "center",
-        }}
+        style={{ display: "block", textAlign: "center" }}
         data-ad-layout="in-article"
         data-ad-format="fluid"
         data-ad-client="ca-pub-4423608769058806"
@@ -798,7 +790,6 @@ const MoonIcon = () => <Icon d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
 const ShareIcon = () => <Icon d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8.59 13.51l6.83 3.98M15.41 6.51L8.59 10.49" />;
 const CheckIcon = () => <Icon d="M20 6L9 17l-5-5" size={14} />;
 const CopyIcon = () => <Icon d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M8 4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V4z" size={14} />;
-const ArrowUpIcon = () => <Icon d="M18 15l-6-6-6 6" />;
 const ArrowLeftIcon = () => <Icon d="M19 12H5M12 5l-7 7 7 7" size={16} />;
 const BookmarkIcon = ({ filled }) => filled
   ? <svg viewBox="0 0 24 24" fill="currentColor" width={16} height={16} aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /></svg>
@@ -1061,7 +1052,7 @@ const HeroImage = ({ src, alt, pinterest }) => {
           alt={alt || "Article hero"}
           className={`w-full block ${pinterest ? "h-full object-cover" : "h-auto"}`}
           loading="eager"
-        />
+          fetchPriority="high" />
       </div>
     </div>
   );
@@ -1976,7 +1967,6 @@ const YouTubeEmbed = ({ id, caption }) => {
   const [dark, setDark] = useState(
     () => document.documentElement.getAttribute("data-theme") === "dark"
   );
-  const iframeRef = useRef(null);
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -2022,7 +2012,6 @@ const YouTubeEmbed = ({ id, caption }) => {
       ) : (
         <div
           style={{ aspectRatio: "16/9", position: "relative" }}
-          ref={iframeRef}
         >
           <iframe
             src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&playsinline=1`}
@@ -2159,8 +2148,6 @@ export default function ReadBlog() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
-
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
           to   { opacity: 1; transform: translateY(0); }
