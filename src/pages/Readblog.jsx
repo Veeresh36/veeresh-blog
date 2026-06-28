@@ -1973,8 +1973,18 @@ function useViewCount(slug) {
 
 const YouTubeEmbed = ({ id, caption }) => {
   const [loaded, setLoaded] = useState(false);
+  const [dark, setDark] = useState(
+    () => document.documentElement.getAttribute("data-theme") === "dark"
+  );
   const iframeRef = useRef(null);
-  const dark = document.documentElement.getAttribute("data-theme") === "dark";
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setDark(document.documentElement.getAttribute("data-theme") === "dark");
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
 
   if (!id) return null;
 
