@@ -19,7 +19,7 @@ const TOC_EMOJIS = ["📌", "💡", "📊", "🔥", "🧠", "✨", "🚀", "🎯
 const REACTIONS = ["❤️", "🔥", "💡", "🤔"];
 const REACTION_LABELS = { "❤️": "Love", "🔥": "Fire", "💡": "Insightful", "🤔": "Thoughtful" };
 
-const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX";
+const ADSENSE_CLIENT = "ca-pub-4423608769058806";
 
 // ═══════════════════════════════════════════════
 // GOOGLE ADSENSE
@@ -46,13 +46,18 @@ const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, 
   if (!consent) return null;
 
   return (
-    <div className={`ad-wrapper overflow-hidden clear-both my-6 text-center ${className}`}>
+    <div className={`ad-wrapper overflow-hidden clear-both my-8 text-center ${className}`}>
       <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 mb-1.5 font-medium">
         — Advertisement —
       </span>
       <ins
-        className="adsbygoogle block bg-neutral-50/50 dark:bg-neutral-900/30 rounded-xl"
-        style={{ minHeight: "90px", ...style }}
+        className="adsbygoogle block rounded-xl"
+        style={{
+          display: "block",
+          width: "100%",
+          minHeight: "280px",
+          ...style,
+        }}
         data-ad-client={ADSENSE_CLIENT}
         data-ad-slot={slot}
         data-ad-format={format}
@@ -1651,7 +1656,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
           return (
             <>
               <ReactMarkdown components={mdComponents}>{firstHalf}</ReactMarkdown>
-              <CarbonAdUnit slot="YOUR_SLOT_2" />
+              <CarbonAdUnit slot="" />
               <ReactMarkdown components={mdComponents}>{secondHalf}</ReactMarkdown>
             </>
           );
@@ -1674,7 +1679,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
 
       <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
 
-      <CarbonAdUnit slot="YOUR_SLOT_PINTEREST_SIDEBAR" style={{ minHeight: "250px" }} />
+      <CarbonAdUnit slot="3170555405" style={{ minHeight: "250px" }} />
 
       {Array.isArray(fm.products) && fm.products.length > 0 && (
         <div className="rounded-2xl overflow-hidden" style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
@@ -2244,7 +2249,7 @@ export default function ReadBlog() {
 
 
         <div className="max-w-[1280px] mx-auto px-6 mb-8">
-          <CarbonAdUnit slot="1234567890" format="horizontal" />
+          <CarbonAdUnit slot="" format="horizontal" />
         </div>
 
         {fm.type === "pinterest" ? (
@@ -2308,7 +2313,7 @@ export default function ReadBlog() {
                   {content}
                 </ReactMarkdown>
 
-                <CarbonAdUnit slot="YOUR_SLOT_3" />
+                <CarbonAdUnit slot="3170555405" />
 
                 <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_ANON_KEY} />
 
@@ -2331,7 +2336,7 @@ export default function ReadBlog() {
                 <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
 
 
-                <CarbonAdUnit slot="YOUR_SLOT_4" style={{ minHeight: "250px" }} />
+                <CarbonAdUnit slot="3170555405" style={{ minHeight: "250px" }} />
 
                 <HighlightsPanel slug={slug} dark={dark} border={border} />
 
@@ -2356,7 +2361,7 @@ export default function ReadBlog() {
         <CommentSection slug={slug} dark={dark} />
 
         <div className="max-w-[1280px] mx-auto px-6 mb-4">
-          <CarbonAdUnit slot="YOUR_SLOT_5" format="horizontal" />
+          <CarbonAdUnit slot="" format="horizontal" />
         </div>
 
         {/* RELATED */}
