@@ -1973,65 +1973,71 @@ function useViewCount(slug) {
 
 const YouTubeEmbed = ({ id, caption }) => {
   const [loaded, setLoaded] = useState(false);
+  const iframeRef = useRef(null);
   const dark = document.documentElement.getAttribute("data-theme") === "dark";
 
   if (!id) return null;
 
   return (
-    <div className="my-8 rounded-2xl overflow-hidden"
-      style={{ border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
-
-      {/* Thumbnail click-to-load for performance */}
+    <div
+      className="my-8 rounded-2xl overflow-hidden"
+      style={{ border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}
+    >
       {!loaded ? (
         <div
           onClick={() => setLoaded(true)}
           className="relative cursor-pointer group"
-          style={{ aspectRatio: "16/9", background: "#000" }}>
-
+          style={{ aspectRatio: "16/9", background: "#000" }}
+        >
           <img
             src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
             alt={caption || "YouTube video"}
             className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
             onError={e => { e.currentTarget.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`; }}
           />
-
-          {/* Play button */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-              style={{ background: "#E60023" }}>
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style={{ background: "#E60023" }}
+            >
               <svg viewBox="0 0 24 24" fill="white" width={28} height={28}>
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
           </div>
-
-          {/* YouTube branding */}
-          <div className="absolute bottom-3 right-3">
-            <svg viewBox="0 0 90 20" width={72} height={16} fill="white" opacity={0.9}>
-              <text fontSize="16" fontWeight="bold" fontFamily="Arial">▶ YouTube</text>
-            </svg>
+          <div className="absolute bottom-3 right-3 bg-black/60 px-2 py-0.5 rounded text-white text-xs font-bold">
+            ▶ YouTube
           </div>
         </div>
       ) : (
-        <div style={{ aspectRatio: "16/9" }}>
+        <div
+          style={{ aspectRatio: "16/9", position: "relative" }}
+          ref={iframeRef}
+        >
           <iframe
-            src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+            src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&playsinline=1`}
             title={caption || "YouTube video"}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-            className="w-full h-full"
-            style={{ border: "none" }}
+            style={{
+              position: "absolute",
+              top: 0, left: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+            }}
           />
         </div>
       )}
 
-      {/* Caption */}
       {caption && (
-        <div className="px-5 py-3 text-[0.78rem] text-center font-medium"
+        <div
+          className="px-5 py-3 text-[0.78rem] text-center font-medium"
           style={{
             color: dark ? "rgba(250,248,244,0.55)" : "#7A6E64",
-            borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}`
-          }}>
+            borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}`,
+          }}
+        >
           {caption}
         </div>
       )}
