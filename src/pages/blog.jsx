@@ -953,7 +953,7 @@ const BlogCard = ({ post, featured = false, index = 0 }) => {
                             : "220px",
                     }}>
                     {post.image && !imgError ? (
-                        <img src={post.image} alt={post.title} className="card-thumb-img" loading="lazy"
+                        <img src={post.image} alt={post.title} className="card-thumb-img" loading="lazy" decoding="async" fetchPriority="low"
                             onError={() => setImgError(true)} />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center text-5xl"
@@ -1465,6 +1465,8 @@ const PinCard = ({ pin, large = false }) => {
                         alt={pin.title}
                         onError={() => setImgError(true)}
                         loading="lazy"
+                        decoding="async"
+                        fetchPriority="low"
                         className="absolute inset-0 w-full h-full"
                         style={{ objectFit: "cover", transition: "transform 0.6s ease" }}
                     />
@@ -1786,6 +1788,8 @@ const AboutSection = () => {
                                 className="w-full"
                                 style={{ height: "460px", objectFit: "cover" }}
                                 loading="lazy"
+                                decoding="async"
+                                fetchPriority="low"
                             />
                         </div>
 
@@ -1860,7 +1864,8 @@ const PostRowItem = ({ post, index }) => {
                 style={{ width: 120, aspectRatio: "4/3", background: "#F2EDE4", border: "1px solid #E8E0D5" }}>
                 {post.image && !imgError ? (
                     // FIX: object-cover (was object-contain)
-                    <img src={post.image} alt={post.title} className="w-full h-full" style={{ objectFit: "cover" }} loading="lazy" onError={() => setImgError(true)} />
+                    <img src={post.image} alt={post.title} className="w-full h-full" style={{ objectFit: "cover" }} loading="lazy" decoding="async"
+                    fetchPriority="low" onError={() => setImgError(true)} />
                 ) : post.emoji}
             </div>
             <div>

@@ -1051,7 +1051,7 @@ const HeroImage = ({ src, alt, pinterest }) => {
           src={src}
           alt={alt || "Article hero"}
           className={`w-full block ${pinterest ? "h-full object-cover" : "h-auto"}`}
-          loading="eager"
+          loading="eager" decoding="async"
           fetchPriority="high" />
       </div>
     </div>
@@ -1490,7 +1490,7 @@ const RelatedCard = ({ post, delay, dark }) => {
       style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
       <div className="overflow-hidden bg-neutral-100 dark:bg-neutral-900" style={{ aspectRatio: "16/9" }}>
         <img src={post.image || "/fallback.jpg"} alt={post.title} loading="lazy"
-          onError={(e) => { e.currentTarget.src = "/fallback.jpg"; }}
+          onError={(e) => { e.currentTarget.src = "/fallback.jpg"; }} decoding="async" fetchPriority="low"
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
       </div>
       <div className="p-5 flex-1 flex flex-col">
@@ -1989,7 +1989,7 @@ const YouTubeEmbed = ({ id, caption }) => {
           className="relative cursor-pointer group"
           style={{ aspectRatio: "16/9", background: "#000" }}
         >
-          <img
+          <img decoding="async" fetchPriority="low"
             src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
             alt={caption || "YouTube video"}
             className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
