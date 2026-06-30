@@ -2104,7 +2104,7 @@ const NewPostsPopup = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="new-posts-popup-heading"
-            className="fixed inset-0 z-[100] flex items-center justify-center px-6"
+            className="fixed inset-0 z-[100] flex items-center justify-center px-3 sm:px-6"
             style={{
                 background: "rgba(26,22,18,0.6)",
                 backdropFilter: "blur(4px)",
@@ -2114,9 +2114,8 @@ const NewPostsPopup = () => {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-3xl overflow-hidden w-full relative"
+                className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden w-full relative max-w-[880px] max-h-[92vh] overflow-y-auto"
                 style={{
-                    maxWidth: "880px",
                     boxShadow: "0 30px 90px rgba(0,0,0,0.4)",
                     animation: closing ? "popupScaleOut 0.25s ease both" : "popupScaleIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both",
                 }}
@@ -2125,7 +2124,7 @@ const NewPostsPopup = () => {
                     type="button"
                     onClick={close}
                     aria-label="Close popup"
-                    className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center"
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center"
                     style={{ background: "rgba(255,255,255,0.95)", border: "1px solid #E8E0D5" }}
                 >
                     <CloseIcon />
@@ -2133,35 +2132,38 @@ const NewPostsPopup = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     {/* Big image side */}
-                    <div className="relative" style={{ height: "440px", overflow: "hidden", background: "#F2EDE4" }}>
+                    <div className="relative w-full h-[200px] md:h-[440px] overflow-hidden bg-[#F2EDE4]">
                         {active.image && (
                             <img
                                 key={active.slug}
                                 src={active.image}
                                 alt={active.title}
-                                className="w-full h-full"
-                                style={{ objectFit: "cover", animation: "popupImgFade 0.4s ease both" }}
+                                className="w-full h-full object-cover"
+                                style={{ animation: "popupImgFade 0.4s ease both" }}
                             />
                         )}
-                        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.45) 100%)" }} />
-                        <span className="absolute top-5 left-5 inline-block bg-[#E60023] text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/45" />
+                        <span className="absolute top-3 left-3 sm:top-5 sm:left-5 inline-block bg-[#E60023] text-white text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-widest px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full">
                             {activeIdx === 0 ? "Newest Post" : "Also New"}
                         </span>
                     </div>
 
                     {/* Content side */}
-                    <div className="p-8 flex flex-col">
-                        <h3 id="new-posts-popup-heading" className="font-display text-[1.7rem] leading-[1.15] text-[#1A1612] mb-3">
+                    <div className="p-5 sm:p-8 flex flex-col">
+                        <h3
+                            id="new-posts-popup-heading"
+                            className="font-display text-[1.25rem] sm:text-[1.7rem] leading-[1.2] sm:leading-[1.15] text-[#1A1612] mb-2 sm:mb-3 pr-8 md:pr-0"
+                        >
                             {active.title}
                         </h3>
                         {active.meta && (
-                            <p className="text-[0.85rem] text-[#8C7E74] mb-6">{active.meta}</p>
+                            <p className="text-[0.8rem] sm:text-[0.85rem] text-[#8C7E74] mb-4 sm:mb-6">{active.meta}</p>
                         )}
 
                         <Link
                             to={`/blog/${active.slug}`}
                             onClick={close}
-                            className="inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-6 py-3.5 rounded-full hover:bg-[#E60023] transition-colors duration-300 mb-6"
+                            className="inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-5 py-3 sm:px-6 sm:py-3.5 rounded-full hover:bg-[#E60023] transition-colors duration-300 mb-4 sm:mb-6 w-full sm:w-auto"
                             style={{ textDecoration: "none" }}
                         >
                             Read it now
@@ -2170,24 +2172,24 @@ const NewPostsPopup = () => {
 
                         {/* Thumbnail strip for other posts */}
                         {posts.length > 1 && (
-                            <div className="mt-auto pt-6" style={{ borderTop: "1px solid #E8E0D5" }}>
-                                <p className="text-[0.68rem] font-bold uppercase tracking-widest text-[#8C7E74] mb-3">More new posts</p>
-                                <div className="flex gap-3">
+                            <div className="mt-auto pt-4 sm:pt-6 border-t border-[#E8E0D5]">
+                                <p className="text-[0.65rem] sm:text-[0.68rem] font-bold uppercase tracking-widest text-[#8C7E74] mb-2 sm:mb-3">More new posts</p>
+                                <div className="flex gap-2 sm:gap-3">
                                     {posts.map((p, i) => (
                                         <button
                                             key={p.slug}
                                             type="button"
                                             onClick={() => setActiveIdx(i)}
                                             aria-label={`View ${p.title}`}
-                                            className="flex-1 text-left rounded-xl overflow-hidden transition-all duration-200"
+                                            className="flex-1 text-left rounded-lg sm:rounded-xl overflow-hidden transition-all duration-200"
                                             style={{
                                                 border: i === activeIdx ? "2px solid #E60023" : "2px solid transparent",
                                                 opacity: i === activeIdx ? 1 : 0.6,
                                             }}
                                         >
                                             {p.image && (
-                                                <div style={{ height: "56px", overflow: "hidden" }}>
-                                                    <img src={p.image} alt={p.title} className="w-full h-full" style={{ objectFit: "cover" }} />
+                                                <div className="h-11 overflow-hidden">
+                                                    <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
                                                 </div>
                                             )}
                                         </button>
