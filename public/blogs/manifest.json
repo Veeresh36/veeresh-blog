@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "slug": "childhood-cartoons-life-lessons",
+      "title": "Doraemon, Chhota Bheem, Shinchan, Oggy: The Cartoons That Quietly Taught Me How to Think",
+      "tag": "Life Lessons",
+      "emoji": "📺",
+      "gradient": "from-[#FFF8E1] to-[#FFECB3]",
+      "meta": "8 min read · June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/childhood-cartoons-life-lessons-doraemon-chhota-bheem.webp"
+    },
+    {
       "slug": "22-year-old-startup-developer-life",
       "title": "22 Years Old, -₹400 in My Bank Account...",
       "tag": "Career",
