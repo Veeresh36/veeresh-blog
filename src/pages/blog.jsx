@@ -2051,6 +2051,201 @@ const Divider = () => (
     <div className="max-w-[1320px] mx-auto px-6"><div className="divider-line" /></div>
 );
 
+
+// ════════════════════════════════════════════════════════════
+//  NEW POST POPUP — shows manifest.json's first post
+// ════════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════════
+//  NEW POST TOAST — corner popup, smart show logic
+// ════════════════════════════════════════════════════════════
+const NewPostPopup = () => {
+    const [post, setPost] = useState(null);
+    const [visible, setVisible] = useState(false);
+    const [closing, setClosing] = useState(false);
+    const [progress, setProgress] = useState(100);
+    const hoverRef = useRef(false);
+    const AUTO_HIDE_MS = 9000;
+
+    // Fetch first post from manifest + decide whether to show
+    useEffect(() => {
+        let cancelled = false;
+        async function load() {
+            try {
+                const res = await fetch("/blogs/manifest.json");
+                if (!res.ok) return;
+                const data = await res.json();
+                const rawPosts = Array.isArray(data) ? data : (data.posts || []);
+                if (rawPosts.length === 0) return;
+
+                const first = rawPosts[0];
+
+                // Permanently dismissed for this exact post ("Don't show this again")
+                if (localStorage.getItem(`toastDismissed:${first.slug}`)) return;
+
+                // Snoozed for this session only
+                if (sessionStorage.getItem(`toastSnoozed:${first.slug}`)) return;
+
+                if (!cancelled) setPost(first);
+            } catch {
+                // fail silently — no popup if manifest fails
+            }
+        }
+        load();
+        return () => { cancelled = true; };
+    }, []);
+
+    // Entrance delay
+    useEffect(() => {
+        if (!post) return;
+        const timer = setTimeout(() => setVisible(true), 1800);
+        return () => clearTimeout(timer);
+    }, [post]);
+
+    // Auto-hide countdown (pauses on hover)
+    useEffect(() => {
+        if (!visible || !post) return;
+        let start = Date.now();
+        let remaining = AUTO_HIDE_MS;
+        let raf;
+
+        const tick = () => {
+            if (!hoverRef.current) {
+                const elapsed = Date.now() - start;
+                const pct = Math.max(0, 100 - (elapsed / AUTO_HIDE_MS) * 100);
+                setProgress(pct);
+                if (elapsed >= AUTO_HIDE_MS) {
+                    snooze(); // soft auto-dismiss = snooze, not permanent
+                    return;
+                }
+            } else {
+                start = Date.now() - (AUTO_HIDE_MS - remaining);
+            }
+            remaining = AUTO_HIDE_MS - (Date.now() - start);
+            raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(raf);
+    }, [visible, post]);
+
+    const closeBase = () => {
+        setClosing(true);
+        setTimeout(() => setVisible(false), 250);
+    };
+
+    const snooze = () => {
+        if (post) sessionStorage.setItem(`toastSnoozed:${post.slug}`, "1");
+        closeBase();
+    };
+
+    const dismissForever = () => {
+        if (post) localStorage.setItem(`toastDismissed:${post.slug}`, "1");
+        closeBase();
+    };
+
+    const onRead = () => {
+        if (post) localStorage.setItem(`toastDismissed:${post.slug}`, "1");
+        closeBase();
+    };
+
+    if (!post || !visible) return null;
+
+    return (
+        <div
+            role="dialog"
+            aria-modal="false"
+            aria-labelledby="toast-heading"
+            onMouseEnter={() => { hoverRef.current = true; }}
+            onMouseLeave={() => { hoverRef.current = false; }}
+            className="fixed z-[100]"
+            style={{
+                bottom: "20px",
+                right: "20px",
+                left: "auto",
+                maxWidth: "min(360px, calc(100vw - 32px))",
+                animation: closing
+                    ? "toastSlideOut 0.25s ease both"
+                    : "toastSlideIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both",
+            }}
+        >
+            <div
+                className="bg-white rounded-2xl overflow-hidden relative"
+                style={{ boxShadow: "0 20px 60px rgba(26,22,18,0.22)", border: "1px solid #E8E0D5" }}
+            >
+                {/* Progress bar */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#F2EDE4] z-10">
+                    <div
+                        className="h-full"
+                        style={{ width: `${progress}%`, background: "#E60023", transition: "width 0.1s linear" }}
+                    />
+                </div>
+
+                <div className="flex gap-3 p-4 pt-5">
+                    {post.image && (
+                        <Link to={`/blog/${post.slug}`} onClick={onRead} className="flex-shrink-0" style={{ textDecoration: "none" }}>
+                            <div className="rounded-xl overflow-hidden" style={{ width: "76px", height: "76px" }}>
+                                <img src={post.image} alt={post.title} className="w-full h-full" style={{ objectFit: "cover" }} />
+                            </div>
+                        </Link>
+                    )}
+
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 mb-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E60023] animate-pulseDot flex-shrink-0" />
+                            <span className="text-[0.62rem] font-bold uppercase tracking-widest text-[#E60023]">New Post</span>
+                        </div>
+                        <Link to={`/blog/${post.slug}`} onClick={onRead} style={{ textDecoration: "none" }}>
+                            <h3 id="toast-heading" className="font-display text-[0.95rem] leading-snug text-[#1A1612] mb-1 line-clamp-2 hover:text-[#E60023] transition-colors duration-200">
+                                {post.title}
+                            </h3>
+                        </Link>
+                        {post.meta && (
+                            <p className="text-[0.7rem] text-[#8C7E74] font-medium">{post.meta}</p>
+                        )}
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={snooze}
+                        aria-label="Close, remind me later"
+                        className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[#8C7E74] hover:bg-[#F2EDE4] transition-colors duration-200"
+                        style={{ marginTop: "-2px" }}
+                    >
+                        <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div className="flex items-center justify-between px-4 pb-3.5 pt-1">
+                    <Link
+                        to={`/blog/${post.slug}`}
+                        onClick={onRead}
+                        className="inline-flex items-center gap-1.5 text-[0.78rem] font-bold text-[#1A1612] hover:text-[#E60023] transition-colors duration-200"
+                        style={{ textDecoration: "none" }}
+                    >
+                        Read now
+                        <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </Link>
+                    <button
+                        type="button"
+                        onClick={dismissForever}
+                        className="text-[0.7rem] font-medium text-[#B8ACA0] hover:text-[#8C7E74] transition-colors duration-200"
+                    >
+                        Don't show this again
+                    </button>
+                </div>
+            </div>
+
+            <style>{`
+        @keyframes toastSlideIn  { from { opacity: 0; transform: translateY(24px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes toastSlideOut { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(16px) scale(0.96); } }
+      `}</style>
+        </div>
+    );
+};
+
 // ════════════════════════════════════════════════════════════
 //  ROOT
 // ════════════════════════════════════════════════════════════
@@ -2075,6 +2270,7 @@ export default function Blog() {
         <>
             <GlobalStyles />
             <SEOHead posts={posts} />
+            <NewPostPopup />
 
             <div className="bg-[#FAF8F4] text-[#1A1612]">
                 <Navbar />
