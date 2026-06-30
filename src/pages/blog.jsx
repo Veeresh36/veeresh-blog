@@ -2053,12 +2053,13 @@ const Divider = () => (
 
 
 // ════════════════════════════════════════════════════════════
-//  NEW POST POPUP — shows manifest.json's first post
+//  NEW POSTS POPUP — wide carousel showing top 3 posts
 // ════════════════════════════════════════════════════════════
-const NewPostPopup = () => {
-    const [post, setPost] = useState(null);
+const NewPostsPopup = () => {
+    const [posts, setPosts] = useState([]);
     const [visible, setVisible] = useState(false);
     const [closing, setClosing] = useState(false);
+    const [activeIdx, setActiveIdx] = useState(0);
 
     useEffect(() => {
         let cancelled = false;
@@ -2070,11 +2071,11 @@ const NewPostPopup = () => {
                 const rawPosts = Array.isArray(data) ? data : (data.posts || []);
                 if (rawPosts.length === 0) return;
 
-                const first = rawPosts[0];
-                const seenKey = `seenPopup:${first.slug}`;
-                if (localStorage.getItem(seenKey)) return; // already shown for this post
+                const top3 = rawPosts.slice(0, 3);
+                const seenKey = `seenPopup:${top3[0].slug}`;
+                if (localStorage.getItem(seenKey)) return;
 
-                if (!cancelled) setPost(first);
+                if (!cancelled) setPosts(top3);
             } catch {
                 // fail silently
             }
@@ -2084,27 +2085,28 @@ const NewPostPopup = () => {
     }, []);
 
     useEffect(() => {
-        if (!post) return;
+        if (posts.length === 0) return;
         const timer = setTimeout(() => setVisible(true), 2500);
         return () => clearTimeout(timer);
-    }, [post]);
+    }, [posts]);
 
     const close = () => {
         setClosing(true);
-        if (post) localStorage.setItem(`seenPopup:${post.slug}`, "1");
+        if (posts[0]) localStorage.setItem(`seenPopup:${posts[0].slug}`, "1");
         setTimeout(() => setVisible(false), 250);
     };
 
-    if (!post || !visible) return null;
+    if (posts.length === 0 || !visible) return null;
+    const active = posts[activeIdx];
 
     return (
         <div
             role="dialog"
             aria-modal="true"
-            aria-labelledby="new-post-popup-heading"
+            aria-labelledby="new-posts-popup-heading"
             className="fixed inset-0 z-[100] flex items-center justify-center px-6"
             style={{
-                background: "rgba(26,22,18,0.55)",
+                background: "rgba(26,22,18,0.6)",
                 backdropFilter: "blur(4px)",
                 animation: closing ? "popupFadeOut 0.25s ease both" : "popupFadeIn 0.3s ease both",
             }}
@@ -2112,9 +2114,10 @@ const NewPostPopup = () => {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-3xl overflow-hidden max-w-[420px] w-full relative"
+                className="bg-white rounded-3xl overflow-hidden w-full relative"
                 style={{
-                    boxShadow: "0 30px 90px rgba(0,0,0,0.35)",
+                    maxWidth: "880px",
+                    boxShadow: "0 30px 90px rgba(0,0,0,0.4)",
                     animation: closing ? "popupScaleOut 0.25s ease both" : "popupScaleIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both",
                 }}
             >
@@ -2122,58 +2125,86 @@ const NewPostPopup = () => {
                     type="button"
                     onClick={close}
                     aria-label="Close popup"
-                    className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ background: "rgba(255,255,255,0.9)", border: "1px solid #E8E0D5" }}
+                    className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center"
+                    style={{ background: "rgba(255,255,255,0.95)", border: "1px solid #E8E0D5" }}
                 >
                     <CloseIcon />
                 </button>
 
-                {post.image && (
-                    <div className="w-full" style={{ height: "200px", overflow: "hidden" }}>
-                        <img
-                            src={post.image}
-                            alt={post.title}
-                            className="w-full h-full"
-                            style={{ objectFit: "cover" }}
-                        />
+                <div className="grid grid-cols-1 md:grid-cols-2">
+                    {/* Big image side */}
+                    <div className="relative" style={{ height: "440px", overflow: "hidden", background: "#F2EDE4" }}>
+                        {active.image && (
+                            <img
+                                key={active.slug}
+                                src={active.image}
+                                alt={active.title}
+                                className="w-full h-full"
+                                style={{ objectFit: "cover", animation: "popupImgFade 0.4s ease both" }}
+                            />
+                        )}
+                        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.45) 100%)" }} />
+                        <span className="absolute top-5 left-5 inline-block bg-[#E60023] text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                            {activeIdx === 0 ? "Newest Post" : "Also New"}
+                        </span>
                     </div>
-                )}
 
-                <div className="p-6">
-                    <span className="inline-block bg-[#FFF0F0] text-[#E60023] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
-                        New Post
-                    </span>
-                    <h3 id="new-post-popup-heading" className="font-display text-[1.4rem] leading-snug text-[#1A1612] mb-2">
-                        {post.title}
-                    </h3>
-                    {post.meta && (
-                        <p className="text-[0.8rem] text-[#8C7E74] mb-5">{post.meta}</p>
-                    )}
-                    <div className="flex gap-3">
+                    {/* Content side */}
+                    <div className="p-8 flex flex-col">
+                        <h3 id="new-posts-popup-heading" className="font-display text-[1.7rem] leading-[1.15] text-[#1A1612] mb-3">
+                            {active.title}
+                        </h3>
+                        {active.meta && (
+                            <p className="text-[0.85rem] text-[#8C7E74] mb-6">{active.meta}</p>
+                        )}
+
                         <Link
-                            to={`/blog/${post.slug}`}
+                            to={`/blog/${active.slug}`}
                             onClick={close}
-                            className="inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-6 py-3 rounded-full flex-1 hover:bg-[#E60023] transition-colors duration-300"
+                            className="inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-6 py-3.5 rounded-full hover:bg-[#E60023] transition-colors duration-300 mb-6"
                             style={{ textDecoration: "none" }}
                         >
                             Read it now
+                            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                         </Link>
-                        <button
-                            type="button"
-                            onClick={close}
-                            className="text-sm font-semibold text-[#8C7E74] px-4"
-                        >
-                            Maybe later
-                        </button>
+
+                        {/* Thumbnail strip for other posts */}
+                        {posts.length > 1 && (
+                            <div className="mt-auto pt-6" style={{ borderTop: "1px solid #E8E0D5" }}>
+                                <p className="text-[0.68rem] font-bold uppercase tracking-widest text-[#8C7E74] mb-3">More new posts</p>
+                                <div className="flex gap-3">
+                                    {posts.map((p, i) => (
+                                        <button
+                                            key={p.slug}
+                                            type="button"
+                                            onClick={() => setActiveIdx(i)}
+                                            aria-label={`View ${p.title}`}
+                                            className="flex-1 text-left rounded-xl overflow-hidden transition-all duration-200"
+                                            style={{
+                                                border: i === activeIdx ? "2px solid #E60023" : "2px solid transparent",
+                                                opacity: i === activeIdx ? 1 : 0.6,
+                                            }}
+                                        >
+                                            {p.image && (
+                                                <div style={{ height: "56px", overflow: "hidden" }}>
+                                                    <img src={p.image} alt={p.title} className="w-full h-full" style={{ objectFit: "cover" }} />
+                                                </div>
+                                            )}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
 
             <style>{`
-        @keyframes popupFadeIn  { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes popupFadeOut { from { opacity: 1; } to { opacity: 0; } }
+        @keyframes popupFadeIn   { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popupFadeOut  { from { opacity: 1; } to { opacity: 0; } }
         @keyframes popupScaleIn  { from { opacity: 0; transform: scale(0.92) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         @keyframes popupScaleOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
+        @keyframes popupImgFade  { from { opacity: 0.3; } to { opacity: 1; } }
       `}</style>
         </div>
     );
@@ -2203,7 +2234,7 @@ export default function Blog() {
         <>
             <GlobalStyles />
             <SEOHead posts={posts} />
-            <NewPostPopup />
+            <NewPostsPopup />
 
             <div className="bg-[#FAF8F4] text-[#1A1612]">
                 <Navbar />
