@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "salary-is-a-drug",
+      "title": "Salary Is a Drug: Why the Paycheck That Saves You Is Also the One Trapping You",
+      "tag": "Life Lessons",
+      "category": "Finance",
+      "excerpt": "Every month the salary hits your account and for two, three days you feel free. Then the loop starts again. An honest account of why salary works exactly like a drug — and what breaking that loop actually looks like.",
+      "emoji": "💊",
+      "gradient": "from-[#2B1B17] to-[#4A2C2A]",
+      "meta": "10 min read · July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/salary-is-a-drug-comfort-trap.webp"
+    },
+    {
       "slug": "childhood-cartoons-life-lessons",
       "title": "Doraemon, Chhota Bheem, Shinchan, Oggy: The Cartoons That Quietly Taught Me How to Think",
       "tag": "Life Lessons",
