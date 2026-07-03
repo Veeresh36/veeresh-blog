@@ -1446,65 +1446,65 @@ const PinCard = ({ pin, large = false }) => {
     };
 
     const inner = (
-            <div
-                ref={cardRef}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                className="relative rounded-[20px] overflow-hidden group flex-shrink-0"
-                style={{
-                    width: large ? "min(78vw, 420px)" : "min(60vw, 280px)",
-                    height: "440px",
-                    transition: "transform 0.2s ease",
-                    border: "1px solid rgba(255,255,255,0.10)",
-                }}
-            >
-                {/* Image fills the whole tile */}
-                {pin.image && !imgError ? (
-                    <img
-                        src={pin.image}
-                        alt={pin.title}
-                        onError={() => setImgError(true)}
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="low"
-                        className="absolute inset-0 w-full h-full"
-                        style={{ objectFit: "cover", transition: "transform 0.6s ease" }}
-                    />
-                ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-6xl" style={{ background: "rgba(255,255,255,0.04)" }}>
-                        {pin.emoji}
-                    </div>
-                )}
-
-                {/* Gradient scrim */}
-                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%)" }} />
-
-                {/* Pin-style save badge top right */}
-                <span
-                    className="absolute top-3 right-3 inline-flex items-center gap-1.5 text-white text-[0.68rem] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100"
-                    style={{ background: "#E60023", transition: "opacity 0.25s ease, transform 0.25s ease", transform: "translateY(-4px)" }}
-                >
-                    {pin.slug ? "Read" : "Save"} <PinIcon size={12} />
-                </span>
-
-                {/* Category eyebrow */}
-                <span
-                    className="absolute top-3 left-3 text-[0.62rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
-                    style={{ background: "rgba(255,255,255,0.16)", color: "#FFFFFF", backdropFilter: "blur(6px)" }}
-                >
-                    {pin.category}
-                </span>
-
-                {/* Text content pinned to bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <strong className={`block font-display text-white leading-snug mb-1.5 ${large ? "text-[1.4rem]" : "text-[1.05rem]"}`}>
-                        {pin.title}
-                    </strong>
-                    <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.72)" }}>
-                        {pin.desc}
-                    </p>
+        <div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="relative rounded-[20px] overflow-hidden group flex-shrink-0"
+            style={{
+                width: large ? "min(78vw, 420px)" : "min(60vw, 280px)",
+                height: "440px",
+                transition: "transform 0.2s ease",
+                border: "1px solid rgba(255,255,255,0.10)",
+            }}
+        >
+            {/* Image fills the whole tile */}
+            {pin.image && !imgError ? (
+                <img
+                    src={pin.image}
+                    alt={pin.title}
+                    onError={() => setImgError(true)}
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
+                    className="absolute inset-0 w-full h-full"
+                    style={{ objectFit: "cover", transition: "transform 0.6s ease" }}
+                />
+            ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-6xl" style={{ background: "rgba(255,255,255,0.04)" }}>
+                    {pin.emoji}
                 </div>
+            )}
+
+            {/* Gradient scrim */}
+            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%)" }} />
+
+            {/* Pin-style save badge top right */}
+            <span
+                className="absolute top-3 right-3 inline-flex items-center gap-1.5 text-white text-[0.68rem] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100"
+                style={{ background: "#E60023", transition: "opacity 0.25s ease, transform 0.25s ease", transform: "translateY(-4px)" }}
+            >
+                {pin.slug ? "Read" : "Save"} <PinIcon size={12} />
+            </span>
+
+            {/* Category eyebrow */}
+            <span
+                className="absolute top-3 left-3 text-[0.62rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                style={{ background: "rgba(255,255,255,0.16)", color: "#FFFFFF", backdropFilter: "blur(6px)" }}
+            >
+                {pin.category}
+            </span>
+
+            {/* Text content pinned to bottom */}
+            <div className="absolute bottom-0 left-0 right-0 p-5">
+                <strong className={`block font-display text-white leading-snug mb-1.5 ${large ? "text-[1.4rem]" : "text-[1.05rem]"}`}>
+                    {pin.title}
+                </strong>
+                <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.72)" }}>
+                    {pin.desc}
+                </p>
             </div>
+        </div>
     );
 
     if (pin.slug) {
@@ -1865,7 +1865,7 @@ const PostRowItem = ({ post, index }) => {
                 {post.image && !imgError ? (
                     // FIX: object-cover (was object-contain)
                     <img src={post.image} alt={post.title} className="w-full h-full" style={{ objectFit: "cover" }} loading="lazy" decoding="async"
-                    fetchPriority="low" onError={() => setImgError(true)} />
+                        fetchPriority="low" onError={() => setImgError(true)} />
                 ) : post.emoji}
             </div>
             <div>
@@ -2106,90 +2106,129 @@ const NewPostsPopup = () => {
             aria-labelledby="new-posts-popup-heading"
             className="fixed inset-0 z-[100] flex items-center justify-center px-3 sm:px-6"
             style={{
-                background: "rgba(26,22,18,0.6)",
-                backdropFilter: "blur(4px)",
-                animation: closing ? "popupFadeOut 0.25s ease both" : "popupFadeIn 0.3s ease both",
+                background: "rgba(20,16,13,0.72)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                animation: closing ? "popupFadeOut 0.25s ease both" : "popupFadeIn 0.35s ease both",
             }}
             onClick={close}
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden w-full relative max-w-[880px] max-h-[92vh] overflow-y-auto"
+                className="bg-white overflow-hidden w-full relative max-w-[900px] max-h-[92vh] overflow-y-auto"
                 style={{
-                    boxShadow: "0 30px 90px rgba(0,0,0,0.4)",
-                    animation: closing ? "popupScaleOut 0.25s ease both" : "popupScaleIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both",
+                    borderRadius: "26px",
+                    boxShadow: "0 40px 100px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)",
+                    animation: closing ? "popupScaleOut 0.25s ease both" : "popupScaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both",
                 }}
             >
                 <button
                     type="button"
                     onClick={close}
                     aria-label="Close popup"
-                    className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center"
-                    style={{ background: "rgba(255,255,255,0.95)", border: "1px solid #E8E0D5" }}
+                    className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+                    style={{
+                        background: "rgba(255,255,255,0.95)",
+                        border: "1px solid rgba(0,0,0,0.06)",
+                        boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+                    }}
                 >
                     <CloseIcon />
                 </button>
 
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                    {/* Big image side */}
-                    <div className="relative w-full h-[200px] md:h-[440px] overflow-hidden bg-[#F2EDE4]">
+                <div className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr]">
+                    {/* ── Image side ── */}
+                    <div className="relative w-full h-[220px] md:h-[480px] overflow-hidden" style={{ background: "#1A1612" }}>
                         {active.image && (
                             <img
                                 key={active.slug}
                                 src={active.image}
                                 alt={active.title}
-                                className="w-full h-full object-cover"
-                                style={{ animation: "popupImgFade 0.4s ease both" }}
+                                className="w-full h-full"
+                                style={{ objectFit: "cover", animation: "popupImgFade 0.5s ease both" }}
                             />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/45" />
-                        <span className="absolute top-3 left-3 sm:top-5 sm:left-5 inline-block bg-[#E60023] text-white text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-widest px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full">
+                        {/* Gradient scrim for legibility + richness */}
+                        <div
+                            className="absolute inset-0 pointer-events-none"
+                            style={{ background: "linear-gradient(180deg, rgba(26,22,18,0.35) 0%, rgba(26,22,18,0) 30%, rgba(26,22,18,0) 60%, rgba(26,22,18,0.55) 100%)" }}
+                        />
+                        {/* Badge */}
+                        <span
+                            className="absolute top-5 left-5 inline-flex items-center gap-1.5 text-white text-[0.66rem] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full"
+                            style={{
+                                background: "#E60023",
+                                boxShadow: "0 6px 20px rgba(230,0,35,0.45)",
+                            }}
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulseDot" />
                             {activeIdx === 0 ? "Newest Post" : "Also New"}
                         </span>
                     </div>
 
-                    {/* Content side */}
-                    <div className="p-5 sm:p-8 flex flex-col">
+                    {/* ── Content side ── */}
+                    <div className="p-6 sm:p-9 flex flex-col">
+                        <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[#E60023] mb-3">
+                            Fresh off the press
+                        </p>
+
                         <h3
                             id="new-posts-popup-heading"
-                            className="font-display text-[1.25rem] sm:text-[1.7rem] leading-[1.2] sm:leading-[1.15] text-[#1A1612] mb-2 sm:mb-3 pr-8 md:pr-0"
+                            className="font-display text-[1.4rem] sm:text-[1.85rem] leading-[1.2] text-[#1A1612] mb-3 pr-6 md:pr-0"
                         >
                             {active.title}
                         </h3>
+
                         {active.meta && (
-                            <p className="text-[0.8rem] sm:text-[0.85rem] text-[#8C7E74] mb-4 sm:mb-6">{active.meta}</p>
+                            <p className="text-[0.82rem] text-[#8C7E74] font-medium mb-6 flex items-center gap-2">
+                                <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" />
+                                </svg>
+                                {active.meta}
+                            </p>
                         )}
 
                         <Link
                             to={`/blog/${active.slug}`}
                             onClick={close}
-                            className="inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-5 py-3 sm:px-6 sm:py-3.5 rounded-full hover:bg-[#E60023] transition-colors duration-300 mb-4 sm:mb-6 w-full sm:w-auto"
-                            style={{ textDecoration: "none" }}
+                            className="group inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-6 py-3.5 rounded-full transition-all duration-300 hover:bg-[#E60023] hover:-translate-y-0.5 mb-7 w-full sm:w-auto"
+                            style={{ textDecoration: "none", boxShadow: "0 10px 30px rgba(26,22,18,0.18)" }}
                         >
                             Read it now
-                            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                                className="transition-transform duration-300 group-hover:translate-x-1">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
                         </Link>
 
-                        {/* Thumbnail strip for other posts */}
+                        {/* Thumbnail strip */}
                         {posts.length > 1 && (
-                            <div className="mt-auto pt-4 sm:pt-6 border-t border-[#E8E0D5]">
-                                <p className="text-[0.65rem] sm:text-[0.68rem] font-bold uppercase tracking-widest text-[#8C7E74] mb-2 sm:mb-3">More new posts</p>
-                                <div className="flex gap-2 sm:gap-3">
+                            <div className="mt-auto pt-6" style={{ borderTop: "1px solid #EFE8DE" }}>
+                                <p className="text-[0.65rem] font-bold uppercase tracking-widest text-[#8C7E74] mb-3">
+                                    More new posts
+                                </p>
+                                <div className="flex gap-3">
                                     {posts.map((p, i) => (
                                         <button
                                             key={p.slug}
                                             type="button"
                                             onClick={() => setActiveIdx(i)}
                                             aria-label={`View ${p.title}`}
-                                            className="flex-1 text-left rounded-lg sm:rounded-xl overflow-hidden transition-all duration-200"
+                                            aria-pressed={i === activeIdx}
+                                            className="flex-1 text-left rounded-xl overflow-hidden transition-all duration-250"
                                             style={{
                                                 border: i === activeIdx ? "2px solid #E60023" : "2px solid transparent",
-                                                opacity: i === activeIdx ? 1 : 0.6,
+                                                opacity: i === activeIdx ? 1 : 0.55,
+                                                transform: i === activeIdx ? "translateY(-2px)" : "none",
+                                                boxShadow: i === activeIdx ? "0 8px 18px rgba(230,0,35,0.18)" : "none",
                                             }}
                                         >
                                             {p.image && (
-                                                <div className="h-11 overflow-hidden">
+                                                <div className="h-14 overflow-hidden relative">
                                                     <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                                                    {i === activeIdx && (
+                                                        <span className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent, rgba(0,0,0,0.35))" }} />
+                                                    )}
                                                 </div>
                                             )}
                                         </button>
@@ -2204,9 +2243,9 @@ const NewPostsPopup = () => {
             <style>{`
         @keyframes popupFadeIn   { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popupFadeOut  { from { opacity: 1; } to { opacity: 0; } }
-        @keyframes popupScaleIn  { from { opacity: 0; transform: scale(0.92) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        @keyframes popupScaleOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
-        @keyframes popupImgFade  { from { opacity: 0.3; } to { opacity: 1; } }
+        @keyframes popupScaleIn  { from { opacity: 0; transform: scale(0.94) translateY(14px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes popupScaleOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.96); } }
+        @keyframes popupImgFade  { from { opacity: 0; } to { opacity: 1; } }
       `}</style>
         </div>
     );
