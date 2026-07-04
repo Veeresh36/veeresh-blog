@@ -2,12 +2,16 @@
 <html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#FAF8F4" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Google AdSense -->
     <script
@@ -21,89 +25,102 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-2R4G8EB2BV"
     ></script>
-
     <script>
       window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-
+      function gtag() { dataLayer.push(arguments); }
+      // Consent defaults — set BEFORE config so gtag respects region rules
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        analytics_storage: "granted",
+      });
       gtag("js", new Date());
-
-      // Google Analytics 4
       gtag("config", "G-2R4G8EB2BV");
-
-      // Google Ads
       gtag("config", "AW-18282410710");
     </script>
 
     <!-- SEO Title & Description -->
     <title>Veeresh Bashetti | Python Full Stack Developer, AI Tools & Lifestyle Blog</title>
-
     <meta
       name="description"
       content="Official website of Veeresh Bashetti. Explore Python, Django, React, AI tools, web development, productivity, finance and lifestyle articles."
     />
-
     <meta
       name="keywords"
       content="Veeresh Bashetti, Python, Django, React, AI Tools, Full Stack Developer, Blog, Technology, Productivity"
     />
-
     <meta name="author" content="Veeresh Bashetti" />
-
     <link rel="canonical" href="https://www.veereshbashetti.com/" />
+    <link rel="alternate" type="application/rss+xml" title="Veeresh Bashetti Blog RSS Feed" href="https://www.veereshbashetti.com/rss.xml" />
 
-    <!-- Social Sharing (Facebook, LinkedIn, WhatsApp) -->
+    <!-- Search Console ownership verification -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Veeresh Bashetti | Python Full Stack Developer" />
-    <meta
-      property="og:description"
-      content="Learn Python, React, Django, AI tools, productivity and technology."
-    />
-    <meta property="og:image" content="https://www.veereshbashetti.com/logo.png" />
+    <meta property="og:description" content="Learn Python, React, Django, AI tools, productivity and technology." />
+    <meta property="og:image" content="https://www.veereshbashetti.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Veeresh Bashetti — Blog & Pinterest Picks" />
     <meta property="og:url" content="https://www.veereshbashetti.com/" />
     <meta property="og:site_name" content="Veeresh Bashetti" />
+    <meta property="og:locale" content="en_IN" />
 
-    <!-- Social Sharing (Twitter/X) -->
+    <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@veereshbashetti" />
+    <meta name="twitter:creator" content="@veereshbashetti" />
     <meta name="twitter:title" content="Veeresh Bashetti | Python Full Stack Developer" />
-    <meta
-      name="twitter:description"
-      content="Python, React, Django, AI Tools and Lifestyle Blog."
-    />
-    <meta name="twitter:image" content="https://www.veereshbashetti.com/logo.png" />
+    <meta name="twitter:description" content="Python, React, Django, AI Tools and Lifestyle Blog." />
+    <meta name="twitter:image" content="https://www.veereshbashetti.com/og-image.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
 
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap"
     />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
 
-    <!-- Tells Google who you are (for search results) -->
+    <!-- Structured data: Person -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Veeresh Bashetti",
       "url": "https://www.veereshbashetti.com",
-      "image": "https://www.veereshbashetti.com/logo.png",
+      "image": "https://www.veereshbashetti.com/favicon.png",
       "jobTitle": "Python Full Stack Developer",
       "sameAs": [
-        "https://github.com/Veeresh36"
+        "https://github.com/Veeresh36",
+        "https://in.pinterest.com/veereshbbashetti/"
       ]
+    }
+    </script>
+
+    <!-- Structured data: WebSite + sitelinks search box -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.veereshbashetti.com/",
+      "name": "Veeresh Bashetti",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.veereshbashetti.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
   </head>
 
   <body>
     <div id="root"></div>
-
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
