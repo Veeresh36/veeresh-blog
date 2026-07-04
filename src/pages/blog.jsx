@@ -361,6 +361,7 @@ function useBlogPosts() {
 const GlobalStyles = () => (
     <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+    .card-thumb-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Outfit', sans-serif; overflow-x: hidden; }
@@ -951,13 +952,13 @@ const BlogCard = ({ post, featured = false, index = 0 }) => {
                         height: featured
                             ? "clamp(260px, 32vw, 380px)"
                             : "220px",
+                        ...(post.gradientStyle || { background: "#F2EDE4" }),
                     }}>
                     {post.image && !imgError ? (
                         <img src={post.image} alt={post.title} className="card-thumb-img" loading="lazy" decoding="async" fetchPriority="low"
                             onError={() => setImgError(true)} />
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-5xl"
-                            style={post.gradientStyle || { background: "#F2EDE4" }}>
+                        <div className="w-full h-full flex items-center justify-center text-5xl">
                             {post.emoji}
                         </div>
                     )}
@@ -968,9 +969,9 @@ const BlogCard = ({ post, featured = false, index = 0 }) => {
                 </div>
 
                 <div className="p-6 flex flex-col flex-1">
-                    <h3 className={`font-display text-[#1A1612] leading-snug mb-3 ${featured ? "text-[1.7rem]" : "text-[1.1rem]"}`}>
-                        {post.title}
-                    </h3>
+                    <h3 className={`font-display text-[#1A1612] leading-snug mb-3 line-clamp-2 ${featured ? "text-[1.7rem]" : "text-[1.1rem]"}`}>
+                    {post.title}
+                </h3>
                     {post.excerpt && (
                         <p className="text-sm text-[#8C7E74] leading-[1.7] flex-1 mb-4 line-clamp-3">{post.excerpt}</p>
                     )}
