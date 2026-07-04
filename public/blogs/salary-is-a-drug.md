@@ -201,6 +201,12 @@ I don't think the answer is to be suspicious of a good salary. I think the answe
 
 ---
 
+If you want this exact loop mapped out story-by-story rather than just described, this video walks through the same pattern — the illusion of stability, lifestyle inflation, and the golden handcuffs moment — through one person's month:
+
+::youtube[nb7I0BBs3C4]{caption="The Salary Trap: why a steady paycheck can quietly keep you stuck"}
+
+---
+
 ## The Question Underneath the Question
 
 If I'm being fully honest with myself, the real question was never "should I stay in this job or leave it." That question is easy to ask because it feels productive, even when nothing changes.
