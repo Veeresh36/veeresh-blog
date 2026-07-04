@@ -1159,11 +1159,11 @@ const BlogSection = ({ posts, loading, error }) => {
                     <>
                         <div
                             key={activeFilter}
-                            className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
                             style={{ animation: "fadeUp 0.4s ease both" }}
                         >
                             {visiblePosts.map((p, i) => (
-                                <div key={p.slug} className="break-inside-avoid">
+                                <div key={p.slug}>
                                     <BlogCard post={p} index={i} />
                                 </div>
                             ))}
