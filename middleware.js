@@ -25,19 +25,27 @@ export default async function middleware(request) {
     return;
   }
 
-  const prerenderUrl = `https://service.prerender.io${request.nextUrl.pathname}`;
+  // Use standard URL API instead of Next.js-only request.nextUrl
+  const url = new URL(request.url);
+  const prerenderUrl = `https://service.prerender.io${url.pathname}${url.search}`;
 
-  const prerenderResponse = await fetch(prerenderUrl, {
-    headers: {
-      "X-Prerender-Token": process.env.PRERENDER_TOKEN,
-      "User-Agent": userAgent,
-    },
-  });
+  try {
+    const prerenderResponse = await fetch(prerenderUrl, {
+      headers: {
+        "X-Prerender-Token": process.env.PRERENDER_TOKEN,
+        "User-Agent": userAgent,
+      },
+    });
 
-  const html = await prerenderResponse.text();
+    const html = await prerenderResponse.text();
 
-  return new Response(html, {
-    status: prerenderResponse.status,
-    headers: { "Content-Type": "text/html" },
-  });
+    return new Response(html, {
+      status: prerenderResponse.status,
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    });
+  } catch (err) {
+    // If Prerender.io fails for any reason, fall back to normal SPA
+    // rather than showing a broken page to the bot
+    return;
+  }
 }
