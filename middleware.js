@@ -25,9 +25,9 @@ export default async function middleware(request) {
     return;
   }
 
-  // Use standard URL API instead of Next.js-only request.nextUrl
+  // Prerender.io expects the FULL target URL appended after service.prerender.io/
   const url = new URL(request.url);
-  const prerenderUrl = `https://service.prerender.io${url.pathname}${url.search}`;
+  const prerenderUrl = `https://service.prerender.io/${url.href}`;
 
   try {
     const prerenderResponse = await fetch(prerenderUrl, {
