@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "http-query-method-explained",
+      "title": "What Is the New HTTP QUERY Method? A Beginner's Guide With Python & Node.js Examples",
+      "tag": "tech",
+      "category": "tech",
+      "excerpt": "For 25 years, developers had exactly two bad options for complex search requests: cram everything into a GET URL, or abuse POST and lose caching. HTTP just got a third option. Here's QUERY, explained simply, with working Python and Node.js code.",
+      "emoji": "🔍",
+      "gradient": "from-[#ECEFF1] to-[#CFD8DC]",
+      "meta": "13 min read · 05 July 2026",
+      "image": "https://raw.githubusercontent.com/Veeresh36/bog_images/main/http-query-method-explained.webp"
+    },
+    {
       "slug": "salary-is-a-drug",
       "title": "Salary Is a Drug: Why the Paycheck That Saves You Is Also the One Trapping You",
       "tag": "Life Lessons",
