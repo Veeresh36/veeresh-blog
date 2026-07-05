@@ -529,10 +529,9 @@ I don't think QUERY changes how any of us build software overnight. Browser supp
 
 ## Keep Reading
 
-- **[REST API Design Mistakes Beginners Make (And How to Fix Them)](/blog/rest-api-design-mistakes)** — common API design traps, including the GET-vs-POST confusion this post covers
-- **[Node.js vs Python for Backend Development in 2026](/blog/nodejs-vs-python-backend-2026)** — a practical comparison for picking your stack
-- **[Understanding HTTP Status Codes: A Cheat Sheet for Developers](/blog/http-status-codes-cheat-sheet)** — the 400/415/422 codes mentioned above, explained in full
-- **[What Is Idempotency in APIs? Explained With Real Examples](/blog/what-is-idempotency-apis)** — the concept underpinning why QUERY and GET are considered "safe"
+- **[22 Years Old, -₹400 in My Bank Account...](/blog/22-year-old-startup-developer-life)** — the developer-life story behind why I care this much about shipping things right, not just fast
+- **[The Developer Setup Trap: Why Better Gear Won't Make You a Better Coder](/blog/developer-setup-trap)** — same instinct to chase the "proper" way of doing things, a different context
+- **[My First Project Failed Quietly. Here's What It Taught Me.](/blog/first-project-failure-lessons)** — on the quieter kind of engineering mistakes that don't show up as a crash
 
 ---
 
