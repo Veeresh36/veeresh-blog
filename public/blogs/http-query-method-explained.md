@@ -20,7 +20,7 @@ tags:
   - Beginner Coding
 image: "https://raw.githubusercontent.com/Veeresh36/bog_images/main/http-query-method-explained.webp"
 imageAlt: "Illustration representing the new HTTP QUERY method (RFC 10008)"
-readingTime: "13 min read"
+readingTime: "15 min read"
 featured: true
 
 seo:
@@ -48,6 +48,8 @@ seo:
     - http query cacheable
     - complex search api design
     - http query method for beginners
+    - when not to use query parameters
+    - url query string limitations
 
 schema:
   type: "Article"
@@ -81,6 +83,8 @@ faqs:
     a: "RFC 10008 was written by Julian Reschke (greenbytes), James M. Snell (Cloudflare), and Mike Bishop (Akamai). Having two major CDN companies as co-authors is a strong signal that edge caching support for QUERY is coming, even if it isn't universal yet."
   - q: "Do I need any special library to use QUERY in Node.js or Python?"
     a: "No special library is required. Both Node's built-in http module and Python's built-in http.server already accept any method string, including QUERY, because HTTP methods have always technically been open text. Frameworks like Express and Flask can be told to listen for it too, as shown in this guide."
+  - q: "When should I avoid using query parameters in a URL?"
+    a: "Avoid URL query parameters when the data is sensitive, when the filter set is long or deeply nested, when you need the request to be retried safely without duplicating side effects, or when you actually intend to change data — none of which a query string was ever designed to handle safely."
 
 takeaways:
   - "QUERY is a brand-new HTTP method (RFC 10008, June 2026) that sends search data in the request body while keeping GET's safe, idempotent, cacheable behavior."
@@ -90,13 +94,14 @@ takeaways:
   - "Browsers can't send QUERY through fetch() yet, and most CDNs don't cache it yet — so I'm only using it server-to-server for now."
   - "QUERY doesn't replace GET or POST. It sits in the gap between them, specifically for safe, read-only requests that need a real body."
   - "Cloudflare and Akamai co-authored the spec, which tells me CDN-level caching support is probably coming sooner rather than later."
+  - "URL query parameters still have a real, permanent place — but sensitive data, long filter sets, and anything with side effects were never a good fit for them."
 ---
 
 # I Tried the New HTTP QUERY Method So You Don't Have To
 
 > *For years, I quietly wrote "// yes this is technically a GET" as a comment above POST endpoints that only ever searched for things. In June 2026, that hack finally got an official name.*
 
-**Published:** July 5, 2026 · **13 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 5, 2026 · **15 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
 
 ---
 
@@ -105,6 +110,8 @@ I've lost count of how many search endpoints I've built where I quietly knew I w
 So when I saw that the IETF had just published **RFC 10008**, standardizing a brand-new HTTP method called **QUERY**, I didn't just want to read about it. I wanted to actually build something with it and see if it held up to the hype, or if it was just a nicer name for the same old workaround.
 
 This post is that walkthrough — what QUERY actually is, how I tested it myself in both Python and Node.js, what surprised me while reading the spec, and my honest take on whether it's worth switching to right now. No fluff on the technical details — everything about the method itself is straight from RFC 10008, checked and re-checked, not guesswork.
+
+> **Quick answer:** The HTTP QUERY method (RFC 10008, June 2026) lets you send search or filter data in a request body — like POST — while staying safe, idempotent, and cacheable — like GET. It exists for read-only requests whose filters are too long, too complex, or too sensitive to put in a URL.
 
 ---
 
@@ -117,10 +124,13 @@ This post is that walkthrough — what QUERY actually is, how I tested it myself
 - [Testing It Myself in Node.js](#testing-it-myself-in-nodejs)
 - [Testing It Myself in Python](#testing-it-myself-in-python)
 - [Where I'd Actually Use This](#where-id-actually-use-this)
+- [When NOT to Use Query Parameters](#when-not-to-use-query-parameters)
 - [Watch: The REST Concepts Behind QUERY, Explained by Fireship](#watch-the-rest-concepts-behind-query-explained-by-fireship)
 - [My Honest Verdict: Should You Use It Today?](#my-honest-verdict-should-you-use-it-today)
 - [Quick Cheat Sheet](#quick-cheat-sheet)
 - [Frequently Asked Questions](#frequently-asked-questions)
+- [Authoritative References](#authoritative-references)
+- [A Personal Note](#a-personal-note)
 
 ---
 
@@ -408,6 +418,19 @@ After sitting with it for a while, here's the line I've drawn for myself:
 
 If I've ever written that `// yes this is technically a GET` comment above an endpoint, that's exactly the kind of endpoint I'm migrating to QUERY first.
 
+## When NOT to Use Query Parameters
+
+The flip side of "when to reach for QUERY" is knowing when your usual `?key=value` query parameters are the wrong tool in the first place. I used to reach for them out of habit, not because they actually fit. A few situations where I've learned to stop and reconsider:
+
+- **The data is sensitive.** Anything in a URL — API keys, customer IDs, tokens, pricing — can end up in server access logs, browser history, and `Referer` headers sent to third parties. A request body at least keeps it out of those places by default.
+- **The filter set is long or deeply nested.** Query strings were never designed for arrays of objects or multi-level filters. You end up either inventing a bracket-encoding convention (`filter[price][min]=10`) or hitting a hard URL length limit, and neither one is fun to maintain.
+- **You need the request to be retried safely.** If a flaky connection means a client (or a proxy) might resend the exact same request, you want a method the spec itself guarantees is safe to repeat. Query strings on a GET are fine here — but the moment you're tempted to swap in a POST just to fit a bigger payload, you've lost that guarantee.
+- **You actually intend to change something.** This sounds obvious, but I've seen — and written — GET endpoints with a `?action=delete` parameter. A query parameter should never be the thing that triggers a write, an update, or a delete. If it changes data, it belongs in the body of a POST, PUT, PATCH, or DELETE, never in the URL.
+- **You want one canonical resource, not thousands of near-duplicate URLs.** Every distinct combination of query parameters is technically a distinct URL to a cache, a crawler, or a CDN. For a handful of filters that's harmless; for a faceted search page with a dozen optional filters, it can quietly generate duplicate-content issues and cache fragmentation.
+- **You're building for machine-to-machine calls with a structured payload.** GraphQL bodies, SQL-like filter expressions, or anything with real internal structure reads far more cleanly as a JSON or GraphQL body than as an escaped, flattened query string.
+
+None of this means query parameters are outdated — for short, shareable, cacheable, read-only lookups, they're still exactly right. It just means "can I fit this in a URL" and "should I fit this in a URL" are two different questions, and I try to actually ask the second one now.
+
 ## Watch: The REST Concepts Behind QUERY, Explained by Fireship
 
 QUERY is new enough that I couldn't find a major creator who's covered it directly yet. But the entire reason it exists comes down to the GET/POST split explained here by **Fireship** — one of the most-watched coding channels on YouTube:
@@ -436,6 +459,7 @@ Where I've landed: I'm using QUERY freely for **server-to-server** calls and int
 | Creating/updating/deleting data | POST / PUT / PATCH / DELETE |
 | Complex read-only search, server-to-server | QUERY |
 | Public browser-facing search, right now | GET (for now) or POST as a temporary fallback |
+| Sensitive data (IDs, tokens, pricing) | Never in a URL — use a request body |
 | Missing Content-Type on a QUERY request | Server must return 400 |
 | Query body has bad syntax | Server should return 422 |
 | Unsupported query format | Server should return 415 |
@@ -476,11 +500,30 @@ RFC 10008 was authored by Julian Reschke (greenbytes), James M. Snell (Cloudflar
 
 No. Both languages' built-in HTTP tooling already accepts any method name, QUERY included, as I found out while testing it myself.
 
+### When should I avoid using query parameters in a URL?
+
+Avoid them when the data is sensitive, the filter set is long or deeply nested, the request needs guaranteed-safe retries, or the request actually changes data — query strings were never built to handle any of those safely.
+
 ---
 
-## About This Post
+## Authoritative References
 
-I write these the way I'd want to read them — starting from what I actually did, not from spec language dressed up as a tutorial. Everything about the QUERY method itself in this post was checked directly against the RFC 10008 draft as published in June 2026, and the code was written and run by me against that spec, not copied from somewhere else. If the spec or browser support changes, I'll update this post and note it in the "Last Modified" date at the top.
+Everything I've described about the spec itself traces back to these primary sources — worth bookmarking if you want to go deeper than a blog post:
+
+- **[RFC 10008 — The HTTP QUERY Method](https://www.rfc-editor.org/info/rfc10008/)** (RFC Editor) — the final, published standard.
+- **[RFC 10008 on the IETF Datatracker](https://datatracker.ietf.org/doc/rfc10008/)** — status, errata, and formal metadata for the RFC.
+- **[draft-ietf-httpbis-safe-method-w-body](https://datatracker.ietf.org/doc/draft-ietf-httpbis-safe-method-w-body/)** — the full history of the draft, including the earlier "SEARCH" naming and every revision before it became RFC 10008.
+- **[HTTP Working Group (HTTPbis)](https://httpwg.org/)** — the IETF working group that developed the spec, for tracking related HTTP extensions.
+- **[MDN: HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods)** — how QUERY fits alongside GET, POST, and the rest of the method registry.
+- **[MDN: URI query component](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Query)** — a refresher on what a URL query string actually is, for anyone still mixing it up with the QUERY method.
+
+## A Personal Note
+
+I'll be honest about why this post exists: it's less about QUERY itself and more about finally having language for something I'd been doing wrong, quietly, for years. Every "yes this is technically a GET" comment I ever wrote was me admitting the tools didn't quite fit the job, and just working around it anyway because that's what shipping software means most days.
+
+What I liked about actually sitting down with the spec instead of skimming a summary of it was realizing how unglamorous the fix was. No new framework, no new mental model, no migration guide to dread — just a method name I could drop into code I already had, in an afternoon, in two different languages. That's rare enough in this field that it felt worth writing down.
+
+I don't think QUERY changes how any of us build software overnight. Browser support isn't there, CDN support isn't there, and most teams have bigger priorities this quarter than renaming an HTTP verb. But I like knowing it exists, and I like that the next time I catch myself writing `POST /search`, I now have a better answer than "it's fine, everyone does it this way."
 
 ---
 
