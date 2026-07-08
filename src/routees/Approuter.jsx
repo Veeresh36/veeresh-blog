@@ -39,10 +39,13 @@ export const routes = [
             {
                 path: "blog/:slug",
                 element: withSuspense(ReadBlog),
-                loader: ({ params }) => ({
-                    post: loadPost(params.slug),
-                    manifest: loadManifest(),
-                }),
+                loader: async ({ params }) => {
+                    const [post, manifest] = await Promise.all([
+                        loadPost(params.slug),
+                        loadManifest(),
+                    ]);
+                    return { post, manifest };
+                },
             },
             { path: "category/:categorySlug", element: withSuspense(CategoryPage) },
             { path: "categories", element: withSuspense(CategoriesPage) },

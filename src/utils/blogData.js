@@ -66,17 +66,30 @@ export function parseFrontmatter(raw) {
     return { data, content };
 }
 
-export function loadPost(slug) {
-    const filePath = path.resolve(process.cwd(), "public/blogs", `${slug}.md`);
-    if (!fs.existsSync(filePath)) return null;
-    const raw = fs.readFileSync(filePath, "utf-8");
+// Browser-safe: fetch from the public/ folder over HTTP instead of node:fs.
+export async function loadPost(slug) {
+    const res = await fetch(`/blogs/${slug}.md`);
+    if (!res.ok) return null;
+
+    const contentType = res.headers.get("content-type") || "";
+    if (contentType.includes("text/html")) return null;
+
+    const raw = await res.text();
+    if (raw.trimStart().startsWith("<!doctype") || raw.trimStart().startsWith("<html")) return null;
+
     const { data, content } = parseFrontmatter(raw);
     const cleanBody = content.replace(/<!--[\s\S]*?-->/g, "").trim();
     return { frontmatter: data, content: cleanBody };
 }
 
-export function loadManifest() {
-    const manifestPath = path.resolve(process.cwd(), "public/blogs/manifest.json");
-    if (!fs.existsSync(manifestPath)) return { posts: [] };
-    return JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+export async function loadManifest() {
+    try {
+        const res = await fetch("/blogs/manifest.json");
+        if (!res.ok) return { posts: [] };
+        const contentType = res.headers.get("content-type") || "";
+        if (contentType.includes("text/html")) return { posts: [] };
+        return await res.json();
+    } catch {
+        return { posts: [] };
+    }
 }
