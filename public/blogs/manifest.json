@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "fear-makes-you-live-not-succeed",
+      "title": "Fear Makes You Live, But It Won't Make You Succeed",
+      "tag": "Life Lessons",
+      "category": "Personal Growth",
+      "excerpt": "Fear has one job: keep you alive until tomorrow. It was never built to help you have a better tomorrow. Here's how to tell protective fear from limiting fear — and a 5-step framework to act anyway.",
+      "emoji": "🧠",
+      "gradient": "from-[#1E1B2E] to-[#332B4D]",
+      "meta": "10 min read · 07 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/fear-makes-you-live-not-succeed.webp"
+    },
+    {
       "slug": "http-query-method-explained",
       "title": "What Is the New HTTP QUERY Method? A Beginner's Guide With Python & Node.js Examples",
       "tag": "tech",
