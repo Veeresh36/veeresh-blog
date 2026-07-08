@@ -21,7 +21,7 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 // ─── Re-export SavedContext (or import from Blog.jsx if co-located) ──────────
-import { SavedContext, useSaved } from "../routees/Approuter";
+import { SavedContext, useSaved } from "../App";
 
 
 // ─── ICONS ──────────────────────────────────────────────────

@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLoaderData } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { hasConsent } from '../pages/CookieBanner'
+import { parseFrontmatter as sharedParseFrontmatter } from "../utils/blogData.js";
+import { hasConsent } from "../pages/CookieBanner";
+
 // ═══════════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════════
@@ -106,72 +108,72 @@ const InArticleAd = () => {
 // FRONTMATTER PARSER
 // ═══════════════════════════════════════════════
 
-function parseFrontmatter(raw) {
-  const normalized = raw.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-  const match = normalized.match(/^\s*---\s*\n([\s\S]*?)\n---\s*/);
-  if (!match) return { data: {}, content: normalized };
+// function parseFrontmatter(raw) {
+//   const normalized = raw.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+//   const match = normalized.match(/^\s*---\s*\n([\s\S]*?)\n---\s*/);
+//   if (!match) return { data: {}, content: normalized };
 
-  const yaml = match[1];
-  const content = normalized.slice(match[0].length).trim();
-  const data = {};
-  const lines = yaml.split("\n");
-  let i = 0;
+//   const yaml = match[1];
+//   const content = normalized.slice(match[0].length).trim();
+//   const data = {};
+//   const lines = yaml.split("\n");
+//   let i = 0;
 
-  while (i < lines.length) {
-    const line = lines[i];
-    const colonIdx = line.search(/:\s/);
-    if (colonIdx === -1 && !line.match(/^[\w-]+:\s*$/)) { i++; continue; }
+//   while (i < lines.length) {
+//     const line = lines[i];
+//     const colonIdx = line.search(/:\s/);
+//     if (colonIdx === -1 && !line.match(/^[\w-]+:\s*$/)) { i++; continue; }
 
-    const keyMatch = line.match(/^([\w-]+):\s*$/);
-    if (keyMatch) {
-      const key = keyMatch[1];
-      i++;
-      const items = [];
-      while (i < lines.length) {
-        const itemLine = lines[i];
-        if (itemLine.match(/^[\w-]+:\s/) || itemLine.match(/^[\w-]+:\s*$/)) break;
-        if (itemLine.match(/^\s{0,4}-\s/)) {
-          const firstVal = itemLine.replace(/^\s*-\s*/, "").trim();
-          // Only treat as object if it looks like "key: value" with a short key (no spaces before colon)
-          const isObjectEntry = firstVal.match(/^[\w-]+:\s/);
+//     const keyMatch = line.match(/^([\w-]+):\s*$/);
+//     if (keyMatch) {
+//       const key = keyMatch[1];
+//       i++;
+//       const items = [];
+//       while (i < lines.length) {
+//         const itemLine = lines[i];
+//         if (itemLine.match(/^[\w-]+:\s/) || itemLine.match(/^[\w-]+:\s*$/)) break;
+//         if (itemLine.match(/^\s{0,4}-\s/)) {
+//           const firstVal = itemLine.replace(/^\s*-\s*/, "").trim();
+//           // Only treat as object if it looks like "key: value" with a short key (no spaces before colon)
+//           const isObjectEntry = firstVal.match(/^[\w-]+:\s/);
 
-          if (isObjectEntry) {
-            const obj = {};
-            const fc = firstVal.indexOf(":");
-            obj[firstVal.slice(0, fc).trim()] = firstVal.slice(fc + 1).trim().replace(/^["']|["']$/g, "");
-            i++;
-            while (i < lines.length) {
-              const sub = lines[i];
-              if (!sub.match(/^\s{4,}[\w-]+:\s/) && !sub.match(/^\s{2,}[\w-]+:\s/)) break;
-              const sc = sub.indexOf(":");
-              const subKey = sub.slice(0, sc).trim();
-              const subVal = sub.slice(sc + 1).trim().replace(/^["']|["']$/g, "");
-              obj[subKey] = subVal;
-              i++;
-            }
-            items.push(obj);
-          } else {
-            items.push(firstVal.replace(/^["']|["']$/g, ""));
-            i++;
-          }
-        } else { i++; }
-      }
-      data[key] = items.length ? items : "";
-      continue;
-    }
+//           if (isObjectEntry) {
+//             const obj = {};
+//             const fc = firstVal.indexOf(":");
+//             obj[firstVal.slice(0, fc).trim()] = firstVal.slice(fc + 1).trim().replace(/^["']|["']$/g, "");
+//             i++;
+//             while (i < lines.length) {
+//               const sub = lines[i];
+//               if (!sub.match(/^\s{4,}[\w-]+:\s/) && !sub.match(/^\s{2,}[\w-]+:\s/)) break;
+//               const sc = sub.indexOf(":");
+//               const subKey = sub.slice(0, sc).trim();
+//               const subVal = sub.slice(sc + 1).trim().replace(/^["']|["']$/g, "");
+//               obj[subKey] = subVal;
+//               i++;
+//             }
+//             items.push(obj);
+//           } else {
+//             items.push(firstVal.replace(/^["']|["']$/g, ""));
+//             i++;
+//           }
+//         } else { i++; }
+//       }
+//       data[key] = items.length ? items : "";
+//       continue;
+//     }
 
-    const ci = line.indexOf(":");
-    const key = line.slice(0, ci).trim();
-    let val = line.slice(ci + 1).trim();
-    val = val.replace(/^["']|["']$/g, "").trim();
-    if (val === "true") val = true;
-    else if (val === "false") val = false;
-    data[key] = val;
-    i++;
-  }
+//     const ci = line.indexOf(":");
+//     const key = line.slice(0, ci).trim();
+//     let val = line.slice(ci + 1).trim();
+//     val = val.replace(/^["']|["']$/g, "").trim();
+//     if (val === "true") val = true;
+//     else if (val === "false") val = false;
+//     data[key] = val;
+//     i++;
+//   }
 
-  return { data, content };
-}
+//   return { data, content };
+// }
 
 // ═══════════════════════════════════════════════
 // UTILITIES
@@ -1746,7 +1748,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
 const FloatingShareBar = ({ title, dark }) => {
   const [copied, setCopied] = useState(false);
   const [instaCopied, setInstaCopied] = useState(false);
-  const url = window.location.href;
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
   const copyLink = async () => { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 2000); };
   const shareNative = async () => { if (navigator.share) { try { await navigator.share({ title, url }); } catch (_) { } } else { copyLink(); } };
@@ -2050,11 +2052,15 @@ const YouTubeEmbed = ({ id, caption }) => {
 
 export default function ReadBlog() {
   const { slug } = useParams();
-  const [content, setContent] = useState("");
-  const [fm, setFm] = useState({});
-  const [tocItems, setTocItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const loaderData = useLoaderData();
+  const initialPost = loaderData?.post;
+  const initialManifestPosts = loaderData?.manifest?.posts || [];
+
+  const [content, setContent] = useState(initialPost?.content || "");
+  const [fm, setFm] = useState(initialPost?.frontmatter || {});
+  const [tocItems, setTocItems] = useState(initialPost ? buildTOC(initialPost.content) : []);
+  const [loading, setLoading] = useState(!initialPost);
+  const [error, setError] = useState(loaderData ? !initialPost : false);
   const [bookmarked, setBookmarked] = useState(false);
   const [dark, toggleDark] = useDarkMode();
   const [fontSize, incFont, decFont] = useFontSize();
@@ -2062,15 +2068,17 @@ export default function ReadBlog() {
   const { activeId, sectionProgress } = useActiveTOC(tocItems);
   const showScrollTop = useScrollToTop();
   const [selTooltip, setSelTooltip] = useSelectionToolbar();
-  const [morePosts, setMorePosts] = useState([]);
-  const [allPosts, setAllPosts] = useState([]);
+  const [morePosts, setMorePosts] = useState(
+    initialManifestPosts.filter(p => p.slug && p.slug !== slug).slice(0, 6)
+  );
+  const [allPosts, setAllPosts] = useState(initialManifestPosts);
 
   const [readingMode, toggleReadingMode] = useReadingMode();
   const streak = useReadingStreak();
   const { highlights, save: saveHighlight } = useHighlights(slug);
   const readTime = useMemo(() => content ? estimateReadTime(content) : null, [content]);
   const finishTime = useFinishTime(readTime, progress);
-  const views = useViewCount(slug);
+const views = useViewCount(slug);
 
   const layoutRef = useRef(null);
   const sidebarScrollRef = useRef(null);
@@ -2098,7 +2106,7 @@ export default function ReadBlog() {
           throw new Error("BLOG_NOT_FOUND");
         }
 
-        const { data, content: body } = parseFrontmatter(raw);
+        const { data, content: body } = sharedParseFrontmatter(raw);
 
         // Strip HTML comments like <!-- ... -->
         const cleanBody = body.replace(/<!--[\s\S]*?-->/g, "").trim();

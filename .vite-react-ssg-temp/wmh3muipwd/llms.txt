@@ -1,0 +1,61 @@
+# Veeresh Bashetti — Personal Blog
+
+> A personal blog by Veeresh Bashetti — a 22-year-old software developer based in India, writing honestly about developer life, personal finance, money mistakes, life lessons, and what it feels like to build from zero without generational wealth.
+
+## Site
+
+- URL: https://veeresh-blog.vercel.app
+- Author: Veeresh Bashetti
+- Topics: Personal Finance, Developer Life, Life Lessons, Career, Mental Health & Money
+
+## Pages
+
+- [Home](https://veeresh-blog.vercel.app/): Landing page with featured and recent blog posts.
+- [Blog](https://veeresh-blog.vercel.app/blog): Full list of all published articles.
+- [Categories](https://veeresh-blog.vercel.app/categories): Posts grouped by topic category.
+- [About](https://veeresh-blog.vercel.app/about): Background on the author, Veeresh Bashetti.
+- [Privacy Policy](https://veeresh-blog.vercel.app/privacy-policy): Site privacy policy.
+- [Terms](https://veeresh-blog.vercel.app/terms): Terms of use.
+
+## Blog Posts
+
+### Life Lessons
+
+- [The Childhood Mistake That Changed My Life Forever](https://veeresh-blog.vercel.app/blog/childhood-mistake-changed-my-life)
+  At 14, the author stole a phone from a family that treated him like their own. Eight years later, the guilt, the forgiveness, and the lessons from that one decision still shape everything he does. (7 min read, Featured)
+
+- [I Spent ₹13,000 of My Scholarship Money on a CPU. It's Still Sitting in the Corner of My Room.](https://veeresh-blog.vercel.app/blog/13k-second-hand-cpu-mistake-in-20s)
+  The story of how buying a used CPU felt like a smart career investment — and how that single purchase taught more about money, guilt, and growing up than any finance book ever could. Tags: money mistakes, impulse buying, student finance India.
+
+- [What My First Freelance Project Failure Taught Me About Money, Trust, and Saying What You Don't Know](https://veeresh-blog.vercel.app/blog/first-project-failure-lessons)
+  A complete matrimony platform was built and the client loved it — until one wrong number given with full confidence ended everything. Lessons on client communication, web hosting, and honesty. (Published: 2026-03-10)
+
+- [Stop Comparing Yourself to People Online. It Is Costing You More Than You Think.](https://veeresh-blog.vercel.app/blog/stop-comparing-yourself-social-media)
+  The comparison habit doesn't just hurt confidence — it quietly drains money, time, and clarity about what one actually wants. A personal account and practical reframe. (9 min read, Published: 2026-03-25)
+
+### Personal Finance
+
+- [The Biggest Money Mistakes People Make in Their 20s (And Why We All Make Them)](https://veeresh-blog.vercel.app/blog/money-mistakes-20s)
+  These aren't just financial errors — they're emotional ones. Understanding the feelings behind them is the only thing that actually changes the pattern. (10 min read, Featured, Published: 2026-05-20)
+
+- [Why Suffering Without Generational Wealth Hits Different](https://veeresh-blog.vercel.app/blog/suffering-without-generational-wealth)
+  Most people are fighting a battle that started before they were born. An honest guide on what it really means to build wealth from absolute zero in India and what you can actually do about it. (8 min read, Featured)
+
+- [How I Finally Started Budgeting — And Why Everything I Tried Before Failed](https://veeresh-blog.vercel.app/blog/budgeting-for-beginners-india)
+  After downloading four apps and reading five systems, nothing stuck — until a budget stopped being treated as punishment and became permission. A student's honest guide to budgeting in India. (Published: 2026-04-15)
+
+- [The 30-Day Rule: The Only Spending Habit That Has Actually Changed My Life](https://veeresh-blog.vercel.app/blog/30-day-rule-impulse-buying)
+  Ten personal finance books didn't change spending as much as one uncomfortable waiting period. How the 30-day rule works psychologically and the tools that make it stick. (Published: 2026-04-22)
+
+### Career
+
+- [Startup Developer Salary Delayed 28 Days — My Life at 22 With -₹400 in the Bank](https://veeresh-blog.vercel.app/blog/22-year-old-startup-developer-life)
+  An unfiltered account of early startup developer life in India — delayed salary, financial pressure, self-doubt, and why the author still opened VS Code every single morning. (Published: 2026-05-27)
+
+- [I'm Building Someone Else's Dream — But My Mind is Already Designing My Own Kingdom](https://veeresh-blog.vercel.app/blog/working-for-others-but-born-to-build-my-own-kingdom)
+  Every morning shipping features for someone else's product. Every night staring at a blank doc with a pull toward something entirely his own. The internal life of a developer with entrepreneurial fire. (Published: 2026-06-01)
+
+### Developer Life
+
+- [The Developer Setup Trap: Why Better Hardware Won't Make You a Better Developer](https://veeresh-blog.vercel.app/blog/developer-setup-trap)
+  ₹13,000 of scholarship money wasted chasing a setup upgrade — the unfinished projects stayed unfinished, the absent habits stayed absent. What actually makes a developer better, and what gear is worth buying. (Published: 2026-04-01)

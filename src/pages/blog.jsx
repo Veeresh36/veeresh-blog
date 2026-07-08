@@ -618,7 +618,7 @@ const BookmarkIcon = ({ size = 20, filled = false }) => (
 // ════════════════════════════════════════════════════════════
 //  SAVED CONTEXT — global save state
 // ════════════════════════════════════════════════════════════
-import { useSaved } from "../routees/Approuter";
+import { useSaved } from "../App";
 // ════════════════════════════════════════════════════════════
 //  NAVBAR — with saved icon
 // ════════════════════════════════════════════════════════════
