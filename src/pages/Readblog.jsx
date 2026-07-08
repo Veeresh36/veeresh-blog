@@ -1101,9 +1101,14 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }
   }, []);
 
   const listRef = useRef(null);
+  const isFirstRun = useRef(true);
   const done = tocItems.filter(t => (sectionProgress[t.id] || 0) >= 95).length;
 
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     if (!activeId || !listRef.current) return;
     const activeElement = listRef.current.querySelector(`[data-id="${activeId}"]`);
     if (!activeElement) return;
@@ -1650,7 +1655,7 @@ const AffiliateLinksSidebar = ({ content, dark, border, fallbackIcon }) => {
   );
 };
 
-const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, tocItems, activeId, sectionProgress, progress }) => (
+const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, tocItems, activeId, sectionProgress, progress, slug }) => (
   <div ref={layoutRef} className="max-w-[1280px] mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 items-start justify-between relative">
     <main id="main-content" className="w-full lg:max-w-[calc(100%-446px)] min-w-0 flex-1">
       <article className="prose w-full" itemScope itemType="https://schema.org/BlogPosting">
@@ -2078,7 +2083,7 @@ export default function ReadBlog() {
   const { highlights, save: saveHighlight } = useHighlights(slug);
   const readTime = useMemo(() => content ? estimateReadTime(content) : null, [content]);
   const finishTime = useFinishTime(readTime, progress);
-const views = useViewCount(slug);
+  const views = useViewCount(slug);
 
   const layoutRef = useRef(null);
   const sidebarScrollRef = useRef(null);
@@ -2169,8 +2174,8 @@ const views = useViewCount(slug);
           50%       { opacity: 0.5; }
         }
 
-        html { scroll-behavior: smooth; }
-        html, body { min-height: 100%; }
+        html { scroll-behavior: smooth; overflow-anchor: none; }
+        html, body { min-height: 100%; overflow-anchor: none; }
 
         body {
           font-family: 'Outfit', sans-serif;
@@ -2309,7 +2314,7 @@ const views = useViewCount(slug);
         {fm.type === "pinterest" ? (
           <PinterestPostLayout
             fm={fm} content={content} dark={dark} fontSize={fontSize} border={border} layoutRef={layoutRef}
-            tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} progress={progress}
+            tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} progress={progress} slug={slug}
           />
         ) : (
           <div ref={layoutRef} className="max-w-[1280px] mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 items-start justify-between relative">
@@ -2382,7 +2387,7 @@ const views = useViewCount(slug);
               <div ref={sidebarScrollRef} className="no-scrollbar w-full pb-4">
 
                 <SidebarCard header="In This Post" dark={dark} delay={0}>
-                  <SmartTOC tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
+                  <SmartTOC key={slug} tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
                 </SidebarCard>
 
                 <AISummaryCard content={content} dark={dark} border={border} />

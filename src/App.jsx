@@ -21,6 +21,7 @@ export const SavedContext = createContext({
     toggleSave: () => {},
 })
 
+
 export const useSaved = () => useContext(SavedContext)
 
 function getInitialSaved() {
@@ -51,7 +52,11 @@ function ScrollToTop() {
     const { pathname } = useLocation()
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        const html = document.documentElement
+        const prevBehavior = html.style.scrollBehavior
+        html.style.scrollBehavior = "auto"
+        window.scrollTo(0, 0)
+        html.style.scrollBehavior = prevBehavior
     }, [pathname])
 
     return null
@@ -63,6 +68,15 @@ function ScrollToTop() {
 
 function App() {
     const [saved, setSaved] = useState(getInitialSaved)
+
+    // Prevent the browser from restoring old scroll positions on client-side
+    // navigation — this was fighting with our own scroll-to-top logic and
+    // causing pages to load already scrolled down.
+    useEffect(() => {
+        if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+            window.history.scrollRestoration = "manual"
+        }
+    }, [])
 
     const toggleSave = useCallback((slug) => {
         setSaved((prev) => {
