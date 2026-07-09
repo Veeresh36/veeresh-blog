@@ -1,5 +1,25 @@
-import fs from "node:fs";
-import path from "node:path";
+const isNode = typeof window === "undefined";
+
+let _fs, _path, _blogsDir;
+
+async function getNodeModules() {
+    if (!isNode) return null;
+    if (_fs && _path && _blogsDir) return { fs: _fs, path: _path, blogsDir: _blogsDir };
+
+    const fsMod = await import("node:fs");
+    const pathMod = await import("node:path");
+    const { fileURLToPath } = await import("node:url");
+
+    _fs = fsMod;
+    _path = pathMod;
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = _path.dirname(__filename);
+    // this file lives at src/utils/blogData.js → project root is two levels up
+    _blogsDir = _path.resolve(__dirname, "../../public/blogs");
+
+    return { fs: _fs, path: _path, blogsDir: _blogsDir };
+}
 
 export function parseFrontmatter(raw) {
     const normalized = raw.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
@@ -66,23 +86,57 @@ export function parseFrontmatter(raw) {
     return { data, content };
 }
 
-// Browser-safe: fetch from the public/ folder over HTTP instead of node:fs.
+// Isomorphic: reads from disk during SSG build (Node), fetches over HTTP in the browser.
 export async function loadPost(slug) {
-    const res = await fetch(`/blogs/${slug}.md`);
-    if (!res.ok) return null;
+    if (isNode) {
+        try {
+            const { fs, path, blogsDir } = await getNodeModules();
+            const filePath = path.join(blogsDir, `${slug}.md`);
+            if (!fs.existsSync(filePath)) return null;
+            const raw = fs.readFileSync(filePath, "utf-8");
+            const { data, content } = parseFrontmatter(raw);
+            const cleanBody = content.replace(/<!--[\s\S]*?-->/g, "").trim();
+            return { frontmatter: data, content: cleanBody };
+        } catch (err) {
+            console.error("loadPost (node) failed:", err);
+            return null;
+        }
+    }
 
-    const contentType = res.headers.get("content-type") || "";
-    if (contentType.includes("text/html")) return null;
+    // Browser: fetch from the public/ folder over HTTP
+    try {
+        const res = await fetch(`/blogs/${slug}.md`);
+        if (!res.ok) return null;
 
-    const raw = await res.text();
-    if (raw.trimStart().startsWith("<!doctype") || raw.trimStart().startsWith("<html")) return null;
+        const contentType = res.headers.get("content-type") || "";
+        if (contentType.includes("text/html")) return null;
 
-    const { data, content } = parseFrontmatter(raw);
-    const cleanBody = content.replace(/<!--[\s\S]*?-->/g, "").trim();
-    return { frontmatter: data, content: cleanBody };
+        const raw = await res.text();
+        if (raw.trimStart().startsWith("<!doctype") || raw.trimStart().startsWith("<html")) return null;
+
+        const { data, content } = parseFrontmatter(raw);
+        const cleanBody = content.replace(/<!--[\s\S]*?-->/g, "").trim();
+        return { frontmatter: data, content: cleanBody };
+    } catch {
+        return null;
+    }
 }
 
 export async function loadManifest() {
+    if (isNode) {
+        try {
+            const { fs, path, blogsDir } = await getNodeModules();
+            const filePath = path.join(blogsDir, "manifest.json");
+            if (!fs.existsSync(filePath)) return { posts: [] };
+            const raw = fs.readFileSync(filePath, "utf-8");
+            return JSON.parse(raw);
+        } catch (err) {
+            console.error("loadManifest (node) failed:", err);
+            return { posts: [] };
+        }
+    }
+
+    // Browser: fetch as before
     try {
         const res = await fetch("/blogs/manifest.json");
         if (!res.ok) return { posts: [] };

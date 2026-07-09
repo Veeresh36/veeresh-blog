@@ -13,7 +13,7 @@ const SITE = {
   tagline: "Writer & Curator",
   pinterestUrl: "https://in.pinterest.com/veereshbbashetti/",
   email: "veeresh.b.bashetti@gmail.com",
-  baseUrl: "https://veereshbashetti.com",
+  baseUrl: "https://www.veereshbashetti.com",
   locale: "en_IN",
 };
 
@@ -361,117 +361,94 @@ function useFadeIn(delay = 0) {
   return ref;
 }
 
-function useSEO(frontmatter, slug, content = "", morePosts = []) {
-  useEffect(() => {
-    if (!frontmatter.title) return;
+import { Head } from "vite-react-ssg";
 
-    document.title = frontmatter.seo?.title || `${frontmatter.title} — ${SITE.name}`;
+const BASE_URL = "https://www.veereshbashetti.com"; // match sitemap — use www consistently
 
-    const setMeta = (name, value, prop = false) => {
-      const attr = prop ? "property" : "name";
-      let el = document.querySelector(`meta[${attr}="${name}"]`);
-      if (!el) { el = document.createElement("meta"); el.setAttribute(attr, name); document.head.appendChild(el); }
-      el.setAttribute("content", value);
-    };
+function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
+  if (!fm.title) return null;
 
-    const desc = frontmatter.seo?.description || frontmatter.description || frontmatter.excerpt || "";
-    const url = `${SITE.baseUrl}/blog/${slug}`;
-    const img = frontmatter.image || "";
-    const words = content.trim().split(/\s+/).length;
-    const readMinutes = Math.max(1, Math.round(words / 238));
+  const title = fm.seo?.title || `${fm.title} — ${SITE.name}`;
+  const desc = fm.seo?.description || fm.description || fm.excerpt || "";
+  const url = `${BASE_URL}/blog/${slug}`;
+  const img = fm.image || "";
+  const words = content.trim().split(/\s+/).length;
+  const readMinutes = Math.max(1, Math.round(words / 238));
+  const tags = normalizeTags(fm.tags);
 
-    setMeta("description", desc);
-    if (frontmatter.seo?.keywords?.length) setMeta("keywords", frontmatter.seo.keywords.join(", "));
+  const currentIdx = morePosts.findIndex(p => p.slug === slug);
+  const prevPost = morePosts[currentIdx - 1];
+  const nextPost = morePosts[currentIdx + 1];
 
-    setMeta("og:type", "article", true);
-    setMeta("og:title", frontmatter.title, true);
-    setMeta("og:description", desc, true);
-    setMeta("og:url", url, true);
-    setMeta("og:site_name", SITE.name, true);
-    setMeta("og:locale", SITE.locale, true);
-    if (img) setMeta("og:image", img, true);
-    if (frontmatter.date) setMeta("article:published_time", frontmatter.date, true);
-    if (frontmatter.author) setMeta("article:author", frontmatter.author, true);
+  const graph = [
+    {
+      "@type": "BlogPosting",
+      "@id": `${url}#article`,
+      headline: fm.title,
+      description: desc,
+      image: img,
+      datePublished: fm.date || "",
+      dateModified: fm.date || "",
+      author: { "@type": "Person", name: fm.author || SITE.name, url: BASE_URL },
+      publisher: { "@type": "Person", name: SITE.name, url: BASE_URL },
+      keywords: tags.join(", "),
+      inLanguage: "en-IN",
+      url,
+      wordCount: words,
+      timeRequired: `PT${readMinutes}M`,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${BASE_URL}/blog` },
+        ...(fm.category ? [{ "@type": "ListItem", position: 3, name: fm.category, item: `${BASE_URL}/category/${fm.category.toLowerCase().replace(/\s+/g, "-")}` }] : []),
+        { "@type": "ListItem", position: fm.category ? 4 : 3, name: fm.title, item: url },
+      ],
+    },
+    ...(Array.isArray(fm.faqs) && fm.faqs.length ? [{
+      "@type": "FAQPage",
+      mainEntity: fm.faqs.map(({ q, a }) => ({
+        "@type": "Question", name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    }] : []),
+  ];
 
-    // article:tag needs one <meta> per tag — querySelector by attribute alone
-    // can't target a specific tag, so clear and rebuild the whole set each time.
-    document.querySelectorAll('meta[property="article:tag"]').forEach(el => el.remove());
-    normalizeTags(frontmatter.tags).forEach(t => {
-      const el = document.createElement("meta");
-      el.setAttribute("property", "article:tag");
-      el.setAttribute("content", t);
-      document.head.appendChild(el);
-    });
+  return (
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={desc} />
+      {fm.seo?.keywords?.length ? <meta name="keywords" content={fm.seo.keywords.join(", ")} /> : null}
 
-    setMeta("twitter:card", "summary_large_image");
-    setMeta("twitter:title", frontmatter.title);
-    setMeta("twitter:description", desc);
-    if (img) setMeta("twitter:image", img);
+      <link rel="canonical" href={url} />
 
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
-    canonical.href = url;
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={fm.title} />
+      <meta property="og:description" content={desc} />
+      <meta property="og:url" content={url} />
+      <meta property="og:site_name" content={SITE.name} />
+      <meta property="og:locale" content={SITE.locale} />
+      {img ? <meta property="og:image" content={img} /> : null}
+      {fm.date ? <meta property="article:published_time" content={fm.date} /> : null}
+      {fm.author ? <meta property="article:author" content={fm.author} /> : null}
+      {tags.map(t => <meta key={t} property="article:tag" content={t} />)}
 
-    ["prev", "next"].forEach(rel => {
-      const existing = document.querySelector(`link[rel="${rel}"]`);
-      if (existing) existing.remove();
-    });
-    const currentIdx = morePosts.findIndex(p => p.slug === slug);
-    if (morePosts[currentIdx - 1]) {
-      const el = document.createElement("link");
-      el.rel = "prev"; el.href = `${SITE.baseUrl}/blog/${morePosts[currentIdx - 1].slug}`;
-      document.head.appendChild(el);
-    }
-    if (morePosts[currentIdx + 1]) {
-      const el = document.createElement("link");
-      el.rel = "next"; el.href = `${SITE.baseUrl}/blog/${morePosts[currentIdx + 1].slug}`;
-      document.head.appendChild(el);
-    }
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fm.title} />
+      <meta name="twitter:description" content={desc} />
+      {img ? <meta name="twitter:image" content={img} /> : null}
 
-    const graph = [
-      {
-        "@type": "BlogPosting",
-        "@id": `${url}#article`,
-        headline: frontmatter.title,
-        description: desc,
-        image: img,
-        datePublished: frontmatter.date || "",
-        dateModified: frontmatter.date || "",
-        author: { "@type": "Person", name: frontmatter.author || SITE.name, url: SITE.baseUrl },
-        publisher: { "@type": "Person", name: SITE.name, url: SITE.baseUrl },
-        keywords: normalizeTags(frontmatter.tags).join(", "),
-        inLanguage: "en-IN",
-        url,
-        wordCount: words,
-        timeRequired: `PT${readMinutes}M`,
-      },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE.baseUrl },
-          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE.baseUrl}/#blog` },
-          ...(frontmatter.category ? [{ "@type": "ListItem", position: 3, name: frontmatter.category, item: `${SITE.baseUrl}/category/${frontmatter.category?.toLowerCase().replace(/\s+/g, "-")}` }] : []),
-          { "@type": "ListItem", position: frontmatter.category ? 4 : 3, name: frontmatter.title, item: url },
-        ],
-      },
-    ];
+      {prevPost ? <link rel="prev" href={`${BASE_URL}/blog/${prevPost.slug}`} /> : null}
+      {nextPost ? <link rel="next" href={`${BASE_URL}/blog/${nextPost.slug}`} /> : null}
 
-    if (Array.isArray(frontmatter.faqs) && frontmatter.faqs.length) {
-      graph.push({
-        "@type": "FAQPage",
-        mainEntity: frontmatter.faqs.map(({ q, a }) => ({
-          "@type": "Question",
-          name: q,
-          acceptedAnswer: { "@type": "Answer", text: a },
-        })),
-      });
-    }
-
-    let schema = document.getElementById("article-schema");
-    if (!schema) { schema = document.createElement("script"); schema.id = "article-schema"; schema.type = "application/ld+json"; document.head.appendChild(schema); }
-    schema.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
-  }, [frontmatter, slug, content, morePosts]);
+      <script type="application/ld+json">
+        {JSON.stringify({ "@context": "https://schema.org", "@graph": graph })}
+      </script>
+    </Head>
+  );
 }
+
 
 function useSyncedSidebarScroll(containerRef, layoutRef) {
   useEffect(() => {
@@ -1972,7 +1949,7 @@ function useViewCount(slug) {
 const YouTubeEmbed = ({ id, caption }) => {
   const [loaded, setLoaded] = useState(false);
   const [dark, setDark] = useState(
-    () => document.documentElement.getAttribute("data-theme") === "dark"
+    () => typeof document !== "undefined" && document.documentElement.getAttribute("data-theme") === "dark"
   );
 
   useEffect(() => {
@@ -2089,8 +2066,7 @@ export default function ReadBlog() {
   const sidebarScrollRef = useRef(null);
 
   useSyncedSidebarScroll(sidebarScrollRef, layoutRef);
-  useSEO(fm, slug, content, morePosts);
-
+  
   useEffect(() => {
     if (!slug) return;
     setLoading(true);
@@ -2160,6 +2136,7 @@ export default function ReadBlog() {
 
   return (
     <>
+      <SEOHead frontmatter={fm} slug={slug} content={content} morePosts={morePosts} />
       <style>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }

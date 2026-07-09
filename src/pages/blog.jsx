@@ -510,83 +510,76 @@ const GlobalStyles = () => (
 // ════════════════════════════════════════════════════════════
 //  SEO HEAD — comprehensive meta tags + JSON-LD
 // ════════════════════════════════════════════════════════════
+import { Head } from "vite-react-ssg";
+
+const SITE_URL = "https://www.veereshbashetti.com";
+
 const SEOHead = ({ posts = [] }) => {
-    useEffect(() => {
-        const SITE_URL = window.location.origin;
-        const SITE_NAME = "Veeresh Bashetti";
-        const DESCRIPTION = "Personal blog by Veeresh Bashetti — startup life, lifestyle, home decor, curated Pinterest picks, product reviews & ideas that inspire.";
-        const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+    const SITE_NAME = "Veeresh Bashetti";
+    const DESCRIPTION = "Personal blog by Veeresh Bashetti — startup life, lifestyle, home decor, curated Pinterest picks, product reviews & ideas that inspire.";
+    const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+    const TITLE = "Veeresh Bashetti — Blog & Pinterest Picks | Lifestyle, Products & Ideas";
 
-        document.title = "Veeresh Bashetti — Blog & Pinterest Picks | Lifestyle, Products & Ideas";
-
-        const metas = [
-            ["name", "description", DESCRIPTION],
-            ["name", "robots", "index, follow"],
-            ["name", "author", "Veeresh Bashetti"],
-            ["name", "keywords", "lifestyle blog, home decor, pinterest picks, startup life, productivity, mindset, product reviews, India blog"],
-            ["property", "og:title", `${SITE_NAME} — Blog & Pinterest Picks`],
-            ["property", "og:description", DESCRIPTION],
-            ["property", "og:type", "website"],
-            ["property", "og:url", SITE_URL],
-            ["property", "og:image", OG_IMAGE],
-            ["property", "og:site_name", SITE_NAME],
-            ["property", "og:locale", "en_IN"],
-            ["name", "twitter:card", "summary_large_image"],
-            ["name", "twitter:title", `${SITE_NAME} — Blog & Pinterest Picks`],
-            ["name", "twitter:description", DESCRIPTION],
-            ["name", "twitter:image", OG_IMAGE],
-            ["name", "twitter:creator", "@veereshbashetti"],
-        ];
-
-        metas.forEach(([attr, name, content]) => {
-            let el = document.querySelector(`meta[${attr}="${name}"]`);
-            if (!el) { el = document.createElement("meta"); el.setAttribute(attr, name); document.head.appendChild(el); }
-            el.setAttribute("content", content);
-        });
-
-        // Canonical
-        let canonical = document.querySelector("link[rel='canonical']");
-        if (!canonical) { canonical = document.createElement("link"); canonical.setAttribute("rel", "canonical"); document.head.appendChild(canonical); }
-        canonical.setAttribute("href", SITE_URL);
-
-        // JSON-LD — Person + Blog
-        const jsonLd = {
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "Person",
-                    "@id": `${SITE_URL}/#person`,
-                    "name": "Veeresh Bashetti",
-                    "url": SITE_URL,
-                    "sameAs": ["https://in.pinterest.com/veereshbbashetti/"],
-                    "jobTitle": "Writer & Content Creator",
-                    "description": DESCRIPTION,
-                },
-                {
-                    "@type": "Blog",
-                    "@id": `${SITE_URL}/#blog`,
-                    "name": SITE_NAME,
-                    "url": SITE_URL,
-                    "description": DESCRIPTION,
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": `${SITE_URL}/#person`,
+                "name": "Veeresh Bashetti",
+                "url": SITE_URL,
+                "sameAs": ["https://in.pinterest.com/veereshbbashetti/"],
+                "jobTitle": "Writer & Content Creator",
+                "description": DESCRIPTION,
+            },
+            {
+                "@type": "Blog",
+                "@id": `${SITE_URL}/#blog`,
+                "name": SITE_NAME,
+                "url": SITE_URL,
+                "description": DESCRIPTION,
+                "author": { "@id": `${SITE_URL}/#person` },
+                "blogPost": posts.slice(0, 10).map(p => ({
+                    "@type": "BlogPosting",
+                    "headline": p.title,
+                    "description": p.excerpt,
+                    "datePublished": p.date,
+                    "url": `${SITE_URL}/blog/${p.slug}`,
                     "author": { "@id": `${SITE_URL}/#person` },
-                    "blogPost": posts.slice(0, 10).map(p => ({
-                        "@type": "BlogPosting",
-                        "headline": p.title,
-                        "description": p.excerpt,
-                        "datePublished": p.date,
-                        "url": `${SITE_URL}/blog/${p.slug}`,
-                        "author": { "@id": `${SITE_URL}/#person` },
-                    })),
-                },
-            ],
-        };
+                })),
+            },
+        ],
+    };
 
-        let ldEl = document.querySelector('script[data-schema="blog"]');
-        if (!ldEl) { ldEl = document.createElement("script"); ldEl.type = "application/ld+json"; ldEl.dataset.schema = "blog"; document.head.appendChild(ldEl); }
-        ldEl.textContent = JSON.stringify(jsonLd);
-    }, [posts]);
+    return (
+        <Head>
+            <title>{TITLE}</title>
+            <meta name="description" content={DESCRIPTION} />
+            <meta name="robots" content="index, follow" />
+            <meta name="author" content="Veeresh Bashetti" />
+            <meta name="keywords" content="lifestyle blog, home decor, pinterest picks, startup life, productivity, mindset, product reviews, India blog" />
 
-    return null;
+            <link rel="canonical" href={SITE_URL} />
+
+            <meta property="og:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} />
+            <meta property="og:description" content={DESCRIPTION} />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={SITE_URL} />
+            <meta property="og:image" content={OG_IMAGE} />
+            <meta property="og:site_name" content={SITE_NAME} />
+            <meta property="og:locale" content="en_IN" />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} />
+            <meta name="twitter:description" content={DESCRIPTION} />
+            <meta name="twitter:image" content={OG_IMAGE} />
+            <meta name="twitter:creator" content="@veereshbashetti" />
+
+            <script type="application/ld+json">
+                {JSON.stringify(jsonLd)}
+            </script>
+        </Head>
+    );
 };
 
 // ════════════════════════════════════════════════════════════
