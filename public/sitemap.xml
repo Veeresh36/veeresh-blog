@@ -4,42 +4,42 @@
 
     <url>
         <loc>https://www.veereshbashetti.com/</loc>
-        <lastmod>2026-07-09</lastmod>
+        <lastmod>2026-07-12</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
         <loc>https://www.veereshbashetti.com/blog</loc>
-        <lastmod>2026-07-09</lastmod>
+        <lastmod>2026-07-12</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
         <loc>https://www.veereshbashetti.com/categories</loc>
-        <lastmod>2026-07-09</lastmod>
+        <lastmod>2026-07-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://www.veereshbashetti.com/about</loc>
-        <lastmod>2026-07-09</lastmod>
+        <lastmod>2026-07-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
 
     <url>
         <loc>https://www.veereshbashetti.com/privacy-policy</loc>
-        <lastmod>2026-07-09</lastmod>
+        <lastmod>2026-07-12</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
 
     <url>
         <loc>https://www.veereshbashetti.com/terms</loc>
-        <lastmod>2026-07-09</lastmod>
+        <lastmod>2026-07-12</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -124,6 +124,13 @@
     <url>
         <loc>https://www.veereshbashetti.com/blog/http-query-method-explained</loc>
         <lastmod>2026-07-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.veereshbashetti.com/blog/learn-to-say-no-workplace-boundaries</loc>
+        <lastmod>2026-07-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>

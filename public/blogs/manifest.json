@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "learn-to-say-no-workplace-boundaries",
+      "title": "Not Saying 'No' Is Quietly Making You Poor — What My Friend's Internship Letter Taught Me",
+      "tag": "Career",
+      "category": "Career",
+      "excerpt": "He came to collect one letter with one request. He left having attended a meeting nobody asked him to attend — because saying yes felt safer than saying no. This is what that hour taught me.",
+      "emoji": "🚫",
+      "gradient": "from-[#1C1420] to-[#3A2B45]",
+      "meta": "9 min read · 12 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/learn-to-say-no-workplace-boundaries.webp"
+    },
+    {
       "slug": "fear-makes-you-live-not-succeed",
       "title": "Fear Makes You Live, But It Won't Make You Succeed",
       "tag": "Life Lessons",
