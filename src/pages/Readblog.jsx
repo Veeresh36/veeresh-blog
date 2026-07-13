@@ -810,6 +810,39 @@ const AdsterraBanner = ({ adKey, width, height, label = true }) => {
   );
 };
 
+const AdsterraNative = ({ adKey, label = true }) => {
+  const ref = useRef(null);
+  const [consent, setConsent] = useState(hasConsent());
+
+  useEffect(() => {
+    const onChange = (e) => setConsent(e.detail === "accepted");
+    window.addEventListener("cookieConsentChanged", onChange);
+    return () => window.removeEventListener("cookieConsentChanged", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!consent || !ref.current || !adKey) return;
+    ref.current.innerHTML = "";
+    const container = document.createElement("div");
+    container.id = `container-${adKey}`;
+    const script = document.createElement("script");
+    script.async = true;
+    script.setAttribute("data-cfasync", "false");
+    script.src = `https://pl30348137.effectivecpmnetwork.com/${adKey}/invoke.js`;
+    ref.current.appendChild(container);
+    ref.current.appendChild(script);
+  }, [adKey, consent]);
+
+  if (!consent || !adKey) return null;
+
+  return (
+    <div className="ad-wrapper overflow-hidden clear-both my-8 text-center">
+      {label && <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 mb-1.5 font-medium">— Advertisement —</span>}
+      <div ref={ref} style={{ minHeight: 250, width: "100%", display: "flex", justifyContent: "center" }} />
+    </div>
+  );
+};
+
 const ProgressBar = ({ progress }) => (
   <div className="fixed top-[68px] left-0 right-0 h-[3px] z-[99] bg-neutral-200 dark:bg-neutral-800" aria-hidden="true">
     <div className="h-full bg-gradient-to-r from-red-500 to-pink-500 transition-[width] duration-75 ease-linear" style={{ width: `${progress}%` }} />
@@ -1706,7 +1739,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
           return (
             <>
               <ReactMarkdown components={mdComponents}>{firstHalf}</ReactMarkdown>
-              <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_NATIVE} width={300} height={250} />
+              <AdsterraNative adKey={import.meta.env.VITE_ADSTERRA_NATIVE} />
               <ReactMarkdown components={mdComponents}>{secondHalf}</ReactMarkdown>
             </>
           );
