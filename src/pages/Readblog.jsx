@@ -778,6 +778,38 @@ const BookmarkIcon = ({ filled }) => filled
 // COMPONENTS
 // ═══════════════════════════════════════════════
 
+const AdsterraBanner = ({ adKey, width, height, label = true }) => {
+  const ref = useRef(null);
+  const [consent, setConsent] = useState(hasConsent());
+
+  useEffect(() => {
+    const onChange = (e) => setConsent(e.detail === "accepted");
+    window.addEventListener("cookieConsentChanged", onChange);
+    return () => window.removeEventListener("cookieConsentChanged", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!consent || !ref.current || !adKey) return;
+    ref.current.innerHTML = "";
+    const conf = document.createElement("script");
+    conf.text = `atOptions = { 'key':'${adKey}','format':'iframe','height':${height},'width':${width},'params':{} };`;
+    const invoke = document.createElement("script");
+    invoke.src = `//www.topcreativeformat.com/${adKey}/invoke.js`;
+    invoke.async = true;
+    ref.current.appendChild(conf);
+    ref.current.appendChild(invoke);
+  }, [adKey, width, height, consent]);
+
+  if (!consent || !adKey) return null;
+
+  return (
+    <div className="ad-wrapper overflow-hidden clear-both my-8 text-center">
+      {label && <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 mb-1.5 font-medium">— Advertisement —</span>}
+      <div ref={ref} style={{ minHeight: height, width: "100%", display: "flex", justifyContent: "center" }} />
+    </div>
+  );
+};
+
 const ProgressBar = ({ progress }) => (
   <div className="fixed top-[68px] left-0 right-0 h-[3px] z-[99] bg-neutral-200 dark:bg-neutral-800" aria-hidden="true">
     <div className="h-full bg-gradient-to-r from-red-500 to-pink-500 transition-[width] duration-75 ease-linear" style={{ width: `${progress}%` }} />
@@ -1674,7 +1706,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
           return (
             <>
               <ReactMarkdown components={mdComponents}>{firstHalf}</ReactMarkdown>
-              <InArticleAd />
+              <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_NATIVE} width={300} height={250} />
               <ReactMarkdown components={mdComponents}>{secondHalf}</ReactMarkdown>
             </>
           );
@@ -1697,7 +1729,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
 
       <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
 
-      <CarbonAdUnit slot="3170555405" style={{ minHeight: "250px" }} />
+      <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_300x250} width={300} height={250} />
 
       {Array.isArray(fm.products) && fm.products.length > 0 && (
         <div className="rounded-2xl overflow-hidden" style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
@@ -2066,7 +2098,7 @@ export default function ReadBlog() {
   const sidebarScrollRef = useRef(null);
 
   useSyncedSidebarScroll(sidebarScrollRef, layoutRef);
-  
+
   useEffect(() => {
     if (!slug) return;
     setLoading(true);
@@ -2285,7 +2317,7 @@ export default function ReadBlog() {
 
 
         <div className="max-w-[1280px] mx-auto px-6 mb-8">
-          <CarbonAdUnit slot="3170555405" format="horizontal" />
+          <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_728x90} width={728} height={90} />
         </div>
 
         {fm.type === "pinterest" ? (
@@ -2349,7 +2381,7 @@ export default function ReadBlog() {
                   {content}
                 </ReactMarkdown>
 
-                <InArticleAd />
+                <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_NATIVE} width={300} height={250} />
 
                 <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_ANON_KEY} />
 
@@ -2372,7 +2404,7 @@ export default function ReadBlog() {
                 <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
 
 
-                <CarbonAdUnit slot="3170555405" style={{ minHeight: "250px" }} />
+                <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_300x250} width={300} height={250} />
 
                 <HighlightsPanel slug={slug} dark={dark} border={border} />
 
@@ -2397,9 +2429,8 @@ export default function ReadBlog() {
         <CommentSection slug={slug} dark={dark} />
 
         <div className="max-w-[1280px] mx-auto px-6 mb-4">
-          <CarbonAdUnit slot="3170555405" format="horizontal" />
+          <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_728x90} width={728} height={90} />
         </div>
-
         {/* RELATED */}
         <section className="max-w-[1280px] mx-auto px-6 pt-16 pb-24 border-t z-30 relative" style={{ borderColor: border, background: bg }}>
           <div className="mb-8">
