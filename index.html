@@ -42,6 +42,12 @@
       crossorigin="anonymous"
     ></script>
 
+    <script
+      async
+      custom-element="amp-auto-ads"
+      src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
+    ></script>
+
     <!-- Google tag (Google Analytics + Google Ads) -->
     <script
       async
@@ -130,8 +136,13 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
+
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-4423608769058806">
+    </amp-auto-ads>
+
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
