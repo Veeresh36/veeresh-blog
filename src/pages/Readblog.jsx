@@ -21,159 +21,21 @@ const TOC_EMOJIS = ["📌", "💡", "📊", "🔥", "🧠", "✨", "🚀", "🎯
 const REACTIONS = ["❤️", "🔥", "💡", "🤔"];
 const REACTION_LABELS = { "❤️": "Love", "🔥": "Fire", "💡": "Insightful", "🤔": "Thoughtful" };
 
+// ═══════════════════════════════════════════════
+// GOOGLE ADSENSE CONFIG
+// ═══════════════════════════════════════════════
+
 const ADSENSE_CLIENT = "ca-pub-4423608769058806";
 
-// ═══════════════════════════════════════════════
-// GOOGLE ADSENSE
-// ═══════════════════════════════════════════════
-
-const CarbonAdUnit = ({ slot, format = "auto", responsive = "true", style = {}, className = "" }) => {
-  const [consent, setConsent] = useState(hasConsent());
-
-  useEffect(() => {
-    const onChange = (e) => setConsent(e.detail === "accepted");
-    window.addEventListener("cookieConsentChanged", onChange);
-    return () => window.removeEventListener("cookieConsentChanged", onChange);
-  }, []);
-
-  useEffect(() => {
-    if (!consent) return;
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error("AdSense error:", e.message);
-    }
-  }, [slot, consent]);
-
-  if (!consent) return null;
-
-  return (
-    <div className={`ad-wrapper overflow-hidden clear-both my-8 text-center ${className}`}>
-      <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500 mb-1.5 font-medium">
-        — Advertisement —
-      </span>
-      <ins
-        className="adsbygoogle block rounded-xl"
-        style={{
-          display: "block",
-          width: "100%",
-          minHeight: "280px",
-          ...style,
-        }}
-        data-ad-client={ADSENSE_CLIENT}
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive={responsive}
-      />
-    </div>
-  );
+const AD_SLOTS = {
+  inArticle: "3083346955", // "horizontal" — In-article unit
+  sidebar: "3170555405",   // "side bar ads" — Display unit
+  // NOTE: reusing the sidebar Display unit for header/footer banners below.
+  // Recommend creating two dedicated Display units in AdSense ("Header banner",
+  // "Footer banner") and swapping the IDs in here once you have them.
+  headerBanner: "3170555405",
+  footerBanner: "3170555405",
 };
-
-const InArticleAd = () => {
-  const [consent, setConsent] = useState(hasConsent());
-
-  useEffect(() => {
-    const onChange = (e) => setConsent(e.detail === "accepted");
-    window.addEventListener("cookieConsentChanged", onChange);
-    return () => window.removeEventListener("cookieConsentChanged", onChange);
-  }, []);
-
-  useEffect(() => {
-    if (!consent) return;
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) { /* silent */ }
-  }, [consent]);
-
-  if (!consent) return null;
-
-  return (
-    <div className="my-10">
-      <span className="block text-center text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 mb-2">
-        — Advertisement —
-      </span>
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block", textAlign: "center" }}
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-        data-ad-client="ca-pub-4423608769058806"
-        data-ad-slot="3083346955"
-      />
-    </div>
-  );
-};
-
-// ═══════════════════════════════════════════════
-// FRONTMATTER PARSER
-// ═══════════════════════════════════════════════
-
-// function parseFrontmatter(raw) {
-//   const normalized = raw.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-//   const match = normalized.match(/^\s*---\s*\n([\s\S]*?)\n---\s*/);
-//   if (!match) return { data: {}, content: normalized };
-
-//   const yaml = match[1];
-//   const content = normalized.slice(match[0].length).trim();
-//   const data = {};
-//   const lines = yaml.split("\n");
-//   let i = 0;
-
-//   while (i < lines.length) {
-//     const line = lines[i];
-//     const colonIdx = line.search(/:\s/);
-//     if (colonIdx === -1 && !line.match(/^[\w-]+:\s*$/)) { i++; continue; }
-
-//     const keyMatch = line.match(/^([\w-]+):\s*$/);
-//     if (keyMatch) {
-//       const key = keyMatch[1];
-//       i++;
-//       const items = [];
-//       while (i < lines.length) {
-//         const itemLine = lines[i];
-//         if (itemLine.match(/^[\w-]+:\s/) || itemLine.match(/^[\w-]+:\s*$/)) break;
-//         if (itemLine.match(/^\s{0,4}-\s/)) {
-//           const firstVal = itemLine.replace(/^\s*-\s*/, "").trim();
-//           // Only treat as object if it looks like "key: value" with a short key (no spaces before colon)
-//           const isObjectEntry = firstVal.match(/^[\w-]+:\s/);
-
-//           if (isObjectEntry) {
-//             const obj = {};
-//             const fc = firstVal.indexOf(":");
-//             obj[firstVal.slice(0, fc).trim()] = firstVal.slice(fc + 1).trim().replace(/^["']|["']$/g, "");
-//             i++;
-//             while (i < lines.length) {
-//               const sub = lines[i];
-//               if (!sub.match(/^\s{4,}[\w-]+:\s/) && !sub.match(/^\s{2,}[\w-]+:\s/)) break;
-//               const sc = sub.indexOf(":");
-//               const subKey = sub.slice(0, sc).trim();
-//               const subVal = sub.slice(sc + 1).trim().replace(/^["']|["']$/g, "");
-//               obj[subKey] = subVal;
-//               i++;
-//             }
-//             items.push(obj);
-//           } else {
-//             items.push(firstVal.replace(/^["']|["']$/g, ""));
-//             i++;
-//           }
-//         } else { i++; }
-//       }
-//       data[key] = items.length ? items : "";
-//       continue;
-//     }
-
-//     const ci = line.indexOf(":");
-//     const key = line.slice(0, ci).trim();
-//     let val = line.slice(ci + 1).trim();
-//     val = val.replace(/^["']|["']$/g, "").trim();
-//     if (val === "true") val = true;
-//     else if (val === "false") val = false;
-//     data[key] = val;
-//     i++;
-//   }
-
-//   return { data, content };
-// }
 
 // ═══════════════════════════════════════════════
 // UTILITIES
@@ -270,13 +132,22 @@ function useActiveTOC(tocItems) {
 
     const calc = () => {
       const ids = tocItems.map(t => t.id);
+
+      // Anchor the final section's end to the article itself, not the whole page
+      const articleEl = document.querySelector(".prose");
+      const articleBottom = articleEl
+        ? articleEl.getBoundingClientRect().bottom + window.scrollY
+        : document.documentElement.scrollHeight;
+
       const result = {};
       ids.forEach((id, i) => {
         const el = document.getElementById(id);
         if (!el) return;
         const next = i < ids.length - 1 ? document.getElementById(ids[i + 1]) : null;
         const top = el.getBoundingClientRect().top + window.scrollY;
-        const bottom = next ? next.getBoundingClientRect().top + window.scrollY : document.documentElement.scrollHeight;
+        const bottom = next
+          ? next.getBoundingClientRect().top + window.scrollY
+          : articleBottom; // ← was document.documentElement.scrollHeight
         const scrolled = window.scrollY + window.innerHeight * 0.2 - top;
         result[id] = Math.min(100, Math.max(0, (scrolled / (bottom - top)) * 100));
       });
@@ -441,6 +312,12 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
 
       {prevPost ? <link rel="prev" href={`${BASE_URL}/blog/${prevPost.slug}`} /> : null}
       {nextPost ? <link rel="next" href={`${BASE_URL}/blog/${nextPost.slug}`} /> : null}
+
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+        crossOrigin="anonymous"
+      ></script>
 
       <script type="application/ld+json">
         {JSON.stringify({ "@context": "https://schema.org", "@graph": graph })}
@@ -778,71 +655,6 @@ const BookmarkIcon = ({ filled }) => filled
 // COMPONENTS
 // ═══════════════════════════════════════════════
 
-const AdsterraBanner = ({ adKey, width, height, label = true }) => {
-  const ref = useRef(null);
-  const [consent, setConsent] = useState(hasConsent());
-
-  useEffect(() => {
-    const onChange = (e) => setConsent(e.detail === "accepted");
-    window.addEventListener("cookieConsentChanged", onChange);
-    return () => window.removeEventListener("cookieConsentChanged", onChange);
-  }, []);
-
-  useEffect(() => {
-    if (!consent || !ref.current || !adKey) return;
-    ref.current.innerHTML = "";
-    const conf = document.createElement("script");
-    conf.text = `atOptions = { 'key':'${adKey}','format':'iframe','height':${height},'width':${width},'params':{} };`;
-    const invoke = document.createElement("script");
-    invoke.src = `//www.topcreativeformat.com/${adKey}/invoke.js`;
-    invoke.async = true;
-    ref.current.appendChild(conf);
-    ref.current.appendChild(invoke);
-  }, [adKey, width, height, consent]);
-
-  if (!consent || !adKey) return null;
-
-  return (
-    <div className="ad-wrapper overflow-hidden clear-both my-8 text-center">
-      {label && <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 mb-1.5 font-medium">— Advertisement —</span>}
-      <div ref={ref} style={{ minHeight: height, width: "100%", display: "flex", justifyContent: "center" }} />
-    </div>
-  );
-};
-
-const AdsterraNative = ({ adKey, label = true }) => {
-  const ref = useRef(null);
-  const [consent, setConsent] = useState(hasConsent());
-
-  useEffect(() => {
-    const onChange = (e) => setConsent(e.detail === "accepted");
-    window.addEventListener("cookieConsentChanged", onChange);
-    return () => window.removeEventListener("cookieConsentChanged", onChange);
-  }, []);
-
-  useEffect(() => {
-    if (!consent || !ref.current || !adKey) return;
-    ref.current.innerHTML = "";
-    const container = document.createElement("div");
-    container.id = `container-${adKey}`;
-    const script = document.createElement("script");
-    script.async = true;
-    script.setAttribute("data-cfasync", "false");
-    script.src = `https://pl30348137.effectivecpmnetwork.com/${adKey}/invoke.js`;
-    ref.current.appendChild(container);
-    ref.current.appendChild(script);
-  }, [adKey, consent]);
-
-  if (!consent || !adKey) return null;
-
-  return (
-    <div className="ad-wrapper overflow-hidden clear-both my-8 text-center">
-      {label && <span className="block text-[0.58rem] tracking-[0.2em] uppercase text-neutral-400 mb-1.5 font-medium">— Advertisement —</span>}
-      <div ref={ref} style={{ minHeight: 250, width: "100%", display: "flex", justifyContent: "center" }} />
-    </div>
-  );
-};
-
 const ProgressBar = ({ progress }) => (
   <div className="fixed top-[68px] left-0 right-0 h-[3px] z-[99] bg-neutral-200 dark:bg-neutral-800" aria-hidden="true">
     <div className="h-full bg-gradient-to-r from-red-500 to-pink-500 transition-[width] duration-75 ease-linear" style={{ width: `${progress}%` }} />
@@ -1086,21 +898,101 @@ const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime,
   );
 };
 
-const HeroImage = ({ src, alt, pinterest }) => {
+const HeroImage = ({ src, alt, dark }) => {
   if (!src) return null;
   return (
     <div className="max-w-[1280px] mx-auto px-6 mb-14">
-      <div className="rounded-2xl overflow-hidden max-w-[1200px] mx-auto aspect-[16/9]">
+      <div
+        className="rounded-2xl overflow-hidden max-w-[1200px] mx-auto aspect-[16/9] flex items-center justify-center"
+        style={{ background: dark ? "#1A1612" : "#F0EBE3" }}
+      >
         <img
           src={src}
           alt={alt || "Article hero"}
-          className={`w-full block ${pinterest ? "h-full object-cover" : "h-auto"}`}
-          loading="eager" decoding="async"
-          fetchPriority="high" />
+          width={1200}
+          height={675}
+          className="w-full h-full object-contain block"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
       </div>
     </div>
   );
 };
+// ═══════════════════════════════════════════════
+// AD SLOTS — Google AdSense
+// ═══════════════════════════════════════════════
+
+// Legacy placeholder — kept only as a fallback if a slot ID is ever missing.
+const AdSlot = ({ dark, label = "Ad Space", height = 250, className = "" }) => (
+  <div
+    className={`ad-wrapper overflow-hidden clear-both my-8 text-center flex items-center justify-center rounded-xl ${className}`}
+    style={{
+      minHeight: height,
+      width: "100%",
+      border: `1px dashed ${dark ? "rgba(255,255,255,0.15)" : "rgba(26,22,18,0.15)"}`,
+      background: dark ? "rgba(255,255,255,0.02)" : "#F5F1EB",
+    }}
+  >
+    <span
+      className="text-[0.68rem] tracking-[0.2em] uppercase font-medium"
+      style={{ color: dark ? "rgba(250,248,244,0.3)" : "#B4A99C" }}
+    >
+      {label}
+    </span>
+  </div>
+);
+
+/**
+ * Real Google AdSense ad unit.
+ * - format="fluid" + layout="in-article" -> use for the "In-article" ad unit (slot 3083346955)
+ * - format="auto" (responsive) -> use for the "Display" ad unit (slot 3170555405), sidebar/banners
+ */
+const GoogleAd = ({
+  slot,
+  dark,
+  format = "auto",
+  layout,
+  responsive = true,
+  height = 250,
+  label,
+  className = "",
+}) => {
+  const pushedRef = useRef(false);
+  const insRef = useRef(null);
+
+  useEffect(() => {
+    if (pushedRef.current) return;
+    if (typeof window === "undefined") return;
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      pushedRef.current = true;
+    } catch (e) {
+      console.error("AdSense push failed:", e);
+    }
+  }, []);
+
+  if (!slot) return <AdSlot dark={dark} height={height} label={label || "Ad Space"} className={className} />;
+
+  return (
+    <div
+      className={`ad-wrapper overflow-hidden clear-both my-8 ${className}`}
+      style={{ minHeight: height, width: "100%" }}
+    >
+      <ins
+        ref={insRef}
+        className="adsbygoogle"
+        style={{ display: "block", textAlign: "center" }}
+        data-ad-client={ADSENSE_CLIENT}
+        data-ad-slot={slot}
+        {...(layout ? { "data-ad-layout": layout } : { "data-ad-format": format })}
+        data-full-width-responsive={responsive ? "true" : "false"}
+      />
+    </div>
+  );
+};
+
 const SelectionToolbar = ({ tooltip, onClose, dark, onHighlight }) => {
   const [copied, setCopied] = useState(false);
   const [highlighted, setHighlighted] = useState(false);
@@ -1739,7 +1631,10 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
           return (
             <>
               <ReactMarkdown components={mdComponents}>{firstHalf}</ReactMarkdown>
-              <AdsterraNative adKey={import.meta.env.VITE_ADSTERRA_NATIVE} />
+
+              {/* mid-article ad — In-article AdSense unit */}
+              <GoogleAd dark={dark} slot={AD_SLOTS.inArticle} layout="in-article" format="fluid" height={250} label="Ad Space — In-Article" />
+
               <ReactMarkdown components={mdComponents}>{secondHalf}</ReactMarkdown>
             </>
           );
@@ -1760,9 +1655,9 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
         <SmartTOC tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
       </SidebarCard>
 
-      <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
+      <GoogleAd dark={dark} slot={AD_SLOTS.sidebar} format="auto" height={250} label="Ad Space — 300×250" />
 
-      <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_300x250} width={300} height={250} />
+      <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
 
       {Array.isArray(fm.products) && fm.products.length > 0 && (
         <div className="rounded-2xl overflow-hidden" style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
@@ -2348,9 +2243,8 @@ export default function ReadBlog() {
 
         <HeroImage src={fm.image} alt={fm.imageAlt || fm.title} pinterest={fm.type === "pinterest"} />
 
-
         <div className="max-w-[1280px] mx-auto px-6 mb-8">
-          <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_728x90} width={728} height={90} />
+          <GoogleAd dark={dark} slot={AD_SLOTS.headerBanner} format="horizontal" height={90} label="Ad Space — 728×90" />
         </div>
 
         {fm.type === "pinterest" ? (
@@ -2370,8 +2264,13 @@ export default function ReadBlog() {
 
                 <KeyTakeawaysBox takeaways={fm.takeaways} dark={dark} />
 
-                <ReactMarkdown
-                  components={{
+                {(() => {
+                  const paragraphs = content.split("\n\n");
+                  const mid = Math.floor(paragraphs.length / 2);
+                  const firstHalf = paragraphs.slice(0, mid).join("\n\n");
+                  const secondHalf = paragraphs.slice(mid).join("\n\n");
+
+                  const mdComponents = {
                     h2: ({ children, ...props }) => {
                       const id = slugToId(String(children).replace(/\s+/g, " ").trim());
                       return <h2 id={id} {...props}>{children}</h2>;
@@ -2381,8 +2280,6 @@ export default function ReadBlog() {
                       return <h3 id={id} {...props}>{children}</h3>;
                     },
                     a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
-
-                    // ← ADD THIS BLOCK
                     p: ({ children }) => {
                       const flatten = (node) => {
                         if (node === null || node === undefined) return "";
@@ -2393,28 +2290,24 @@ export default function ReadBlog() {
                         return "";
                       };
                       const text = flatten(children).trim();
-
-                      const youtubeMatch = text.match(
-                        /^::youtube\[([a-zA-Z0-9_-]{11})\](?:\{caption="([^"]*)"\})?$/
-                      );
-
-                      if (youtubeMatch) {
-                        return (
-                          <YouTubeEmbed
-                            id={youtubeMatch[1]}
-                            caption={youtubeMatch[2] || ""}
-                          />
-                        );
-                      }
-
+                      const youtubeMatch = text.match(/^::youtube\[([a-zA-Z0-9_-]{11})\](?:\{caption="([^"]*)"\})?$/);
+                      if (youtubeMatch) return <YouTubeEmbed id={youtubeMatch[1]} caption={youtubeMatch[2] || ""} />;
                       return <p>{children}</p>;
                     },
-                  }}
-                >
-                  {content}
-                </ReactMarkdown>
+                  };
 
-                <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_NATIVE} width={300} height={250} />
+                  return (
+                    <>
+                      <ReactMarkdown components={mdComponents}>{firstHalf}</ReactMarkdown>
+
+                      {/* mid-article ad break — this is the one readers actually scroll past */}
+                      <GoogleAd dark={dark} slot={AD_SLOTS.inArticle} layout="in-article" format="fluid" height={250} label="Ad Space — In-Article" />
+
+                      <ReactMarkdown components={mdComponents}>{secondHalf}</ReactMarkdown>
+                    </>
+                  );
+                })()}
+
 
                 <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_ANON_KEY} />
 
@@ -2432,12 +2325,12 @@ export default function ReadBlog() {
                   <SmartTOC key={slug} tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
                 </SidebarCard>
 
+                <GoogleAd dark={dark} slot={AD_SLOTS.sidebar} format="auto" height={250} label="Ad Space — 300×250" />
+
                 <AISummaryCard content={content} dark={dark} border={border} />
 
                 <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
 
-
-                <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_300x250} width={300} height={250} />
 
                 <HighlightsPanel slug={slug} dark={dark} border={border} />
 
@@ -2462,8 +2355,9 @@ export default function ReadBlog() {
         <CommentSection slug={slug} dark={dark} />
 
         <div className="max-w-[1280px] mx-auto px-6 mb-4">
-          <AdsterraBanner adKey={import.meta.env.VITE_ADSTERRA_728x90} width={728} height={90} />
+          <GoogleAd dark={dark} slot={AD_SLOTS.footerBanner} format="horizontal" height={90} label="Ad Space — 728×90" />
         </div>
+
         {/* RELATED */}
         <section className="max-w-[1280px] mx-auto px-6 pt-16 pb-24 border-t z-30 relative" style={{ borderColor: border, background: bg }}>
           <div className="mb-8">
