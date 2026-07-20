@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "are-ai-jobs-in-demand-2026",
+      "title": "Are AI Jobs in Demand in 2026? Here's What the Actual Hiring Data Says",
+      "tag": "career",
+      "category": "career",
+      "excerpt": "Every 'AI is taking over' headline sits next to an 'AI hiring is exploding' one. Both are true at the same time. Here's the actual 2026 hiring data — role by role, region by region — so you can stop guessing and start planning.",
+      "emoji": "🤖",
+      "gradient": "from-[#1A0B2E] to-[#2E1E5F]",
+      "meta": "13 min read · 20 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/are-ai-jobs-in-demand-2026.webp"
+    },
+    {
       "slug": "9-totally-free-ai-tools-for-developers-2026",
       "title": "9 AI Tools That Are Actually 100% Free for Developers in 2026",
       "tag": "tech",
