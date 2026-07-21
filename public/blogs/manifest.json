@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "why-ai-tools-are-costly-2026",
+      "title": "Why Are AI Tools So Costly in 2026? The Real Numbers Behind the Price Tag",
+      "tag": "tech",
+      "category": "tech",
+      "excerpt": "Everyone's asking why ChatGPT, Claude, and every other AI tool suddenly cost real money. The honest answer isn't 'because they can charge it' — it's GPUs, electricity, and a compute bill that scales with every single message you send. Here's what's actually driving the price tag, with real 2026 numbers.",
+      "emoji": "💸",
+      "gradient": "from-[#0B1220] to-[#1E3A5F]",
+      "meta": "11 min read · 21 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-ai-tools-are-costly-2026.webp"
+    },
+    {
       "slug": "are-ai-jobs-in-demand-2026",
       "title": "Are AI Jobs in Demand in 2026? Here's What the Actual Hiring Data Says",
       "tag": "career",
