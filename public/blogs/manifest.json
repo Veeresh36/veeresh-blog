@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "how-i-actually-use-ai-every-day-as-a-developer-2026",
+      "title": "How I Actually Use AI Every Day as a Developer (My Real Workflow, Not a Tools List)",
+      "tag": "tech",
+      "category": "tech",
+      "excerpt": "Everyone's written the 'here are 10 AI tools' post. Almost nobody writes the boring, honest one — how those tools actually fit into a real workday, where they save time, and where they quietly waste it. Here's mine.",
+      "emoji": "🧠",
+      "gradient": "from-[#0B1220] to-[#2E5339]",
+      "meta": "10 min read · 23 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/how-i-use-ai-daily-developer-workflow.webp"
+    },
+    {
       "slug": "why-ai-tools-are-costly-2026",
       "title": "Why Are AI Tools So Costly in 2026? The Real Numbers Behind the Price Tag",
       "tag": "tech",
@@ -37,7 +48,7 @@
       "slug": "fear-makes-you-live-not-succeed",
       "title": "Fear Makes You Live, But It Won't Make You Succeed",
       "tag": "Life Lessons",
-      "category": "Personal Growth",
+      "category": "Life Lessons",
       "excerpt": "Fear has one job: keep you alive until tomorrow. It was never built to help you have a better tomorrow. Here's how to tell protective fear from limiting fear — and a 5-step framework to act anyway.",
       "emoji": "🧠",
       "gradient": "from-[#1E1B2E] to-[#332B4D]",
