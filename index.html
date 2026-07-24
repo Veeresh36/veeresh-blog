@@ -7,16 +7,13 @@
     <meta name="color-scheme" content="light" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
+    <title>Veeresh Bashetti | Python Full Stack Developer & Tech Blogger</title>
+
     <!-- Icons -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="/favicon-192x192.png"
-    />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
@@ -24,16 +21,21 @@
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
         var f = d.getElementsByTagName(s)[0],
           j = d.createElement(s),
           dl = l != "dataLayer" ? "&l=" + l : "";
+
         j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        j.src =
+          "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-54HK6FBW");
     </script>
-    <!-- End Google Tag Manager -->
 
     <!-- Google AdSense -->
     <script
@@ -42,33 +44,44 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- AMP Auto Ads -->
     <script
       async
       custom-element="amp-auto-ads"
       src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
     ></script>
 
-    <!-- Google tag (Google Analytics + Google Ads) -->
+    <!-- Google Analytics (GA4) + Google Ads -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-2R4G8EB2BV"
+      src="https://www.googletagmanager.com/gtag/js?id=G-29V9WPWVQT"
     ></script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
         dataLayer.push(arguments);
       }
-      // Consent defaults — set BEFORE config so gtag respects region rules
+
       gtag("consent", "default", {
-        ad_storage: "denied",
         analytics_storage: "granted",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
       });
+
       gtag("js", new Date());
-      gtag("config", "G-2R4G8EB2BV");
+
+      // Google Analytics
+      gtag("config", "G-29V9WPWVQT");
+
+      // Google Ads
       gtag("config", "AW-18282410710");
     </script>
 
     <meta name="author" content="Veeresh Bashetti" />
+
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -79,9 +92,13 @@
     <meta name="twitter:site" content="@veereshbashetti" />
     <meta name="twitter:creator" content="@veereshbashetti" />
 
-    <!-- Bing Webmaster Tools site verification -->
-    <meta name="msvalidate.01" content="F02F258E3CCAC1E70E13E2CE1C1A2479" />
+    <!-- Bing Webmaster -->
+    <meta
+      name="msvalidate.01"
+      content="F02F258E3CCAC1E70E13E2CE1C1A2479"
+    />
 
+    <!-- Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -89,12 +106,13 @@
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
 
+    <!-- Fonts -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap"
     />
 
-    <!-- Structured data: Person -->
+    <!-- Schema: Person -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -110,7 +128,7 @@
       }
     </script>
 
-    <!-- Structured data: WebSite + sitelinks search box -->
+    <!-- Schema: Website -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -128,19 +146,21 @@
 
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
+    <noscript>
+      <iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-54HK6FBW"
         height="0"
         width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
+        style="display:none;visibility:hidden"
+      ></iframe>
+    </noscript>
 
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-4423608769058806">
+    <!-- AMP Auto Ads -->
+    <amp-auto-ads
+      type="adsense"
+      data-ad-client="ca-pub-4423608769058806">
     </amp-auto-ads>
 
-    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
 
     <script type="module" src="/src/main.jsx"></script>
