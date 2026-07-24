@@ -25,16 +25,13 @@ const REACTION_LABELS = { "❤️": "Love", "🔥": "Fire", "💡": "Insightful"
 // GOOGLE ADSENSE CONFIG
 // ═══════════════════════════════════════════════
 
-const ADSENSE_CLIENT = "ca-pub-4423608769058806";
+const ADSENSE_CLIENT = "ca-pub-1349373945527283";
 
 const AD_SLOTS = {
-  inArticle: "3083346955", // "horizontal" — In-article unit
-  sidebar: "3170555405",   // "side bar ads" — Display unit
-  // NOTE: reusing the sidebar Display unit for header/footer banners below.
-  // Recommend creating two dedicated Display units in AdSense ("Header banner",
-  // "Footer banner") and swapping the IDs in here once you have them.
-  headerBanner: "3170555405",
-  footerBanner: "3170555405",
+  inArticle: "1507061897",
+  sidebar: "1507061897",
+  headerBanner: "1507061897",
+  footerBanner: "1507061897",
 };
 
 // ═══════════════════════════════════════════════
