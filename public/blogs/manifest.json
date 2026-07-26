@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "5-django-mistakes-i-made-as-a-beginner",
+      "title": "5 Django Mistakes I Made as a Beginner (and How to Avoid Them)",
+      "tag": "tech",
+      "category": "tech",
+      "excerpt": "Every Django developer has broken something in the first few months — usually the same five things. Here's what actually went wrong for me, why it happens to almost everyone, and the exact fix for each one.",
+      "emoji": "🐍",
+      "gradient": "from-[#0B1220] to-[#2E5339]",
+      "meta": "12 min read · 26 July 2026",
+      "image": "REPLACE_WITH_YOUR_IMAGE_URL/5-django-mistakes-beginner.webp"
+    },
+    {
       "slug": "how-i-actually-use-ai-every-day-as-a-developer-2026",
       "title": "How I Actually Use AI Every Day as a Developer (My Real Workflow, Not a Tools List)",
       "tag": "tech",
