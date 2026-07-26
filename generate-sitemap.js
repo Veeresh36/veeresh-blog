@@ -62,6 +62,27 @@ const escapeXml = (str) =>
         }
     });
 
+function getLastModified(filePath) {
+    const content = fs.readFileSync(filePath, "utf8");
+
+    // Prefer updated field
+    const updatedMatch = content.match(/^updated:\s*(.+)$/m);
+
+    if (updatedMatch) {
+        return updatedMatch[1].trim();
+    }
+
+    // Otherwise use date field
+    const dateMatch = content.match(/^date:\s*(.+)$/m);
+
+    if (dateMatch) {
+        return dateMatch[1].trim();
+    }
+
+    // Fallback to file modified date
+    return formatDate(fs.statSync(filePath).mtime);
+}
+
 const urls = [];
 
 // Static pages
@@ -85,26 +106,22 @@ for (const file of blogFiles) {
     const slug = file.replace(".md", "");
     const filePath = path.join(BLOGS_DIR, file);
 
-    const stats = fs.statSync(filePath);
-
     urls.push(`
     <url>
         <loc>${DOMAIN}/blog/${escapeXml(slug)}</loc>
-        <lastmod>${formatDate(stats.mtime)}</lastmod>
+        <lastmod>${getLastModified(filePath)}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>`);
 }
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.join("\n")}
-</urlset>
-`;
+</urlset>`;
 
 fs.writeFileSync(OUTPUT, sitemap, "utf8");
 
-console.log(`✅ Sitemap generated successfully`);
+console.log("✅ Sitemap generated successfully");
 console.log(`📄 Total URLs: ${urls.length}`);
 console.log(`📍 Saved to: ${OUTPUT}`);
