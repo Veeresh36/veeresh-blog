@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "10-productivity-habits-that-actually-changed-my-work",
+      "title": "10 Productivity Habits That Actually Changed My Work (Not the Generic 5AM Advice)",
+      "tag": "Productivity",
+      "category": "Productivity",
+      "excerpt": "Most productivity posts are written by people who never had a manager checking their numbers at 6 PM. Mine did. Here are the 10 habits that actually stuck — and the one I quietly dropped.",
+      "emoji": "🧠",
+      "gradient": "from-[#0B1220] to-[#2E5339]",
+      "meta": "10 min read · 27 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/10-productivity-habits-that-actually-changed-my-work.webp"
+    },
+    {
       "slug": "5-django-mistakes-i-made-as-a-beginner",
       "title": "5 Django Mistakes I Made as a Beginner (and How to Avoid Them)",
       "tag": "tech",
