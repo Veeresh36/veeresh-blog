@@ -6,7 +6,7 @@ import {
     useContext,
     useEffect,
 } from "react"
-import { Outlet, useLocation } from "react-router-dom"
+import { Outlet, useLocation, useNavigation } from "react-router-dom"
 import { HelmetProvider } from "react-helmet-async"
 import { Analytics } from "@vercel/analytics/react"
 import CookieBanner from "./pages/CookieBanner"
@@ -63,6 +63,24 @@ function ScrollToTop() {
 }
 
 // ─────────────────────────────────────────────
+// Navigation Loading Bar
+// ─────────────────────────────────────────────
+
+function NavigationProgress() {
+    const navigation = useNavigation()
+    const isLoading = navigation.state === "loading"
+
+    if (!isLoading) return null
+
+    return (
+        <div
+            className="fixed top-0 left-0 right-0 h-[3px] z-[200] bg-gradient-to-r from-red-500 to-pink-500 animate-pulse"
+            aria-hidden="true"
+        />
+    )
+}
+
+// ─────────────────────────────────────────────
 // App
 // ─────────────────────────────────────────────
 
@@ -99,6 +117,7 @@ function App() {
             <SavedContext.Provider value={contextValue}>
                 <CookieBanner />
                 <ScrollToTop />
+                <NavigationProgress />
                 <Outlet />
                 {typeof window !== "undefined" && <Analytics />}
             </SavedContext.Provider>

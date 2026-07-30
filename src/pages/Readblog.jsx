@@ -2026,6 +2026,22 @@ export default function ReadBlog() {
 
   useEffect(() => {
     if (!slug) return;
+
+    // React Router's loader already fetched this slug — use it, don't refetch.
+    if (initialPost && initialPost.frontmatter?.title) {
+      setFm(initialPost.frontmatter);
+      setContent(initialPost.content);
+      setTocItems(buildTOC(initialPost.content));
+      const storedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+      setBookmarked(storedBookmarks.includes(slug));
+      setAllPosts(initialManifestPosts);
+      setMorePosts(initialManifestPosts.filter(p => p.slug && p.slug !== slug).slice(0, 6));
+      setLoading(false);
+      setError(false);
+      window.scrollTo({ top: 0, behavior: "instant" });
+      return; // skip the manual fetch entirely
+    }
+
     setLoading(true);
     setError(false);
     window.scrollTo({ top: 0, behavior: "instant" });
