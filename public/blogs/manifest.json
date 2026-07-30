@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "every-http-status-code-explained-with-real-examples",
+      "title": "Every HTTP Status Code Explained with Real Examples (2026 Guide)",
+      "tag": "tech",
+      "category": "tech",
+      "excerpt": "404 and 500 are the only two most people ever notice. But the difference between 401 and 403, or 301 and 302, is the difference between an API that makes sense and one that quietly breaks someone's integration at 2 AM. Here's every status code that actually matters, explained with real code.",
+      "emoji": "🔢",
+      "gradient": "from-[#0B1220] to-[#1E3A5F]",
+      "meta": "13 min read · 28 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/every-http-status-code-explained-with-real-examples.webp"
+    },
+    {
       "slug": "10-productivity-habits-that-actually-changed-my-work",
       "title": "10 Productivity Habits That Actually Changed My Work (Not the Generic 5AM Advice)",
       "tag": "Productivity",
