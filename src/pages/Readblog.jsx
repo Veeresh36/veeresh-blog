@@ -1165,26 +1165,83 @@ const AuthorCard = ({ author, dark }) => {
   );
 };
 
+// TODO: update these two lines to match your real GitHub repo path/branch and profile URLs
+const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/author/veeresh.webp";
+const AUTHOR_SOCIALS = {
+  github: "https://github.com/Veeresh36",
+  linkedin: "https://www.linkedin.com/in/veeresh-bashetti",
+  pinterest: SITE.pinterestUrl,
+};
+
+const GitHubIcon = ({ size = 16 }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width={size} height={size} aria-hidden="true">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.04-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.49 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
+  </svg>
+);
+
+const LinkedInIcon = ({ size = 16 }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width={size} height={size} aria-hidden="true">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+  </svg>
+);
+
 const AuthorBioBlock = ({ author, dark, border }) => {
   const name = author || SITE.name;
   const initials = name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+  const [imgFailed, setImgFailed] = useState(false);
+
+  const socialLinks = [
+    { key: "github", href: AUTHOR_SOCIALS.github, icon: <GitHubIcon />, label: "GitHub" },
+    { key: "linkedin", href: AUTHOR_SOCIALS.linkedin, icon: <LinkedInIcon />, label: "LinkedIn" },
+    { key: "pinterest", href: AUTHOR_SOCIALS.pinterest, icon: <PinterestIcon size={15} />, label: "Pinterest" },
+  ].filter(s => s.href);
+
   return (
-    <div className="mt-12 pt-8 flex items-start gap-4 rounded-2xl p-6"
+    <div className="mt-14 pt-10 flex flex-col sm:flex-row items-start gap-6 rounded-2xl p-8"
       style={{ border: `1px solid ${border}`, background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF" }}>
-      <div className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold font-['DM_Serif_Display',serif] flex-shrink-0"
-        style={{ background: "#1A1612", color: "#FAF8F4" }}>
-        {initials}
-      </div>
-      <div>
-        <p className="text-[0.68rem] font-bold tracking-[0.12em] uppercase mb-1.5" style={{ color: "#E60023" }}>
+
+      {!imgFailed && AUTHOR_PHOTO_URL ? (
+        <img
+          src={AUTHOR_PHOTO_URL}
+          alt={name}
+          onError={() => setImgFailed(true)}
+          className="w-20 h-20 rounded-full object-cover flex-shrink-0"
+          style={{ border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#EAE4DC"}` }}
+          loading="lazy"
+        />
+      ) : (
+        <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold font-['DM_Serif_Display',serif] flex-shrink-0"
+          style={{ background: "#1A1612", color: "#FAF8F4" }}>
+          {initials}
+        </div>
+      )}
+
+      <div className="flex-1">
+        <p className="text-[0.68rem] font-bold tracking-[0.12em] uppercase mb-2" style={{ color: "#E60023" }}>
           About the Author
         </p>
-        <div className="font-['DM_Serif_Display',serif] text-[1.1rem] mb-2" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>
+        <div className="font-['DM_Serif_Display',serif] text-[1.25rem] mb-3" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>
           {name}
         </div>
-        <p className="text-[0.85rem] leading-relaxed" style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>
+        <p className="text-[0.88rem] leading-relaxed mb-5 max-w-[560px]" style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>
           {name} is a Python Full Stack Developer who writes practical tutorials about Python, Django, React, AI, productivity, and software development based on hands-on experience.
         </p>
+
+        {socialLinks.length > 0 && (
+          <div className="flex items-center gap-2.5">
+            {socialLinks.map(s => (
+              <a key={s.key} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}
+                className="w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+                style={{
+                  borderColor: dark ? "rgba(255,255,255,0.1)" : "#DDD7CE",
+                  background: dark ? "rgba(255,255,255,0.04)" : "#F5F1EB",
+                  color: dark ? "rgba(250,248,244,0.8)" : "#3D3530",
+                }}>
+                {s.icon}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
