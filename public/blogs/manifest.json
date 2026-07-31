@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "10-ai-prompts-to-prepare-for-your-next-job-search",
+      "title": "10 AI Prompts Every Job Seeker Needs in 2026 (Photo, Resume, LinkedIn & Interview Prep)",
+      "tag": "career",
+      "category": "career",
+      "excerpt": "Most people use AI for job search the same lazy way: type 'make my resume better' and hope. That gets you a polished-sounding document and zero interviews. Here are the 10 prompts I actually use — the ones specific enough to get a result you can use the same day, starting with the photo on your profile.",
+      "emoji": "🧳",
+      "gradient": "from-[#0F1B2D] to-[#274472]",
+      "meta": "13 min read · 31 July 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/10-ai-prompts-to-prepare-for-your-next-job-search.webp"
+    },
+    {
       "slug": "every-http-status-code-explained-with-real-examples",
       "title": "Every HTTP Status Code Explained with Real Examples (2026 Guide)",
       "tag": "tech",
