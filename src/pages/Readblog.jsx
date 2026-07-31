@@ -1147,7 +1147,7 @@ const AuthorCard = ({ author, dark }) => {
       </div>
       <div className="font-['DM_Serif_Display',serif] text-[1rem] mb-1" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{name}</div>
       <p className="text-[0.8rem] leading-relaxed mb-4" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>
-        Writer and curator based in Hubballi, India. Writing about small things that make life better.
+        {name} is a Python Full Stack Developer who writes practical tutorials about Python, Django, React, AI, productivity, and software development based on hands-on experience.
       </p>
       <div className="flex gap-2 flex-wrap">
         {[
@@ -1162,6 +1162,31 @@ const AuthorCard = ({ author, dark }) => {
         ))}
       </div>
     </>
+  );
+};
+
+const AuthorBioBlock = ({ author, dark, border }) => {
+  const name = author || SITE.name;
+  const initials = name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+  return (
+    <div className="mt-12 pt-8 flex items-start gap-4 rounded-2xl p-6"
+      style={{ border: `1px solid ${border}`, background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF" }}>
+      <div className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold font-['DM_Serif_Display',serif] flex-shrink-0"
+        style={{ background: "#1A1612", color: "#FAF8F4" }}>
+        {initials}
+      </div>
+      <div>
+        <p className="text-[0.68rem] font-bold tracking-[0.12em] uppercase mb-1.5" style={{ color: "#E60023" }}>
+          About the Author
+        </p>
+        <div className="font-['DM_Serif_Display',serif] text-[1.1rem] mb-2" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>
+          {name}
+        </div>
+        <p className="text-[0.85rem] leading-relaxed" style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>
+          {name} is a Python Full Stack Developer who writes practical tutorials about Python, Django, React, AI, productivity, and software development based on hands-on experience.
+        </p>
+      </div>
+    </div>
   );
 };
 
@@ -1637,6 +1662,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
           );
         })()}
         <ArticleTags tags={fm.tags} dark={dark} />
+        <AuthorBioBlock author={fm.author} dark={dark} border={border} />
       </article>
     </main>
     <aside className="w-full lg:w-[380px] lg:shrink-0 z-20 self-start lg:sticky lg:top-[96px] flex flex-col gap-4" aria-label="Article actions panel">
@@ -2327,6 +2353,8 @@ export default function ReadBlog() {
                 <ArticleTags tags={fm.tags} dark={dark} />
 
                 <FAQSection faqs={fm.faqs} dark={dark} border={border} />
+
+                <AuthorBioBlock author={fm.author} dark={dark} border={border} />
               </article>
             </main>
 
