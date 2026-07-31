@@ -1166,7 +1166,7 @@ const AuthorCard = ({ author, dark }) => {
 };
 
 // TODO: update these two lines to match your real GitHub repo path/branch and profile URLs
-const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/author/veeresh.webp";
+const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh.webp";
 const AUTHOR_SOCIALS = {
   github: "https://github.com/Veeresh36",
   linkedin: "https://www.linkedin.com/in/veeresh-bashetti",
