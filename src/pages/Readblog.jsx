@@ -1205,8 +1205,17 @@ const AuthorBioBlock = ({ author, dark, border }) => {
           src={AUTHOR_PHOTO_URL}
           alt={name}
           onError={() => setImgFailed(true)}
-          className="w-20 h-20 rounded-full object-cover flex-shrink-0"
-          style={{ border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#EAE4DC"}` }}
+          className="flex-shrink-0"
+          style={{
+            width: "80px",
+            height: "80px",
+            minWidth: "80px",
+            borderRadius: "9999px",
+            objectFit: "cover",
+            objectPosition: "center top",
+            margin: 0,
+            border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#EAE4DC"}`,
+          }}
           loading="lazy"
         />
       ) : (
