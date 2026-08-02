@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "18-free-websites-that-feel-illegal-to-know",
+      "title": "18 Free Websites That Feel Illegal to Know (But Are 100% Legal) — 2026 Edition",
+      "tag": "productivity",
+      "category": "productivity",
+      "excerpt": "You've probably seen the carousel post promising '20 websites Google doesn't want you to know about.' Most of those lists quietly mix in a couple of piracy sites next to the genuinely useful ones. I went through every entry, kept only what's actually free and legal, checked whether it still works in 2026, and added a few I use every week that never make these lists.",
+      "emoji": "🧰",
+      "gradient": "from-[#0F1B2D] to-[#274472]",
+      "meta": "11 min read · 2 August 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/18-free-websites-that-feel-illegal-to-know.webp"
+    },
+    {
       "slug": "10-ai-prompts-to-prepare-for-your-next-job-search",
       "title": "10 AI Prompts Every Job Seeker Needs in 2026 (Photo, Resume, LinkedIn & Interview Prep)",
       "tag": "career",

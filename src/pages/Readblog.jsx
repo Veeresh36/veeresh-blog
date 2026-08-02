@@ -1166,7 +1166,7 @@ const AuthorCard = ({ author, dark }) => {
 };
 
 // TODO: update these two lines to match your real GitHub repo path/branch and profile URLs
-const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh.webp";
+const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp";
 const AUTHOR_SOCIALS = {
   github: "https://github.com/Veeresh36",
   linkedin: "https://www.linkedin.com/in/veeresh-bashetti",
@@ -1185,10 +1185,27 @@ const LinkedInIcon = ({ size = 16 }) => (
   </svg>
 );
 
-const AuthorBioBlock = ({ author, dark, border }) => {
+// ═══════════════════════════════════════════════
+// AUTHOR BIO BLOCK — v3 (split panel, big photo, animated)
+// Drop-in replacement. Same props as v2:
+//   author, dark, border (required — dark/border kept
+//   for API compatibility though the photo panel is
+//   intentionally always dark, by design, for contrast)
+//   specialties, articleCount, sinceYear (optional)
+// ═══════════════════════════════════════════════
+
+const AuthorBioBlock = ({
+  author,
+  dark,
+  border,
+  specialties = ["Python", "Django", "React", "AI"],
+  articleCount,
+  sinceYear,
+}) => {
   const name = author || SITE.name;
   const initials = name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
   const [imgFailed, setImgFailed] = useState(false);
+  const ref = useFadeIn(0);
 
   const socialLinks = [
     { key: "github", href: AUTHOR_SOCIALS.github, icon: <GitHubIcon />, label: "GitHub" },
@@ -1196,56 +1213,159 @@ const AuthorBioBlock = ({ author, dark, border }) => {
     { key: "pinterest", href: AUTHOR_SOCIALS.pinterest, icon: <PinterestIcon size={15} />, label: "Pinterest" },
   ].filter(s => s.href);
 
+  const stats = [
+    articleCount ? { value: `${articleCount}+`, label: "Articles" } : null,
+    sinceYear ? { value: `${new Date().getFullYear() - sinceYear}+`, label: "Years writing" } : null,
+  ].filter(Boolean);
+
   return (
-    <div className="mt-14 pt-10 flex flex-col sm:flex-row items-start gap-6 rounded-2xl p-8"
-      style={{ border: `1px solid ${border}`, background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF" }}>
+    <div
+      ref={ref}
+      className="author-bio-v3 relative mt-14 flex flex-col sm:flex-row overflow-hidden rounded-[28px] transition-transform duration-300 hover:-translate-y-1"
+      style={{
+        border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#EAE0D2"}`,
+        background: dark ? "#141110" : "#FFFFFF",
+        boxShadow: dark ? "0 28px 64px -34px rgba(0,0,0,0.6)" : "0 28px 56px -30px rgba(26,22,18,0.16)",
+      }}
+    >
+      <style>{`
+        @keyframes authorRingSpin { to { transform: rotate(360deg); } }
+        @keyframes authorGlowPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+        @keyframes authorRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .author-bio-v3 .ring-spin { animation: authorRingSpin 10s linear infinite; }
+        .author-bio-v3 .glow-pulse { animation: authorGlowPulse 4s ease-in-out infinite; }
+        .author-bio-v3 .rise-1 { animation: authorRise 0.5s ease 0.05s both; }
+        .author-bio-v3 .rise-2 { animation: authorRise 0.5s ease 0.15s both; }
+        .author-bio-v3 .rise-3 { animation: authorRise 0.5s ease 0.25s both; }
+        .author-bio-v3 .rise-4 { animation: authorRise 0.5s ease 0.35s both; }
+        .author-bio-v3 a:focus-visible { outline: 2px solid #E60023; outline-offset: 2px; }
+        @media (prefers-reduced-motion: reduce) {
+          .author-bio-v3, .author-bio-v3 * { animation: none !important; transition: none !important; transform: none !important; }
+        }
+      `}</style>
 
-      {!imgFailed && AUTHOR_PHOTO_URL ? (
-        <img
-          src={AUTHOR_PHOTO_URL}
-          alt={name}
-          onError={() => setImgFailed(true)}
-          className="flex-shrink-0"
-          style={{
-            width: "80px",
-            height: "80px",
-            minWidth: "80px",
-            borderRadius: "9999px",
-            objectFit: "cover",
-            objectPosition: "center top",
-            margin: 0,
-            border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#EAE4DC"}`,
-          }}
-          loading="lazy"
+      {/* PHOTO PANEL — always dark, by design, for contrast against either theme */}
+      <div
+        className="relative flex items-center justify-center py-10 sm:py-0 sm:w-[240px] flex-shrink-0 overflow-hidden"
+        style={{ background: "radial-gradient(circle at 50% 30%, #2A0009 0%, #14090B 60%, #0F0E0D 100%)" }}
+      >
+        <div
+          aria-hidden="true"
+          className="glow-pulse absolute w-[220px] h-[220px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(230,0,35,0.35) 0%, transparent 70%)" }}
         />
-      ) : (
-        <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold font-['DM_Serif_Display',serif] flex-shrink-0"
-          style={{ background: "#1A1612", color: "#FAF8F4" }}>
-          {initials}
-        </div>
-      )}
 
-      <div className="flex-1">
-        <p className="text-[0.68rem] font-bold tracking-[0.12em] uppercase mb-2" style={{ color: "#E60023" }}>
-          About the Author
-        </p>
-        <div className="font-['DM_Serif_Display',serif] text-[1.25rem] mb-3" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>
-          {name}
+        <div className="relative">
+          <div className="ring-spin absolute -inset-2 rounded-full" style={{
+            background: "conic-gradient(from 0deg, #E60023 0deg, transparent 100deg, transparent 260deg, #E60023 360deg)",
+          }} />
+          <div className="relative rounded-full p-[4px]" style={{ background: "#14090B" }}>
+            {!imgFailed && AUTHOR_PHOTO_URL ? (
+              <img
+                src={AUTHOR_PHOTO_URL}
+                alt={name}
+                onError={() => setImgFailed(true)}
+                style={{ width: "152px", height: "152px", borderRadius: "9999px", objectFit: "cover", objectPosition: "center top", display: "block" }}
+                loading="lazy"
+              />
+            ) : (
+              <div
+                className="w-[152px] h-[152px] rounded-full flex items-center justify-center text-4xl font-bold font-['DM_Serif_Display',serif]"
+                style={{ background: "#1A1612", color: "#FAF8F4" }}
+              >
+                {initials}
+              </div>
+            )}
+          </div>
+
+          <div
+            className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center"
+            style={{ background: "#E60023", border: "3px solid #14090B" }}
+            title="Verified author"
+            aria-label="Verified author"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" width={13} height={13}>
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+          </div>
         </div>
-        <p className="text-[0.88rem] leading-relaxed mb-5 max-w-[560px]" style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>
-          {name} is a Python Full Stack Developer who writes practical tutorials about Python, Django, React, AI, productivity, and software development based on hands-on experience.
+      </div>
+
+      {/* CONTENT PANEL */}
+      <div className="relative flex-1 min-w-0 px-8 py-8 sm:py-9">
+        <div className="flex items-start justify-between gap-4 flex-wrap mb-1">
+          <span className="rise-1 text-[0.68rem] font-bold tracking-[0.2em] uppercase" style={{ color: "#E60023" }}>
+            Written By
+          </span>
+          {stats.length > 0 && (
+            <div className="rise-1 flex items-center gap-4">
+              {stats.map(s => (
+                <div key={s.label} className="text-right leading-none">
+                  <div className="text-[0.85rem] font-bold" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{s.value}</div>
+                  <div className="text-[0.58rem] uppercase tracking-[0.08em] mt-0.5" style={{ color: dark ? "rgba(250,248,244,0.4)" : "#9C8E84" }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <h3 className="rise-2 font-['DM_Serif_Display',serif] text-[1.8rem] leading-tight mt-2 mb-3" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>
+          {name}
+        </h3>
+
+        {specialties?.length > 0 && (
+          <div className="rise-3 flex flex-wrap gap-1.5 mb-4">
+            {specialties.map(tag => (
+              <span
+                key={tag}
+                className="text-[0.68rem] font-semibold px-2.5 py-1 rounded-md"
+                style={{
+                  color: dark ? "rgba(250,248,244,0.55)" : "#7A6E64",
+                  background: dark ? "rgba(255,255,255,0.04)" : "#F5F1EB",
+                  border: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "#EAE4DC"}`,
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <p className="rise-3 text-[0.92rem] leading-relaxed mb-6 max-w-[520px] font-light" style={{ color: dark ? "rgba(250,248,244,0.72)" : "#3D3530" }}>
+          {name} is a Python Full Stack Developer who writes practical tutorials about
+          Python, Django, React, AI, productivity, and software development based on
+          hands-on experience.
         </p>
 
         {socialLinks.length > 0 && (
-          <div className="flex items-center gap-2.5">
+          <div className="rise-4 flex items-center gap-2.5 pt-5" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EFE9DF"}` }}>
             {socialLinks.map(s => (
-              <a key={s.key} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}
-                className="w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 hover:opacity-80"
+              <a
+                key={s.key}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                title={s.label}
+                className="w-10 h-10 flex items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5"
                 style={{
                   borderColor: dark ? "rgba(255,255,255,0.1)" : "#DDD7CE",
-                  background: dark ? "rgba(255,255,255,0.04)" : "#F5F1EB",
-                  color: dark ? "rgba(250,248,244,0.8)" : "#3D3530",
-                }}>
+                  background: dark ? "rgba(255,255,255,0.03)" : "#FAF8F4",
+                  color: dark ? "rgba(250,248,244,0.75)" : "#3D3530",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = "#E60023";
+                  e.currentTarget.style.borderColor = "#E60023";
+                  e.currentTarget.style.color = "#FFFFFF";
+                  e.currentTarget.style.boxShadow = "0 8px 20px -8px rgba(230,0,35,0.55)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = dark ? "rgba(255,255,255,0.03)" : "#FAF8F4";
+                  e.currentTarget.style.borderColor = dark ? "rgba(255,255,255,0.1)" : "#DDD7CE";
+                  e.currentTarget.style.color = dark ? "rgba(250,248,244,0.75)" : "#3D3530";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
                 {s.icon}
               </a>
             ))}
