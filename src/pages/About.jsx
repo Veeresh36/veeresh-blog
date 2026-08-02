@@ -12,6 +12,8 @@ const SITE = {
     location: "Hubballi, Karnataka, India",
 };
 
+const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp";
+
 const TOPICS = [
     { emoji: "💰", label: "Finance", desc: "Personal finance, smart saving, and investment basics explained simply.", path: "/category/finance" },
     { emoji: "📱", label: "Tech", desc: "Apps, tools, and technology that actually make life easier.", path: "/category/tech" },
@@ -176,23 +178,161 @@ const Navbar = ({ dark, toggleDark }) => {
     );
 };
 
-// Avatar with initials
-const Avatar = ({ dark, size = 96 }) => (
-    <div
-        className="rounded-full flex items-center justify-center font-['DM_Serif_Display',serif] flex-shrink-0 select-none"
-        style={{
-            width: size, height: size,
-            background: "linear-gradient(135deg, #1A1612 60%, #3D3530)",
-            color: "#FAF8F4",
-            fontSize: size * 0.35,
-            border: `3px solid ${dark ? "rgba(255,255,255,0.1)" : "#EAE4DC"}`,
-            boxShadow: dark ? "0 0 0 6px rgba(255,255,255,0.03)" : "0 0 0 6px rgba(26,22,18,0.04)",
-        }}
-        aria-label="Veeresh Bashetti"
-    >
-        VB
-    </div>
-);
+// Large, animated author photo panel for the hero's right column.
+// Rotating gradient halo + 3D tilt-on-hover + corner frame accents + shine sweep.
+// Padding is reserved deliberately so badges/halo never overlap the caption or get clipped,
+// and the whole block is centered instead of pinned to a narrow fixed column.
+const BigAuthorPhoto = ({ dark, border }) => {
+    const [imgFailed, setImgFailed] = useState(false);
+    const [tilt, setTilt] = useState({ x: 0, y: 0 });
+    const cardRef = useRef(null);
+
+    const handleMouseMove = (e) => {
+        const el = cardRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        setTilt({ x: (py - 0.5) * -10, y: (px - 0.5) * 10 });
+    };
+    const resetTilt = () => setTilt({ x: 0, y: 0 });
+
+    return (
+        <div className="relative w-full max-w-[460px] mx-auto px-6 pt-10 pb-4" style={{ perspective: "1400px" }}>
+
+            {/* Rotating conic-gradient halo, blurred, spinning slowly behind the card */}
+            <div
+                className="absolute inset-6 rounded-[40%] blur-3xl pointer-events-none opacity-70"
+                style={{
+                    background: "conic-gradient(from 0deg, #E60023, #FF8A65, #E60023, #7A1F2B, #E60023)",
+                    animation: "haloSpin 14s linear infinite",
+                }}
+            />
+
+            {/* Secondary soft blob for extra depth */}
+            <div
+                className="absolute rounded-full blur-3xl pointer-events-none"
+                style={{
+                    width: "55%", height: "55%", bottom: "0%", left: "-6%",
+                    background: dark
+                        ? "radial-gradient(circle, #FAF8F42A, transparent 70%)"
+                        : "radial-gradient(circle, #1A16121A, transparent 70%)",
+                    animation: "blobFloat2 11s ease-in-out infinite",
+                }}
+            />
+
+            {/* Top floating badges — kept inside the reserved padding, never over the caption */}
+            <div className="absolute top-0 left-2 z-20 hidden sm:block" style={{ animation: "badgeFloat 4.5s ease-in-out infinite" }}>
+                <span
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.7rem] font-bold whitespace-nowrap select-none"
+                    style={{
+                        background: dark ? "rgba(26,22,18,0.9)" : "#FFFFFF",
+                        color: dark ? "#FAF8F4" : "#1A1612",
+                        border: `1px solid ${border}`,
+                        boxShadow: "0 10px 28px -10px rgba(0,0,0,0.4)",
+                        backdropFilter: "blur(8px)",
+                    }}
+                >
+                    💻 Full-Stack Developer
+                </span>
+            </div>
+            <div className="absolute top-14 right-0 z-20 hidden sm:block" style={{ animation: "badgeFloat 4.5s ease-in-out infinite", animationDelay: "1.4s" }}>
+                <span
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.7rem] font-bold whitespace-nowrap select-none"
+                    style={{
+                        background: "#E60023",
+                        color: "#fff",
+                        boxShadow: "0 10px 28px -10px rgba(230,0,35,0.55)",
+                    }}
+                >
+                    ✍️ Writer
+                </span>
+            </div>
+
+            {/* Tilting photo card */}
+            <div
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={resetTilt}
+                className="relative rounded-[32px] overflow-hidden w-full z-10 transition-transform duration-200 ease-out"
+                style={{
+                    aspectRatio: "4 / 5",
+                    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${tilt.x || tilt.y ? 1.015 : 1})`,
+                    transformStyle: "preserve-3d",
+                    border: "3px solid transparent",
+                    backgroundImage: dark
+                        ? "linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)), linear-gradient(120deg, #E60023, #FF6B6B, #E60023)"
+                        : "linear-gradient(160deg, #F5F1EB, #EAE4DC), linear-gradient(120deg, #E60023, #FF6B6B, #E60023)",
+                    backgroundOrigin: "border-box",
+                    backgroundClip: "padding-box, border-box",
+                    backgroundSize: "auto, 200% 200%",
+                    animation: "borderFlow 6s ease infinite",
+                    boxShadow: dark
+                        ? "0 30px 70px -20px rgba(0,0,0,0.75)"
+                        : "0 30px 70px -25px rgba(26,22,18,0.4)",
+                }}
+            >
+                {AUTHOR_PHOTO_URL && !imgFailed ? (
+                    <img
+                        src={AUTHOR_PHOTO_URL}
+                        alt="Veeresh Bashetti — web developer and writer"
+                        loading="eager"
+                        onError={() => setImgFailed(true)}
+                        className="w-full h-full object-cover select-none"
+                        style={{ transform: "translateZ(20px) scale(1.02)" }}
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                        <span
+                            className="font-['DM_Serif_Display',serif] select-none"
+                            style={{ fontSize: "5rem", color: dark ? "#FAF8F4" : "#1A1612", opacity: 0.85 }}
+                        >
+                            VB
+                        </span>
+                    </div>
+                )}
+
+                {/* Corner frame brackets — viewfinder-style accents */}
+                {[
+                    { top: 14, left: 14, borderWidth: "3px 0 0 3px", radius: "10px 0 0 0" },
+                    { top: 14, right: 14, borderWidth: "3px 3px 0 0", radius: "0 10px 0 0" },
+                    { bottom: 14, left: 14, borderWidth: "0 0 3px 3px", radius: "0 0 0 10px" },
+                    { bottom: 14, right: 14, borderWidth: "0 3px 3px 0", radius: "0 0 10px 0" },
+                ].map((c, i) => (
+                    <div key={i} className="absolute w-6 h-6 pointer-events-none"
+                        style={{
+                            top: c.top, left: c.left, right: c.right, bottom: c.bottom,
+                            borderStyle: "solid",
+                            borderWidth: c.borderWidth,
+                            borderColor: "rgba(255,255,255,0.85)",
+                            borderRadius: c.radius,
+                        }}
+                    />
+                ))}
+
+                {/* Shine sweep overlay */}
+                <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                        background: "linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.25) 35%, transparent 50%)",
+                        backgroundSize: "250% 250%",
+                        animation: "shineSweep 5s ease-in-out infinite",
+                        mixBlendMode: "overlay",
+                    }}
+                />
+
+                {/* bottom gradient + caption */}
+                <div
+                    className="absolute inset-x-0 bottom-0 px-5 py-4"
+                    style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.65), transparent)" }}
+                >
+                    <div className="text-[0.9rem] font-bold text-white">{SITE.name}</div>
+                    <div className="text-[0.7rem] text-white/75 mt-0.5">📍 {SITE.location}</div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 // Reusable section heading
 const SectionHeading = ({ eyebrow, title, dark }) => (
@@ -369,6 +509,32 @@ export default function About() {
           to   { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes haloSpin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+
+        @keyframes blobFloat2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50%      { transform: translate(-6%, -8%) scale(1.1); }
+        }
+
+        @keyframes badgeFloat {
+          0%, 100% { transform: translateY(0); }
+          50%      { transform: translateY(-10px); }
+        }
+
+        @keyframes borderFlow {
+          0%   { background-position: 0 0, 0% 50%; }
+          50%  { background-position: 0 0, 100% 50%; }
+          100% { background-position: 0 0, 0% 50%; }
+        }
+
+        @keyframes shineSweep {
+          0%, 100% { background-position: 0% 0%; }
+          50%      { background-position: 100% 100%; }
+        }
+
         html { scroll-behavior: smooth; }
         body {
           font-family: 'Outfit', sans-serif;
@@ -396,13 +562,10 @@ export default function About() {
             HERO — name, photo, intro, social links
         ══════════════════════════════════════ */}
                 <section ref={heroRef} className="max-w-[1280px] mx-auto px-6 pt-10 pb-20">
-                    <div className="flex flex-col md:flex-row md:items-start gap-10 max-w-[860px]">
-
-                        {/* Avatar */}
-                        <Avatar dark={dark} size={104} />
+                    <div className="flex flex-col lg:flex-row lg:items-center gap-12">
 
                         {/* Text */}
-                        <div className="flex-1">
+                        <div className="flex-1 lg:max-w-[600px]">
                             <div
                                 className="inline-flex items-center gap-2 text-[0.7rem] font-bold tracking-[0.1em] uppercase px-3 py-1.5 rounded-full mb-5"
                                 style={{ background: "#E600230F", color: "#E60023", border: "1px solid #E6002322" }}>
@@ -415,8 +578,6 @@ export default function About() {
                             </h1>
 
                             <div className="space-y-4 max-w-[650px]">
-
-                                ```
                                 <p
                                     className="text-[1rem] leading-[1.85] font-light"
                                     style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
@@ -465,8 +626,6 @@ export default function About() {
                                 >
                                     I'm still learning, still building, and still figuring things out. That's what makes the journey exciting.
                                 </p>
-                                ```
-
                             </div>
 
                             {/* Location + links row */}
@@ -498,6 +657,11 @@ export default function About() {
                                     Read the blog →
                                 </Link>
                             </div>
+                        </div>
+
+                        {/* Large author photo — right side */}
+                        <div className="w-full lg:flex-1 flex justify-center">
+                            <BigAuthorPhoto dark={dark} border={border} />
                         </div>
                     </div>
                 </section>
