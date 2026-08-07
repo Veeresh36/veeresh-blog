@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "best-chrome-extensions-for-developers-2026",
+      "title": "15 Chrome Extensions Every Developer Should Have Installed in 2026",
+      "tag": "developer-tools",
+      "category": "productivity",
+      "excerpt": "Most 'best extensions for developers' lists are the same 10 tools copy-pasted since 2021, half of them abandoned since Manifest V3. I went through what I actually reach for every day building Django and React apps, and cut anything that hasn't been updated or that I stopped using.",
+      "emoji": "🛠️",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "meta": "10 min read · 3 August 2026 · Verified for Manifest V3",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/best-chrome-extensions-for-developers-2026.webp"
+    },
+    {
       "slug": "18-free-websites-that-feel-illegal-to-know",
       "title": "18 Free Websites That Feel Illegal to Know (But Are 100% Legal) — 2026 Edition",
       "tag": "productivity",
