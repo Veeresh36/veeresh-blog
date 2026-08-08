@@ -1807,13 +1807,6 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
           const mdComponents = {
             h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
             h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
-
-            table: ({ children }) => (
-              <div className="prose-table-wrapper">
-                <table>{children}</table>
-              </div>
-            ),
-
             a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
             p: ({ children }) => {
               const flatten = (node) => {
@@ -2415,39 +2408,9 @@ export default function ReadBlog() {
           font-size: 0.87rem; line-height: 1.6;
         }
         .prose pre code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
-        .prose-table-wrapper {
-          width: 100%;
-          max-width: 100%;
-          margin: 2rem 0;
-          overflow-x: auto;
-          overflow-y: hidden;
-          -webkit-overflow-scrolling: touch;
-          scrollbar-width: thin;
-        }
-
-        .prose-table-wrapper table {
-          width: max-content;
-          min-width: 100%;
-          margin: 0;
-          border-collapse: collapse;
-          text-align: left;
-          font-size: 0.9rem;
-        }
-
-        .prose-table-wrapper th {
-          font-weight: 700;
-          padding: 0.75rem 1rem;
-          white-space: nowrap;
-          border-bottom: 2px solid ${border};
-          color: ${dark ? "#FAF8F4" : "#1A1612"};
-        }
-
-        .prose-table-wrapper td {
-          padding: 0.75rem 1rem;
-          border-bottom: 1px solid ${border};
-          color: ${dark ? "rgba(250,248,244,0.7)" : "#5A5046"};
-          vertical-align: top;
-        }
+        .prose table { width: 100%; margin: 2rem 0; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+        .prose th { font-weight: 700; padding: 0.75rem 1rem; border-bottom: 2px solid ${border}; color: ${dark ? "#FAF8F4" : "#1A1612"}; }
+        .prose td { padding: 0.75rem 1rem; border-bottom: 1px solid ${border}; color: ${dark ? "rgba(250,248,244,0.7)" : "#5A5046"}; }
         .prose ol { counter-reset: step; list-style: none; margin: 1.5rem 0; }
         .prose ol li { counter-increment: step; position: relative; padding-left: 2.75rem; margin-bottom: 1rem; }
         .prose ol li::before {
@@ -2473,38 +2436,6 @@ export default function ReadBlog() {
 
         @media (max-width: 1023px) {
           aside { position: relative !important; top: 0 !important; max-height: none !important; overflow-y: visible !important; }
-        }
-        @media (max-width: 767px) {
-          .prose {
-            min-width: 0;
-            max-width: 100%;
-          }
-
-          .prose-table-wrapper {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: auto;
-            overscroll-behavior-x: contain;
-          }
-
-          .prose-table-wrapper table {
-            width: max-content;
-            min-width: 620px;
-            font-size: 0.72rem;
-          }
-
-          .prose-table-wrapper th,
-          .prose-table-wrapper td {
-            padding: 0.6rem 0.7rem;
-          }
-
-          .prose-table-wrapper th {
-            white-space: nowrap;
-          }
-
-          .prose-table-wrapper td {
-            min-width: 100px;
-          }
         }
       `}</style>
 
