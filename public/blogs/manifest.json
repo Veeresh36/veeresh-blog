@@ -1,10 +1,21 @@
 {
   "posts": [
     {
+      "slug": "genai-developer-2026-hype-reality-pros-cons-students",
+      "title": "GenAI Developer in 2026: Real Career Wave or Just LinkedIn Hype? Full Guide for Students",
+      "tag": "genai-career",
+      "category": "career",
+      "excerpt": "Every second LinkedIn post says 'become a GenAI Developer and earn 20 LPA.' Some of that is true. A lot of it is marketing. Here's what the data actually says — the good, the risky, and exactly how to start — explained simply, with sources, for Indian students.",
+      "emoji": "🤖",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "meta": "14 min read · Updated 7 August 2026 · Research-backed, sources linked",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/genai-developer-2026-guide.webp"
+    },
+    {
       "slug": "best-chrome-extensions-for-developers-2026",
       "title": "15 Chrome Extensions Every Developer Should Have Installed in 2026",
       "tag": "developer-tools",
-      "category": "productivity",
+      "category": "tech",
       "excerpt": "Most 'best extensions for developers' lists are the same 10 tools copy-pasted since 2021, half of them abandoned since Manifest V3. I went through what I actually reach for every day building Django and React apps, and cut anything that hasn't been updated or that I stopped using.",
       "emoji": "🛠️",
       "gradient": "from-[#0D1321] to-[#1D2D50]",
@@ -14,8 +25,8 @@
     {
       "slug": "18-free-websites-that-feel-illegal-to-know",
       "title": "18 Free Websites That Feel Illegal to Know (But Are 100% Legal) — 2026 Edition",
-      "tag": "productivity",
-      "category": "productivity",
+      "tag": "tech",
+      "category": "tech",
       "excerpt": "You've probably seen the carousel post promising '20 websites Google doesn't want you to know about.' Most of those lists quietly mix in a couple of piracy sites next to the genuinely useful ones. I went through every entry, kept only what's actually free and legal, checked whether it still works in 2026, and added a few I use every week that never make these lists.",
       "emoji": "🧰",
       "gradient": "from-[#0F1B2D] to-[#274472]",
@@ -48,7 +59,7 @@
       "slug": "10-productivity-habits-that-actually-changed-my-work",
       "title": "10 Productivity Habits That Actually Changed My Work (Not the Generic 5AM Advice)",
       "tag": "Productivity",
-      "category": "Productivity",
+      "category": "tech",
       "excerpt": "Most productivity posts are written by people who never had a manager checking their numbers at 6 PM. Mine did. Here are the 10 habits that actually stuck — and the one I quietly dropped.",
       "emoji": "🧠",
       "gradient": "from-[#0B1220] to-[#2E5339]",
