@@ -304,7 +304,7 @@ Every prompt above is written around one rule: the AI works from what you actual
 
 - Never let AI invent a number, a title, or an achievement you didn't have — it will surface in an interview, and it's not worth the risk.
 - Treat AI output as a strong first draft, not a final answer — read it back in your own voice before sending anything.
-- Be mindful of what personal information you paste into a public chatbot — avoid sensitive identifiers, and check your AI tool's data-training settings if that matters to you.
+- Be mindful of what personal information you paste into a public chatbot — avoid sensitive identifiers, and check your AI tool's data-training settings if that matters to you..
 - For anything official — a passport, visa, or government ID photo — always verify the AI output against your specific country's current photo specification before submitting it.
 
 ## Keep Reading
