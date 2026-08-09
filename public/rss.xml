@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Veeresh Bashetti — Blog &amp; Pinterest Picks</title>
+  <link>https://www.veereshbashetti.com</link>
+  <description>Personal blog by Veeresh Bashetti — startup life, lifestyle, home decor, curated Pinterest picks, product reviews &amp; ideas that inspire.</description>
+  <language>en-in</language>
+  <lastBuildDate>Sun, 09 Aug 2026 00:00:00 GMT</lastBuildDate>
+  <atom:link href="https://www.veereshbashetti.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+  <item>
+    <title>GenAI Developer in 2026: Real Career Wave or Just LinkedIn Hype? Full Guide for Students</title>
+    <link>https://www.veereshbashetti.com/blog/genai-developer-2026-hype-reality-pros-cons-students</link>
+    <guid>https://www.veereshbashetti.com/blog/genai-developer-2026-hype-reality-pros-cons-students</guid>
+    <description>Is 'GenAI Developer' a real career or marketing noise? A research-backed, honest breakdown of what the role actually is, real 2026 India salary data, the entry-level job crunch nobody talks about, and a step-by-step roadmap for students.</description>
+    <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
+    <category>career</category>
+  </item>
+
+  <item>
+    <title>15 Chrome Extensions Every Developer Should Have Installed in 2026</title>
+    <link>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</guid>
+    <description>The Chrome extensions actually worth installing as a developer in 2026, based on daily use.</description>
+    <pubDate>Mon, 03 Aug 2026 00:00:00 GMT</pubDate>
+    <category>developer-tools</category>
+  </item>
+
+  <item>
+    <title>18 Free Websites That Feel Illegal to Know (But Are 100% Legal) — 2026 Edition</title>
+    <link>https://www.veereshbashetti.com/blog/18-free-websites-that-feel-illegal-to-know</link>
+    <guid>https://www.veereshbashetti.com/blog/18-free-websites-that-feel-illegal-to-know</guid>
+    <description>A curated list of genuinely useful free websites and tools worth knowing about in 2026.</description>
+    <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+    <category>tech</category>
+  </item>
+
+  <item>
+    <title>10 AI Prompts Every Job Seeker Needs in 2026 (Photo, Resume, LinkedIn &amp; Interview Prep)</title>
+    <link>https://www.veereshbashetti.com/blog/10-ai-prompts-to-prepare-for-your-next-job-search</link>
+    <guid>https://www.veereshbashetti.com/blog/10-ai-prompts-to-prepare-for-your-next-job-search</guid>
+    <description>Practical AI prompts to help with photos, resumes, LinkedIn profiles, and interview preparation.</description>
+    <pubDate>Fri, 31 Jul 2026 00:00:00 GMT</pubDate>
+    <category>career</category>
+  </item>
+
+  <item>
+    <title>Every HTTP Status Code Explained with Real Examples (2026 Guide)</title>
+    <link>https://www.veereshbashetti.com/blog/every-http-status-code-explained-with-real-examples</link>
+    <guid>https://www.veereshbashetti.com/blog/every-http-status-code-explained-with-real-examples</guid>
+    <description>A practical, example-driven walkthrough of HTTP status codes for developers.</description>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+    <category>tech</category>
+  </item>
+
+  <item>
+    <title>Doraemon, Chhota Bheem, Shinchan, Oggy: The Cartoons That Quietly Taught Me How to Think</title>
+    <link>https://www.veereshbashetti.com/blog/childhood-cartoons-life-lessons</link>
+    <guid>https://www.veereshbashetti.com/blog/childhood-cartoons-life-lessons</guid>
+    <description>A personal, honest account of how childhood cartoons shaped the way I think, create and solve problems today.</description>
+    <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
+    <category>life-lessons</category>
+  </item>
+
+</channel>
+</rss>
