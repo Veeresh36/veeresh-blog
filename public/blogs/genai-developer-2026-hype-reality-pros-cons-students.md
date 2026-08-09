@@ -302,7 +302,7 @@ The data referenced in this article draws on 2026 hiring and salary reports and 
 - [Stanford HAI 2026 AI Index](https://medium.com/codetodeploy/67-of-entry-level-developer-jobs-are-gone-1b48bd8f218b) — employment trends for developers aged 22–25 vs 35–49 since 2022
 - [IBM: The bottom rung returns as AI reshapes entry-level jobs](https://www.ibm.com/think/news/entry-level-roles-get-reset-ai) — IBM's 2026 entry-level hiring expansion and reasoning
 
-Salary figures are directional ranges reported across multiple sources as of mid-2026, not guarantees. Always cross-check current numbers before making a career decision, since this market is moving fast.
+Salary figures are directional ranges reported across multiple sources as of mid-2026, not guarantees. Always cross-check current numbers before making a career decision, since this market is moving fast..
 
 *This article is maintained and periodically updated as new hiring data is published. If you spot outdated information, please use the Contact page to flag it.*
 
