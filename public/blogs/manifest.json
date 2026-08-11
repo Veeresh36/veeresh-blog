@@ -3,7 +3,7 @@
     {
       "slug": "8-ai-prompts-smart-marketers-2026",
       "title": "8 AI Prompts Every Smart Marketer Should Have Saved in 2026",
-      "tag": "ai-prompts",
+      "tag": "tech",
       "category": "tech",
       "excerpt": "Every marketer has a folder of half-finished prompts they never reuse. Here's the actual structure behind the ones that work — seven full templates, the mistakes that quietly ruin AI output, and how to turn this into a system instead of a one-off trick.",
       "emoji": "🧠",
@@ -14,7 +14,7 @@
     {
       "slug": "genai-developer-2026-hype-reality-pros-cons-students",
       "title": "GenAI Developer in 2026: Real Career Wave or Just LinkedIn Hype? Full Guide for Students",
-      "tag": "genai-career",
+      "tag": "career",
       "category": "career",
       "excerpt": "Every second LinkedIn post says 'become a GenAI Developer and earn 20 LPA.' Some of that is true. A lot of it is marketing. Here's what the data actually says — the good, the risky, and exactly how to start — explained simply, with sources, for Indian students.",
       "emoji": "🤖",
@@ -25,7 +25,7 @@
     {
       "slug": "best-chrome-extensions-for-developers-2026",
       "title": "15 Chrome Extensions Every Developer Should Have Installed in 2026",
-      "tag": "developer-tools",
+      "tag": "tech",
       "category": "tech",
       "excerpt": "Most 'best extensions for developers' lists are the same 10 tools copy-pasted since 2021, half of them abandoned since Manifest V3. I went through what I actually reach for every day building Django and React apps, and cut anything that hasn't been updated or that I stopped using.",
       "emoji": "🛠️",
@@ -69,7 +69,7 @@
     {
       "slug": "10-productivity-habits-that-actually-changed-my-work",
       "title": "10 Productivity Habits That Actually Changed My Work (Not the Generic 5AM Advice)",
-      "tag": "Productivity",
+      "tag": "tech",
       "category": "tech",
       "excerpt": "Most productivity posts are written by people who never had a manager checking their numbers at 6 PM. Mine did. Here are the 10 habits that actually stuck — and the one I quietly dropped.",
       "emoji": "🧠",
@@ -157,7 +157,7 @@
     {
       "slug": "salary-is-a-drug",
       "title": "Salary Is a Drug: Why the Paycheck That Saves You Is Also the One Trapping You",
-      "tag": "Life Lessons",
+      "tag": "Finance",
       "category": "Finance",
       "excerpt": "Every month the salary hits your account and for two, three days you feel free. Then the loop starts again. An honest account of why salary works exactly like a drug — and what breaking that loop actually looks like.",
       "emoji": "💊",
@@ -179,6 +179,7 @@
       "slug": "22-year-old-startup-developer-life",
       "title": "22 Years Old, -₹400 in My Bank Account...",
       "tag": "Career",
+      "category": "career",
       "excerpt": "At 22, staring at a bank balance of -₹400, I learned more about money, pride, and survival than any finance course could have taught me.",
       "emoji": "💻",
       "gradient": "from-[#E8F0FE] to-[#D4E4FC]",
@@ -209,6 +210,7 @@
       "slug": "working-for-others-but-born-to-build-my-own-kingdom",
       "title": "I'm Building Someone Else's Dream — But My Mind is Already Designing My Own Kingdom",
       "tag": "Career",
+      "category": "career",
       "excerpt": "I spend my days building someone else's product, but my mind never stops sketching blueprints for something that's entirely mine.",
       "emoji": "👑",
       "gradient": "from-[#1A1612] to-[#2D2520]",
@@ -249,6 +251,7 @@
       "slug": "first-project-failure-lessons",
       "title": "My First Project Failed Quietly. Here's What It Taught Me.",
       "tag": "Career",
+      "category": "career",
       "excerpt": "My first project didn't crash loudly — it just quietly failed. No one noticed at first, including me. Here's what that silence taught me about shipping real work.",
       "emoji": "🔧",
       "gradient": "from-[#EDE7F6] to-[#D1C4E9]",
