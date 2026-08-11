@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "8-ai-prompts-smart-marketers-2026",
+      "title": "8 AI Prompts Every Smart Marketer Should Have Saved in 2026",
+      "tag": "ai-prompts",
+      "category": "productivity",
+      "excerpt": "Every marketer has a folder of half-finished prompts they never reuse. Here's the actual structure behind the ones that work — seven full templates, the mistakes that quietly ruin AI output, and how to turn this into a system instead of a one-off trick.",
+      "emoji": "🧠",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "meta": "19 min read · Updated 11 August 2026 · Practical, tested prompt templates",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/ai-prompts-marketers-2026.webp"
+    },
+    {
       "slug": "genai-developer-2026-hype-reality-pros-cons-students",
       "title": "GenAI Developer in 2026: Real Career Wave or Just LinkedIn Hype? Full Guide for Students",
       "tag": "genai-career",

@@ -1026,7 +1026,7 @@ const SelectionToolbar = ({ tooltip, onClose, dark, onHighlight }) => {
   );
 };
 
-const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }) => {
+const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark, readTime }) => {
   const scrollTo = useCallback(id => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -1119,7 +1119,7 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark }
         <span>{tocItems.length} sections</span>
         {done === tocItems.length
           ? <span style={{ color: "#22543D", fontWeight: 700 }}>✓ Fully read!</span>
-          : <span>~{Math.max(1, Math.round(8 * (1 - overallProgress / 100)))} min left</span>}
+          : <span>~{Math.max(1, Math.round((readTime || 8) * (1 - overallProgress / 100)))} min left</span>}
       </div>
     </div>
   );
@@ -1399,11 +1399,11 @@ const ArticleTags = ({ tags, dark }) => {
     <div className="mt-12 pt-8 flex items-center gap-2.5 flex-wrap" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
       <span className="text-[0.72rem] font-bold uppercase tracking-[0.07em]" style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84" }}>Tags:</span>
       {normalized.map(tag => (
-        <span key={tag} to={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}`}
+        <Link key={tag} to={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}`}
           className="inline-block text-[0.73rem] font-semibold px-3.5 py-1.5 rounded-full border transition-all duration-200 hover:opacity-70"
           style={{ background: dark ? "rgba(255,255,255,0.05)" : "#F5F1EB", color: dark ? "rgba(250,248,244,0.7)" : "#3D3530", borderColor: dark ? "rgba(255,255,255,0.09)" : "#DDD7CE" }}>
           {tag}
-        </span>
+        </Link>
       ))}
     </div>
   );
@@ -1792,7 +1792,7 @@ const AffiliateLinksSidebar = ({ content, dark, border, fallbackIcon }) => {
   );
 };
 
-const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, tocItems, activeId, sectionProgress, progress, slug }) => (
+const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, tocItems, activeId, sectionProgress, progress, slug, readTime }) => (
   <div ref={layoutRef} className="max-w-[1280px] mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 items-start justify-between relative">
     <main id="main-content" className="w-full lg:max-w-[calc(100%-446px)] min-w-0 flex-1">
       <article className="prose w-full" itemScope itemType="https://schema.org/BlogPosting">
@@ -1838,7 +1838,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
               {/* mid-article ad — In-article AdSense unit */}
               <GoogleAd dark={dark} slot={AD_SLOTS.inArticle} layout="in-article" format="fluid" height={250} label="Ad Space — In-Article" />
 
-              <ReactMarkdown components={mdComponents} remarkPlugins={[remarkGfm]}>{secondHalf}</ReactMarkdown>
+              <ReactMarkdown components={mdComponents} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>{secondHalf}</ReactMarkdown>
             </>
           );
         })()}
@@ -1856,7 +1856,7 @@ const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, t
       )}
 
       <SidebarCard header="In This Post" dark={dark} delay={0}>
-        <SmartTOC tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
+        <SmartTOC tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} readTime={readTime} />
       </SidebarCard>
 
       <GoogleAd dark={dark} slot={AD_SLOTS.sidebar} format="auto" height={250} label="Ad Space — 300×250" />
@@ -2429,7 +2429,6 @@ export default function ReadBlog() {
         .affiliate-chip { transition: transform .15s ease, box-shadow .15s ease, filter .15s ease; }
         .affiliate-chip:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,.15); filter: brightness(1.04); }
         .affiliate-chip:active { transform: translateY(0); }
-        .affiliate-chip, .affiliate-chip * { color: red !important; }
 
         .no-scrollbar { scrollbar-width: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -2518,12 +2517,12 @@ export default function ReadBlog() {
 
                   return (
                     <>
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>{firstHalf}</ReactMarkdown>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={mdComponents}>{firstHalf}</ReactMarkdown>
 
                       {/* mid-article ad break — this is the one readers actually scroll past */}
                       <GoogleAd dark={dark} slot={AD_SLOTS.inArticle} layout="in-article" format="fluid" height={250} label="Ad Space — In-Article" />
 
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>{secondHalf}</ReactMarkdown>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={mdComponents}>{secondHalf}</ReactMarkdown>
                     </>
                   );
                 })()}
@@ -2544,7 +2543,7 @@ export default function ReadBlog() {
               <div ref={sidebarScrollRef} className="no-scrollbar w-full pb-4">
 
                 <SidebarCard header="In This Post" dark={dark} delay={0}>
-                  <SmartTOC key={slug} tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} />
+                  <SmartTOC key={slug} tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} overallProgress={progress} dark={dark} readTime={readTime} />
                 </SidebarCard>
 
                 <GoogleAd dark={dark} slot={AD_SLOTS.sidebar} format="auto" height={250} label="Ad Space — 300×250" />
