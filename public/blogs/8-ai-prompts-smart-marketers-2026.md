@@ -6,7 +6,7 @@ excerpt: "Every marketer has a folder of half-finished prompts they never reuse.
 author: "Veeresh Bashetti"
 date: "2026-08-11"
 lastModified: "2026-08-11"
-category: "productivity"
+category: "tech"
 tag: "ai-prompts"
 emoji: "🧠"
 gradient: "from-[#0D1321] to-[#1D2D50]"
