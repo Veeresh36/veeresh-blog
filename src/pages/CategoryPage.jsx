@@ -143,7 +143,7 @@ const PostCard = ({ post, index }) => {
                                     className="ml-1 text-[0.6rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
                                     style={{ background: "#E600230F", color: ACCENT }}
                                 >
-                                    Featured
+                                    Featured.
                                 </span>
                             )}
                         </div>
