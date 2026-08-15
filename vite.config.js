@@ -41,7 +41,29 @@ export default defineConfig({
 
             const blogPaths = manifest.posts.map((post) => `/blog/${post.slug}`);
 
-            return [...paths, ...blogPaths];
+            // Category slugs actually linked to across the site (footer, About, Sitemap,
+            // and the /category/:slug links generated from each post's category field).
+            // Keep this in sync with the CATEGORY_SLUGS list in generate-sitemap.js and
+            // with any new categories introduced in post frontmatter.
+            const staticCategorySlugs = [
+                "career",
+                "life-lessons",
+                "pinterest-picks",
+                "finance",
+                "tech",
+                "lifestyle",
+                "personal-growth",
+            ];
+
+            const postCategorySlugs = manifest.posts
+                .map((post) => post.category)
+                .filter(Boolean)
+                .map((category) => category.toLowerCase().replace(/\s+/g, "-"));
+
+            const categorySlugs = [...new Set([...staticCategorySlugs, ...postCategorySlugs])];
+            const categoryPaths = categorySlugs.map((slug) => `/category/${slug}`);
+
+            return [...paths, ...blogPaths, ...categoryPaths];
         },
     },
 });

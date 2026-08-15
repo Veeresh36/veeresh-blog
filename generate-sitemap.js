@@ -7,7 +7,20 @@ const __dirname = path.dirname(__filename);
 
 const DOMAIN = "https://www.veereshbashetti.com";
 const BLOGS_DIR = path.join(__dirname, "public", "blogs");
+const MANIFEST_PATH = path.join(BLOGS_DIR, "manifest.json");
 const OUTPUT = path.join(__dirname, "public", "sitemap.xml");
+
+// Keep this in sync with the staticCategorySlugs list in vite.config.js and
+// with any new categories introduced in post frontmatter.
+const CATEGORY_SLUGS = [
+    "career",
+    "life-lessons",
+    "pinterest-picks",
+    "finance",
+    "tech",
+    "lifestyle",
+    "personal-growth",
+];
 
 const staticRoutes = [
     {
@@ -140,6 +153,29 @@ for (const route of staticRoutes) {
         <lastmod>${route.lastmod}</lastmod>
         <changefreq>${route.changefreq}</changefreq>
         <priority>${route.priority}</priority>
+    </url>`);
+}
+
+// Generate category URLs
+let categorySlugs = [...CATEGORY_SLUGS];
+
+if (fs.existsSync(MANIFEST_PATH)) {
+    const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+    const postCategorySlugs = (manifest.posts || [])
+        .map((post) => post.category)
+        .filter(Boolean)
+        .map((category) => category.toLowerCase().replace(/\s+/g, "-"));
+
+    categorySlugs = [...new Set([...categorySlugs, ...postCategorySlugs])];
+}
+
+for (const slug of categorySlugs) {
+    urls.push(`
+    <url>
+        <loc>${DOMAIN}/category/${escapeXml(slug)}</loc>
+        <lastmod>2026-08-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
     </url>`);
 }
 

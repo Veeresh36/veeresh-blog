@@ -1399,7 +1399,7 @@ const ArticleTags = ({ tags, dark }) => {
     <div className="mt-12 pt-8 flex items-center gap-2.5 flex-wrap" style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}` }}>
       <span className="text-[0.72rem] font-bold uppercase tracking-[0.07em]" style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84" }}>Tags:</span>
       {normalized.map(tag => (
-        <Link key={tag} to={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}`}
+        <Link key={tag} to={`/blog?q=${encodeURIComponent(tag)}`}
           className="inline-block text-[0.73rem] font-semibold px-3.5 py-1.5 rounded-full border transition-all duration-200 hover:opacity-70"
           style={{ background: dark ? "rgba(255,255,255,0.05)" : "#F5F1EB", color: dark ? "rgba(250,248,244,0.7)" : "#3D3530", borderColor: dark ? "rgba(255,255,255,0.09)" : "#DDD7CE" }}>
           {tag}
