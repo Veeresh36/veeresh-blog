@@ -120,18 +120,22 @@
       }
     </script>
 
-    <!-- Schema: Website -->
+    <!--
+      Schema: Website
+      NOTE: potentialAction/SearchAction intentionally removed.
+      There is no real /search route in this app, so declaring it here
+      caused Googlebot to crawl the literal template URL
+      (/search?q={search_term_string}), which fell through to the
+      catch-all 404 route and got flagged "Excluded by noindex tag"
+      in Search Console. Re-add SearchAction only after a real
+      /search page exists.
+    -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "url": "https://www.veereshbashetti.com/",
-        "name": "Veeresh Bashetti",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://www.veereshbashetti.com/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+        "name": "Veeresh Bashetti"
       }
     </script>
   </head>
