@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "2026-tech-sector-layoffs-explained",
+      "title": "2026 Tech Sector Layoffs: The Complete Data-Backed Breakdown",
+      "tag": "tech",
+      "category": "tech",
+      "excerpt": "Trackers show anywhere from 126,000 to 205,000+ tech jobs cut in 2026 — and the numbers keep climbing. Here's the full picture: which companies cut the most, the India IT angle, whether AI is really to blame or just a convenient excuse, and a practical playbook for anyone affected.",
+      "emoji": "📉",
+      "gradient": "from-[#1A0F0F] to-[#3D1A1A]",
+      "meta": "22 min read · Updated 15 August 2026 · Verified tracker data, no fabricated numbers",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/2026-techies-layoffs-cover.webp"
+    },
+    {
       "slug": "8-ai-prompts-smart-marketers-2026",
       "title": "8 AI Prompts Every Smart Marketer Should Have Saved in 2026",
       "tag": "tech",
