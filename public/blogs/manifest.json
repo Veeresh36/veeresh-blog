@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "the-profit-of-a-moment",
+      "title": "The Profit of a Moment: Why You Can't Enjoy Good Days When Joy Feels Tied to Achievement",
+      "tag": "Life Lessons",
+      "category": "Life Lessons",
+      "excerpt": "Four friends laughing in a car, and one quiet question running underneath it all: what's the profit here? An honest account of what happens when joy gets rewired to require achievement — and what to do about it without forcing a feeling you don't have.",
+      "emoji": "🧭",
+      "gradient": "from-[#1E1B2E] to-[#332B4D]",
+      "meta": "11 min read · 16 August 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/the-profit-of-a-moment-cover.webp"
+    },
+    {
       "slug": "2026-tech-sector-layoffs-explained",
       "title": "2026 Tech Sector Layoffs: The Complete Data-Backed Breakdown",
       "tag": "tech",
@@ -180,6 +191,7 @@
       "slug": "childhood-cartoons-life-lessons",
       "title": "Doraemon, Chhota Bheem, Shinchan, Oggy: The Cartoons That Quietly Taught Me How to Think",
       "tag": "Life Lessons",
+      "category": "Life Lessons",
       "excerpt": "Doraemon, Chhota Bheem, Shinchan, and Oggy weren't just Saturday morning cartoons — looking back, they quietly taught curiosity, friendship, and imagination long before 'life lessons' had a name.",
       "emoji": "📺",
       "gradient": "from-[#FFF8E1] to-[#FFECB3]",
@@ -201,6 +213,7 @@
       "slug": "13k-second-hand-cpu-mistake-in-20s",
       "title": "The ₹13,000 Mistake I Made in My 20s",
       "tag": "Life Lessons",
+      "category": "Life Lessons",
       "excerpt": "I spent ₹13,000 on a second-hand CPU convinced it would make me a more serious developer. It didn't — and the real lesson ended up costing far more than the money.",
       "emoji": "💸",
       "gradient": "from-[#F5E8E8] to-[#E8D4D4]",
@@ -232,6 +245,7 @@
       "slug": "childhood-mistake-changed-my-life",
       "title": "They Forgave Me in 5 Minutes. I Haven't Forgiven Myself in 8 Years — How One Childhood Mistake Still Shapes Who I Am",
       "tag": "Life Lessons",
+      "category": "Life Lessons",
       "excerpt": "They forgave me in five minutes. I still haven't forgiven myself after eight years — on how one small childhood mistake quietly shaped the person I became.",
       "emoji": "🪞",
       "gradient": "from-[#E8EEF5] to-[#D4DDE8]",
@@ -294,6 +308,7 @@
       "slug": "stop-comparing-yourself-social-media",
       "title": "Stop Comparing Your Chapter 1 to Someone Else's Chapter 10",
       "tag": "Life Lessons",
+      "category": "Life Lessons",
       "excerpt": "You're comparing your Chapter 1 to someone else's Chapter 10 — and social media makes sure you never see the messy parts in between.",
       "emoji": "📱",
       "gradient": "from-[#F3E5F5] to-[#E1BEE7]",
