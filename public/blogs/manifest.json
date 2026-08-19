@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "waiting-on-a-sinking-ship-delayed-salary",
+      "title": "Waiting on a Sinking Ship: What to Do When Your Startup Is Failing and Your Salary Keeps Getting Delayed",
+      "tag": "Career",
+      "category": "career",
+      "excerpt": "A practical, honest guide for developers and employees stuck at a startup in financial trouble — two months of delayed salary, no clear answers, and a decision that keeps getting postponed. What to actually look at, what to ask, and how to move without panic.",
+      "emoji": "🚢",
+      "gradient": "from-[#151A24] to-[#26344A]",
+      "meta": "13 min read · 17 August 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/waiting-on-a-sinking-ship-delayed-salary-cover.webp"
+    },
+    {
       "slug": "the-profit-of-a-moment",
       "title": "The Profit of a Moment: Why You Can't Enjoy Good Days When Joy Feels Tied to Achievement",
       "tag": "Life Lessons",
