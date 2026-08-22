@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "gemini-ai-script-writer-guide-2026",
+      "title": "Gemini AI as a Script Writer in 2026: The Overlooked Features, Real Pros & Cons, and How to Use It Free",
+      "tag": "AI Tools",
+      "category": "tech",
+      "excerpt": "Everyone talks about asking Gemini to 'write me a YouTube script.' Almost nobody talks about the fact that Gemini can now storyboard the video around that script, that its command-line tool for developers is being replaced this year, or that its free tier is one of the most generous in AI right now. Here's the full picture.",
+      "emoji": "🎬",
+      "gradient": "from-[#1A0F2D] to-[#4C2A72]",
+      "meta": "11 min read · 22 August 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/gemini-ai-script-writer-guide-2026.webp"
+    },
+    {
       "slug": "waiting-on-a-sinking-ship-delayed-salary",
       "title": "Waiting on a Sinking Ship: What to Do When Your Startup Is Failing and Your Salary Keeps Getting Delayed",
       "tag": "Career",

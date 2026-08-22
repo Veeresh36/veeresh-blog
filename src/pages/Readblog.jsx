@@ -902,7 +902,7 @@ const HeroImage = ({ src, alt, dark }) => {
   return (
     <div className="max-w-[1280px] mx-auto px-6 mb-14">
       <div
-        className="rounded-2xl overflow-hidden max-w-[1200px] mx-auto aspect-[16/9] flex items-center justify-center"
+        className="rounded-2xl overflow-hidden max-w-[1100px] mx-auto aspect-[16/9] flex items-center justify-center"
         style={{ background: dark ? "#1A1612" : "#F0EBE3" }}
       >
         <img
