@@ -2,7 +2,16 @@
  * ============================================================
  * Blog.jsx — Home Page (Dynamic .md file loading)
  * ============================================================
- * FIXED BUGS:
+ * PERF FIXES APPLIED (this pass):
+ * - Removed @import url(...) font loading from GlobalStyles —
+ *   that's render-blocking. Fonts should be loaded once via
+ *   index.html <link rel="preload"> + async apply.
+ * - NewPostsPopup no longer fetches /blogs/manifest.json itself
+ *   (it was duplicating the fetch useBlogPosts() already makes).
+ *   It now receives `posts` as a prop from the root Blog()
+ *   component and derives its "top 3" from that.
+ *
+ * PRE-EXISTING FIXED BUGS (kept from earlier pass):
  * - Image fallback logic: always renders both, toggles display via state
  * - parseFrontmatter: handles inline array syntax tags: ["a","b"]
  * - Dynamic Tailwind gradient classes replaced with inline styles (JIT-safe)
@@ -14,7 +23,7 @@
  * - Removed unused ArrowRight + SpinnerIcon imports
  * - will-change: transform on reveal elements to prevent layout shift
  *
- * NEW SEO:
+ * SEO:
  * - JSON-LD structured data (Person + Blog schema)
  * - Twitter Card meta tags
  * - og:url, og:image, og:description
@@ -22,7 +31,7 @@
  * - robots meta
  * - Article structured data per post card
  *
- * NEW ANIMATIONS:
+ * ANIMATIONS:
  * - Floating cards in hero (float up/down loop)
  * - Typewriter effect on hero headline
  * - Animated counters on stats (count up on mount)
@@ -357,10 +366,12 @@ function useBlogPosts() {
 
 // ════════════════════════════════════════════════════════════
 //  GLOBAL STYLES
+//  FIXED: removed @import url(...) font loading — that's
+//  render-blocking. Fonts (Outfit / DM Serif Display) should be
+//  loaded once via index.html <link rel="preload"> + async apply.
 // ════════════════════════════════════════════════════════════
 const GlobalStyles = () => (
     <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
     .card-thumb-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -2048,50 +2059,33 @@ const Divider = () => (
 
 // ════════════════════════════════════════════════════════════
 //  NEW POSTS POPUP — wide carousel showing top 3 posts
+//  FIXED: no longer fetches manifest.json itself — receives
+//  already-loaded posts as a prop from the root Blog() component,
+//  eliminating a duplicate network request on every homepage load.
 // ════════════════════════════════════════════════════════════
-const NewPostsPopup = () => {
-    const [posts, setPosts] = useState([]);
+const NewPostsPopup = ({ posts }) => {
     const [visible, setVisible] = useState(false);
     const [closing, setClosing] = useState(false);
     const [activeIdx, setActiveIdx] = useState(0);
 
-    useEffect(() => {
-        let cancelled = false;
-        async function load() {
-            try {
-                const res = await fetch("/blogs/manifest.json");
-                if (!res.ok) return;
-                const data = await res.json();
-                const rawPosts = Array.isArray(data) ? data : (data.posts || []);
-                if (rawPosts.length === 0) return;
-
-                const top3 = rawPosts.slice(0, 3);
-                const seenKey = `seenPopup:${top3[0].slug}`;
-                if (localStorage.getItem(seenKey)) return;
-
-                if (!cancelled) setPosts(top3);
-            } catch {
-                // fail silently
-            }
-        }
-        load();
-        return () => { cancelled = true; };
-    }, []);
+    const top3 = useMemo(() => posts.slice(0, 3), [posts]);
 
     useEffect(() => {
-        if (posts.length === 0) return;
+        if (top3.length === 0) return;
+        const seenKey = `seenPopup:${top3[0].slug}`;
+        if (localStorage.getItem(seenKey)) return;
         const timer = setTimeout(() => setVisible(true), 2500);
         return () => clearTimeout(timer);
-    }, [posts]);
+    }, [top3]);
 
     const close = () => {
         setClosing(true);
-        if (posts[0]) localStorage.setItem(`seenPopup:${posts[0].slug}`, "1");
+        if (top3[0]) localStorage.setItem(`seenPopup:${top3[0].slug}`, "1");
         setTimeout(() => setVisible(false), 250);
     };
 
-    if (posts.length === 0 || !visible) return null;
-    const active = posts[activeIdx];
+    if (top3.length === 0 || !visible) return null;
+    const active = top3[activeIdx];
 
     return (
         <div
@@ -2173,12 +2167,12 @@ const NewPostsPopup = () => {
                             {active.title}
                         </h3>
 
-                        {active.meta && (
+                        {active.readingTime && (
                             <p className="text-[0.82rem] text-[#8C7E74] font-medium mb-6 flex items-center gap-2">
                                 <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" />
                                 </svg>
-                                {active.meta}
+                                {active.readingTime}
                             </p>
                         )}
 
@@ -2196,13 +2190,13 @@ const NewPostsPopup = () => {
                         </Link>
 
                         {/* Thumbnail strip */}
-                        {posts.length > 1 && (
+                        {top3.length > 1 && (
                             <div className="mt-auto pt-6" style={{ borderTop: "1px solid #EFE8DE" }}>
                                 <p className="text-[0.65rem] font-bold uppercase tracking-widest text-[#8C7E74] mb-3">
                                     More new posts
                                 </p>
                                 <div className="flex gap-3">
-                                    {posts.map((p, i) => (
+                                    {top3.map((p, i) => (
                                         <button
                                             key={p.slug}
                                             type="button"
@@ -2269,7 +2263,7 @@ export default function Blog() {
         <>
             <GlobalStyles />
             <SEOHead posts={posts} />
-            <NewPostsPopup />
+            <NewPostsPopup posts={posts} />
 
             <div className="bg-[#FAF8F4] text-[#1A1612]">
                 <Navbar />

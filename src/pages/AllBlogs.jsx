@@ -4,16 +4,22 @@
  * ============================================================
  * Route: /blogs  (add to your router as shown at bottom)
  *
- * Features:
- * - Masonry/Pinterest-style grid layout
- * - Category filter pills (sticky)
- * - Search bar
- * - Sort: Latest / Featured / A–Z
- * - Scroll reveal + stagger animations
- * - Save/bookmark per card (uses SavedContext from Blog.jsx)
- * - 3D card tilt on hover
- * - Responsive: 4 col → 3 → 2 → 1
- * - Reads same manifest.json + .md files as Blog.jsx
+ * PERF FIXES APPLIED:
+ * - useBlogPosts now reads fields straight from manifest.json
+ *   instead of firing a separate fetch+parse for every post's
+ *   .md file (was N+1 network waterfall — 40+ requests just to
+ *   render the grid).
+ * - Removed @import url(...) font-loading from GlobalStyles.
+ *   That's render-blocking — move the font <link> to index.html
+ *   using preload + async apply (same fix already done there for
+ *   ReadBlog.jsx). If index.html already loads Outfit + DM Serif
+ *   Display, this component gets it for free with zero extra cost.
+ *
+ * ASSUMPTION: your manifest.json posts already carry title,
+ * excerpt/description, category, tags, date, image, featured,
+ * readingTime — same shape ReadBlog.jsx's `morePosts` expects.
+ * If any field is missing in your actual manifest, adjust the
+ * mapping in useBlogPosts below (marked with comments).
  * ============================================================
  */
 
@@ -93,47 +99,6 @@ const EMOJI_PRESETS = ["💻", "🌿", "🏠", "✈️", "🍛", "⚡", "🧠", 
 // Variable card heights for masonry feel
 const CARD_HEIGHTS = [260, 320, 280, 360, 240, 300, 340, 260, 310, 280];
 
-// ─── FRONTMATTER PARSER (same as Blog.jsx) ──────────────────
-function parseFrontmatter(raw) {
-  const normalized = raw.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-  const match = normalized.match(/^\s*---\s*\n([\s\S]*?)\n---\s*/);
-  if (!match) return { data: {}, content: normalized };
-  const yaml = match[1];
-  const content = normalized.slice(match[0].length).trim();
-  const data = {};
-  const lines = yaml.split("\n");
-  let i = 0;
-  while (i < lines.length) {
-    const line = lines[i];
-    if (/^\s*-\s/.test(line) && !line.includes(":")) { i++; continue; }
-    const colonIdx = line.indexOf(":");
-    if (colonIdx === -1) { i++; continue; }
-    const key = line.slice(0, colonIdx).trim();
-    let val = line.slice(colonIdx + 1).trim();
-    if (/^\[/.test(val)) {
-      try { data[key] = JSON.parse(val.replace(/'/g, '"')); }
-      catch { data[key] = val.slice(1, -1).split(",").map(s => s.trim().replace(/^["']|["']$/g, "")); }
-      i++; continue;
-    }
-    if (val === "" || val === "|" || val === ">") {
-      i++;
-      const items = [];
-      while (i < lines.length && /^\s+-/.test(lines[i])) {
-        items.push(lines[i].replace(/^\s+-\s*/, "").trim().replace(/^["']|["']$/g, ""));
-        i++;
-      }
-      data[key] = items.length ? items : "";
-      continue;
-    }
-    val = val.replace(/^["']|["']$/g, "").trim();
-    if (val === "true") val = true;
-    else if (val === "false") val = false;
-    data[key] = val;
-    i++;
-  }
-  return { data, content };
-}
-
 // ─── HOOKS ──────────────────────────────────────────────────
 function useScrollReveal(threshold = 0.08) {
   const ref = useRef(null);
@@ -150,47 +115,53 @@ function useScrollReveal(threshold = 0.08) {
   return [ref, isVisible];
 }
 
+/**
+ * FIXED: reads everything straight off manifest.json.
+ * No more per-post .md fetch — this was the N+1 waterfall
+ * causing "network dependency tree" / unused-JS / main-thread flags.
+ *
+ * If your manifest.posts[] entries use different key names than
+ * what's mapped below, adjust the right-hand side only — e.g. if
+ * your manifest calls it `desc` instead of `excerpt`, change
+ * `p.excerpt || p.description` to `p.desc`.
+ */
 function useBlogPosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     let cancelled = false;
+
     async function load() {
       try {
         const res = await fetch("/blogs/manifest.json");
         if (!res.ok) throw new Error("manifest.json not found");
         const manifest = await res.json();
-        const slugs = Array.isArray(manifest) ? manifest : (manifest.posts || []).map(p => p.slug);
-        const results = await Promise.allSettled(slugs.map(async (slug, idx) => {
-          const r = await fetch(`/blogs/${slug}.md`);
-          if (!r.ok) throw new Error(`Could not load /blogs/${slug}.md`);
-          const raw = await r.text();
-          const { data } = parseFrontmatter(raw);
-          return {
-            slug: data.slug || slug,
-            title: data.title || slug,
-            excerpt: data.excerpt || data.description || "",
-            date: data.date || "",
-            category: data.category || (Array.isArray(data.tags) ? data.tags[0] : "") || "General",
-            tags: Array.isArray(data.tags) ? data.tags : [],
-            readingTime: data.readingTime || data["reading-time"] || "5 min read",
-            featured: data.featured === true || data.featured === "true",
-            emoji: data.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
-            gradientStyle: GRADIENT_PRESETS[idx % GRADIENT_PRESETS.length],
-            image: data.image || null,
-            author: data.author || "Veeresh Bashetti",
-            heightPx: CARD_HEIGHTS[idx % CARD_HEIGHTS.length],
-          };
+        const rawPosts = Array.isArray(manifest) ? manifest : (manifest.posts || []);
+
+        const loaded = rawPosts.map((p, idx) => ({
+          slug: p.slug,
+          title: p.title || p.slug,
+          excerpt: p.excerpt || p.description || "",
+          date: p.date || "",
+          category: p.category || (Array.isArray(p.tags) ? p.tags[0] : "") || "General",
+          tags: Array.isArray(p.tags) ? p.tags : [],
+          readingTime: p.readingTime || p["reading-time"] || "5 min read",
+          featured: p.featured === true || p.featured === "true",
+          emoji: p.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
+          gradientStyle: GRADIENT_PRESETS[idx % GRADIENT_PRESETS.length],
+          image: p.image || null,
+          author: p.author || "Veeresh Bashetti",
+          heightPx: CARD_HEIGHTS[idx % CARD_HEIGHTS.length],
         }));
-        const loaded = results
-          .filter(r => r.status === "fulfilled")
-          .map(r => r.value);
+
         loaded.sort((a, b) => {
           if (a.featured && !b.featured) return -1;
           if (!a.featured && b.featured) return 1;
           return new Date(b.date) - new Date(a.date);
         });
+
         if (!cancelled) setPosts(loaded);
       } catch (err) {
         if (!cancelled) setError(err.message);
@@ -198,16 +169,21 @@ function useBlogPosts() {
         if (!cancelled) setLoading(false);
       }
     }
+
     load();
     return () => { cancelled = true; };
   }, []);
+
   return { posts, loading, error };
 }
 
 // ─── GLOBAL STYLES ──────────────────────────────────────────
+// FIXED: removed @import url(...) font loading — that's render-blocking.
+// Fonts should be loaded once via index.html <link rel="preload"> + async
+// apply. If Outfit / DM Serif Display are already loaded there (they should
+// be, from the ReadBlog.jsx fix), this component just inherits them free.
 const GlobalStyles = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Outfit', sans-serif; overflow-x: hidden; background: #FAF8F4; }
@@ -457,7 +433,7 @@ const PinCard = ({ post, index }) => {
         <Link to={`/blog/${post.slug}`} style={{ textDecoration: "none" }} aria-label={`Read: ${post.title}`}>
           <div className="card-img-wrap" style={{ height: post.heightPx }}>
             {post.image && !imgError ? (
-              <img src={post.image} alt={post.title} className="card-img" loading="lazy" onError={() => setImgError(true)} />
+              <img src={post.image} alt={post.title} className="card-img" loading="lazy" decoding="async" onError={() => setImgError(true)} />
             ) : (
               <div className="card-img" style={{ ...post.gradientStyle, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "3.2rem" }}>
                 {post.emoji}
@@ -521,7 +497,7 @@ const ListCard = ({ post, index }) => {
         {/* Thumb */}
         <div style={{ width: 120, height: 90, borderRadius: 12, overflow: "hidden", flexShrink: 0 }}>
           {post.image && !imgError ? (
-            <img src={post.image} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" onError={() => setImgError(true)} />
+            <img src={post.image} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" decoding="async" onError={() => setImgError(true)} />
           ) : (
             <div style={{ ...post.gradientStyle, width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem" }}>
               {post.emoji}
@@ -836,44 +812,3 @@ export default function AllBlogs() {
     </>
   );
 }
-
-/**
- * ============================================================
- * ROUTER SETUP — Add this route to your App.jsx / Router
- * ============================================================
- *
- * import AllBlogs from "./AllBlogs";
- * import { SavedContext } from "./Blog";   // re-use the same context
- *
- * // In your BrowserRouter:
- * <Route path="/blogs" element={<AllBlogs />} />
- *
- * // If you want saved state to persist across pages, lift it up:
- *
- * function App() {
- *   const [saved, setSaved] = useState(() => {
- *     try { return JSON.parse(localStorage.getItem("saved_posts") || "[]"); } catch { return []; }
- *   });
- *   const toggleSave = useCallback((slug) => {
- *     setSaved(prev => {
- *       const next = prev.includes(slug) ? prev.filter(s => s !== slug) : [...prev, slug];
- *       localStorage.setItem("saved_posts", JSON.stringify(next));
- *       return next;
- *     });
- *   }, []);
- *
- *   return (
- *     <SavedContext.Provider value={{ saved, toggleSave }}>
- *       <BrowserRouter>
- *         <Routes>
- *           <Route path="/"       element={<Blog />} />
- *           <Route path="/blogs"  element={<AllBlogs />} />
- *           <Route path="/blog/:slug" element={<BlogPost />} />
- *           <Route path="/saved"  element={<SavedPage />} />
- *         </Routes>
- *       </BrowserRouter>
- *     </SavedContext.Provider>
- *   );
- * }
- * ============================================================
- */

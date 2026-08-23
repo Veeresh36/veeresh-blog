@@ -312,12 +312,6 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
       {prevPost ? <link rel="prev" href={`${BASE_URL}/blog/${prevPost.slug}`} /> : null}
       {nextPost ? <link rel="next" href={`${BASE_URL}/blog/${nextPost.slug}`} /> : null}
 
-      <script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-        crossOrigin="anonymous"
-      ></script>
-
       <script type="application/ld+json">
         {JSON.stringify({ "@context": "https://schema.org", "@graph": graph })}
       </script>
@@ -472,160 +466,6 @@ function useReactions(slug, supabaseUrl, supabaseKey) {
   return { counts, myVotes, react };
 }
 
-// ─── VOICE CONFIG ─────────────────────────────────────────────────────
-const VOICE_CONFIG = {
-  voiceId: "TX3LPaxmHKxFdv7VOQHJ",
-  stability: 0.30,
-  similarity_boost: 0.82,
-  style: 0.60,
-  use_speaker_boost: true,
-};
-
-const NARRATION_PROMPT = `You are converting a blog post into a warm, emotionally resonant spoken narration.
-
-Rules:
-- Write like an experienced Indian storyteller reading his own journal to a close friend
-- Use natural spoken rhythm — short punchy sentences mixed with longer flowing ones
-- Add breath pauses with commas and ellipses where a speaker would pause naturally
-- Build emotion gradually: start grounded and calm, rise toward the key insight, end with warmth and reflection
-- Use "I" and personal language — this feels lived-in, not reported
-- No markdown, no bullet points, no headers, no lists
-- Plain flowing prose only, max 200 words
-- The listener should feel something, not just understand something
-
-Blog content:`;
-
-function useTextToSpeech(content) {
-  const [speaking, setSpeaking] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [supported, setSupported] = useState(false);
-  const audioRef = useRef(null);
-
-  useEffect(() => { setSupported(true); }, []);
-
-  const stop = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = "";
-      audioRef.current = null;
-    }
-    window.speechSynthesis?.cancel();
-    setSpeaking(false);
-    setLoading(false);
-  }, []);
-
-  const rewriteForStorytelling = useCallback(async (text) => {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        messages: [{
-          role: "user",
-          content: `${NARRATION_PROMPT}\n\n${text.slice(0, 3000)}`
-        }]
-      })
-    });
-    const data = await response.json();
-    return data.content?.[0]?.text?.trim() || text;
-  }, []);
-
-  const speakWithElevenLabs = useCallback(async (text) => {
-    const ELEVENLABS_KEY = import.meta.env.VITE_ELEVENLABS_API_KEY;
-    if (!ELEVENLABS_KEY) throw new Error("No ElevenLabs key");
-
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${VOICE_CONFIG.voiceId}/stream`,
-      {
-        method: "POST",
-        headers: {
-          "xi-api-key": ELEVENLABS_KEY,
-          "Content-Type": "application/json",
-          "Accept": "audio/mpeg",
-        },
-        body: JSON.stringify({
-          text,
-          model_id: "eleven_turbo_v2_5",
-          voice_settings: {
-            stability: VOICE_CONFIG.stability,
-            similarity_boost: VOICE_CONFIG.similarity_boost,
-            style: VOICE_CONFIG.style,
-            use_speaker_boost: VOICE_CONFIG.use_speaker_boost,
-          },
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      const err = await response.text();
-      throw new Error(`ElevenLabs error: ${err}`);
-    }
-
-    const audioBlob = await response.blob();
-    const audioUrl = URL.createObjectURL(audioBlob);
-    const audio = new Audio(audioUrl);
-    audioRef.current = audio;
-
-    audio.onended = () => { setSpeaking(false); URL.revokeObjectURL(audioUrl); };
-    audio.onerror = () => { setSpeaking(false); URL.revokeObjectURL(audioUrl); };
-
-    await audio.play();
-    setSpeaking(true);
-  }, []);
-
-  const speakFallback = useCallback((rawText) => {
-    const plain = rawText
-      .replace(/#{1,6}\s+/g, "")
-      .replace(/\*\*?([^*]+)\*\*?/g, "$1")
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-      .replace(/`[^`]+`/g, "")
-      .replace(/^\s*[-*>]\s+/gm, "")
-      .slice(0, 4000);
-
-    const voices = window.speechSynthesis.getVoices();
-    const voice =
-      voices.find(v => v.name.includes("Google UK English Male")) ||
-      voices.find(v => v.name.includes("Daniel")) ||
-      voices.find(v => v.name.includes("Alex")) ||
-      voices.find(v => v.lang === "en-IN") ||
-      voices.find(v => v.lang.startsWith("en-")) ||
-      voices[0];
-
-    const utt = new SpeechSynthesisUtterance(plain);
-    if (voice) utt.voice = voice;
-    utt.rate = 0.80;
-    utt.pitch = 0.95;
-    utt.volume = 1;
-    utt.lang = "en-IN";
-    utt.onend = () => setSpeaking(false);
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utt);
-    setSpeaking(true);
-  }, []);
-
-  const toggle = useCallback(async () => {
-    if (!supported) return;
-    if (speaking || loading) { stop(); return; }
-
-    setLoading(true);
-    try {
-      const narration = await rewriteForStorytelling(content);
-      await speakWithElevenLabs(narration);
-      setLoading(false);
-    } catch (err) {
-      console.warn("ElevenLabs failed, using browser fallback:", err);
-      setLoading(false);
-      speakFallback(content);
-    }
-  }, [content, speaking, loading, supported, stop, rewriteForStorytelling, speakWithElevenLabs, speakFallback]);
-
-  useEffect(() => () => stop(), [stop]);
-
-  return { speaking, loading, supported, toggle };
-}
-
 // ═══════════════════════════════════════════════
 // ICONS
 // ═══════════════════════════════════════════════
@@ -664,7 +504,6 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { speaking, loading, supported, toggle: toggleTTS } = useTextToSpeech(content);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -711,42 +550,6 @@ const Navbar = ({ dark, toggleDark, fontSize, incFont, decFont, readingMode, tog
             aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}>
             {dark ? <SunIcon /> : <MoonIcon />}
           </button>
-
-          {supported && (
-            <button
-              onClick={toggleTTS}
-              className="hidden md:flex w-9 h-9 items-center justify-center rounded-lg border transition-all duration-200 hover:opacity-70"
-              style={{
-                borderColor: (speaking || loading) ? "#E60023" : (dark ? "rgba(255,255,255,0.1)" : "rgba(26,22,18,0.12)"),
-                color: (speaking || loading) ? "#E60023" : (dark ? "#FAF8F4" : "#3D3530"),
-                background: (speaking || loading) ? (dark ? "rgba(230,0,35,0.1)" : "#FFF5F6") : "transparent",
-                animation: speaking ? "ttsPulse 1.5s infinite" : "none",
-              }}
-              aria-label={loading ? "Preparing story..." : speaking ? "Stop reading" : "Read article aloud (AI storytelling)"}
-              title={loading ? "Preparing…" : speaking ? "Stop" : "Read aloud"}
-            >
-              {loading ? (
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: 14, height: 14,
-                    border: "2px solid #E60023",
-                    borderTopColor: "transparent",
-                    borderRadius: "50%",
-                    animation: "spin 0.7s linear infinite",
-                  }}
-                />
-              ) : speaking ? (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" width={16} height={16}>
-                  <path d="M6 6h4v12H6zM14 6h4v12h-4z" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" width={16} height={16}>
-                  <path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-                </svg>
-              )}
-            </button>
-          )}
 
           <button onClick={toggleReadingMode}
             className="hidden md:flex items-center gap-1.5 text-[0.75rem] font-semibold px-3 py-2 rounded-lg border transition-all duration-200 hover:opacity-70"
