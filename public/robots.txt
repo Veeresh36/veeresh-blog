@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /blog?q=
 
 Sitemap: https://www.veereshbashetti.com/sitemap.xml
