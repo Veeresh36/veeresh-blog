@@ -14,7 +14,7 @@
     {
       "slug": "waiting-on-a-sinking-ship-delayed-salary",
       "title": "Waiting on a Sinking Ship: What to Do When Your Startup Is Failing and Your Salary Keeps Getting Delayed",
-      "tag": "Career",
+      "tag": "career",
       "category": "career",
       "excerpt": "A practical, honest guide for developers and employees stuck at a startup in financial trouble — two months of delayed salary, no clear answers, and a decision that keeps getting postponed. What to actually look at, what to ask, and how to move without panic.",
       "emoji": "🚢",
@@ -223,7 +223,7 @@
     {
       "slug": "22-year-old-startup-developer-life",
       "title": "22 Years Old, -₹400 in My Bank Account...",
-      "tag": "Career",
+      "tag": "career",
       "category": "career",
       "excerpt": "At 22, staring at a bank balance of -₹400, I learned more about money, pride, and survival than any finance course could have taught me.",
       "emoji": "💻",
@@ -246,6 +246,7 @@
       "slug": "suffering-without-generational-wealth",
       "title": "Why Suffering Without Generational Wealth Hits Different",
       "tag": "Finance",
+      "category": "Finance",
       "excerpt": "Struggling without a financial safety net hits differently — every setback feels heavier when there's no cushion behind you. Here's what that pressure actually teaches.",
       "emoji": "💰",
       "gradient": "from-[#F8F5F1] to-[#EDE7DF]",
@@ -255,7 +256,7 @@
     {
       "slug": "working-for-others-but-born-to-build-my-own-kingdom",
       "title": "I'm Building Someone Else's Dream — But My Mind is Already Designing My Own Kingdom",
-      "tag": "Career",
+      "tag": "career",
       "category": "career",
       "excerpt": "I spend my days building someone else's product, but my mind never stops sketching blueprints for something that's entirely mine.",
       "emoji": "👑",
@@ -278,6 +279,7 @@
       "slug": "money-mistakes-20s",
       "title": "7 Money Mistakes I Made in My 20s (That Nobody Warned Me About)",
       "tag": "Finance",
+      "category": "Finance",
       "excerpt": "These aren't just financial errors. They're emotional ones — and understanding the feelings behind them is the only thing that actually changes the pattern.",
       "emoji": "💸",
       "gradient": "from-[#FFF3E0] to-[#FFE0B2]",
@@ -288,6 +290,7 @@
       "slug": "budgeting-for-beginners-india",
       "title": "Budgeting for Beginners in India: The 3-Bucket Method That Actually Works",
       "tag": "Finance",
+      "category": "Finance",
       "excerpt": "A simple 3-bucket method for splitting your income that actually sticks — no spreadsheets, no jargon, just a system beginners in India can start using today.",
       "emoji": "📊",
       "gradient": "from-[#E8F5E9] to-[#C8E6C9]",
@@ -297,7 +300,7 @@
     {
       "slug": "first-project-failure-lessons",
       "title": "My First Project Failed Quietly. Here's What It Taught Me.",
-      "tag": "Career",
+      "tag": "career",
       "category": "career",
       "excerpt": "My first project didn't crash loudly — it just quietly failed. No one noticed at first, including me. Here's what that silence taught me about shipping real work.",
       "emoji": "🔧",
@@ -308,8 +311,8 @@
     {
       "slug": "developer-setup-trap",
       "title": "The Developer Setup Trap: Why Better Gear Won't Make You a Better Coder",
-      "tag": "Career",
-      "category": "Career",
+      "tag": "career",
+      "category": "career",
       "excerpt": "I wasted ₹13,000 chasing a setup upgrade. The projects I hadn't finished stayed unfinished. Here's what actually makes you a better developer.",
       "emoji": "🖥️",
       "gradient": "from-[#E3F2FD] to-[#BBDEFB]",
@@ -320,6 +323,7 @@
       "slug": "30-day-rule-impulse-buying",
       "title": "The 30-Day Rule That Would Have Saved Me ₹13,000",
       "tag": "Finance",
+      "category": "Finance",
       "excerpt": "One simple rule — wait 30 days before any non-essential purchase — would have saved me ₹13,000 and a lot of regret. Here's how it actually works.",
       "emoji": "⏳",
       "gradient": "from-[#FCE4EC] to-[#F8BBD9]",
@@ -343,6 +347,7 @@
       "title": "This Expandable Backpack Might Be the Smartest Travel Upgrade of 2026",
       "emoji": "🎒",
       "tag": "pinterest picks",
+      "category": "pinterest picks",
       "excerpt": "A closer look at the WROGN expandable backpack that's quietly become one of the smartest travel upgrades of 2026 — more room when you need it, none of the bulk when you don't.",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review.webp",
       "meta": "4 min read · Jun 21, 2026"
@@ -352,6 +357,7 @@
       "title": "This Compact Tech Organizer Keeps Every Cable and Charger in One Place",
       "emoji": "🔌",
       "tag": "pinterest picks",
+      "category": "pinterest picks",
       "excerpt": "This compact DailyObjects tech organizer ends the tangled-cable chaos in your bag, keeping chargers, cables, and cards sorted in one zip-around case.",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review.webp",
       "meta": "3 min read · Jun 21, 2026"
@@ -361,6 +367,7 @@
       "title": "This Tiny Webcam Cover Quietly Fixes a Privacy Blind Spot on Your Laptop",
       "emoji": "🔒",
       "tag": "pinterest picks",
+      "category": "pinterest picks",
       "excerpt": "A slim STRIFF webcam cover that quietly fixes a privacy blind spot most laptops still ship without — slide it shut in seconds, no stickers or residue.",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/striff-webcam-cover-slide-review.webp",
       "meta": "3 min read · Jun 21, 2026"
@@ -370,6 +377,7 @@
       "title": "Why This Bean Bag Became My Favorite Spot in the House",
       "emoji": "🛋️",
       "tag": "pinterest picks",
+      "category": "pinterest picks",
       "excerpt": "After sinking into this Biggie bean bag daily for work breaks, gaming sessions, and lazy evenings, it's become the coziest, most-used seat in the house.",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/biggie-bean-bag-review-banner.webp",
       "meta": "6 min read · Jun 22, 2026"
