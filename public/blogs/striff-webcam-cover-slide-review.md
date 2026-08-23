@@ -17,43 +17,43 @@ readingTime: "5 min read"
 
 tags:
 
-* webcam cover
-* privacy gadget
-* laptop accessories
-* work from home
-* macbook accessories
-* useful gadgets under 1000
-* desk setup
-* security gadget
-* pinterest finds
+- webcam cover
+- privacy gadget
+- laptop accessories
+- work from home
+- macbook accessories
+- useful gadgets under 1000
+- desk setup
+- security gadget
+- pinterest finds
 
 products:
 
-* name: "STRIFF Webcam Cover Slide (Pack of 6)"
+- name: "STRIFF Webcam Cover Slide (Pack of 6)"
   icon: "🔒"
   price: "Check on Amazon"
   link: "https://www.amazon.in/STRIFF-Webcam-Blocker-Computer-MacBook/dp/B09Z6FRGVY?linkCode=ll2&tag=veeresh0308-21&linkId=2a456110693231038bb30b3a63451aca&ref_=as_li_ss_tl"
 
 takeaways:
 
-* "Physically blocks the webcam with a simple slide."
-* "Ultra-thin design doesn't interfere with closing the laptop lid."
-* "Easy peel-and-stick installation."
-* "Pack of 6 covers multiple devices."
-* "Protects the camera, not the microphone."
+- "Physically blocks the webcam with a simple slide."
+- "Ultra-thin design doesn't interfere with closing the laptop lid."
+- "Easy peel-and-stick installation."
+- "Pack of 6 covers multiple devices."
+- "Protects the camera, not the microphone."
 
 faqs:
 
-* q: "Does it completely block the camera?"
+- q: "Does it completely block the camera?"
   a: "Yes. When closed, the webcam lens is physically covered."
 
-* q: "Will it damage my laptop?"
+- q: "Will it damage my laptop?"
   a: "No. It's designed to be removed cleanly without leaving residue."
 
-* q: "Can I use it on tablets and phones?"
+- q: "Can I use it on tablets and phones?"
   a: "Yes. It works on most devices that have a flat area around the camera."
 
-* q: "Does it block the microphone?"
+- q: "Does it block the microphone?"
   a: "No. It only covers the camera lens."
 
 ---

@@ -151,11 +151,15 @@
       ></iframe>
     </noscript>
 
-    <!-- AMP Auto Ads -->
-    <amp-auto-ads
-      type="adsense"
-      data-ad-client="ca-pub-4423608769058806">
-    </amp-auto-ads>
+    <!--
+      NOTE: <amp-auto-ads> was removed here.
+      That tag only works on a real AMP HTML document (<html amp>,
+      AMP boilerplate CSS, the amp-auto-ads-0.1.js library, etc).
+      This is a normal React/Vite SPA, not an AMP page, so the tag
+      did nothing (or could throw a console error). The regular
+      adsbygoogle.js script above + the <ins class="adsbygoogle">
+      units already in the React components are all this site needs.
+    -->
 
     <div id="root"></div>
 

@@ -17,44 +17,44 @@ readingTime: "6 min read"
 
 tags:
 
-* backpack
-* travel backpack
-* office backpack
-* college backpack
-* expandable backpack
-* wrogn backpack
-* everyday carry
-* minimalist backpack
-* travel essentials
-* pinterest finds
+- backpack
+- travel backpack
+- office backpack
+- college backpack
+- expandable backpack
+- wrogn backpack
+- everyday carry
+- minimalist backpack
+- travel essentials
+- pinterest finds
 
 products:
 
-* name: "WROGN x FWD Brand Logo Backpack"
+- name: "WROGN x FWD Brand Logo Backpack"
   price: "Check on Myntra"
   rating: "4.5"
   link: "https://myntr.it/end38Ea"
 
 takeaways:
 
-* "The expandable design gives me extra storage whenever I need it."
-* "Clean minimalist styling works for office, college, and travel."
-* "Comfortable for daily commuting and weekend trips."
-* "Reflective detailing adds both style and practicality."
-* "Best suited for everyday carry rather than heavy trekking."
+- "The expandable design gives me extra storage whenever I need it."
+- "Clean minimalist styling works for office, college, and travel."
+- "Comfortable for daily commuting and weekend trips."
+- "Reflective detailing adds both style and practicality."
+- "Best suited for everyday carry rather than heavy trekking."
 
 faqs:
 
-* q: "Is this backpack good for travel?"
+- q: "Is this backpack good for travel?"
   a: "Yes. The expandable 23L to 35L capacity makes it suitable for short trips, daily commuting, and weekend travel."
 
-* q: "Can it fit a laptop?"
+- q: "Can it fit a laptop?"
   a: "Yes. It comfortably fits a laptop along with chargers, notebooks, and daily essentials."
 
-* q: "Is it waterproof?"
+- q: "Is it waterproof?"
   a: "It offers everyday protection, but check the latest product listing for official waterproof specifications."
 
-* q: "Would I recommend it?"
+- q: "Would I recommend it?"
   a: "If you want one backpack that works for office, college, commuting, and travel, I'd definitely recommend it."
 
 ---

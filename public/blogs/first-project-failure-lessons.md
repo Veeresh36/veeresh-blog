@@ -22,7 +22,6 @@ tags:
 readingTime: "10 min read"
 featured: false
 emoji: "🔧"
-author: "Veeresh Bashetti"
 
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.webp"
 imageAlt: "My Code Worked But The Project Still Failed — Freelance Lessons India"
