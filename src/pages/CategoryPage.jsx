@@ -211,6 +211,19 @@ export default function CategoryPage() {
         [categorySlug]
     );
 
+    // ─── FIX: reset scroll position + any lingering search state whenever
+    // the category changes. Without this, navigating here from a link
+    // lower on the previous page (e.g. the "Explore other categories"
+    // pills) keeps the old scroll offset, so the breadcrumb and top of
+    // the heading render off-screen above the viewport — that's exactly
+    // the clipped-title / missing-breadcrumb bug in the "Pinterest Picks"
+    // screenshot. "instant" avoids fighting with the reveal animations
+    // below, which expect to start from the top of the page. ───
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        setSearchQuery("");
+    }, [categorySlug]);
+
     // ─── SEO: document title, meta description, canonical, per category ───
     useEffect(() => {
         const originalTitle = document.title;
