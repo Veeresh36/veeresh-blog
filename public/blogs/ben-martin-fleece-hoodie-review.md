@@ -1,163 +1,240 @@
 ---
-title: "The Bug That Took 11 Hours to Fix Wasn't in My Code — It Was in Me"
-slug: "the-bug-that-wasnt-in-my-code"
-category: "career"
-emoji: "🐛"
-description: "An honest story about the night an 11-hour production bug taught me more about ego, panic, and asking for help than two years of writing Django code ever did."
-excerpt: "I spent 11 hours hunting a bug that turned out to be four lines away from where I started looking. The real problem wasn't the code — it was me refusing to say I was stuck."
+title: "Ben Martin Fleece Zipper Hoodie Review — Best Budget Winter Jacket for Men in India 2026"
+slug: "ben-martin-fleece-hoodie-review"
+type: "pinterest"
+category: "Product Reviews"
+emoji: "🧥"
+description: "Honest review of the Ben Martin Men's Fleece Standard Length Zipper Hoodie with Kangaroo Pocket — a warm, budget-friendly winterwear jacket. Is it worth buying in India in 2026?"
+excerpt: "Warm, soft, and priced under ₹1,000 — here's whether the Ben Martin fleece hoodie actually holds up as a daily winter jacket."
 date: "2026-08-25"
 lastModified: "2026-08-25"
 author: "Veeresh Bashetti"
-featured: false
-image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/ben-martin-fleece-hoodie-review-banner.webp"
-imageAlt: "Developer working alone late at night on a laptop with production error logs on screen"
-gradient: "from-[#151A24] to-[#26344A]"
-readingTime: "9 min read"
+featured: true
+image: "REPLACE_WITH_YOUR_CDN_IMAGE_URL/ben-martin-fleece-hoodie-review-banner.webp"
+imageAlt: "Man wearing Ben Martin blue fleece zipper hoodie with kangaroo pocket, holding a coffee cup — best budget winter jacket India 2026"
+pinterest: "https://in.pinterest.com/veereshbbashetti/"
+gradient: "from-[#F5F3F0] to-[#E7DED6]"
+readingTime: "6 min read"
 
 tags:
-  - Career
-  - Developer Life
-  - Life Lessons
-  - Debugging
-  - Software Engineering
-  - Mental Health for Developers
-  - Django
-  - Junior Developer Advice
+  - Product Review
+  - Winter Jacket
+  - Fleece Hoodie
+  - Men's Fashion
+  - Winterwear
+  - Ben Martin
+  - Budget Winter Jacket India
+  - best fleece hoodie India 2026
+  - ben martin hoodie review
+  - winter jacket under 1000 India
+  - kangaroo pocket hoodie India
 
 seo:
-  title: "The 11-Hour Bug That Taught Me the Real Lesson Wasn't the Code — Developer Story | Veeresh Bashetti"
-  description: "A personal story about an 11-hour production debugging session that had nothing to do with skill and everything to do with ego, panic, and asking for help too late."
-  canonicalUrl: "https://www.veereshbashetti.com/blog/the-bug-that-wasnt-in-my-code"
+  title: "Ben Martin Fleece Hoodie Review 2026 — Best Budget Winter Jacket for Men in India | Veeresh Bashetti"
+  description: "Honest review of the Ben Martin Men Fleece Standard Length Zipper Hoodie with Kangaroo Pocket. Is this budget winter jacket worth buying in India in 2026? Read before you buy."
+  canonicalUrl: "https://www.veereshbashetti.com/blog/ben-martin-fleece-hoodie-review"
   keywords:
-    - developer burnout story
-    - debugging production issue story
-    - junior developer lessons
-    - asking for help as a developer
-    - imposter syndrome developer
-    - django production bug story
-    - software engineer personal story India
+    - Ben Martin hoodie review India
+    - best budget winter jacket India 2026
+    - fleece zipper hoodie India
+    - winter jacket under 1000 rupees
+    - kangaroo pocket hoodie review
+    - best men's winterwear India
+    - warm hoodie for winter India
+    - Ben Martin fleece jacket review
+    - budget fleece hoodie India
+    - casual winter jacket for men India
+
+schema:
+  type: "Review"
+  itemReviewed:
+    type: "Product"
+    name: "Ben Martin Men Fleece Standard Length Zipper Hoodie with Kangaroo Pocket"
+    brand: "Ben Martin"
+  author:
+    type: "Person"
+    name: "Veeresh Bashetti"
+    url: "https://www.veereshbashetti.com"
+  reviewRating:
+    type: "Rating"
+    ratingValue: "3.8"
+    bestRating: "5"
+  datePublished: "2026-08-25"
+  dateModified: "2026-08-25"
+  publisher:
+    type: "Person"
+    name: "Veeresh Bashetti"
+
+products:
+  - name: "Ben Martin Men Fleece Standard Length Zipper Hoodie"
+    icon: "🧥"
+    price: "₹899 (78% off MRP ₹3,999)"
+    link: "https://www.amazon.in/Ben-Martin-Hoodies-Jacket-Kangaroo/dp/B0DRFZ597C?dib=eyJ2IjoiMSJ9.qT_K4lnY_xGK5ARm8WYv6WE-Wg9aTomzJeNUGXgbFvONECbiQeD4RFtSoECOfaEaOcx7R4r7KhqXgeyg4r6QJcsJ3doHUE_5jhkRf1usqDGwENPY0fmkVoBjajKET4QbJ5XijvAEmE4m0AoQqgSkpcYMKhmBOmwin-Exfb2RANNZkAY4yA1SKhlPYlNJjxFysGf5n1BKAFOlqFeyA_5mvwd1hPxwX7YWrWGDxNKsUxEWdUioOp-XYp_wf2bTU0CrRoBv0ZlOqU1kssHVU7YWRmhA1V2kxeMYT7gGHaF7uxk.k7XbzVc2KgdGEXnQRwOecx5AZmn6aM2iej96A5T7mhs&dib_tag=se&keywords=product%2B799&qid=1787405280&sr=8-77&xpid=jmCL1IrNlPFxk&th=1&pinCode=sflink&utm_source=Pinterest&utm_medium=organic&psc=1&linkCode=ll2&tag=veeresh0308-21&linkId=c9936a3e52787f6d16bebb751b2d5eb3&ref_=as_li_ss_tl"
 
 takeaways:
-  - "The bug itself took minutes to fix once I finally asked for a second pair of eyes."
-  - "I spent most of the 11 hours protecting my ego, not solving the problem."
-  - "Panic makes you re-read the same 20 lines of code instead of stepping back."
-  - "Asking for help early isn't a weakness signal — it's a time-management decision."
-  - "The habit that fixed this for me going forward: a 45-minute rule before escalating."
+  - "Super soft fleece fabric that feels warm right out of the box."
+  - "Full zip front with a kangaroo pocket for quick hand-warming and storage."
+  - "Standard length, regular fit — layers easily over a tee or turtleneck."
+  - "Priced well under ₹1,000, making it one of the cheapest full-fleece hoodies on Amazon India."
+  - "Best suited for mild-to-moderate winter, not extreme cold or heavy rain."
+  - "Rated 3.8/5 from 82+ Amazon reviews — solid, not flawless."
 
 faqs:
-  - q: "How long should you struggle with a bug before asking for help?"
-    a: "There's no universal number, but a useful rule is to give yourself a fixed window — 30 to 45 minutes of focused, undistracted effort — before you loop in a teammate. If you've re-read the same section of code three or more times without a new idea, that's usually a sign you're stuck in a loop, not making progress."
-  - q: "Why do developers avoid asking for help even when they're stuck?"
-    a: "Usually it's some mix of not wanting to look inexperienced, believing you're supposed to figure it out alone, or genuinely thinking you're seconds away from the answer. All three feel rational in the moment and are rarely true in hindsight."
-  - q: "Does asking for help early make you look less capable?"
-    a: "In most healthy teams, the opposite is true. Engineers who escalate early, with a clear summary of what they've already tried, are seen as efficient — not weak. The developers who look inexperienced are usually the ones who stayed silent for six hours and then missed a deadline."
-  - q: "What's a good way to ask for help without feeling like you're offloading your problem?"
-    a: "Come with a short summary: what you expected, what actually happened, and what you've already ruled out. This shows you did the work, respects the other person's time, and usually helps you spot the answer yourself while writing it out."
+  - q: "Is the Ben Martin fleece hoodie warm enough for North Indian winters?"
+    a: "It works well for mild-to-moderate cold — commutes, evenings, air-conditioned offices, and early mornings. For extreme cold (hill stations, peak Delhi/UP winter nights), you'll want to layer it over a thermal or under a heavier jacket."
+  - q: "What is the fit like — true to size?"
+    a: "It's a standard length, regular fit hoodie. Most reviewers find it true to size, but since fleece has some bulk, going one size down is worth considering if you prefer a slimmer look."
+  - q: "Does it have pockets?"
+    a: "Yes, it has a kangaroo-style front pocket, useful for hands, a phone, or small essentials, along with the full-zip front closure."
+  - q: "Is it machine washable?"
+    a: "Fleece hoodies like this are generally machine washable on a gentle/cold cycle, but always check the specific care label on the product before washing to avoid pilling."
+  - q: "Is the Ben Martin hoodie worth buying at this price in India?"
+    a: "At around ₹899, it's a strong budget pick — you get a genuinely warm, soft fleece jacket with a proper zip and pocket for less than a third of comparable branded options. The trade-off is it won't match premium brands on long-term durability or finish."
+  - q: "How does it compare to premium fleece jackets?"
+    a: "Premium brands use tighter-knit, pill-resistant fleece and reinforced stitching, and cost 3-4x more. The Ben Martin hoodie trades some of that long-term durability for a much lower price, making it a reasonable pick if you want warmth without the premium spend."
 ---
 
 <!--
   NOTE ON H1: the page template (ArticleHeader component) already renders
   fm.title as the visible H1. This body does not repeat the title as a
-  markdown heading.
+  markdown heading, to avoid a duplicate-H1 SEO issue.
 -->
 
-> _At 2 AM, staring at the same 20 lines of code for the ninth time, I wasn't debugging anymore. I was just refusing to admit I didn't know what was wrong._
+> *Winter shopping in India usually means choosing between "cheap and thin" or "warm and expensive." I wanted to see if a budget fleece hoodie could actually land somewhere in between.*
 
-It started as a normal Tuesday deploy. Small feature, low risk — a change to how our Django app handled recurring billing dates. I pushed it after testing locally, watched the CI pipeline go green, and went to get dinner feeling fine about it.
+**Published:** August 25, 2026 · **6 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
-By the time I got back, three support tickets were sitting in Slack. Customers were being billed on the wrong dates. Not catastrophically wrong — a day or two off — but wrong enough that finance had noticed, and finance noticing anything is never a quiet problem.
+**Rating: ⭐ 3.8 / 5**
 
----
+👉 **[Check Current Price on Amazon India](https://www.amazon.in/Ben-Martin-Hoodies-Jacket-Kangaroo/dp/B0DRFZ597C?dib=eyJ2IjoiMSJ9.qT_K4lnY_xGK5ARm8WYv6WE-Wg9aTomzJeNUGXgbFvONECbiQeD4RFtSoECOfaEaOcx7R4r7KhqXgeyg4r6QJcsJ3doHUE_5jhkRf1usqDGwENPY0fmkVoBjajKET4QbJ5XijvAEmE4m0AoQqgSkpcYMKhmBOmwin-Exfb2RANNZkAY4yA1SKhlPYlNJjxFysGf5n1BKAFOlqFeyA_5mvwd1hPxwX7YWrWGDxNKsUxEWdUioOp-XYp_wf2bTU0CrRoBv0ZlOqU1kssHVU7YWRmhA1V2kxeMYT7gGHaF7uxk.k7XbzVc2KgdGEXnQRwOecx5AZmn6aM2iej96A5T7mhs&dib_tag=se&keywords=product%2B799&qid=1787405280&sr=8-77&xpid=jmCL1IrNlPFxk&th=1&pinCode=sflink&utm_source=Pinterest&utm_medium=organic&psc=1&linkCode=ll2&tag=veeresh0308-21&linkId=c9936a3e52787f6d16bebb751b2d5eb3&ref_=as_li_ss_tl)**
 
-## The First Two Hours: Confidence
-
-I opened the code convinced I'd find it fast. I'd written the change. I knew exactly where the date logic lived. This felt like a five-minute fix waiting to happen.
-
-Two hours later, it wasn't.
-
-I'd checked the obvious places — timezone handling, the date math, the cron schedule that triggered the billing job. Everything looked correct in isolation. Nothing explained why some customers were affected and others weren't.
-
-This is the part nobody warns you about: the first stretch of a hard bug doesn't feel hard. It feels like you're one print statement away from the answer the entire time. That feeling is what keeps you going alone for way longer than you should.
+*Affiliate Disclosure: If you purchase through this link, I may earn a small commission at no extra cost to you.*
 
 ---
 
-## Hours Three to Seven: The Loop
-
-Somewhere around hour three, I stopped debugging and started what I now recognize as panicking with extra steps.
-
-I re-read the same function for the fifth time, hoping I'd see something new. I rewrote logic that wasn't broken, just to feel like I was doing something. I added print statements, removed them, added them back in slightly different places. I opened Stack Overflow tabs for problems that weren't quite mine and closed them without reading past the first answer.
-
-At no point in those four hours did I message a teammate. Not because nobody was around — two senior developers were active on Slack the entire time. I just kept thinking: _I'm close. I'll have it in twenty more minutes._
-
-I said that sentence to myself, honestly, for about four hours straight.
+Most winter jackets in India fall into one of two categories: thin polyester options that look warm but aren't, or genuinely warm jackets that cost several thousand rupees. The **Ben Martin Men Fleece Standard Length Zipper Hoodie with Kangaroo Pocket** caught my attention because it's priced under ₹1,000 while promising full-fleece warmth — so I wanted to break down exactly what you're getting at this price point.
 
 ---
 
-## What I Was Actually Protecting
+## Quick Specs at a Glance
 
-Looking back, the thing keeping me stuck wasn't a lack of ability. It was a very specific, very quiet fear: that asking for help on a bug I introduced would confirm what I already half-believed about myself — that I wasn't experienced enough to be trusted with production.
-
-I'd written the original bug. Admitting I couldn't find it alone felt like admitting the mistake twice. So instead of a five-minute Slack message, I chose four extra hours of silent panic, alone, at my desk, getting nowhere.
-
-That's the part of this story that isn't really about code at all. The bug was a technical problem. My reaction to it was an ego problem, and ego problems don't get solved by staring at a screen longer.
-
----
-
-## Hour Eight: The Message I Should Have Sent at Hour One
-
-At 11 PM, I finally typed a message to a senior developer on the team. Not a panicked "everything is broken help" — I forced myself to write it properly: what I expected the code to do, what was actually happening, what I'd already ruled out, and the exact lines I suspected.
-
-Writing that message took me twelve minutes.
-
-He replied in under three.
-
-The bug wasn't in the date math at all. It was in a queryset filter four lines above the function I'd been staring at for eight hours — a subtle off-by-one in how we selected "due" invoices that only triggered for customers in a specific timezone offset. Once he pointed at it, I saw it immediately. It wasn't subtle in hindsight. It was just outside the box I'd trapped myself in.
-
-We deployed the fix by midnight. Total time to actually solve the problem, once I asked: about fifteen minutes.
+| Feature         | Details                          |
+| --------------- | --------------------------------- |
+| Best For        | Daily winter wear, layering, commutes |
+| Material        | Fleece (sherpa-style)             |
+| Fit             | Standard length, regular fit      |
+| Closure         | Full zip front                    |
+| Pocket          | Kangaroo-style front pocket       |
+| Hood            | Yes, attached                     |
+| Rating          | 3.8 / 5 (82+ ratings on Amazon)   |
+| Approx. Price   | ₹899 (MRP ₹3,999, ~78% off)       |
+| Made For        | Mild-to-moderate winter climates  |
 
 ---
 
-## The Real Lesson Wasn't About Debugging
+## First Impressions
 
-If you take one thing from this story, I want it to be this: the 11 hours weren't a skill problem. They were a communication problem I created by refusing to communicate.
+The hoodie has a noticeably fuzzy, sherpa-style fleece texture rather than a flat fleece finish — it looks and feels bulkier and cozier than typical thin winter hoodies at this price. The blue colourway photographs well and layers cleanly over a plain white tee or turtleneck, which is part of why it works as a Pinterest-style outfit staple rather than just a functional layer.
 
-A few things I've changed since that night:
-
-**I gave myself a hard time limit.** Now, if I've spent 45 focused minutes on something without meaningful progress, that's my signal to ask — not a failure marker, just a rule I agreed to follow before I got emotionally invested in "almost having it."
-
-**I write the summary before I ask, not after.** Forcing myself to explain what I've tried, in writing, does two things: it respects the other person's time, and about a third of the time, I find the bug myself in the process of writing the question.
-
-**I stopped treating "I don't know" as a confession.** It's information. Teams work better when people say it early and often, not when everyone privately struggles and calls it independence.
-
-**I started noticing the loop, not just the bug.** Re-reading the same code without a new hypothesis is a pattern, not effort. Recognizing that pattern in the moment is the actual skill — more useful, honestly, than anything I know about Django.
+The full-zip front and drawstring hood give it a casual, streetwear-adjacent look rather than a purely "thermal jacket" feel, which is a nice touch if you want something you can wear outside the house and not just around it.
 
 ---
 
-## Why This Matters More Than the Bug Itself
+## What is Good — Pros
 
-I've shipped a lot of bugs since that night, and fixed a lot of them faster than that one — not because I got smarter at debugging Django, but because I stopped treating "asking for help" as a scoreboard of how good a developer I am.
+### Genuinely soft, warm fleece
 
-If you're early in your career and you've had a version of this night — staring at the same function at 1 AM, convinced you're one minute from the answer that never comes — the fix probably isn't more focus. It's a shorter fuse on asking. The bug was never the hard part. Admitting I was stuck was.
+The fabric feels noticeably thicker and softer than typical budget hoodies — it's built more like a sherpa fleece than a plain cotton-blend hoodie, which is exactly what you want in a winter layer.
+
+### Practical kangaroo pocket
+
+The front pocket is roomy enough for your hands, a phone, or small essentials — useful on cold mornings when you don't want to keep unzipping the jacket.
+
+### Works as a standalone jacket or a mid-layer
+
+The standard length and regular fit mean it layers well under a heavier jacket on very cold days, or works fine on its own during milder winter weather.
+
+### Strong value at the price
+
+At roughly ₹899, it undercuts most branded fleece jackets by a significant margin while still delivering genuine fleece warmth rather than a thin imitation.
+
+---
+
+## What Could Be Better — Cons
+
+### Not built for extreme cold or heavy rain
+
+Like most fleece jackets, this isn't wind-proof or waterproof. In peak cold or wet conditions, you'll want a shell layer over it.
+
+### Rating reflects a budget product, not a premium one
+
+A 3.8/5 across 82+ reviews suggests it's a solid, functional product — but not flawless. Expect normal budget-hoodie trade-offs like variability in stitching finish between units.
+
+### Limited colour options
+
+Reviews and listings for budget hoodies like this typically ship in a small set of colourways rather than a wide range, so pick a shade you're confident about before ordering.
+
+---
+
+## Who Should Buy This?
+
+This hoodie is a good fit for:
+
+- **Students and young professionals** who want warm winterwear without a big spend
+- **Commuters** who need something to throw on for early mornings and evenings
+- **People layering under a heavier jacket** for genuinely cold conditions
+- **Anyone building a casual winter wardrobe** on a budget
+
+---
+
+## Who Should Skip It?
+
+Consider a heavier or more technical jacket if:
+
+- You live somewhere with extreme cold or frequent heavy rain/snow
+- You need a wind-proof or fully waterproof outer shell
+- You want premium-grade stitching and long-term durability guarantees
+- You're looking for a formal or semi-formal winter option rather than casual streetwear
+
+---
+
+## Final Verdict — Is the Ben Martin Fleece Hoodie Worth It?
+
+For its price, the Ben Martin fleece hoodie delivers more warmth and better texture than you'd expect from a sub-₹1,000 jacket. It's not going to replace a premium technical winter jacket, and the 3.8/5 rating is an honest reflection of a solid — not flawless — budget product. But as a daily-wear layer for mild-to-moderate Indian winters, it's a genuinely practical, well-priced pick.
+
+**Rating: ⭐ 3.8 / 5**
+
+👉 **[Check Current Price on Amazon India](https://www.amazon.in/Ben-Martin-Hoodies-Jacket-Kangaroo/dp/B0DRFZ597C?dib=eyJ2IjoiMSJ9.qT_K4lnY_xGK5ARm8WYv6WE-Wg9aTomzJeNUGXgbFvONECbiQeD4RFtSoECOfaEaOcx7R4r7KhqXgeyg4r6QJcsJ3doHUE_5jhkRf1usqDGwENPY0fmkVoBjajKET4QbJ5XijvAEmE4m0AoQqgSkpcYMKhmBOmwin-Exfb2RANNZkAY4yA1SKhlPYlNJjxFysGf5n1BKAFOlqFeyA_5mvwd1hPxwX7YWrWGDxNKsUxEWdUioOp-XYp_wf2bTU0CrRoBv0ZlOqU1kssHVU7YWRmhA1V2kxeMYT7gGHaF7uxk.k7XbzVc2KgdGEXnQRwOecx5AZmn6aM2iej96A5T7mhs&dib_tag=se&keywords=product%2B799&qid=1787405280&sr=8-77&xpid=jmCL1IrNlPFxk&th=1&pinCode=sflink&utm_source=Pinterest&utm_medium=organic&psc=1&linkCode=ll2&tag=veeresh0308-21&linkId=c9936a3e52787f6d16bebb751b2d5eb3&ref_=as_li_ss_tl)**
+
+*Affiliate Disclosure: If you purchase through this link, I may earn a small commission at no extra cost to you.*
 
 ---
 
 ## Frequently Asked Questions
 
-### How long should you struggle with a bug before asking for help?
+### Is the Ben Martin fleece hoodie warm enough for North Indian winters?
 
-Give yourself a fixed window — 30 to 45 minutes of focused effort — before looping in a teammate. If you've re-read the same section of code three or more times without a new idea, you're likely stuck in a loop, not making progress.
+It works well for mild-to-moderate cold — commutes, evenings, and early mornings. For extreme cold, layer it over a thermal or under a heavier jacket.
 
-### Why do developers avoid asking for help even when they're stuck?
+### What is the fit like — true to size?
 
-Usually some mix of not wanting to look inexperienced, believing you're supposed to solve it alone, or genuinely thinking you're seconds from the answer. All three feel rational in the moment and are rarely true in hindsight.
+It's a standard length, regular fit. Most buyers find it true to size, though sizing down slightly is an option if you prefer a slimmer look.
 
-### Does asking for help early make you look less capable?
+### Does it have pockets?
 
-Generally the opposite. Engineers who escalate early with a clear summary of what they've tried are seen as efficient, not weak. Staying silent for hours and missing a deadline is what actually reads as inexperience.
+Yes — a kangaroo-style front pocket plus the full-zip front closure.
 
-### What's a good way to ask for help without feeling like you're offloading your problem?
+### Is it machine washable?
 
-Summarize what you expected, what actually happened, and what you've already ruled out. It respects the other person's time — and often helps you spot the answer yourself while writing it.
+Generally yes, on a gentle/cold cycle, but always check the specific care label before washing.
+
+### Is the Ben Martin hoodie worth buying at this price in India?
+
+At around ₹899, it's a strong budget pick for genuine fleece warmth with a proper zip and pocket, at a fraction of premium-brand pricing.
+
+### How does it compare to premium fleece jackets?
+
+Premium brands use tighter-knit, pill-resistant fleece and reinforced stitching at 3-4x the cost. This hoodie trades some long-term durability for a much lower price point.
 
 ---
 
@@ -165,14 +242,15 @@ Summarize what you expected, what actually happened, and what you've already rul
   ============================================================
   ACTION ITEMS BEFORE PUBLISHING
   ============================================================
-  1. Replace REPLACE_WITH_YOUR_CDN_IMAGE_URL/... in the `image`
-     frontmatter field with a hosted banner image from your
-     bog_images CDN repo, matching your other posts' pattern.
-  2. This is an original story written for your blog voice —
-     not based on a real incident I have knowledge of. If you'd
-     like, swap in real details from an actual debugging session
-     of yours to make it fully first-person accurate.
-  3. Add this post's entry to manifest.json when ready to publish
-     (happy to generate that card too).
+  1. Replace https://www.amazon.in/Ben-Martin-Hoodies-Jacket-Kangaroo/dp/B0DRFZ597C?dib=eyJ2IjoiMSJ9.qT_K4lnY_xGK5ARm8WYv6WE-Wg9aTomzJeNUGXgbFvONECbiQeD4RFtSoECOfaEaOcx7R4r7KhqXgeyg4r6QJcsJ3doHUE_5jhkRf1usqDGwENPY0fmkVoBjajKET4QbJ5XijvAEmE4m0AoQqgSkpcYMKhmBOmwin-Exfb2RANNZkAY4yA1SKhlPYlNJjxFysGf5n1BKAFOlqFeyA_5mvwd1hPxwX7YWrWGDxNKsUxEWdUioOp-XYp_wf2bTU0CrRoBv0ZlOqU1kssHVU7YWRmhA1V2kxeMYT7gGHaF7uxk.k7XbzVc2KgdGEXnQRwOecx5AZmn6aM2iej96A5T7mhs&dib_tag=se&keywords=product%2B799&qid=1787405280&sr=8-77&xpid=jmCL1IrNlPFxk&th=1&pinCode=sflink&utm_source=Pinterest&utm_medium=organic&psc=1&linkCode=ll2&tag=veeresh0308-21&linkId=c9936a3e52787f6d16bebb751b2d5eb3&ref_=as_li_ss_tl (appears 3x)
+     with your actual Amazon affiliate link for this product.
+  2. Replace REPLACE_WITH_YOUR_CDN_IMAGE_URL/... in the `image`
+     frontmatter field with your hosted banner image (upload one
+     of the product photos to your bog_images CDN repo, same
+     pattern as your other posts).
+  3. Rating (3.8/5, 82 reviews) and price (₹899, 78% off ₹3,999)
+     were taken directly from your uploaded Amazon screenshot —
+     double-check these haven't changed before publishing, since
+     Amazon pricing/ratings shift over time.
   ============================================================
 -->
