@@ -122,15 +122,66 @@ const TOPICS = [
 
 // ─── PINS DATA ───────────────────────────────────────────────
 const PINS = [
-    { emoji: "🚗", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review.webp", title: "This Expandable Backpack Might Be the Smartest Travel Upgrade of 2026", desc: "Discover why this WROGN expandable backpack is becoming a Pinterest favorite.", category: "Pinterest Picks", heightPx: 280, slug: "wrogn-expandable-backpack-review" },
+    {
+        emoji: "🧥",
+        image:
+            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/ben-martin-fleece-hoodie-review-banner.webp",
+        title: "Is This ₹899 Fleece Hoodie Actually Worth It?",
+        desc:
+            "A closer look at the Ben Martin fleece hoodie — warmth, fit, comfort, and everyday winter wear.",
+        category: "Pinterest Picks",
+        heightPx: 280,
+        slug: "ben-martin-fleece-hoodie-review",
+    },
 
-    { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review.webp", title: "This Compact Tech Organizer Keeps Every Cable and Charger in One Place", desc: "A small canvas pouch that ends the tangled-cable mess in your travel bag — chargers, power banks, and cards all sorted in one zip-around case.", category: "Pinterest Picks", heightPx: 280, slug: "dailyobjects-gadget-organizer-review" },
+    {
+        emoji: "🎒",
+        image:
+            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review.webp",
+        title: "The Expandable Backpack Built for Smarter Travel",
+        desc:
+            "A practical look at the WROGN expandable backpack, from its extra capacity to everyday travel convenience.",
+        category: "Pinterest Picks",
+        heightPx: 280,
+        slug: "wrogn-expandable-backpack-review",
+    },
 
-    { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/striff-webcam-cover-slide-review.webp", title: "This Tiny Webcam Cover Quietly Fixes a Privacy Blind Spot on Your Laptop", desc: "STRIFF ultra-thin webcam cover slide attached over a laptop camera, sliding open and closed", category: "Pinterest Picks", heightPx: 280, slug: "striff-webcam-cover-slide-review" },
+    {
+        emoji: "🔌",
+        image:
+            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review.webp",
+        title: "The Simple Tech Organizer That Ends Cable Chaos",
+        desc:
+            "Keep chargers, cables, power banks, and everyday tech neatly organized in one compact case.",
+        category: "Pinterest Picks",
+        heightPx: 280,
+        slug: "dailyobjects-gadget-organizer-review",
+    },
 
-    { emoji: "⌨️", image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/biggie-bean-bag-review.webp", title: "Why This Bean Bag Became My Favorite Spot in the House", desc: "After sinking into this printed bean bag daily for work breaks, gaming sessions, and lazy evenings, I can confidently say it's the coziest addition to my room", category: "Pinterest Picks", heightPx: 280, slug: "biggie-bean-bag-review" },
+    {
+        emoji: "🔒",
+        image:
+            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/striff-webcam-cover-slide-review.webp",
+        title: "This Tiny Webcam Cover Adds a Simple Privacy Layer",
+        desc:
+            "A slim STRIFF webcam cover that keeps your laptop camera protected without getting in the way.",
+        category: "Pinterest Picks",
+        heightPx: 280,
+        slug: "striff-webcam-cover-slide-review",
+    },
+
+    {
+        emoji: "🛋️",
+        image:
+            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/biggie-bean-bag-review.webp",
+        title: "Why This Bean Bag Became My Favorite Spot",
+        desc:
+            "A closer look at the comfort, design, and everyday lounging experience that makes this bean bag stand out.",
+        category: "Pinterest Picks",
+        heightPx: 280,
+        slug: "biggie-bean-bag-review",
+    },
 ];
-
 // ─── MARQUEE TAGS ─────────────────────────────────────────────
 const MARQUEE_TAGS = ["Home Decor", "Lifestyle", "Travel", "Productivity", "Mindset", "Food & Recipes", "Pinterest Picks", "Career", "Tech", "Product Reviews", "Startup Life", "Personal Stories"];
 
@@ -974,8 +1025,8 @@ const BlogCard = ({ post, featured = false, index = 0 }) => {
 
                 <div className="p-6 flex flex-col flex-1">
                     <h3 className={`font-display text-[#1A1612] leading-snug mb-3 line-clamp-2 ${featured ? "text-[1.7rem]" : "text-[1.1rem]"}`}>
-                    {post.title}
-                </h3>
+                        {post.title}
+                    </h3>
                     {post.excerpt && (
                         <p className="text-sm text-[#8C7E74] leading-[1.7] flex-1 mb-4 line-clamp-3">{post.excerpt}</p>
                     )}
