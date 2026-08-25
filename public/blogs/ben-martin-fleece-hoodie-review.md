@@ -10,7 +10,7 @@ date: "2026-08-25"
 lastModified: "2026-08-25"
 author: "Veeresh Bashetti"
 featured: true
-image: "REPLACE_WITH_YOUR_CDN_IMAGE_URL/ben-martin-fleece-hoodie-review-banner.webp"
+image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/ben-martin-fleece-hoodie-review-banner.webp"
 imageAlt: "Man wearing Ben Martin blue fleece zipper hoodie with kangaroo pocket, holding a coffee cup — best budget winter jacket India 2026"
 pinterest: "https://in.pinterest.com/veereshbbashetti/"
 gradient: "from-[#F5F3F0] to-[#E7DED6]"
