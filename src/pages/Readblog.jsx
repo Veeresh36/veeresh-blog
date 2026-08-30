@@ -290,8 +290,14 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
       <title>{title}</title>
       <meta name="description" content={desc} />
       {fm.seo?.keywords?.length ? <meta name="keywords" content={fm.seo.keywords.join(", ")} /> : null}
+      <meta name="robots" content={fm.seo?.robots || "index, follow"} />
+      <meta name="googlebot" content={fm.seo?.robots || "index, follow"} />
+      <meta name="author" content={fm.author || SITE.name} />
 
       <link rel="canonical" href={url} />
+      {fm.seo?.hreflang?.map(h => (
+        <link key={h.lang} rel="alternate" hrefLang={h.lang} href={h.href} />
+      ))}
 
       <meta property="og:type" content="article" />
       <meta property="og:title" content={fm.title} />
@@ -300,6 +306,9 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
       <meta property="og:site_name" content={SITE.name} />
       <meta property="og:locale" content={SITE.locale} />
       {img ? <meta property="og:image" content={img} /> : null}
+      {img && fm.seo?.imageWidth ? <meta property="og:image:width" content={String(fm.seo.imageWidth)} /> : null}
+      {img && fm.seo?.imageHeight ? <meta property="og:image:height" content={String(fm.seo.imageHeight)} /> : null}
+      {img ? <meta property="og:image:alt" content={fm.imageAlt || fm.title} /> : null}
       {fm.date ? <meta property="article:published_time" content={fm.date} /> : null}
       {fm.author ? <meta property="article:author" content={fm.author} /> : null}
       {tags.map(t => <meta key={t} property="article:tag" content={t} />)}
@@ -308,6 +317,8 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
       <meta name="twitter:title" content={fm.title} />
       <meta name="twitter:description" content={desc} />
       {img ? <meta name="twitter:image" content={img} /> : null}
+      {fm.seo?.twitterHandle ? <meta name="twitter:site" content={fm.seo.twitterHandle} /> : null}
+      {fm.seo?.twitterHandle ? <meta name="twitter:creator" content={fm.seo.twitterHandle} /> : null}
 
       {prevPost ? <link rel="prev" href={`${BASE_URL}/blog/${prevPost.slug}`} /> : null}
       {nextPost ? <link rel="next" href={`${BASE_URL}/blog/${nextPost.slug}`} /> : null}

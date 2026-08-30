@@ -93,6 +93,13 @@
     </url>
 
     <url>
+        <loc>https://www.veereshbashetti.com/category/entertainment</loc>
+        <lastmod>2026-08-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
         <loc>https://www.veereshbashetti.com/blog/10-ai-prompts-to-prepare-for-your-next-job-search</loc>
         <lastmod>2026-07-31</lastmod>
         <changefreq>monthly</changefreq>
@@ -319,6 +326,13 @@
     <url>
         <loc>https://www.veereshbashetti.com/blog/the-profit-of-a-moment</loc>
         <lastmod>2026-08-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.veereshbashetti.com/blog/toxic-movie-yash-2026-review</loc>
+        <lastmod>2026-08-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
