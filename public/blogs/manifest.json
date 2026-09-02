@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "indian-govt-websites-no-structure",
+      "title": "Indian Government Websites Don't Just Have a Design Problem. They Have a Structure Problem.",
+      "tag": "GovTech",
+      "category": "tech",
+      "excerpt": "This isn't about one ugly government form. It's about a pattern that shows up across many Indian government websites: no design system, no data model that keeps up with policy, no process for revisiting anything after launch — and why that's fixable.",
+      "emoji": "🏛️",
+      "gradient": "from-[#0F1A2E] to-[#1A2F4D]",
+      "meta": "11 min read · 30 August 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/indian-govt-websites-no-structure-banner.webp"
+    },
+    {
       "slug": "toxic-movie-yash-2026-review",
       "title": "Toxic Movie Review 2026: Is Yash's Most Controversial Film Worth the Hype?",
       "tag": "Entertainment",
