@@ -54,6 +54,7 @@ export const routes = [
             { path: "terms", element: withSuspense(TermsOfUse) },
             { path: "sitemap", element: withSuspense(Sitemap) },
             { path: "about", element: withSuspense(About) },
+            { path: "404", element: withSuspense(NotFound) },
             { path: "*", element: withSuspense(NotFound) },
         ],
     },
