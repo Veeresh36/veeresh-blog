@@ -1,10 +1,12 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo, memo } from "react";
 import { useParams, Link, useLoaderData } from "react-router-dom";
+import { Head } from "vite-react-ssg";
 import { parseFrontmatter as sharedParseFrontmatter } from "../utils/blogData.js";
 import { hasConsent } from "../pages/CookieBanner";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import NotFound from "./NotFound";
 
 // ═══════════════════════════════════════════════
 // CONFIG
@@ -17,6 +19,16 @@ const SITE = {
   email: "veeresh.b.bashetti@gmail.com",
   baseUrl: "https://www.veereshbashetti.com",
   locale: "en_IN",
+};
+
+const BASE_URL = "https://www.veereshbashetti.com"; // match sitemap — use www consistently
+
+// TODO: update these to match your real GitHub repo path/branch and profile URLs
+const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp";
+const AUTHOR_SOCIALS = {
+  github: "https://github.com/Veeresh36",
+  linkedin: "https://www.linkedin.com/in/veeresh-bashetti",
+  pinterest: SITE.pinterestUrl,
 };
 
 const TOC_EMOJIS = ["📌", "💡", "📊", "🔥", "🧠", "✨", "🚀", "🎯", "📝", "⚡"];
@@ -61,6 +73,13 @@ function formatDate(d) {
   } catch { return d; }
 }
 
+function formatDateShort(d) {
+  if (!d) return "";
+  try {
+    return new Date(d).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" });
+  } catch { return d; }
+}
+
 function estimateReadTime(text) {
   const words = text.trim().split(/\s+/).length;
   return Math.max(1, Math.round(words / 238));
@@ -78,6 +97,31 @@ function normalizeTags(tags) {
       return null;
     })
     .filter(Boolean);
+}
+
+function flattenNode(node) {
+  if (node === null || node === undefined) return "";
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(flattenNode).join("");
+  if (node?.props?.children !== undefined) return flattenNode(node.props.children);
+  return "";
+}
+
+// Split markdown into [intro, ...sections] at every "## " heading.
+// Safer than splitting on blank lines (never cuts through a code fence).
+function splitSections(md) {
+  const parts = md.split(/\n(?=## )/);
+  if (parts[0].startsWith("## ")) return ["", ...parts];
+  return parts;
+}
+
+// CTA can be a nested `cta:` object or flat ctaTitle/ctaText/ctaHref/ctaLabel keys
+// (flat keys are safest if your frontmatter parser doesn't do nested maps).
+function getCta(fm) {
+  if (fm.cta && typeof fm.cta === "object" && fm.cta.href) return fm.cta;
+  if (fm.ctaHref && fm.ctaTitle) return { title: fm.ctaTitle, text: fm.ctaText, href: fm.ctaHref, label: fm.ctaLabel };
+  return null;
 }
 
 // ── Marketplace link detection ──────────────────────────────
@@ -146,7 +190,7 @@ function useActiveTOC(tocItems) {
         const top = el.getBoundingClientRect().top + window.scrollY;
         const bottom = next
           ? next.getBoundingClientRect().top + window.scrollY
-          : articleBottom; // ← was document.documentElement.scrollHeight
+          : articleBottom;
         const scrolled = window.scrollY + window.innerHeight * 0.2 - top;
         result[id] = Math.min(100, Math.max(0, (scrolled / (bottom - top)) * 100));
       });
@@ -231,9 +275,9 @@ function useFadeIn(delay = 0) {
   return ref;
 }
 
-import { Head } from "vite-react-ssg";
-
-const BASE_URL = "https://www.veereshbashetti.com"; // match sitemap — use www consistently
+// ═══════════════════════════════════════════════
+// SEO HEAD
+// ═══════════════════════════════════════════════
 
 function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
   if (!fm.title) return null;
@@ -245,6 +289,7 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
   const words = content.trim().split(/\s+/).length;
   const readMinutes = Math.max(1, Math.round(words / 238));
   const tags = normalizeTags(fm.tags);
+  const modified = fm.updated || fm.date || "";
 
   const currentIdx = morePosts.findIndex(p => p.slug === slug);
   const prevPost = morePosts[currentIdx - 1];
@@ -256,10 +301,16 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
       "@id": `${url}#article`,
       headline: fm.title,
       description: desc,
-      image: img,
+      image: img ? [img] : undefined,
       datePublished: fm.date || "",
-      dateModified: fm.date || "",
-      author: { "@type": "Person", name: fm.author || SITE.name, url: BASE_URL },
+      dateModified: modified,
+      mainEntityOfPage: { "@type": "WebPage", "@id": url },
+      author: {
+        "@type": "Person",
+        name: fm.author || SITE.name,
+        url: `${BASE_URL}/about`,
+        sameAs: [AUTHOR_SOCIALS.github, AUTHOR_SOCIALS.linkedin, AUTHOR_SOCIALS.pinterest].filter(Boolean),
+      },
       publisher: { "@type": "Person", name: SITE.name, url: BASE_URL },
       keywords: tags.join(", "),
       inLanguage: "en-IN",
@@ -310,6 +361,7 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
       {img && fm.seo?.imageHeight ? <meta property="og:image:height" content={String(fm.seo.imageHeight)} /> : null}
       {img ? <meta property="og:image:alt" content={fm.imageAlt || fm.title} /> : null}
       {fm.date ? <meta property="article:published_time" content={fm.date} /> : null}
+      {modified ? <meta property="article:modified_time" content={modified} /> : null}
       {fm.author ? <meta property="article:author" content={fm.author} /> : null}
       {tags.map(t => <meta key={t} property="article:tag" content={t} />)}
 
@@ -329,7 +381,6 @@ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {
     </Head>
   );
 }
-
 
 function useSyncedSidebarScroll(containerRef, layoutRef) {
   useEffect(() => {
@@ -395,15 +446,6 @@ function useReadingMode() {
     return () => document.documentElement.removeAttribute("data-reading-mode");
   }, [on]);
   return [on, () => setOn(o => !o)];
-}
-
-function useFinishTime(readTime, progress) {
-  return useMemo(() => {
-    if (!readTime || progress >= 100) return null;
-    const remaining = Math.max(0, readTime * (1 - progress / 100));
-    const finish = new Date(Date.now() + remaining * 60000);
-    return finish.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
-  }, [readTime, progress]);
 }
 
 function useHighlights(slug) {
@@ -621,14 +663,14 @@ const Breadcrumb = ({ category, title, dark }) => (
   <nav className="max-w-[1280px] mx-auto px-6 pt-28 pb-0 flex items-center gap-2 text-xs font-medium flex-wrap" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }} aria-label="Breadcrumb">
     <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
     <span>›</span>
-    <a href="/#blog" className="hover:text-red-500 transition-colors">Blog</a>
+    <Link to="/blog" className="hover:text-red-500 transition-colors">Blog</Link>
     {category && (<><span>›</span><Link to={`/category/${category.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-red-500 transition-colors capitalize">{category}</Link></>)}
     <span>›</span>
     <span className="truncate max-w-[180px]" style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>{title}</span>
   </nav>
 );
 
-const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime, streak, views }) => {
+const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, streak, views }) => {
   const [copied, setCopied] = useState(false);
   const share = useCallback(async () => {
     if (navigator.share) {
@@ -641,6 +683,7 @@ const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime,
   }, [fm.title]);
 
   const initials = (fm.author || SITE.name).split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+  const shownDate = fm.updated || fm.date;
 
   return (
     <header className="max-w-[1280px] mx-auto px-6 pt-7" style={{ animation: "fadeUp 0.65s ease forwards" }}>
@@ -673,20 +716,20 @@ const ArticleHeader = ({ fm, readTime, dark, onBookmark, bookmarked, finishTime,
           <div>
             <div className="text-[0.88rem] font-semibold" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{fm.author || SITE.name}</div>
             <div className="flex items-center gap-2 text-[0.73rem] flex-wrap" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
-              {fm.date && <time dateTime={fm.date}>{formatDate(fm.date)}</time>}
-              {fm.date && readTime && <span>·</span>}
               {readTime && <span>{readTime} min read</span>}
+              {shownDate && (
+                <>
+                  {readTime && <span>·</span>}
+                  <time dateTime={shownDate}>
+                    {fm.updated ? "Updated" : "Published"} {formatDateShort(shownDate)}
+                  </time>
+                </>
+              )}
               {views && (
                 <>
                   <span>·</span>
                   <span>{views.toLocaleString()} views</span>
                 </>
-              )}
-              {finishTime && (
-                <span className="inline-flex items-center gap-1 text-[0.68rem] font-semibold px-2 py-0.5 rounded-full"
-                  style={{ background: dark ? "rgba(255,255,255,0.07)" : "#F0EBE3", color: dark ? "rgba(250,248,244,0.5)" : "#7A6E64" }}>
-                  ⏱ Finish by {finishTime}
-                </span>
               )}
             </div>
           </div>
@@ -733,6 +776,7 @@ const HeroImage = ({ src, alt, dark }) => {
     </div>
   );
 };
+
 // ═══════════════════════════════════════════════
 // AD SLOTS — Google AdSense
 // ═══════════════════════════════════════════════
@@ -759,8 +803,8 @@ const AdSlot = ({ dark, label = "Ad Space", height = 250, className = "" }) => (
 
 /**
  * Real Google AdSense ad unit.
- * - format="fluid" + layout="in-article" -> use for the "In-article" ad unit (slot 3083346955)
- * - format="auto" (responsive) -> use for the "Display" ad unit (slot 3170555405), sidebar/banners
+ * - format="fluid" + layout="in-article" -> use for the "In-article" ad unit
+ * - format="auto" (responsive) -> use for the "Display" ad unit, sidebar/banners
  */
 const GoogleAd = ({
   slot,
@@ -857,9 +901,13 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark, 
       return;
     }
     if (!activeId || !listRef.current) return;
-    const activeElement = listRef.current.querySelector(`[data-id="${activeId}"]`);
+    const list = listRef.current;
+    const activeElement = list.querySelector(`[data-id="${activeId}"]`);
     if (!activeElement) return;
-    activeElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    // Scroll ONLY the TOC list. scrollIntoView() also scrolls the window,
+    // which fought the reader's own scrolling and caused the up/down jumping.
+    const top = activeElement.offsetTop - list.clientHeight / 2 + activeElement.clientHeight / 2;
+    list.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   }, [activeId]);
 
   if (!tocItems.length) return <p className="text-sm" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>No sections found.</p>;
@@ -885,7 +933,7 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark, 
         </div>
       </div>
 
-      <ul className="space-y-0.5 list-none" ref={listRef} role="navigation" aria-label="Article sections">
+      <ul className="relative space-y-0.5 list-none no-scrollbar overflow-y-auto max-h-[55vh]" ref={listRef} role="navigation" aria-label="Article sections">
         {tocItems.map((item, idx) => {
           const isActive = activeId === item.id;
           const pct = Math.round(sectionProgress[item.id] || 0);
@@ -939,6 +987,57 @@ const SmartTOC = ({ tocItems, activeId, sectionProgress, overallProgress, dark, 
   );
 };
 
+// ─── Mobile / tablet sticky step navigation ─────────────────────────
+// The sidebar TOC drops below the article on small screens, so this bar
+// gives readers section navigation while they read.
+
+const MobileSectionBar = ({ tocItems, activeId, progress, dark }) => {
+  const rowRef = useRef(null);
+
+  useEffect(() => {
+    const row = rowRef.current;
+    const el = row?.querySelector(`[data-chip="${activeId}"]`);
+    if (row && el) {
+      row.scrollTo({ left: el.offsetLeft - row.clientWidth / 2 + el.clientWidth / 2, behavior: "smooth" });
+    }
+  }, [activeId]);
+
+  if (!tocItems.length || progress < 3) return null;
+
+  const go = id => {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 120, behavior: "smooth" });
+  };
+
+  return (
+    <nav aria-label="Jump to section"
+      className="lg:hidden fixed left-0 right-0 z-[98] top-[71px]"
+      style={{
+        background: dark ? "rgba(15,14,13,0.94)" : "rgba(250,248,244,0.94)",
+        backdropFilter: "blur(14px)",
+        borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#EAE4DC"}`,
+      }}>
+      <div ref={rowRef} className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-2">
+        {tocItems.map((t, i) => {
+          const active = t.id === activeId;
+          return (
+            <button key={t.id} data-chip={t.id} onClick={() => go(t.id)}
+              aria-current={active ? "true" : undefined}
+              className="flex-shrink-0 text-[0.72rem] font-semibold px-3 py-1.5 rounded-full border whitespace-nowrap transition-colors"
+              style={{
+                background: active ? "#E60023" : "transparent",
+                color: active ? "#fff" : (dark ? "rgba(250,248,244,0.7)" : "#5A5046"),
+                borderColor: active ? "#E60023" : (dark ? "rgba(255,255,255,0.12)" : "#DDD7CE"),
+              }}>
+              {i + 1}. {t.label.length > 24 ? t.label.slice(0, 24) + "…" : t.label}
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+};
+
 const SidebarCard = ({ header, children, dark, delay = 0 }) => {
   const ref = useFadeIn(delay);
   return (
@@ -981,14 +1080,6 @@ const AuthorCard = ({ author, dark }) => {
   );
 };
 
-// TODO: update these two lines to match your real GitHub repo path/branch and profile URLs
-const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp";
-const AUTHOR_SOCIALS = {
-  github: "https://github.com/Veeresh36",
-  linkedin: "https://www.linkedin.com/in/veeresh-bashetti",
-  pinterest: SITE.pinterestUrl,
-};
-
 const GitHubIcon = ({ size = 16 }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" width={size} height={size} aria-hidden="true">
     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.04-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.49 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.22.7.83.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
@@ -1003,11 +1094,6 @@ const LinkedInIcon = ({ size = 16 }) => (
 
 // ═══════════════════════════════════════════════
 // AUTHOR BIO BLOCK — v3 (split panel, big photo, animated)
-// Drop-in replacement. Same props as v2:
-//   author, dark, border (required — dark/border kept
-//   for API compatibility though the photo panel is
-//   intentionally always dark, by design, for contrast)
-//   specialties, articleCount, sinceYear (optional)
 // ═══════════════════════════════════════════════
 
 const AuthorBioBlock = ({
@@ -1290,6 +1376,8 @@ const ReactionBar = ({ slug, dark, border, supabaseUrl, supabaseKey }) => {
   );
 };
 
+// FAQ structured data now comes only from the JSON-LD in SEOHead
+// (microdata removed to avoid duplicate/competing FAQ markup).
 const FAQSection = ({ faqs, dark, border }) => {
   const [open, setOpen] = useState(null);
   if (!faqs?.length) return null;
@@ -1299,16 +1387,14 @@ const FAQSection = ({ faqs, dark, border }) => {
       <h2 className="font-['DM_Serif_Display',serif] text-[1.6rem] mb-6" style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>
         Frequently Asked Questions
       </h2>
-      <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
+      <div className="space-y-2">
         {faqs.map((faq, i) => (
-          <div key={i} className="rounded-xl overflow-hidden"
-            itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
-            style={{ border: `1px solid ${border}` }}>
+          <div key={i} className="rounded-xl overflow-hidden" style={{ border: `1px solid ${border}` }}>
             <button onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between px-5 py-4 text-left transition-colors"
               style={{ background: open === i ? (dark ? "rgba(255,255,255,0.04)" : "#F9F6F1") : "transparent" }}
               aria-expanded={open === i}>
-              <span className="text-[0.88rem] font-semibold pr-4" itemProp="name"
+              <span className="text-[0.88rem] font-semibold pr-4"
                 style={{ color: dark ? "#FAF8F4" : "#1A1612" }}>{faq.q}</span>
               <span className="flex-shrink-0 text-lg transition-transform duration-200"
                 style={{ transform: open === i ? "rotate(45deg)" : "none", color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
@@ -1317,9 +1403,8 @@ const FAQSection = ({ faqs, dark, border }) => {
             </button>
             {open === i && (
               <div className="px-5 pb-5 text-[0.85rem] leading-relaxed"
-                itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
                 style={{ color: dark ? "rgba(250,248,244,0.65)" : "#5A5046" }}>
-                <span itemProp="text">{faq.a}</span>
+                <span>{faq.a}</span>
               </div>
             )}
           </div>
@@ -1341,7 +1426,7 @@ const AISummaryCard = ({ content, dark, border }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
         },
         body: JSON.stringify({ content: content.slice(0, 6000) }),
       });
@@ -1518,13 +1603,12 @@ const SmartLink = ({ href = "", children }) => {
         borderRadius: "999px", background: p.bg, color: p.color,
         fontWeight: 700, fontSize: "0.86em", textDecoration: "none",
         border: `1px solid ${p.color}33`, whiteSpace: "nowrap", verticalAlign: "middle",
-      }
-      }
+      }}
     >
       <span aria-hidden="true">{p.icon}</span>
       {children}
       <span aria-hidden="true" style={{ fontSize: "0.8em" }}>↗</span>
-    </a >
+    </a>
   );
 };
 
@@ -1606,56 +1690,188 @@ const AffiliateLinksSidebar = ({ content, dark, border, fallbackIcon }) => {
   );
 };
 
+// ═══════════════════════════════════════════════
+// ARTICLE BODY PIECES — callouts, roadmap, body, CTA
+// ═══════════════════════════════════════════════
+
+// Callouts: markdown blockquotes starting with an emoji become styled cards.
+//   > ⚠️ **Salary is not a milestone.** ...
+//   > 🛠️ **Proof of skill:** ...
+//   > 💡 **Tip:** ...
+//   > ℹ️ **Note:** ...
+// Any other blockquote keeps the default look.
+// (Uses <div role="note">, not <aside>, so focus mode's `aside {display:none}` doesn't hide them.)
+
+const CALLOUTS = {
+  "⚠️": { label: "Heads up", light: { bg: "#FFF8E6", bd: "#F0D48A", fg: "#8A5A00" }, dark: { bg: "rgba(255,180,0,0.08)", bd: "rgba(255,200,80,0.3)", fg: "#F5C750" } },
+  "🛠": { label: "Proof of skill", light: { bg: "#EEF7F1", bd: "#B9DCC5", fg: "#22543D" }, dark: { bg: "rgba(72,187,120,0.08)", bd: "rgba(72,187,120,0.3)", fg: "#7BD8A0" } },
+  "💡": { label: "Tip", light: { bg: "#EEF3FF", bd: "#C4D3F7", fg: "#2A4DA0" }, dark: { bg: "rgba(90,130,255,0.08)", bd: "rgba(120,150,255,0.3)", fg: "#9DB4FF" } },
+  "ℹ️": { label: "Note", light: { bg: "#F5F1EB", bd: "#DDD7CE", fg: "#5A5046" }, dark: { bg: "rgba(255,255,255,0.04)", bd: "rgba(255,255,255,0.12)", fg: "rgba(250,248,244,0.7)" } },
+};
+
+const Callout = ({ children, dark }) => {
+  const text = flattenNode(children).trim();
+  const key = Object.keys(CALLOUTS).find(k => text.startsWith(k));
+  if (!key) return <blockquote>{children}</blockquote>;
+  const c = CALLOUTS[key];
+  const t = dark ? c.dark : c.light;
+  return (
+    <div
+      role="note"
+      aria-label={c.label}
+      className="callout"
+      style={{
+        margin: "2rem 0", padding: "1.1rem 1.3rem", borderRadius: "1rem",
+        background: t.bg, border: `1px solid ${t.bd}`, borderLeft: `4px solid ${t.fg}`,
+        color: dark ? "rgba(250,248,244,0.82)" : "#3D3530", fontStyle: "normal", fontSize: "0.95em",
+      }}>
+      <div style={{ fontSize: "0.72rem", fontWeight: 700, color: t.fg, marginBottom: "0.35rem" }}>{c.label}</div>
+      <div className="callout-body">{children}</div>
+    </div>
+  );
+};
+
+// Single place that builds react-markdown overrides (replaces the two duplicated copies).
+function buildMdComponents(dark) {
+  return {
+    h2: ({ children, ...props }) => <h2 id={slugToId(String(children).replace(/\s+/g, " ").trim())} {...props}>{children}</h2>,
+    h3: ({ children, ...props }) => <h3 id={slugToId(String(children).replace(/\s+/g, " ").trim())} {...props}>{children}</h3>,
+    a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
+    blockquote: ({ children }) => <Callout dark={dark}>{children}</Callout>,
+    // wrap tables so wide ones scroll instead of breaking the page
+    table: ({ children }) => <div style={{ overflowX: "auto" }}><table>{children}</table></div>,
+    p: ({ children }) => {
+      const m = flattenNode(children).trim().match(/^::youtube\[([a-zA-Z0-9_-]{11})\](?:\{caption="([^"]*)"\})?$/);
+      if (m) return <YouTubeEmbed id={m[1]} caption={m[2] || ""} />;
+      return <p>{children}</p>;
+    },
+  };
+}
+
+// Visual "at a glance" roadmap.
+// Frontmatter:
+//   roadmapTitle: "Frontend Developer Roadmap 2026 at a Glance"
+//   roadmap: [HTML, CSS, JavaScript, ...]
+// Each label is matched (case-insensitive "contains") against your "## " headings
+// so the step links to its section. No match = step shown but not clickable.
+// Built from <div>s (not <ol>) so the .prose ordered-list styling doesn't apply.
+const RoadmapGlance = ({ items, tocItems, dark, title }) => {
+  const [copied, setCopied] = useState(false);
+  if (!Array.isArray(items) || !items.length) return null;
+
+  const border = dark ? "rgba(255,255,255,0.09)" : "#E4DDD4";
+  const fg = dark ? "#FAF8F4" : "#1A1612";
+  const muted = dark ? "rgba(250,248,244,0.6)" : "#7A6E64";
+
+  const steps = items.map((label, i) => {
+    const needle = String(label).toLowerCase();
+    const target = tocItems.find(t => t.label.toLowerCase().includes(needle));
+    return { n: String(i + 1).padStart(2, "0"), label: String(label), id: target?.id };
+  });
+
+  const go = id => {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 110, behavior: "smooth" });
+  };
+
+  const copy = async () => {
+    const text = `${title || "Roadmap"}\n\n` + steps.map(s => `- [ ] ${s.n} ${s.label}`).join("\n");
+    try { await navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* ignore */ }
+  };
+
+  return (
+    <section aria-label={title || "Roadmap at a glance"} className="my-10 rounded-2xl p-6 sm:p-8"
+      style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
+      <div className="flex items-start justify-between gap-4 flex-wrap mb-6">
+        <h2 className="font-['DM_Serif_Display',serif]"
+          style={{ fontSize: "1.5rem", lineHeight: 1.15, color: fg, margin: 0, padding: 0, border: "none" }}>
+          {title || "Roadmap at a Glance"}
+        </h2>
+        <button onClick={copy}
+          className="inline-flex items-center gap-1.5 text-[0.75rem] font-semibold px-3.5 py-2 rounded-lg border transition-opacity hover:opacity-70"
+          style={{ borderColor: border, color: copied ? "#22543D" : fg }}>
+          {copied ? <><CheckIcon /> Copied</> : <><CopyIcon /> Copy as checklist</>}
+        </button>
+      </div>
+
+      <div role="list" className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+        {steps.map((s, i) => (
+          <div role="listitem" key={s.n}>
+            <button
+              onClick={() => s.id && go(s.id)}
+              disabled={!s.id}
+              className="w-full text-left flex items-center gap-3 rounded-xl px-3.5 py-3 border transition-all duration-200 enabled:hover:-translate-y-0.5 disabled:cursor-default"
+              style={{ borderColor: border, background: dark ? "rgba(255,255,255,0.02)" : "#FAF8F4" }}>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-[0.72rem] font-bold"
+                style={{ background: i === steps.length - 1 ? "#E60023" : "#1A1612", color: "#FAF8F4" }}>
+                {s.n}
+              </span>
+              <span className="text-[0.9rem] font-semibold leading-snug" style={{ color: fg }}>{s.label}</span>
+              {i < steps.length - 1 && (
+                <span aria-hidden="true" className="ml-auto text-[0.8rem]" style={{ color: muted }}>↓</span>
+              )}
+            </button>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// Article body: intro → roadmap → sections, with a mid-article ad.
+// Memoised so it doesn't re-parse the markdown on every scroll tick.
+const ArticleBody = memo(function ArticleBody({ content, dark, roadmap, roadmapTitle, tocItems }) {
+  const mdComponents = useMemo(() => buildMdComponents(dark), [dark]);
+  const roadmapItems = useMemo(() => normalizeTags(roadmap), [roadmap]);
+  const [intro, ...sections] = useMemo(() => splitSections(content), [content]);
+  const mid = Math.ceil(sections.length / 2);
+  const first = sections.slice(0, mid).join("\n");
+  const second = sections.slice(mid).join("\n");
+  const md = txt => txt.trim()
+    ? <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={mdComponents}>{txt}</ReactMarkdown>
+    : null;
+
+  return (
+    <>
+      {md(intro)}
+      <RoadmapGlance items={roadmapItems} tocItems={tocItems} dark={dark} title={roadmapTitle} />
+      {md(first)}
+      {second.trim() && (
+        <GoogleAd dark={dark} slot={AD_SLOTS.inArticle} layout="in-article" format="fluid" height={250} label="Ad Space — In-Article" />
+      )}
+      {md(second)}
+    </>
+  );
+});
+
+// End-of-article CTA. Frontmatter (optional):
+//   ctaTitle, ctaText, ctaHref, ctaLabel      (or a nested `cta:` object)
+const EndCTA = ({ fm }) => {
+  const cta = getCta(fm);
+  if (!cta) return null;
+  return (
+    <section className="mt-12 rounded-2xl p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5"
+      style={{ background: "#1A1612", color: "#FAF8F4" }}>
+      <div className="max-w-[460px]">
+        <div className="font-['DM_Serif_Display',serif] text-[1.35rem] leading-tight mb-1.5">{cta.title}</div>
+        {cta.text && <p className="text-[0.88rem] m-0" style={{ color: "rgba(250,248,244,0.7)", fontWeight: 300 }}>{cta.text}</p>}
+      </div>
+      <a href={cta.href} target="_blank" rel="noopener noreferrer"
+        className="flex-shrink-0 text-center font-bold text-[0.85rem] px-6 py-3 rounded-full transition-opacity hover:opacity-90"
+        style={{ background: "#E60023", color: "#fff", textDecoration: "none" }}>
+        {cta.label || "Get started"}
+      </a>
+    </section>
+  );
+};
+
 const PinterestPostLayout = ({ fm, content, dark, fontSize, border, layoutRef, tocItems, activeId, sectionProgress, progress, slug, readTime }) => (
   <div ref={layoutRef} className="max-w-[1280px] mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 items-start justify-between relative">
     <main id="main-content" className="w-full lg:max-w-[calc(100%-446px)] min-w-0 flex-1">
-      <article className="prose w-full" itemScope itemType="https://schema.org/BlogPosting">
-        <meta itemProp="headline" content={fm.title} />
-        <meta itemProp="datePublished" content={fm.date} />
-        <meta itemProp="author" content={fm.author || SITE.name} />
-        {(() => {
-          const paragraphs = content.split("\n\n");
-          const mid = Math.floor(paragraphs.length / 2);
-          const firstHalf = paragraphs.slice(0, mid).join("\n\n");
-          const secondHalf = paragraphs.slice(mid).join("\n\n");
-          const mdComponents = {
-            h2: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h2 id={id} {...props}>{children}</h2>; },
-            h3: ({ children, ...props }) => { const id = slugToId(String(children).replace(/\s+/g, " ").trim()); return <h3 id={id} {...props}>{children}</h3>; },
-            a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
-            p: ({ children }) => {
-              const flatten = (node) => {
-                if (node === null || node === undefined) return "";
-                if (typeof node === "string") return node;
-                if (typeof node === "number") return String(node);
-                if (Array.isArray(node)) return node.map(flatten).join("");
-                if (node?.props?.children !== undefined) return flatten(node.props.children);
-                return "";
-              };
-
-              const text = flatten(children).trim();
-
-              const youtubeMatch = text.match(
-                /^::youtube\[([a-zA-Z0-9_-]{11})\](?:\{caption="([^"]*)"\})?$/
-              );
-
-              if (youtubeMatch) {
-                return <YouTubeEmbed id={youtubeMatch[1]} caption={youtubeMatch[2] || ""} />;
-              }
-
-              return <p>{children}</p>;
-            },
-          };
-          return (
-            <>
-              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={mdComponents}>{firstHalf}</ReactMarkdown>
-
-              {/* mid-article ad — In-article AdSense unit */}
-              <GoogleAd dark={dark} slot={AD_SLOTS.inArticle} layout="in-article" format="fluid" height={250} label="Ad Space — In-Article" />
-
-              <ReactMarkdown components={mdComponents} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>{secondHalf}</ReactMarkdown>
-            </>
-          );
-        })()}
+      <article className="prose w-full">
+        <ArticleBody content={content} dark={dark} tocItems={tocItems}
+          roadmap={fm.roadmap} roadmapTitle={fm.roadmapTitle} />
+        <EndCTA fm={fm} />
         <ArticleTags tags={fm.tags} dark={dark} />
         <AuthorBioBlock author={fm.author} dark={dark} border={border} />
       </article>
@@ -1755,7 +1971,7 @@ const FloatingShareBar = ({ title, dark }) => {
 // ═══════════════════════════════════════════════
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 const CommentSection = ({ slug, dark }) => {
   const border = dark ? "rgba(255,255,255,0.07)" : "#EAE4DC";
@@ -1772,7 +1988,7 @@ const CommentSection = ({ slug, dark }) => {
     try {
       const res = await fetch(
         `${SUPABASE_URL}/rest/v1/comments?slug=eq.${encodeURIComponent(slug)}&approved=eq.true&order=created_at.desc`,
-        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
+        { headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}` } }
       );
       const data = await res.json();
       setComments(Array.isArray(data) ? data : []);
@@ -1789,7 +2005,7 @@ const CommentSection = ({ slug, dark }) => {
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
         method: "POST",
-        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`, "Content-Type": "application/json", Prefer: "return=minimal" },
+        headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`, "Content-Type": "application/json", Prefer: "return=minimal" },
         body: JSON.stringify({ slug, name: name.trim(), message: message.trim() }),
       });
       if (!res.ok) throw new Error();
@@ -1896,15 +2112,15 @@ function useViewCount(slug) {
   const [views, setViews] = useState(null);
 
   useEffect(() => {
-    if (!slug || !SUPABASE_URL || !SUPABASE_ANON_KEY || !hasConsent()) return;
+    if (!slug || !SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY || !hasConsent()) return;
 
     const track = async () => {
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_view`, {
           method: "POST",
           headers: {
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ slug: slug }),
@@ -2019,7 +2235,7 @@ export default function ReadBlog() {
   const [content, setContent] = useState(initialPost?.content || "");
   const [fm, setFm] = useState(initialPost?.frontmatter || {});
   const [tocItems, setTocItems] = useState(initialPost ? buildTOC(initialPost.content) : []);
-  const [loading, setLoading] = useState(!initialPost);
+  const [loading, setLoading] = useState(!initialPost && !loaderData);
   const [error, setError] = useState(loaderData ? !initialPost : false);
   const [bookmarked, setBookmarked] = useState(false);
   const [dark, toggleDark] = useDarkMode();
@@ -2037,7 +2253,6 @@ export default function ReadBlog() {
   const streak = useReadingStreak();
   const { highlights, save: saveHighlight } = useHighlights(slug);
   const readTime = useMemo(() => content ? estimateReadTime(content) : null, [content]);
-  const finishTime = useFinishTime(readTime, progress);
   const views = useViewCount(slug);
 
   const layoutRef = useRef(null);
@@ -2047,6 +2262,12 @@ export default function ReadBlog() {
 
   useEffect(() => {
     if (!slug) return;
+
+    if (loaderData && !initialPost) {
+      setError(true);
+      setLoading(false);
+      return;
+    }
 
     // React Router's loader already fetched this slug — use it, don't refetch.
     if (initialPost && initialPost.frontmatter?.title) {
@@ -2123,7 +2344,7 @@ export default function ReadBlog() {
   }, [bookmarked, slug]);
 
   if (loading) return <LoadingSkeleton dark={dark} />;
-  if (error) return <ErrorState slug={slug} dark={dark} />;
+  if (error) return <NotFound />;
 
   const bg = dark ? "#0F0E0D" : "#FAF8F4";
   const border = dark ? "rgba(255,255,255,0.07)" : "#EAE4DC";
@@ -2166,12 +2387,15 @@ export default function ReadBlog() {
           display: none !important;
         }
         [data-reading-mode="on"] #main-content {
-          max-width: 680px !important;
-          margin: 0 auto !important;
+          max-width: 100% !important;
+          width: 100% !important;
+          flex: 1 1 100% !important;
+          margin: 0 !important;
         }
         [data-reading-mode="on"] .prose {
+          max-width: none !important;
           font-size: 18px !important;
-          line-height: 2.1 !important;
+          line-height: 1.95 !important;
         }
 
         .prose {
@@ -2240,6 +2464,11 @@ export default function ReadBlog() {
         .prose ul li::before { content: '—'; position: absolute; left: 0; color: #E60023; font-weight: 700; }
         .prose img { width: 100%; border-radius: 1rem; margin: 2rem 0; border: 1px solid ${border}; }
 
+        /* Callouts (blockquotes that start with ⚠️ 🛠️ 💡 ℹ️) */
+        .prose .callout-body p { margin-bottom: 0.6rem; font-weight: 400; }
+        .prose .callout-body p:last-child { margin-bottom: 0; }
+        .prose .callout-body ul, .prose .callout-body ol { margin: 0.6rem 0 0; }
+
         .affiliate-chip { transition: transform .15s ease, box-shadow .15s ease, filter .15s ease; }
         .affiliate-chip:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,.15); filter: brightness(1.04); }
         .affiliate-chip:active { transform: translateY(0); }
@@ -2249,6 +2478,8 @@ export default function ReadBlog() {
 
         @media (max-width: 1023px) {
           aside { position: relative !important; top: 0 !important; max-height: none !important; overflow-y: visible !important; }
+          /* clear the fixed navbar + progress bar + mobile section bar */
+          .prose h2, .prose h3 { scroll-margin-top: 120px; }
         }
       `}</style>
 
@@ -2258,6 +2489,7 @@ export default function ReadBlog() {
 
       <div style={{ background: bg, minHeight: "100vh" }}>
         <ProgressBar progress={progress} />
+        <MobileSectionBar tocItems={tocItems} activeId={activeId} progress={progress} dark={dark} />
 
         <Navbar
           dark={dark} toggleDark={toggleDark}
@@ -2271,7 +2503,7 @@ export default function ReadBlog() {
         <ArticleHeader
           fm={fm} readTime={readTime} dark={dark}
           onBookmark={toggleBookmark} bookmarked={bookmarked}
-          finishTime={finishTime} streak={streak} views={views}
+          streak={streak} views={views}
         />
 
         <HeroImage src={fm.image} alt={fm.imageAlt || fm.title} dark={dark} />
@@ -2284,65 +2516,23 @@ export default function ReadBlog() {
           <PinterestPostLayout
             fm={fm} content={content} dark={dark} fontSize={fontSize} border={border} layoutRef={layoutRef}
             tocItems={tocItems} activeId={activeId} sectionProgress={sectionProgress} progress={progress} slug={slug}
+            readTime={readTime}
           />
         ) : (
           <div ref={layoutRef} className="max-w-[1280px] mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 items-start justify-between relative">
 
             {/* ARTICLE */}
             <main id="main-content" className="w-full lg:max-w-[calc(100%-386px)] min-w-0 flex-1">
-              <article className="prose w-full" itemScope itemType="https://schema.org/BlogPosting">
-                <meta itemProp="headline" content={fm.title} />
-                <meta itemProp="datePublished" content={fm.date} />
-                <meta itemProp="author" content={fm.author || SITE.name} />
+              <article className="prose w-full">
 
                 <KeyTakeawaysBox takeaways={fm.takeaways} dark={dark} />
 
-                {(() => {
-                  const paragraphs = content.split("\n\n");
-                  const mid = Math.floor(paragraphs.length / 2);
-                  const firstHalf = paragraphs.slice(0, mid).join("\n\n");
-                  const secondHalf = paragraphs.slice(mid).join("\n\n");
+                <ArticleBody content={content} dark={dark} tocItems={tocItems}
+                  roadmap={fm.roadmap} roadmapTitle={fm.roadmapTitle} />
 
-                  const mdComponents = {
-                    h2: ({ children, ...props }) => {
-                      const id = slugToId(String(children).replace(/\s+/g, " ").trim());
-                      return <h2 id={id} {...props}>{children}</h2>;
-                    },
-                    h3: ({ children, ...props }) => {
-                      const id = slugToId(String(children).replace(/\s+/g, " ").trim());
-                      return <h3 id={id} {...props}>{children}</h3>;
-                    },
-                    a: ({ href, children }) => <SmartLink href={href}>{children}</SmartLink>,
-                    p: ({ children }) => {
-                      const flatten = (node) => {
-                        if (node === null || node === undefined) return "";
-                        if (typeof node === "string") return node;
-                        if (typeof node === "number") return String(node);
-                        if (Array.isArray(node)) return node.map(flatten).join("");
-                        if (node?.props?.children !== undefined) return flatten(node.props.children);
-                        return "";
-                      };
-                      const text = flatten(children).trim();
-                      const youtubeMatch = text.match(/^::youtube\[([a-zA-Z0-9_-]{11})\](?:\{caption="([^"]*)"\})?$/);
-                      if (youtubeMatch) return <YouTubeEmbed id={youtubeMatch[1]} caption={youtubeMatch[2] || ""} />;
-                      return <p>{children}</p>;
-                    },
-                  };
+                <EndCTA fm={fm} />
 
-                  return (
-                    <>
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={mdComponents}>{firstHalf}</ReactMarkdown>
-
-                      {/* mid-article ad break — this is the one readers actually scroll past */}
-                      <GoogleAd dark={dark} slot={AD_SLOTS.inArticle} layout="in-article" format="fluid" height={250} label="Ad Space — In-Article" />
-
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={mdComponents}>{secondHalf}</ReactMarkdown>
-                    </>
-                  );
-                })()}
-
-
-                <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_ANON_KEY} />
+                <ReactionBar slug={slug} dark={dark} border={border} supabaseUrl={SUPABASE_URL} supabaseKey={SUPABASE_PUBLISHABLE_KEY} />
 
                 <ArticleTags tags={fm.tags} dark={dark} />
 
@@ -2365,7 +2555,6 @@ export default function ReadBlog() {
                 <AISummaryCard content={content} dark={dark} border={border} />
 
                 <AffiliateLinksSidebar content={content} dark={dark} border={border} fallbackIcon={fm.emoji} />
-
 
                 <HighlightsPanel slug={slug} dark={dark} border={border} />
 
@@ -2564,7 +2753,7 @@ export default function ReadBlog() {
 
             <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-[0.72rem]"
-                style={{ color: " rgba(250,248,244,0.5)" }}>
+                style={{ color: "rgba(250,248,244,0.5)" }}>
                 <span>© {new Date().getFullYear()} Veeresh Bashetti.</span>
                 <span className="w-1 h-1 rounded-full inline-block"
                   style={{ background: "rgba(250,248,244,0.2)" }} />
@@ -2581,7 +2770,7 @@ export default function ReadBlog() {
           </div>
         </footer>
 
-      </div >
+      </div>
     </>
   );
 }
