@@ -2,20 +2,25 @@
  * ============================================================
  * Blog.jsx — Home Page (Dynamic .md file loading)
  * ============================================================
- * PERF FIXES APPLIED (this pass):
- * - Removed @import url(...) font loading from GlobalStyles —
- *   that's render-blocking. Fonts should be loaded once via
- *   index.html <link rel="preload"> + async apply.
- * - NewPostsPopup no longer fetches /blogs/manifest.json itself
- *   (it was duplicating the fetch useBlogPosts() already makes).
- *   It now receives `posts` as a prop from the root Blog()
- *   component and derives its "top 3" from that.
+ * CHANGES IN THIS PASS:
+ * - Removed the Pinterest board/shelf section entirely
+ *   (PinterestSection, PinCard, PINS data, its nav links,
+ *   command-palette entry, and related CSS).
+ * - Fixed the "looks like an unfinished demo" stats problem:
+ *   the hero used to render literal "0 Blog Posts / 0+ Pinterest
+ *   Saves / 0+ Categories" the instant the page painted, before
+ *   the manifest fetch resolved (and that's exactly what a static
+ *   crawl / screenshot would see). The stats now show a shimmer
+ *   skeleton while `loading` is true and only render real numbers
+ *   pulled from posts.length / actual category count once the
+ *   manifest has actually loaded. "Pinterest Saves" (a made-up
+ *   number) is gone along with the section it described.
  *
- * PRE-EXISTING FIXED BUGS (kept from earlier pass):
+ * PRE-EXISTING FIXED BUGS (kept from earlier passes):
  * - Image fallback logic: always renders both, toggles display via state
  * - parseFrontmatter: handles inline array syntax tags: ["a","b"]
  * - Dynamic Tailwind gradient classes replaced with inline styles (JIT-safe)
- * - PinCard aspect ratios use inline style instead of dynamic Tailwind classes
+ * - PinCard aspect ratios use inline style instead of dynamic Tailwind classes (n/a — PinCard removed)
  * - TopicsSection: no longer mutates array on every render
  * - Newsletter: clears input after submit
  * - PostRowItem: object-cover instead of object-contain
@@ -34,7 +39,7 @@
  * ANIMATIONS:
  * - Floating cards in hero (float up/down loop)
  * - Typewriter effect on hero headline
- * - Animated counters on stats (count up on mount)
+ * - Animated counters on stats (count up on mount, once loaded)
  * - Magnetic hover effect on CTA buttons
  * - Particle/sparkle trail on hero badge
  * - Smooth marquee tag strip
@@ -120,68 +125,6 @@ const TOPICS = [
     { icon: "🔧", name: "Tech" },
 ];
 
-// ─── PINS DATA ───────────────────────────────────────────────
-const PINS = [
-    {
-        emoji: "🧥",
-        image:
-            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/ben-martin-fleece-hoodie-review-banner.webp",
-        title: "Is This ₹899 Fleece Hoodie Actually Worth It?",
-        desc:
-            "A closer look at the Ben Martin fleece hoodie — warmth, fit, comfort, and everyday winter wear.",
-        category: "Pinterest Picks",
-        heightPx: 280,
-        slug: "ben-martin-fleece-hoodie-review",
-    },
-
-    {
-        emoji: "🎒",
-        image:
-            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/wrogn-expandable-backpack-review.webp",
-        title: "The Expandable Backpack Built for Smarter Travel",
-        desc:
-            "A practical look at the WROGN expandable backpack, from its extra capacity to everyday travel convenience.",
-        category: "Pinterest Picks",
-        heightPx: 280,
-        slug: "wrogn-expandable-backpack-review",
-    },
-
-    {
-        emoji: "🔌",
-        image:
-            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/dailyobjects-gadget-organizer-review.webp",
-        title: "The Simple Tech Organizer That Ends Cable Chaos",
-        desc:
-            "Keep chargers, cables, power banks, and everyday tech neatly organized in one compact case.",
-        category: "Pinterest Picks",
-        heightPx: 280,
-        slug: "dailyobjects-gadget-organizer-review",
-    },
-
-    {
-        emoji: "🔒",
-        image:
-            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/striff-webcam-cover-slide-review.webp",
-        title: "This Tiny Webcam Cover Adds a Simple Privacy Layer",
-        desc:
-            "A slim STRIFF webcam cover that keeps your laptop camera protected without getting in the way.",
-        category: "Pinterest Picks",
-        heightPx: 280,
-        slug: "striff-webcam-cover-slide-review",
-    },
-
-    {
-        emoji: "🛋️",
-        image:
-            "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/biggie-bean-bag-review.webp",
-        title: "Why This Bean Bag Became My Favorite Spot",
-        desc:
-            "A closer look at the comfort, design, and everyday lounging experience that makes this bean bag stand out.",
-        category: "Pinterest Picks",
-        heightPx: 280,
-        slug: "biggie-bean-bag-review",
-    },
-];
 // ─── MARQUEE TAGS ─────────────────────────────────────────────
 const MARQUEE_TAGS = ["Home Decor", "Lifestyle", "Travel", "Productivity", "Mindset", "Food & Recipes", "Pinterest Picks", "Career", "Tech", "Product Reviews", "Startup Life", "Personal Stories"];
 
@@ -295,6 +238,38 @@ function useScrollReveal(threshold = 0.1) {
 }
 
 // ════════════════════════════════════════════════════════════
+//  HOOK — useRecentlyViewed
+//  Reads slugs from localStorage (written by the post page on
+//  view) and maps them back to full post objects, most-recent-first.
+// ════════════════════════════════════════════════════════════
+const RECENT_KEY = "recentlyViewedSlugs";
+const RECENT_LIMIT = 5;
+
+function useRecentlyViewed(posts) {
+    const [slugs, setSlugs] = useState(() => {
+        try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); }
+        catch { return []; }
+    });
+
+    useEffect(() => {
+        const onStorage = (e) => {
+            if (e.key === RECENT_KEY) {
+                try { setSlugs(JSON.parse(e.newValue || "[]")); } catch { /* noop */ }
+            }
+        };
+        window.addEventListener("storage", onStorage);
+        return () => window.removeEventListener("storage", onStorage);
+    }, []);
+
+    const recentPosts = useMemo(() => {
+        const bySlug = Object.fromEntries(posts.map(p => [p.slug, p]));
+        return slugs.map(s => bySlug[s]).filter(Boolean).slice(0, RECENT_LIMIT);
+    }, [slugs, posts]);
+
+    return recentPosts;
+}
+
+// ════════════════════════════════════════════════════════════
 //  HOOK — useCountUp (animated counter)
 // ════════════════════════════════════════════════════════════
 function useCountUp(target, duration = 1800, start = false) {
@@ -373,8 +348,6 @@ function useBlogPosts() {
                 const rawPosts = Array.isArray(manifestData)
                     ? manifestData
                     : (manifestData.posts || []);
-
-                const { readingTime: _unused } = { readingTime: null }; // no-op, keeps diff minimal
 
                 const loaded = rawPosts.map((p, idx) => {
                     const { readingTime, date } = parseMetaString(p.meta);
@@ -465,7 +438,7 @@ const GlobalStyles = () => (
     .delay-300 { animation-delay: 0.30s; } .delay-400 { animation-delay: 0.40s; }
     .delay-550 { animation-delay: 0.55s; } .delay-700 { animation-delay: 0.70s; }
 
-    /* ── Shimmer button ── */
+    /* ── Shimmer (loading skeletons + button hover) ── */
     @keyframes shimmer {
       0%   { background-position: -200% center; }
       100% { background-position:  200% center; }
@@ -563,9 +536,6 @@ const GlobalStyles = () => (
     @keyframes sectionFadeIn {
       from { opacity: 0; } to { opacity: 1; }
     }
-
-    /* ── Pinterest shelf: hide scrollbar ── */
-    #pinterest .pin-shelf-track::-webkit-scrollbar { display: none; }
   `}</style>
 );
 
@@ -674,10 +644,13 @@ const BookmarkIcon = ({ size = 20, filled = false }) => (
 //  SAVED CONTEXT — global save state
 // ════════════════════════════════════════════════════════════
 import { useSaved } from "../App";
+
 // ════════════════════════════════════════════════════════════
 //  NAVBAR — with saved icon
 // ════════════════════════════════════════════════════════════
-const Navbar = () => {
+const NAV_SECTIONS = ["blog", "topics", "about"];
+
+const Navbar = ({ onSearchOpen }) => {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("");
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -686,14 +659,12 @@ const Navbar = () => {
     const scrollTimer = useRef(null);
 
     useEffect(() => {
-        const DOM_ORDER = ["blog", "topics", "pinterest", "about"];
-
         const onScroll = () => {
             setScrolled(window.scrollY > 10);
             if (scrollingTo.current) return;
             const scrollMid = window.scrollY + window.innerHeight / 2;
             let best = "";
-            for (const id of DOM_ORDER) {
+            for (const id of NAV_SECTIONS) {
                 const el = document.getElementById(id);
                 if (!el) continue;
                 if (el.getBoundingClientRect().top + window.scrollY - 80 <= scrollMid) best = id;
@@ -727,7 +698,7 @@ const Navbar = () => {
 
                 {/* Desktop nav */}
                 <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
-                    {["blog", "topics", "pinterest", "about"].map((id) => (
+                    {NAV_SECTIONS.map((id) => (
                         <li key={id}>
                             <button type="button" onClick={() => scrollTo(id)}
                                 className={`font-body text-sm font-medium tracking-wide transition-colors duration-300 capitalize bg-transparent border-none cursor-pointer p-0 ${activeSection === id ? "text-[#E60023]" : "text-[#3D3530] hover:text-[#E60023]"}`}>
@@ -735,6 +706,16 @@ const Navbar = () => {
                             </button>
                         </li>
                     ))}
+
+                    {/* ── Quick search trigger ── */}
+                    <li>
+                        <button type="button" onClick={onSearchOpen}
+                            className="hidden lg:inline-flex items-center gap-2 text-[0.8rem] font-medium text-[#8C7E74] border border-[#E8E0D5] rounded-full px-3.5 py-1.5 hover:border-[#1A1612] hover:text-[#1A1612] transition-colors duration-200 bg-transparent cursor-pointer"
+                            aria-label="Open quick search">
+                            Quick search
+                            <kbd className="text-[0.62rem] font-bold px-1.5 py-0.5 rounded" style={{ background: "#F2EDE4" }}>⌘K</kbd>
+                        </button>
+                    </li>
 
                     {/* ── Saved icon with badge ── */}
                     <li>
@@ -759,8 +740,16 @@ const Navbar = () => {
                     </li>
                 </ul>
 
-                {/* Mobile: saved icon + hamburger */}
+                {/* Mobile: search + saved icon + hamburger */}
                 <div className="md:hidden flex items-center gap-3">
+                    <button type="button" onClick={onSearchOpen}
+                        className="relative inline-flex items-center justify-center w-9 h-9 rounded-full border border-[#E8E0D5] text-[#3D3530] bg-transparent cursor-pointer"
+                        style={{ background: "#F2EDE4" }}
+                        aria-label="Open quick search">
+                        <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                        </svg>
+                    </button>
                     <Link to="/saved" aria-label={`Saved posts (${saved.length})`}
                         className="relative inline-flex items-center justify-center w-9 h-9 rounded-full border border-[#E8E0D5] text-[#3D3530]"
                         style={{ background: "#F2EDE4" }}>
@@ -781,7 +770,7 @@ const Navbar = () => {
             {mobileOpen && (
                 <div className="mobile-menu-open md:hidden nav-glass border-t border-[#E8E0D5] px-6 pb-6 pt-4">
                     <ul className="flex flex-col gap-4 list-none m-0 p-0 mb-4">
-                        {["blog", "pinterest", "topics", "about"].map((id) => (
+                        {NAV_SECTIONS.map((id) => (
                             <li key={id}>
                                 <button type="button" onClick={() => scrollTo(id)}
                                     className={`font-body text-base font-medium capitalize w-full text-left bg-transparent border-none cursor-pointer p-0 ${activeSection === id ? "text-[#E60023]" : "text-[#3D3530]"}`}>
@@ -848,8 +837,29 @@ const Typewriter = ({ texts, speed = 70, pause = 2200 }) => {
 
 // ════════════════════════════════════════════════════════════
 //  ANIMATED STAT
+//  FIX: while the manifest is still loading, this renders a
+//  shimmer skeleton instead of a hardcoded "0" — a static
+//  crawl / first paint should never show a literal "0 Blog
+//  Posts", which reads as an unfinished demo site.
 // ════════════════════════════════════════════════════════════
-const AnimatedStat = ({ num, label, started }) => {
+const AnimatedStat = ({ num, label, started, loading }) => {
+    if (loading) {
+        return (
+            <div className="flex flex-col gap-2">
+                <div
+                    className="h-8 w-14 rounded-md"
+                    style={{
+                        background: "linear-gradient(90deg,#F2EDE4 25%,#FAF8F4 50%,#F2EDE4 75%)",
+                        backgroundSize: "200% 100%",
+                        animation: "shimmer 1.5s infinite",
+                    }}
+                    aria-hidden="true"
+                />
+                <span className="text-[0.78rem] font-medium text-[#8C7E74] uppercase tracking-wider">{label}</span>
+            </div>
+        );
+    }
+
     const isNumber = /^\d+/.test(String(num));
     const targetNum = isNumber ? parseInt(String(num)) : 0;
     const suffix = isNumber ? String(num).replace(/^\d+/, "") : num;
@@ -866,11 +876,15 @@ const AnimatedStat = ({ num, label, started }) => {
 
 // ════════════════════════════════════════════════════════════
 //  HERO
+//  FIX: takes `loading` (from useBlogPosts) and no longer takes
+//  a fabricated "Pinterest Saves" number. Stats are: real post
+//  count and real category count, both sourced from the actual
+//  manifest data, with a skeleton shown until that data lands.
 // ════════════════════════════════════════════════════════════
 const Hero = ({
     totalPosts,
     categoriesCount,
-    pinterestSaves,
+    loading,
 }) => {
     const [statsRef, statsVisible] = useScrollReveal(0.3);
     const magBtn1 = useMagneticHover(0.25);
@@ -919,19 +933,19 @@ const Hero = ({
                         </a>
                     </div>
 
-                    {/* Animated stats */}
+                    {/* Animated stats — real data only, skeleton until loaded */}
                     <div ref={statsRef} className="flex gap-8 mt-10 pt-8 border-t border-[#E8E0D5] animate-fadeUp delay-550">
-                        <AnimatedStat num={totalPosts > 0 ? `${totalPosts}+` : "0"} label="Blog Posts" started={statsVisible} />
                         <AnimatedStat
-                            num={`${pinterestSaves}+`}
-                            label="Pinterest Saves"
+                            num={`${totalPosts}+`}
+                            label="Blog Posts"
                             started={statsVisible}
+                            loading={loading}
                         />
-
                         <AnimatedStat
                             num={`${categoriesCount}+`}
                             label="Categories"
                             started={statsVisible}
+                            loading={loading}
                         />
                     </div>
                 </div>
@@ -1476,227 +1490,6 @@ const TopicsSection = ({ posts }) => {
                     </Link>
                 </div>
 
-            </div>
-        </section>
-    );
-};
-
-
-// ════════════════════════════════════════════════════════════
-//  PIN CARD — pinboard-tile layout for horizontal shelf
-// ════════════════════════════════════════════════════════════
-const PinCard = ({ pin, large = false }) => {
-    const [imgError, setImgError] = useState(false);
-    const cardRef = useRef(null);
-
-    const handleMouseMove = (e) => {
-        if (!cardRef.current) return;
-        const rect = cardRef.current.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        cardRef.current.style.transform = `perspective(900px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
-    };
-    const handleMouseLeave = () => {
-        if (!cardRef.current) return;
-        cardRef.current.style.transform = "perspective(900px) rotateX(0) rotateY(0)";
-    };
-
-    const inner = (
-        <div
-            ref={cardRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="relative rounded-[20px] overflow-hidden group flex-shrink-0"
-            style={{
-                width: large ? "min(78vw, 420px)" : "min(60vw, 280px)",
-                height: "440px",
-                transition: "transform 0.2s ease",
-                border: "1px solid rgba(255,255,255,0.10)",
-            }}
-        >
-            {/* Image fills the whole tile */}
-            {pin.image && !imgError ? (
-                <img
-                    src={pin.image}
-                    alt={pin.title}
-                    onError={() => setImgError(true)}
-                    loading="lazy"
-                    decoding="async"
-                    fetchPriority="low"
-                    className="absolute inset-0 w-full h-full"
-                    style={{ objectFit: "cover", transition: "transform 0.6s ease" }}
-                />
-            ) : (
-                <div className="absolute inset-0 flex items-center justify-center text-6xl" style={{ background: "rgba(255,255,255,0.04)" }}>
-                    {pin.emoji}
-                </div>
-            )}
-
-            {/* Gradient scrim */}
-            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%)" }} />
-
-            {/* Pin-style save badge top right */}
-            <span
-                className="absolute top-3 right-3 inline-flex items-center gap-1.5 text-white text-[0.68rem] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100"
-                style={{ background: "#E60023", transition: "opacity 0.25s ease, transform 0.25s ease", transform: "translateY(-4px)" }}
-            >
-                {pin.slug ? "Read" : "Save"} <PinIcon size={12} />
-            </span>
-
-            {/* Category eyebrow */}
-            <span
-                className="absolute top-3 left-3 text-[0.62rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
-                style={{ background: "rgba(255,255,255,0.16)", color: "#FFFFFF", backdropFilter: "blur(6px)" }}
-            >
-                {pin.category}
-            </span>
-
-            {/* Text content pinned to bottom */}
-            <div className="absolute bottom-0 left-0 right-0 p-5">
-                <strong className={`block font-display text-white leading-snug mb-1.5 ${large ? "text-[1.4rem]" : "text-[1.05rem]"}`}>
-                    {pin.title}
-                </strong>
-                <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.72)" }}>
-                    {pin.desc}
-                </p>
-            </div>
-        </div>
-    );
-
-    if (pin.slug) {
-        return <Link to={`/blog/${pin.slug}`} aria-label={`Read: ${pin.title}`} style={{ textDecoration: "none" }}>{inner}</Link>;
-    }
-    return (
-        <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
-            aria-label={`Pinterest pin: ${pin.title}`} style={{ textDecoration: "none" }}>
-            {inner}
-        </a>
-    );
-};
-
-// ════════════════════════════════════════════════════════════
-//  PINTEREST SECTION — horizontal scroll-snap board shelf
-// ════════════════════════════════════════════════════════════
-const PinterestSection = () => {
-    const [headerRef, headerVisible] = useScrollReveal();
-    const trackRef = useRef(null);
-
-    const scrollByAmount = (dir) => {
-        if (!trackRef.current) return;
-        const amount = trackRef.current.clientWidth * 0.7;
-        trackRef.current.scrollBy({ left: dir * amount, behavior: "smooth" });
-    };
-
-    return (
-        <section id="pinterest" aria-labelledby="pinterest-heading" className="py-24 bg-[#1A1612] overflow-hidden">
-            <div className="max-w-[1320px] mx-auto px-6">
-                <div ref={headerRef} className={`flex items-end justify-between flex-wrap gap-8 mb-10 ${headerVisible ? "reveal-visible" : "reveal-hidden"}`}>
-                    <div>
-                        <p className="text-xs font-bold tracking-[0.12em] uppercase mb-2" style={{ color: "#FF6B81" }}>Pinterest Picks</p>
-                        <h2 id="pinterest-heading" className="font-display text-[clamp(2rem,3.5vw,2.75rem)]" style={{ color: "#FAF8F4" }}>
-                            Pin the <em style={{ color: "rgba(255,255,255,0.45)" }}>board</em>
-                        </h2>
-                        <p className="mt-3 text-base max-w-[520px] leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-                            Scroll the shelf like you would a board — handpicked products, room ideas, and finds worth saving.
-                        </p>
-                    </div>
-
-                    <div className="hidden sm:flex items-center gap-3">
-                        <button type="button" onClick={() => scrollByAmount(-1)} aria-label="Scroll pins left"
-                            className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#E60023]"
-                            style={{ border: "1px solid rgba(255,255,255,0.18)", color: "#FAF8F4" }}>
-                            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6" /></svg>
-                        </button>
-                        <button type="button" onClick={() => scrollByAmount(1)} aria-label="Scroll pins right"
-                            className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#E60023]"
-                            style={{ border: "1px solid rgba(255,255,255,0.18)", color: "#FAF8F4" }}>
-                            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 6l6 6-6 6" /></svg>
-                        </button>
-                        <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
-                            className="btn-shimmer inline-flex items-center gap-2 text-white font-bold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 ml-2"
-                            style={{ boxShadow: "0 4px 20px rgba(230,0,35,0.4)" }}>
-                            <PinIcon size={16} /> Follow
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            {/* ✅ FIXED TRACK — no px-6 class, padding via style only */}
-            <div
-                ref={trackRef}
-                role="list"
-                className="xl:ml-[110px] md:ml-5 sm:ml-4"
-                style={{
-                    display: "flex",
-                    gap: "20px",
-                    overflowX: "auto",
-                    scrollSnapType: "x mandatory",
-                    WebkitOverflowScrolling: "touch",
-                    scrollbarWidth: "none",
-                    msOverflowStyle: "none",
-                    paddingLeft: "max(24px, calc((100vw - 1320px) / 2 + 24px))",
-                    paddingRight: "24px",
-                    paddingBottom: "12px",
-                    // ✅ Critical: prevents flex from shrinking children
-                    flexWrap: "nowrap",
-                    alignItems: "flex-start",
-                }}
-            >
-                {PINS.map((pin, i) => (
-                    // ✅ flex-shrink: 0 on the WRAPPER, not just the inner card
-                    <div
-                        key={pin.title}
-                        role="listitem"
-                        style={{
-                            flexShrink: 0,
-                            scrollSnapAlign: "start",
-                        }}
-                    >
-                        <PinCard pin={pin} large={i === 0} />
-                    </div>
-                ))}
-
-                {/* Trailing follow tile */}
-                <a
-                    href="https://in.pinterest.com/veereshbbashetti/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                        flexShrink: 0,
-                        width: "min(60vw, 280px)",
-                        height: "440px",
-                        scrollSnapAlign: "start",
-                        background: "rgba(255,255,255,0.04)",
-                        border: "1px dashed rgba(255,255,255,0.22)",
-                        borderRadius: "20px",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        gap: "16px",
-                        padding: "32px",
-                        textDecoration: "none",
-                    }}
-                >
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "#E60023" }}>
-                        <PinIcon size={22} className="text-white" />
-                    </div>
-                    <p className="font-display text-[1.2rem]" style={{ color: "#FAF8F4" }}>See the full board</p>
-                    <p className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.55)" }}>More pins live on Pinterest — updated weekly.</p>
-                    <span className="text-[0.78rem] font-bold uppercase tracking-widest" style={{ color: "#FF6B81" }}>Visit Pinterest ↗</span>
-                </a>
-
-                {/* Trailing spacer so last card doesn't clip */}
-                <div style={{ flexShrink: 0, width: "24px" }} aria-hidden="true" />
-            </div>
-
-            {/* Mobile follow CTA */}
-            <div className="sm:hidden px-6 mt-6">
-                <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
-                    className="btn-shimmer inline-flex items-center justify-center gap-2 text-white font-bold text-sm px-6 py-3 rounded-full w-full">
-                    <PinIcon size={16} /> Follow on Pinterest
-                </a>
             </div>
         </section>
     );
@@ -2291,39 +2084,217 @@ const NewPostsPopup = ({ posts }) => {
 };
 
 // ════════════════════════════════════════════════════════════
+//  COMMAND PALETTE — ⌘K quick jump (posts, categories, sections)
+// ════════════════════════════════════════════════════════════
+function useCommandPalette() {
+    const [open, setOpen] = useState(false);
+    useEffect(() => {
+        const onKey = (e) => {
+            const isMac = navigator.platform.toUpperCase().includes("MAC");
+            if ((isMac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === "k") {
+                e.preventDefault();
+                setOpen(v => !v);
+            }
+            if (e.key === "Escape") setOpen(false);
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, []);
+    return [open, setOpen];
+}
+
+const CommandPalette = ({ open, onClose, posts }) => {
+    const [query, setQuery] = useState("");
+    const [activeIdx, setActiveIdx] = useState(0);
+    const inputRef = useRef(null);
+    const recentPosts = useRecentlyViewed(posts); // ← new
+
+    useEffect(() => {
+        if (open) {
+            setQuery("");
+            setActiveIdx(0);
+            setTimeout(() => inputRef.current?.focus(), 50);
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => { document.body.style.overflow = ""; };
+    }, [open]);
+
+    const SECTIONS = [
+        { id: "blog", label: "Jump to Blog section", type: "section" },
+        { id: "topics", label: "Jump to Topics", type: "section" },
+        { id: "about", label: "Jump to About", type: "section" },
+    ];
+
+    const results = useMemo(() => {
+        const q = query.trim().toLowerCase();
+
+        if (!q) {
+            // Empty query: show recently viewed first, then sections, then fill with latest posts
+            const recentSlugs = new Set(recentPosts.map(p => p.slug));
+            const recentResults = recentPosts.map(p => ({ ...p, type: "post", recent: true }));
+            const fillerPosts = posts
+                .filter(p => !recentSlugs.has(p.slug))
+                .slice(0, Math.max(0, 4 - recentResults.length))
+                .map(p => ({ ...p, type: "post" }));
+            return [...recentResults, ...SECTIONS, ...fillerPosts];
+        }
+
+        const postMatches = posts.filter(p =>
+            p.title?.toLowerCase().includes(q) ||
+            p.excerpt?.toLowerCase().includes(q) ||
+            p.category?.toLowerCase().includes(q) ||
+            p.tags?.some(t => t.toLowerCase().includes(q))
+        ).slice(0, 6).map(p => ({ ...p, type: "post" }));
+
+        const sectionMatches = SECTIONS.filter(s => s.label.toLowerCase().includes(q));
+
+        return [...sectionMatches, ...postMatches];
+    }, [query, posts, recentPosts]);
+
+    useEffect(() => { setActiveIdx(0); }, [query]);
+
+    const go = useCallback((item) => {
+        if (!item) return;
+        if (item.type === "section") {
+            document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
+        } else {
+            window.location.href = `/blog/${item.slug}`;
+        }
+        onClose();
+    }, [onClose]);
+
+    const handleKeyDown = (e) => {
+        if (e.key === "ArrowDown") { e.preventDefault(); setActiveIdx(i => Math.min(i + 1, results.length - 1)); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); setActiveIdx(i => Math.max(i - 1, 0)); }
+        else if (e.key === "Enter") { e.preventDefault(); go(results[activeIdx]); }
+    };
+
+    if (!open) return null;
+
+    const showingRecents = !query.trim() && recentPosts.length > 0;
+    let recentHeaderShown = false;
+    let sectionHeaderShown = false;
+
+    return (
+        <div
+            role="dialog" aria-modal="true" aria-label="Quick search"
+            className="fixed inset-0 z-[200] flex items-start justify-center pt-[12vh] px-4"
+            style={{ background: "rgba(20,16,13,0.6)", backdropFilter: "blur(4px)", animation: "popupFadeIn 0.2s ease both" }}
+            onClick={onClose}
+        >
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-[560px] rounded-2xl overflow-hidden"
+                style={{ background: "#FFFFFF", boxShadow: "0 30px 80px rgba(0,0,0,0.35)", animation: "popupScaleIn 0.22s cubic-bezier(0.22,1,0.36,1) both" }}
+            >
+                <div className="flex items-center gap-3 px-5 py-4 border-b" style={{ borderColor: "#E8E0D5" }}>
+                    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="#8C7E74" strokeWidth="2">
+                        <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input
+                        ref={inputRef}
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder="Search posts, categories, sections…"
+                        className="flex-1 outline-none border-none text-[0.95rem] bg-transparent"
+                        style={{ color: "#1A1612" }}
+                    />
+                    <kbd className="text-[0.65rem] font-bold px-2 py-1 rounded" style={{ background: "#F2EDE4", color: "#8C7E84" }}>ESC</kbd>
+                </div>
+
+                <div className="max-h-[400px] overflow-y-auto py-2">
+                    {results.length === 0 && (
+                        <p className="px-5 py-8 text-center text-sm" style={{ color: "#8C7E74" }}>No results for "{query}"</p>
+                    )}
+                    {results.map((item, i) => {
+                        let header = null;
+                        if (showingRecents && item.recent && !recentHeaderShown) {
+                            recentHeaderShown = true;
+                            header = "Recently viewed";
+                        } else if (item.type === "section" && !sectionHeaderShown) {
+                            sectionHeaderShown = true;
+                            header = "Jump to";
+                        }
+
+                        return (
+                            <div key={item.type === "section" ? item.id : `${item.slug}-${i}`}>
+                                {header && (
+                                    <p className="px-5 pt-3 pb-1 text-[0.65rem] font-bold uppercase tracking-widest" style={{ color: "#B4A99C" }}>
+                                        {header}
+                                    </p>
+                                )}
+                                <button
+                                    onClick={() => go(item)}
+                                    onMouseEnter={() => setActiveIdx(i)}
+                                    className="w-full flex items-center gap-3 px-5 py-3 text-left transition-colors duration-100"
+                                    style={{ background: activeIdx === i ? "#F2EDE4" : "transparent" }}
+                                >
+                                    {item.type === "section" ? (
+                                        <span className="w-8 h-8 rounded-lg flex items-center justify-center text-sm flex-shrink-0" style={{ background: "#1A1612", color: "#FAF8F4" }}>#</span>
+                                    ) : (
+                                        <span className="w-8 h-8 rounded-lg flex items-center justify-center text-base flex-shrink-0 relative" style={{ background: "#E8E0D5" }}>
+                                            {item.emoji || "📄"}
+                                            {item.recent && (
+                                                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full flex items-center justify-center" style={{ background: "#E60023" }}>
+                                                    <svg width={8} height={8} viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+                                                </span>
+                                            )}
+                                        </span>
+                                    )}
+                                    <div className="min-w-0 flex-1">
+                                        <p className="text-[0.85rem] font-semibold truncate" style={{ color: "#1A1612" }}>{item.label || item.title}</p>
+                                        {item.type === "post" && item.category && (
+                                            <p className="text-[0.7rem]" style={{ color: "#8C7E74" }}>{item.category}</p>
+                                        )}
+                                    </div>
+                                    {activeIdx === i && <span className="text-[0.65rem] font-bold" style={{ color: "#E60023" }}>↵</span>}
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// ════════════════════════════════════════════════════════════
 //  ROOT
 // ════════════════════════════════════════════════════════════
 export default function Blog() {
     const { posts, loading, error } = useBlogPosts();
+    const [paletteOpen, setPaletteOpen] = useCommandPalette();
 
-    // Dynamic category count
+    // Dynamic category count — real, computed from actual loaded posts
     const categoriesCount = useMemo(() => {
         const unique = new Set(
             posts.map((p) => p.category || "General")
         );
-
         return unique.size;
     }, [posts]);
-
-    // Dynamic Pinterest saves count
-    const pinterestSaves = useMemo(() => {
-        return PINS.length;
-    }, []);
 
     return (
         <>
             <GlobalStyles />
             <SEOHead posts={posts} />
             <NewPostsPopup posts={posts} />
+            <CommandPalette
+                open={paletteOpen}
+                onClose={() => setPaletteOpen(false)}
+                posts={posts}
+            />
 
             <div className="bg-[#FAF8F4] text-[#1A1612]">
-                <Navbar />
+                <Navbar onSearchOpen={() => setPaletteOpen(true)} />
 
                 <main id="main-content">
                     <Hero
                         totalPosts={posts.length}
                         categoriesCount={categoriesCount}
-                        pinterestSaves={pinterestSaves}
+                        loading={loading}
                     />
 
                     <BlogSection
@@ -2337,9 +2308,6 @@ export default function Blog() {
                     <TopicsSection posts={posts} />
 
                     <Divider />
-
-                    <PinterestSection />
-
 
                     <AboutSection />
 
