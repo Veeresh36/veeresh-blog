@@ -1,0 +1,149 @@
+[1mdiff --git a/src/pages/Readblog.jsx b/src/pages/Readblog.jsx[m
+[1mindex 0c40126..dbc5654 100644[m
+[1m--- a/src/pages/Readblog.jsx[m
+[1m+++ b/src/pages/Readblog.jsx[m
+[36m@@ -1,10 +1,12 @@[m
+[31m-import { useState, useEffect, useRef, useCallback, useMemo } from "react";[m
+[32m+[m[32mimport { useState, useEffect, useRef, useCallback, useMemo, memo } from "react";[m
+ import { useParams, Link, useLoaderData } from "react-router-dom";[m
+[32m+[m[32mimport { Head } from "vite-react-ssg";[m
+ import { parseFrontmatter as sharedParseFrontmatter } from "../utils/blogData.js";[m
+ import { hasConsent } from "../pages/CookieBanner";[m
+ import ReactMarkdown from "react-markdown";[m
+ import remarkGfm from "remark-gfm";[m
+ import rehypeHighlight from "rehype-highlight";[m
+[32m+[m[32mimport NotFound from "./NotFound";[m
+ [m
+ // ═══════════════════════════════════════════════[m
+ // CONFIG[m
+[36m@@ -19,6 +21,16 @@[m [mconst SITE = {[m
+   locale: "en_IN",[m
+ };[m
+ [m
+[32m+[m[32mconst BASE_URL = "https://www.veereshbashetti.com"; // match sitemap — use www consistently[m
+[32m+[m
+[32m+[m[32m// TODO: update these to match your real GitHub repo path/branch and profile URLs[m
+[32m+[m[32mconst AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp";[m
+[32m+[m[32mconst AUTHOR_SOCIALS = {[m
+[32m+[m[32m  github: "https://github.com/Veeresh36",[m
+[32m+[m[32m  linkedin: "https://www.linkedin.com/in/veeresh-bashetti",[m
+[32m+[m[32m  pinterest: SITE.pinterestUrl,[m
+[32m+[m[32m};[m
+[32m+[m
+ const TOC_EMOJIS = ["📌", "💡", "📊", "🔥", "🧠", "✨", "🚀", "🎯", "📝", "⚡"];[m
+ const REACTIONS = ["❤️", "🔥", "💡", "🤔"];[m
+ const REACTION_LABELS = { "❤️": "Love", "🔥": "Fire", "💡": "Insightful", "🤔": "Thoughtful" };[m
+[36m@@ -61,6 +73,13 @@[m [mfunction formatDate(d) {[m
+   } catch { return d; }[m
+ }[m
+ [m
+[32m+[m[32mfunction formatDateShort(d) {[m
+[32m+[m[32m  if (!d) return "";[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    return new Date(d).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" });[m
+[32m+[m[32m  } catch { return d; }[m
+[32m+[m[32m}[m
+[32m+[m
+ function estimateReadTime(text) {[m
+   const words = text.trim().split(/\s+/).length;[m
+   return Math.max(1, Math.round(words / 238));[m
+[36m@@ -80,6 +99,31 @@[m [mfunction normalizeTags(tags) {[m
+     .filter(Boolean);[m
+ }[m
+ [m
+[32m+[m[32mfunction flattenNode(node) {[m
+[32m+[m[32m  if (node === null || node === undefined) return "";[m
+[32m+[m[32m  if (typeof node === "string") return node;[m
+[32m+[m[32m  if (typeof node === "number") return String(node);[m
+[32m+[m[32m  if (Array.isArray(node)) return node.map(flattenNode).join("");[m
+[32m+[m[32m  if (node?.props?.children !== undefined) return flattenNode(node.props.children);[m
+[32m+[m[32m  return "";[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Split markdown into [intro, ...sections] at every "## " heading.[m
+[32m+[m[32m// Safer than splitting on blank lines (never cuts through a code fence).[m
+[32m+[m[32mfunction splitSections(md) {[m
+[32m+[m[32m  const parts = md.split(/\n(?=## )/);[m
+[32m+[m[32m  if (parts[0].startsWith("## ")) return ["", ...parts];[m
+[32m+[m[32m  return parts;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// CTA can be a nested `cta:` object or flat ctaTitle/ctaText/ctaHref/ctaLabel keys[m
+[32m+[m[32m// (flat keys are safest if your frontmatter parser doesn't do nested maps).[m
+[32m+[m[32mfunction getCta(fm) {[m
+[32m+[m[32m  if (fm.cta && typeof fm.cta === "object" && fm.cta.href) return fm.cta;[m
+[32m+[m[32m  if (fm.ctaHref && fm.ctaTitle) return { title: fm.ctaTitle, text: fm.ctaText, href: fm.ctaHref, label: fm.ctaLabel };[m
+[32m+[m[32m  return null;[m
+[32m+[m[32m}[m
+[32m+[m
+ // ── Marketplace link detection ──────────────────────────────[m
+ const AFFILIATE_PLATFORMS = {[m
+   amazon: { match: /amazon\.[a-z.]+|amzn\.to|amzn\.in/i, label: "Amazon", color: "#FF9900", bg: "#FFF6E5", icon: "📦" },[m
+[36m@@ -146,7 +190,7 @@[m [mfunction useActiveTOC(tocItems) {[m
+         const top = el.getBoundingClientRect().top + window.scrollY;[m
+         const bottom = next[m
+           ? next.getBoundingClientRect().top + window.scrollY[m
+[31m-          : articleBottom; // ← was document.documentElement.scrollHeight[m
+[32m+[m[32m          : articleBottom;[m
+         const scrolled = window.scrollY + window.innerHeight * 0.2 - top;[m
+         result[id] = Math.min(100, Math.max(0, (scrolled / (bottom - top)) * 100));[m
+       });[m
+[36m@@ -231,9 +275,9 @@[m [mfunction useFadeIn(delay = 0) {[m
+   return ref;[m
+ }[m
+ [m
+[31m-import { Head } from "vite-react-ssg";[m
+[31m-[m
+[31m-const BASE_URL = "https://www.veereshbashetti.com"; // match sitemap — use www consistently[m
+[32m+[m[32m// ═══════════════════════════════════════════════[m
+[32m+[m[32m// SEO HEAD[m
+[32m+[m[32m// ═══════════════════════════════════════════════[m
+ [m
+ function SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {[m
+   if (!fm.title) return null;[m
+[36m@@ -245,6 +289,7 @@[m [mfunction SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {[m
+   const words = content.trim().split(/\s+/).length;[m
+   const readMinutes = Math.max(1, Math.round(words / 238));[m
+   const tags = normalizeTags(fm.tags);[m
+[32m+[m[32m  const modified = fm.updated || fm.date || "";[m
+ [m
+   const currentIdx = morePosts.findIndex(p => p.slug === slug);[m
+   const prevPost = morePosts[currentIdx - 1];[m
+[36m@@ -256,10 +301,16 @@[m [mfunction SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {[m
+       "@id": `${url}#article`,[m
+       headline: fm.title,[m
+       description: desc,[m
+[31m-      image: img,[m
+[32m+[m[32m      image: img ? [img] : undefined,[m
+       datePublished: fm.date || "",[m
+[31m-      dateModified: fm.date || "",[m
+[31m-      author: { "@type": "Person", name: fm.author || SITE.name, url: BASE_URL },[m
+[32m+[m[32m      dateModified: modified,[m
+[32m+[m[32m      mainEntityOfPage: { "@type": "WebPage", "@id": url },[m
+[32m+[m[32m      author: {[m
+[32m+[m[32m        "@type": "Person",[m
+[32m+[m[32m        name: fm.author || SITE.name,[m
+[32m+[m[32m        url: `${BASE_URL}/about`,[m
+[32m+[m[32m        sameAs: [AUTHOR_SOCIALS.github, AUTHOR_SOCIALS.linkedin, AUTHOR_SOCIALS.pinterest].filter(Boolean),[m
+[32m+[m[32m      },[m
+       publisher: { "@type": "Person", name: SITE.name, url: BASE_URL },[m
+       keywords: tags.join(", "),[m
+       inLanguage: "en-IN",[m
+[36m@@ -310,6 +361,7 @@[m [mfunction SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {[m
+       {img && fm.seo?.imageHeight ? <meta property="og:image:height" content={String(fm.seo.imageHeight)} /> : null}[m
+       {img ? <meta property="og:image:alt" content={fm.imageAlt || fm.title} /> : null}[m
+       {fm.date ? <meta property="article:published_time" content={fm.date} /> : null}[m
+[32m+[m[32m      {modified ? <meta property="article:modified_time" content={modified} /> : null}[m
+       {fm.author ? <meta property="article:author" content={fm.author} /> : null}[m
+       {tags.map(t => <meta key={t} property="article:tag" content={t} />)}[m
+ [m
+[36m@@ -330,7 +382,6 @@[m [mfunction SEOHead({ frontmatter: fm, slug, content = "", morePosts = [] }) {[m
+   );[m
+ }[m
+ [m
+[31m-[m
+ function useSyncedSidebarScroll(containerRef, layoutRef) {[m
+   useEffect(() => {[m
+     const container = containerRef.current;[m
+[36m@@ -397,15 +448,6 @@[m [mfunction useReadingMode() {[m
+   return [on, () => setOn(o => !o)];[
