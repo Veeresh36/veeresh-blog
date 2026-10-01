@@ -2262,6 +2262,38 @@ const CommandPalette = ({ open, onClose, posts }) => {
 };
 
 // ════════════════════════════════════════════════════════════
+//  AD SLOT — Google AdSense responsive unit
+//  The ref guard stops the double push in React StrictMode
+//  (which causes "already have ads in them" errors).
+// ════════════════════════════════════════════════════════════
+const AdSlot = ({ slot = "1507061897" }) => {
+    const pushed = useRef(false);
+
+    useEffect(() => {
+        if (pushed.current) return;
+        pushed.current = true;
+        try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.error("AdSense error:", e);
+        }
+    }, []);
+
+    return (
+        <aside aria-label="Advertisement" className="max-w-[1320px] mx-auto px-6 py-10">
+            <ins
+                className="adsbygoogle"
+                style={{ display: "block" }}
+                data-ad-client="ca-pub-1349373945527283"
+                data-ad-slot={slot}
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+            />
+        </aside>
+    );
+};
+
+// ════════════════════════════════════════════════════════════
 //  ROOT
 // ════════════════════════════════════════════════════════════
 export default function Blog() {
@@ -2304,6 +2336,7 @@ export default function Blog() {
                     />
 
                     <Divider />
+                    <AdSlot />
 
                     <TopicsSection posts={posts} />
 
@@ -2314,6 +2347,7 @@ export default function Blog() {
                     <Divider />
 
                     <LatestPosts posts={posts} />
+
                 </main>
 
                 <Footer />
