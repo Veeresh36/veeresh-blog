@@ -2268,6 +2268,8 @@ const CommandPalette = ({ open, onClose, posts }) => {
 // ════════════════════════════════════════════════════════════
 const AdSlot = ({ slot = "1507061897" }) => {
     const pushed = useRef(false);
+    const insRef = useRef(null);
+    const [filled, setFilled] = useState(true);
 
     useEffect(() => {
         if (pushed.current) return;
@@ -2277,11 +2279,23 @@ const AdSlot = ({ slot = "1507061897" }) => {
         } catch (e) {
             console.error("AdSense error:", e);
         }
+
+        // Hide the whole block if Google reports the slot as unfilled
+        const el = insRef.current;
+        if (!el) return;
+        const observer = new MutationObserver(() => {
+            if (el.getAttribute("data-ad-status") === "unfilled") setFilled(false);
+        });
+        observer.observe(el, { attributes: true, attributeFilter: ["data-ad-status"] });
+        return () => observer.disconnect();
     }, []);
+
+    if (!filled) return null;
 
     return (
         <aside aria-label="Advertisement" className="max-w-[1320px] mx-auto px-6 py-10">
             <ins
+                ref={insRef}
                 className="adsbygoogle"
                 style={{ display: "block" }}
                 data-ad-client="ca-pub-1349373945527283"
