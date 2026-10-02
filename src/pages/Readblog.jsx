@@ -818,24 +818,37 @@ const GoogleAd = ({
 }) => {
   const pushedRef = useRef(false);
   const insRef = useRef(null);
+  const showAds = import.meta.env.PROD; // AdSense never serves on localhost
 
   useEffect(() => {
-    if (pushedRef.current) return;
-    if (typeof window === "undefined") return;
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-      pushedRef.current = true;
-    } catch (e) {
-      console.error("AdSense push failed:", e);
-    }
-  }, []);
+    if (!showAds || !slot || pushedRef.current) return;
+    const el = insRef.current;
+    if (!el) return;
 
+    const tryPush = () => {
+      if (pushedRef.current || el.offsetWidth === 0) return false;
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        pushedRef.current = true;
+      } catch (e) {
+        console.error("AdSense push failed:", e);
+      }
+      return true;
+    };
+
+    if (tryPush()) return;
+    const ro = new ResizeObserver(() => { if (tryPush()) ro.disconnect(); });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [slot, showAds]);
+
+  if (!showAds) return null;
   if (!slot) return <AdSlot dark={dark} height={height} label={label || "Ad Space"} className={className} />;
 
   return (
     <div
       className={`ad-wrapper overflow-hidden clear-both my-8 ${className}`}
-      style={{ minHeight: height, width: "100%" }}
+      style={{ width: "100%", maxHeight: 320 }}
     >
       <ins
         ref={insRef}
@@ -1422,19 +1435,35 @@ const AISummaryCard = ({ content, dark, border }) => {
     if (state === "loading" || !content) return;
     setState("loading");
     try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/summarize`, {
+      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+          "Authorization": `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
         },
-        body: JSON.stringify({ content: content.slice(0, 6000) }),
+        body: JSON.stringify({
+          model: "openai/gpt-oss-20b",
+          max_tokens: 1000,
+          reasoning_effort: "low",
+          messages: [{
+            role: "user",
+            content: `Summarize this article in exactly 3 concise bullet points. Each bullet should be one sentence capturing a key insight. Return ONLY 3 bullets using "•" as the bullet character. No preamble, no headers.\n\n${content.slice(0, 6000)}`
+          }]
+        }),
       });
       const data = await res.json();
-      const text = data.choices?.[0]?.message?.content || "";
+      if (!res.ok) {
+        console.error("Groq error:", data);
+        throw new Error(data?.error?.message || "Groq request failed");
+      }
+      const text = data.choices?.[0]?.message?.content?.trim();
+      if (!text) throw new Error("Empty summary");
       setSummary(text);
       setState("done");
-    } catch { setState("error"); }
+    } catch (e) {
+      console.error(e);
+      setState("error");
+    }
   };
 
   return (
@@ -1442,7 +1471,7 @@ const AISummaryCard = ({ content, dark, border }) => {
       style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
       <div className="px-5 py-3 flex items-center justify-between" style={{ borderBottom: `1px solid ${border}` }}>
         <span className="text-[0.65rem] font-bold tracking-[0.13em] uppercase"
-          style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84" }}>
+          style={{ color: dark ? "rgba(250,248,244,0.35)" : "#9C8E84" }}>
           ✦ AI Summary
         </span>
         {state === "idle" && (
@@ -1462,12 +1491,12 @@ const AISummaryCard = ({ content, dark, border }) => {
       </div>
       <div className="p-5">
         {state === "idle" && (
-          <p className="text-[0.8rem] leading-relaxed" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>
+          <p className="text-[0.8rem] leading-relaxed" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>
             Get a 3-bullet AI summary of this article.
           </p>
         )}
         {state === "loading" && (
-          <div className="flex items-center gap-2 text-[0.8rem]" style={{ color: dark ? "rgba(250,248,244,0.655)" : "#7A6E64" }}>
+          <div className="flex items-center gap-2 text-[0.8rem]" style={{ color: dark ? "rgba(250,248,244,0.45)" : "#7A6E64" }}>
             <span className="inline-block w-3.5 h-3.5 border-2 rounded-full border-t-transparent animate-spin"
               style={{ borderColor: "#E60023", borderTopColor: "transparent" }} />
             Summarizing…
@@ -2376,6 +2405,8 @@ export default function ReadBlog() {
           overflow-x: hidden;
           transition: background 0.3s, color 0.3s;
         }
+
+        .ad-wrapper:has(ins.adsbygoogle[data-ad-status="unfilled"]) { display: none !important; }
 
         ::selection { background: #E6002326; color: ${dark ? "#FAF8F4" : "#1A1612"}; }
 

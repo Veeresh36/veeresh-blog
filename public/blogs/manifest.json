@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "slug": "react-state-12-things-every-developer-should-know",
+      "title": "12 Things Every React Developer Should Know About State (2026 Guide)",
+      "tag": "react",
+      "category": "tech",
+      "excerpt": "Most React bugs are state bugs. These 12 rules cover where state should live, how updates really work, how to structure it, and when Context, reducers, server-state tools or a global store are the right call, with code, free videos and a checklist.",
+      "emoji": "⚛️",
+      "gradient": "from-[#0B1220] to-[#16264A]",
+      "meta": "13 min read · 1 October 2026 · Checked against react.dev, sources linked",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/react-state-12-things-every-react-developer-should-know.webp"
+    },
+    {
       "slug": "frontend-developer-roadmap-2026-learn-in-this-order",
       "title": "Frontend Developer Roadmap 2026: What to Learn, in Exactly This Order (12 Steps)",
       "tag": "frontend",
