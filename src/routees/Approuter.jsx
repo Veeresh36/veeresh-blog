@@ -44,7 +44,33 @@ export const routes = [
                         loadPost(params.slug),
                         loadManifest(),
                     ]);
-                    return { post, manifest };
+                    const entry = manifest?.posts?.find(p => p.slug === params.slug);
+                    if (!post || !entry) return { post, manifest };
+
+                    const fm = post.frontmatter || {};
+                    const published = fm.date || entry.date;
+                    const modified = fm.updated || (entry.lastModified && entry.lastModified !== published ? entry.lastModified : undefined);
+
+                    return {
+                        manifest,
+                        post: {
+                            ...post,
+                            frontmatter: {
+                                ...fm,
+                                title: fm.title || entry.title,
+                                description: fm.description || entry.description,
+                                excerpt: fm.excerpt || entry.excerpt,
+                                image: fm.image || entry.image,
+                                imageAlt: fm.imageAlt || entry.imageAlt,
+                                category: fm.category || entry.category,
+                                author: fm.author || entry.author,
+                                tags: fm.tags?.length ? fm.tags : entry.tags,
+                                date: published,
+                                updated: modified,
+                                seo: { title: entry.title, description: entry.description, ...fm.seo },
+                            },
+                        },
+                    };
                 },
             },
             { path: "category/:categorySlug", element: withSuspense(CategoryPage) },

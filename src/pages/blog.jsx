@@ -315,15 +315,15 @@ function useMagneticHover(strength = 0.3) {
 // ════════════════════════════════════════════════════════════
 //  HOOK — useBlogPosts
 // ════════════════════════════════════════════════════════════
+const MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+
 function parseMetaString(meta) {
-    const match = /(\d+\s*min read)\s*·\s*([A-Za-z]+)\s+(\d{4})/.exec(meta || "");
-    if (!match) return { readingTime: meta || "5 min read", date: "" };
-    const [, readingTime, month, year] = match;
-    const parsed = new Date(`${month} 1, ${year}`);
-    return {
-        readingTime,
-        date: isNaN(parsed.getTime()) ? "" : parsed.toISOString(),
-    };
+    const m = /(\d+\s*min read)\s*·\s*(?:Updated\s+)?(?:(\d{1,2})\s+)?([A-Za-z]+)\s+(\d{4})/.exec(meta || "");
+    if (!m) return { readingTime: meta || "5 min read", date: "" };
+    const [, readingTime, day = "1", month, year] = m;
+    const mi = MONTHS.indexOf(month.toLowerCase());
+    if (mi < 0) return { readingTime, date: "" };
+    return { readingTime, date: new Date(Date.UTC(+year, mi, +day)).toISOString() };
 }
 
 function parseGradientString(gradient) {
@@ -354,10 +354,13 @@ function useBlogPosts() {
                     return {
                         slug: p.slug,
                         title: p.title || p.slug,
-                        excerpt: p.excerpt || "",
+                        excerpt: p.excerpt || p.description || "",
+                        description: p.description || p.excerpt || "",
                         date: p.date || date,
+                        modified: p.lastModified || p.date || date,
                         category: p.category || p.tag || "General",
                         tags: p.tag ? [p.tag] : [],
+                        keywords: Array.isArray(p.tags) ? p.tags : [],
                         readingTime,
                         featured: p.featured === true || p.featured === "true",
                         emoji: p.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
@@ -574,8 +577,10 @@ const SEOHead = ({ posts = [] }) => {
                 "blogPost": posts.slice(0, 10).map(p => ({
                     "@type": "BlogPosting",
                     "headline": p.title,
-                    "description": p.excerpt,
+                    "description": p.description || p.excerpt,
                     "datePublished": p.date,
+                    "dateModified": p.modified || p.date,
+                    "keywords": (p.keywords || []).join(", "),
                     "url": `${SITE_URL}/blog/${p.slug}`,
                     "author": { "@id": `${SITE_URL}/#person` },
                 })),
@@ -2145,7 +2150,7 @@ const CommandPalette = ({ open, onClose, posts }) => {
             p.title?.toLowerCase().includes(q) ||
             p.excerpt?.toLowerCase().includes(q) ||
             p.category?.toLowerCase().includes(q) ||
-            p.tags?.some(t => t.toLowerCase().includes(q))
+            [...(p.tags || []), ...(p.keywords || [])].some(t => t.toLowerCase().includes(q))
         ).slice(0, 6).map(p => ({ ...p, type: "post" }));
 
         const sectionMatches = SECTIONS.filter(s => s.label.toLowerCase().includes(q));
