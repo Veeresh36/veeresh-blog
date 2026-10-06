@@ -212,6 +212,13 @@
     </url>
 
     <url>
+        <loc>https://www.veereshbashetti.com/blog/do-frontend-developers-need-dsa-12-concepts-worth-learning</loc>
+        <lastmod>2026-10-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.veereshbashetti.com/blog/every-http-status-code-explained-with-real-examples</loc>
         <lastmod>2026-07-28</lastmod>
         <changefreq>monthly</changefreq>
