@@ -154,7 +154,7 @@ Few questions split frontend developers faster than this one. One camp says you 
 
 The 12-concept structure in this guide follows a popular infographic titled "Do Frontend Developers Need DSA? 12 Concepts Worth Learning" by CodeWithAlpana, which I liked because each concept comes with one frontend use case. The explanations, code, corrections and resources here are my own, and I checked the technical claims against MDN and the official [react.dev](https://react.dev) documentation. Where I add nuance, I say so. The biggest change is the learning order, which I cover near the end.
 
-If you are still building fundamentals, start with my [frontend developer roadmap for 2026](/blog/frontend-developer-roadmap-2026-learn-in-this-order). DSA makes the most sense once you are comfortable with JavaScript and the DOM.
+If you are still building fundamentals, start with my [frontend developer roadmap for 2026](/blog/frontend-developer-roadmap-2026-learn-in-this-order). DSA makes the most sense once you are comfortable with JavaScript and the DOM. If the job market is what worries you, the data in [2026 tech layoffs by company](/blog/2026-tech-sector-layoffs-explained) and [what hiring data shows about AI jobs](/blog/are-ai-jobs-in-demand-2026) gives the wider picture.
 
 ## The 12 Concepts at a Glance
 
@@ -224,7 +224,7 @@ const rows2 = orders.map(order => ({
 }));
 ```
 
-Use a plain object for a fixed shape, such as a user record with known fields. Use a `Map` for a dynamic lookup table, especially when keys are not strings or when you add and remove entries often. This is also the practical meaning of a rule from my React state guide: store ids, then look the object up, instead of keeping copies.
+Use a plain object for a fixed shape, such as a user record with known fields. Use a `Map` for a dynamic lookup table, especially when keys are not strings or when you add and remove entries often. This is also the practical meaning of a rule from my [React state guide](/blog/react-state-12-things-every-developer-should-know): store ids, then look the object up, instead of keeping copies.
 
 > 🛠 **Proof of skill:** You understand this concept if you can take a list of orders and a list of users and produce a joined table without a loop inside a loop, and explain why the second version scales better.
 
@@ -434,7 +434,7 @@ function countElements(node) {
 countElements(document.body);
 ```
 
-This function is also recursion (Concept 7) in action. Knowing the tree model explains real behaviour too: React keeps each piece of state attached to a component by its position in the tree, which is why changing a component's position or `key` resets its state.
+This function is also recursion (Concept 7) in action. Knowing the tree model explains real behaviour too: React keeps each piece of state attached to a component by its position in the tree, which is why changing a component's position or `key` resets its state. You can inspect that component tree yourself with React DevTools, one of the [Chrome extensions I use daily](/blog/best-chrome-extensions-for-developers-2026).
 
 Beyond the DOM, the tree shows up in nested navigation, file explorers, category pickers and in the algorithms behind them: depth-first search (go deep first) and breadth-first search (go level by level).
 
@@ -510,11 +510,11 @@ The infographic lists Big O last. I would learn it much earlier, because it is t
 | 4 | Graphs, BFS and DFS | Route and dependency problems; frequent interview topic | Interview preparation, plus curiosity |
 | 5 | Linked lists and beyond (heaps, dynamic programming) | Rare in UI work; useful for DSA-heavy interviews | Only if a target company asks |
 
-This is a suggested priority, not a universal rule. If you are applying to a company that runs a DSA-heavy loop, move stages 3 to 5 up. If you are building products and not interviewing soon, stages 1 and 2 will cover most of what you meet.
+This is a suggested priority, not a universal rule. If you are applying to a company that runs a DSA-heavy loop, move stages 3 to 5 up. If you are building products and not interviewing soon, stages 1 and 2 will cover most of what you meet. If you are interviewing, pair this plan with [10 AI prompts for job seekers](/blog/10-ai-prompts-to-prepare-for-your-next-job-search) for resume and interview prep.
 
 ## Common DSA Mistakes Frontend Developers Make
 
-- **Studying DSA with no connection to the browser.** Attach each concept to something you can build: an undo stack, a toast queue, a comment thread, a route checker.
+- **Studying DSA with no connection to the browser.** Attach each concept to something you can build: an undo stack, a toast queue, a comment thread, a route checker. Shipping real work is the lesson of [why my first project failed quietly](/blog/first-project-failure-lessons).
 - **Memorising solutions instead of patterns.** Know why a hash map turns a nested loop into a single pass, not just the answer to one problem.
 - **Mutating arrays and Sets that live in React state.** `sort`, `push` and `splice` change the original. Copy first, or use methods that return new values.
 - **Optimising too early.** Measure with realistic data before replacing readable code with something clever.
@@ -558,6 +558,8 @@ The question "do frontend developers need DSA?" has a boring honest answer: you 
 
 If you remember one thing, make it this: **learn each concept by attaching it to something you can build in a browser.** A data structure you have used to build undo, a comment thread or a route checker stays with you far longer than one you memorised from a list.
 
+You also do not need a new laptop or a perfect setup for any of this. [Better gear won't make you a better developer](/blog/developer-setup-trap), and small, steady habits do more, as in [10 productivity habits for developers that actually work](/blog/10-productivity-habits-that-actually-changed-my-work).
+
 Pick one concept from the first stage today. Find one place in a project where a nested loop could be a `Map` lookup, make the change, and you have already learned the most valuable lesson in this guide.
 
 ## Sources and Further Reading
@@ -575,6 +577,8 @@ Technical claims in this article were checked against the following sources in O
 - [freeCodeCamp: Data Structures and Algorithms in JavaScript](https://www.freecodecamp.org/news/data-structures-and-algorithms-in-javascript/): course details for the Beau Carnes video
 - [freeCodeCamp: Data Structure and Algorithm Patterns for LeetCode Interviews](https://www.freecodecamp.org/news/data-structure-and-algorithm-patterns-for-leetcode-interviews/): course details for the Sheldon Chi video
 
+Videos are only half of it. Use AI as a tutor, not an answer key: [how I use AI every day as a developer](/blog/how-i-actually-use-ai-every-day-as-a-developer-2026) shows my workflow, and [9 truly free AI tools for developers](/blog/9-totally-free-ai-tools-for-developers-2026) lists tools that cost nothing.
+
 Code examples are simplified for teaching. Performance claims depend on data size and the JavaScript engine, so measure in your own project before optimising. Interview formats vary by company and change over time, so confirm the current process for any specific role.
 
 *This article is maintained and updated as the frontend ecosystem changes. If you spot outdated information, please use the Contact page to flag it.*
@@ -585,8 +589,10 @@ Code examples are simplified for teaching. Performance claims depend on data siz
 
 ## More Useful Resources
 
-- [Frontend Developer Roadmap 2026: What to Learn, in Exactly This Order (12 Steps)](/blog/frontend-developer-roadmap-2026-learn-in-this-order)
-- [12 Things Every React Developer Should Know About State (2026 Guide)](/blog/react-state-12-things-every-developer-should-know)
-- [Every HTTP Status Code Explained with Real Examples (2026 Guide)](/blog/every-http-status-code-explained-with-real-examples)
-- [9 AI Tools That Are Actually 100% Free for Developers in 2026](/blog/9-totally-free-ai-tools-for-developers-2026)
-- [More Career and Tech Articles](/category/career)
+- [Frontend Developer Roadmap 2026: 12 Steps, in Order](/blog/frontend-developer-roadmap-2026-learn-in-this-order)
+- [React State Explained: 12 Rules Every Developer Should Know (2026)](/blog/react-state-12-things-every-developer-should-know)
+- [How I Use AI Every Day as a Developer: My Real Workflow](/blog/how-i-actually-use-ai-every-day-as-a-developer-2026)
+- [10 AI Prompts for Job Seekers in 2026: Resume to Interview](/blog/10-ai-prompts-to-prepare-for-your-next-job-search)
+- [GenAI Developer Career in 2026: Hype vs Reality for Students](/blog/genai-developer-2026-hype-reality-pros-cons-students)
+- [10 Productivity Habits for Developers That Actually Work](/blog/10-productivity-habits-that-actually-changed-my-work)
+- [More Tech Articles](/category/tech)
