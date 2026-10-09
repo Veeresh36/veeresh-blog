@@ -1,6 +1,38 @@
 {
   "posts": [
     {
+      "slug": "types-of-apis-and-their-use-cases-explained",
+      "title": "Types of APIs and Their Use Cases (2026 Guide)",
+      "description": "Types of APIs explained: Open, Internal and Partner APIs, plus REST, SOAP and GraphQL, with 9 real use cases, JavaScript code and a free video.",
+      "excerpt": "Most 'types of APIs' lists mix two questions: who can use the API, and how it talks. This guide separates them and walks through 9 real use cases, from weather data to affiliate tracking, with JavaScript code.",
+      "author": "Veeresh Bashetti",
+      "date": "2026-10-09",
+      "lastModified": "2026-10-09",
+      "category": "tech",
+      "tag": "backend",
+      "emoji": "🔌",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "readingTime": "14 min read",
+      "meta": "14 min read · 9 October 2026 · Checked against GitHub Docs, OpenAPI and freeCodeCamp, sources linked",
+      "featured": false,
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Types%20of%20APIs_%20A%20Developer%E2%80%99s%20Guide.webp",
+      "imageAlt": "Types of APIs and their use cases: open, internal and partner APIs with REST, SOAP, GraphQL, backend to backend, frontend to backend, B2B and affiliate examples",
+      "tags": [
+        "Types of APIs",
+        "API Use Cases",
+        "REST API",
+        "SOAP API",
+        "GraphQL",
+        "Internal API",
+        "Partner API",
+        "Open API",
+        "Frontend Developer",
+        "JavaScript",
+        "Students",
+        "2026"
+      ]
+    },
+    {
       "slug": "do-frontend-developers-need-dsa-12-concepts-worth-learning",
       "title": "Do Frontend Developers Need DSA? 12 Concepts to Learn (2026)",
       "description": "Do frontend developers need DSA? Yes, but not all of it. Learn 12 concepts that show up in real UI work, with JavaScript code, free videos and a study order.",
@@ -17,7 +49,20 @@
       "featured": false,
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Frontend%20DSA%20Study%20Setup.webp",
       "imageAlt": "Do frontend developers need DSA? 12 concepts worth learning: arrays, hash maps, sets, stacks, queues, linked lists, recursion, search, sorting, trees, graphs and Big O",
-      "tags": ["DSA for frontend developers", "Data Structures and Algorithms", "Frontend Developer", "JavaScript", "React", "Big O Notation", "Coding Interviews", "Arrays", "Hash Maps", "Recursion", "Students", "2026"]
+      "tags": [
+        "DSA for frontend developers",
+        "Data Structures and Algorithms",
+        "Frontend Developer",
+        "JavaScript",
+        "React",
+        "Big O Notation",
+        "Coding Interviews",
+        "Arrays",
+        "Hash Maps",
+        "Recursion",
+        "Students",
+        "2026"
+      ]
     },
     {
       "slug": "react-state-12-things-every-developer-should-know",
@@ -31,7 +76,16 @@
       "meta": "13 min read · 1 October 2026 · Checked against react.dev, sources linked",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/react-state-12-things-every-react-developer-should-know.webp",
       "imageAlt": "12 things every React developer should know about state management, covering useState, Context, reducers and global stores",
-      "tags": ["React state management", "useState", "useReducer", "React Context", "React hooks", "Frontend Developer", "React best practices", "2026"]
+      "tags": [
+        "React state management",
+        "useState",
+        "useReducer",
+        "React Context",
+        "React hooks",
+        "Frontend Developer",
+        "React best practices",
+        "2026"
+      ]
     },
     {
       "slug": "frontend-developer-roadmap-2026-learn-in-this-order",
@@ -45,7 +99,16 @@
       "meta": "16 min read · 30 September 2026 · Research-backed, sources linked",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/frontend-developer-roadmap-2026.webp",
       "imageAlt": "Frontend developer roadmap 2026 showing 12 steps to learn in order, from HTML and CSS to JavaScript and React",
-      "tags": ["Frontend developer roadmap", "How to become a frontend developer", "Learn web development", "HTML CSS JavaScript", "React", "Beginner roadmap", "Free courses", "2026"]
+      "tags": [
+        "Frontend developer roadmap",
+        "How to become a frontend developer",
+        "Learn web development",
+        "HTML CSS JavaScript",
+        "React",
+        "Beginner roadmap",
+        "Free courses",
+        "2026"
+      ]
     },
     {
       "slug": "indian-govt-websites-no-structure",
@@ -59,7 +122,15 @@
       "meta": "11 min read · 30 August 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/indian-govt-websites-no-structure-banner.webp",
       "imageAlt": "Indian government websites and their structural problems: no design system, outdated data models and no post-launch process",
-      "tags": ["Indian government websites", "GovTech India", "Government UX", "Design systems", "Digital India", "Web accessibility", "Public sector technology"]
+      "tags": [
+        "Indian government websites",
+        "GovTech India",
+        "Government UX",
+        "Design systems",
+        "Digital India",
+        "Web accessibility",
+        "Public sector technology"
+      ]
     },
     {
       "slug": "toxic-movie-yash-2026-review",
@@ -73,7 +144,15 @@
       "meta": "9 min read · 29 August 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/toxic-movie-yash-2026-review-banner.webp",
       "imageAlt": "Toxic movie 2026 review banner featuring Yash and the film Toxic: A Fairy Tale for Grown-Ups",
-      "tags": ["Toxic movie review", "Yash Toxic", "Toxic A Fairy Tale for Grown-Ups", "Kannada cinema", "Toxic box office", "Toxic certificate controversy", "2026 movies"]
+      "tags": [
+        "Toxic movie review",
+        "Yash Toxic",
+        "Toxic A Fairy Tale for Grown-Ups",
+        "Kannada cinema",
+        "Toxic box office",
+        "Toxic certificate controversy",
+        "2026 movies"
+      ]
     },
     {
       "slug": "gemini-ai-script-writer-guide-2026",
@@ -87,7 +166,15 @@
       "meta": "11 min read · 22 August 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/gemini-ai-script-writer-guide-2026.webp",
       "imageAlt": "Gemini AI as a script writer in 2026, showing script and storyboard features for video creators",
-      "tags": ["Gemini AI script writer", "Gemini for YouTube scripts", "Google Gemini free", "AI video storyboard", "AI writing tools", "Content creators", "2026"]
+      "tags": [
+        "Gemini AI script writer",
+        "Gemini for YouTube scripts",
+        "Google Gemini free",
+        "AI video storyboard",
+        "AI writing tools",
+        "Content creators",
+        "2026"
+      ]
     },
     {
       "slug": "waiting-on-a-sinking-ship-delayed-salary",
@@ -101,7 +188,15 @@
       "meta": "13 min read · 17 August 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/waiting-on-a-sinking-ship.webp",
       "imageAlt": "Employee waiting on a sinking ship, symbolising a failing startup with delayed salary",
-      "tags": ["Delayed salary", "Failing startup", "Startup layoffs", "Employee rights India", "Career advice", "Job switch", "Developers"]
+      "tags": [
+        "Delayed salary",
+        "Failing startup",
+        "Startup layoffs",
+        "Employee rights India",
+        "Career advice",
+        "Job switch",
+        "Developers"
+      ]
     },
     {
       "slug": "the-profit-of-a-moment",
@@ -115,7 +210,15 @@
       "meta": "11 min read · 16 August 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/the-profit-of-a-moment-cover.webp",
       "imageAlt": "Friends laughing in a car while one person quietly questions the profit of the moment",
-      "tags": ["Can't enjoy good days", "Joy and achievement", "Hustle culture", "Anhedonia", "Mindfulness", "Life lessons", "Mental wellbeing"]
+      "tags": [
+        "Can't enjoy good days",
+        "Joy and achievement",
+        "Hustle culture",
+        "Anhedonia",
+        "Mindfulness",
+        "Life lessons",
+        "Mental wellbeing"
+      ]
     },
     {
       "slug": "2026-tech-sector-layoffs-explained",
@@ -129,7 +232,15 @@
       "meta": "22 min read · Updated 15 August 2026 · Verified tracker data, no fabricated numbers",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/2026-techies-layoffs-cover.webp",
       "imageAlt": "2026 tech sector layoffs data breakdown showing job cuts by company and tracker totals",
-      "tags": ["2026 tech layoffs", "Tech layoffs tracker", "India IT layoffs", "AI and layoffs", "Layoff survival guide", "Job market 2026", "Software engineers"]
+      "tags": [
+        "2026 tech layoffs",
+        "Tech layoffs tracker",
+        "India IT layoffs",
+        "AI and layoffs",
+        "Layoff survival guide",
+        "Job market 2026",
+        "Software engineers"
+      ]
     },
     {
       "slug": "8-ai-prompts-smart-marketers-2026",
@@ -143,7 +254,15 @@
       "meta": "19 min read · Updated 11 August 2026 · Practical, tested prompt templates",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/ai-prompts-marketers-2026.webp",
       "imageAlt": "AI prompt templates for marketers in 2026 for content, campaigns and strategy",
-      "tags": ["AI prompts for marketers", "ChatGPT prompts marketing", "Prompt templates", "Content marketing AI", "Marketing automation", "Prompt engineering", "2026"]
+      "tags": [
+        "AI prompts for marketers",
+        "ChatGPT prompts marketing",
+        "Prompt templates",
+        "Content marketing AI",
+        "Marketing automation",
+        "Prompt engineering",
+        "2026"
+      ]
     },
     {
       "slug": "genai-developer-2026-hype-reality-pros-cons-students",
@@ -157,7 +276,16 @@
       "meta": "14 min read · Updated 7 August 2026 · Research-backed, sources linked",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/genai-developer-2026-guide.webp",
       "imageAlt": "GenAI developer career guide for students in 2026 comparing hype with reality",
-      "tags": ["GenAI developer", "Generative AI career", "AI jobs for students", "GenAI salary India", "Learn generative AI", "LLM developer", "Students", "2026"]
+      "tags": [
+        "GenAI developer",
+        "Generative AI career",
+        "AI jobs for students",
+        "GenAI salary India",
+        "Learn generative AI",
+        "LLM developer",
+        "Students",
+        "2026"
+      ]
     },
     {
       "slug": "best-chrome-extensions-for-developers-2026",
@@ -171,7 +299,15 @@
       "meta": "10 min read · 3 August 2026 · Verified for Manifest V3",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/best-chrome-extensions-for-developers-2026.webp",
       "imageAlt": "Best Chrome extensions for developers in 2026 compatible with Manifest V3",
-      "tags": ["Best Chrome extensions for developers", "Chrome extensions 2026", "Manifest V3", "Web developer tools", "React DevTools", "Django", "Productivity"]
+      "tags": [
+        "Best Chrome extensions for developers",
+        "Chrome extensions 2026",
+        "Manifest V3",
+        "Web developer tools",
+        "React DevTools",
+        "Django",
+        "Productivity"
+      ]
     },
     {
       "slug": "18-free-websites-that-feel-illegal-to-know",
@@ -185,7 +321,14 @@
       "meta": "11 min read · 2 August 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/18-free-websites-that-feel-illegal-to-know.webp",
       "imageAlt": "18 free legal websites that feel illegal to know, verified for 2026",
-      "tags": ["Free websites", "Useful websites 2026", "Free online tools", "Legal free resources", "Productivity websites", "Free tools for students"]
+      "tags": [
+        "Free websites",
+        "Useful websites 2026",
+        "Free online tools",
+        "Legal free resources",
+        "Productivity websites",
+        "Free tools for students"
+      ]
     },
     {
       "slug": "10-ai-prompts-to-prepare-for-your-next-job-search",
@@ -199,7 +342,15 @@
       "meta": "13 min read · 31 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/10-ai-prompts-to-prepare-for-your-next-job-search.webp",
       "imageAlt": "10 AI prompts for job seekers covering resume, LinkedIn, profile photo and interview preparation",
-      "tags": ["AI prompts for job search", "ChatGPT resume prompts", "LinkedIn optimization", "Interview preparation", "Resume tips", "Job seekers", "2026"]
+      "tags": [
+        "AI prompts for job search",
+        "ChatGPT resume prompts",
+        "LinkedIn optimization",
+        "Interview preparation",
+        "Resume tips",
+        "Job seekers",
+        "2026"
+      ]
     },
     {
       "slug": "every-http-status-code-explained-with-real-examples",
@@ -213,7 +364,15 @@
       "meta": "13 min read · 28 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/every-http-status-code-explained-with-real-examples.webp",
       "imageAlt": "HTTP status codes explained with real examples including 200, 301, 401, 403, 404 and 500",
-      "tags": ["HTTP status codes", "401 vs 403", "301 vs 302", "REST API design", "Web development", "Backend", "API errors"]
+      "tags": [
+        "HTTP status codes",
+        "401 vs 403",
+        "301 vs 302",
+        "REST API design",
+        "Web development",
+        "Backend",
+        "API errors"
+      ]
     },
     {
       "slug": "10-productivity-habits-that-actually-changed-my-work",
@@ -227,7 +386,14 @@
       "meta": "10 min read · 27 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/10-productivity-habits-that-actually-changed-my-work.webp",
       "imageAlt": "10 productivity habits that actually changed my work as a developer",
-      "tags": ["Productivity habits", "Developer productivity", "Work habits", "Time management", "Focus", "Career growth"]
+      "tags": [
+        "Productivity habits",
+        "Developer productivity",
+        "Work habits",
+        "Time management",
+        "Focus",
+        "Career growth"
+      ]
     },
     {
       "slug": "5-django-mistakes-i-made-as-a-beginner",
@@ -241,7 +407,14 @@
       "meta": "12 min read · 26 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/5-django-mistakes-beginner-thumbnail.webp",
       "imageAlt": "5 Django mistakes beginners make and how to avoid them",
-      "tags": ["Django mistakes", "Django for beginners", "Python web development", "Django best practices", "Backend development", "Django tips"]
+      "tags": [
+        "Django mistakes",
+        "Django for beginners",
+        "Python web development",
+        "Django best practices",
+        "Backend development",
+        "Django tips"
+      ]
     },
     {
       "slug": "how-i-actually-use-ai-every-day-as-a-developer-2026",
@@ -255,7 +428,14 @@
       "meta": "10 min read · 23 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/how-i-use-ai-daily-developer-workflow.webp",
       "imageAlt": "Developer's daily AI workflow showing how AI tools fit into a real workday",
-      "tags": ["AI for developers", "AI coding workflow", "Developer productivity", "AI tools 2026", "Coding assistants", "Software development"]
+      "tags": [
+        "AI for developers",
+        "AI coding workflow",
+        "Developer productivity",
+        "AI tools 2026",
+        "Coding assistants",
+        "Software development"
+      ]
     },
     {
       "slug": "why-ai-tools-are-costly-2026",
@@ -269,7 +449,15 @@
       "meta": "11 min read · 21 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-ai-tools-are-costly-2026.webp",
       "imageAlt": "Why AI tools are costly in 2026: GPU, electricity and compute costs behind subscription prices",
-      "tags": ["AI tools pricing", "Why AI is expensive", "ChatGPT cost", "AI compute cost", "GPU costs", "LLM pricing", "2026"]
+      "tags": [
+        "AI tools pricing",
+        "Why AI is expensive",
+        "ChatGPT cost",
+        "AI compute cost",
+        "GPU costs",
+        "LLM pricing",
+        "2026"
+      ]
     },
     {
       "slug": "are-ai-jobs-in-demand-2026",
@@ -283,7 +471,15 @@
       "meta": "13 min read · 20 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/are-ai-jobs-in-demand-2026.webp",
       "imageAlt": "AI jobs demand in 2026 based on hiring data by role and region",
-      "tags": ["AI jobs in demand", "AI hiring 2026", "AI careers", "Job market", "Machine learning jobs", "Tech careers", "Hiring data"]
+      "tags": [
+        "AI jobs in demand",
+        "AI hiring 2026",
+        "AI careers",
+        "Job market",
+        "Machine learning jobs",
+        "Tech careers",
+        "Hiring data"
+      ]
     },
     {
       "slug": "9-totally-free-ai-tools-for-developers-2026",
@@ -297,7 +493,14 @@
       "meta": "14 min read · 19 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/top-9-free-ai-tools-for-developers-2026.webp",
       "imageAlt": "9 totally free AI tools for developers in 2026 verified against vendor pricing",
-      "tags": ["Free AI tools for developers", "Free AI coding tools", "AI tools 2026", "Free code assistants", "Developer tools", "Free tier"]
+      "tags": [
+        "Free AI tools for developers",
+        "Free AI coding tools",
+        "AI tools 2026",
+        "Free code assistants",
+        "Developer tools",
+        "Free tier"
+      ]
     },
     {
       "slug": "fear-makes-you-live-not-succeed",
@@ -311,7 +514,15 @@
       "meta": "10 min read · 07 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/fear-makes-you-live-not-succeed.webp",
       "imageAlt": "Fear makes you live but won't make you succeed: protective vs limiting fear",
-      "tags": ["Overcoming fear", "Fear of failure", "Self-improvement", "Personal growth", "Courage", "Life lessons", "Mindset"]
+      "tags": [
+        "Overcoming fear",
+        "Fear of failure",
+        "Self-improvement",
+        "Personal growth",
+        "Courage",
+        "Life lessons",
+        "Mindset"
+      ]
     },
     {
       "slug": "http-query-method-explained",
@@ -325,7 +536,15 @@
       "meta": "13 min read · 05 July 2026",
       "image": "https://raw.githubusercontent.com/Veeresh36/bog_images/main/http-query-method-explained.webp",
       "imageAlt": "HTTP QUERY method explained with Python and Node.js examples compared with GET and POST",
-      "tags": ["HTTP QUERY method", "GET vs POST", "REST API", "Python", "Node.js", "HTTP methods", "Web development"]
+      "tags": [
+        "HTTP QUERY method",
+        "GET vs POST",
+        "REST API",
+        "Python",
+        "Node.js",
+        "HTTP methods",
+        "Web development"
+      ]
     },
     {
       "slug": "salary-is-a-drug",
@@ -339,7 +558,14 @@
       "meta": "10 min read · 03 July 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/salary-is-a-drug-comfort-trap.webp",
       "imageAlt": "Salary as a drug: the comfort trap of a monthly paycheck",
-      "tags": ["Salary trap", "Paycheck to paycheck", "Financial freedom", "Comfort zone", "Personal finance India", "Career and money"]
+      "tags": [
+        "Salary trap",
+        "Paycheck to paycheck",
+        "Financial freedom",
+        "Comfort zone",
+        "Personal finance India",
+        "Career and money"
+      ]
     },
     {
       "slug": "childhood-cartoons-life-lessons",
@@ -353,7 +579,15 @@
       "meta": "8 min read · 30 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/childhood-cartoons-life-lessons-doraemon-chhota-bheem.webp",
       "imageAlt": "Childhood cartoons Doraemon, Chhota Bheem, Shinchan and Oggy and the life lessons they taught",
-      "tags": ["Childhood cartoons", "Doraemon", "Chhota Bheem", "Shinchan", "Oggy and the Cockroaches", "90s nostalgia", "Life lessons"]
+      "tags": [
+        "Childhood cartoons",
+        "Doraemon",
+        "Chhota Bheem",
+        "Shinchan",
+        "Oggy and the Cockroaches",
+        "90s nostalgia",
+        "Life lessons"
+      ]
     },
     {
       "slug": "22-year-old-startup-developer-life",
@@ -367,7 +601,15 @@
       "meta": "8 min read · May 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.webp",
       "imageAlt": "22-year-old startup developer facing a negative bank balance of -₹400",
-      "tags": ["Startup developer", "Money struggles", "Financial lessons", "Early career", "Personal finance India", "Survival", "Developer story"]
+      "tags": [
+        "Startup developer",
+        "Money struggles",
+        "Financial lessons",
+        "Early career",
+        "Personal finance India",
+        "Survival",
+        "Developer story"
+      ]
     },
     {
       "slug": "13k-second-hand-cpu-mistake-in-20s",
@@ -381,7 +623,14 @@
       "meta": "8 min read · May 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp",
       "imageAlt": "₹13,000 second-hand CPU purchase mistake made in my 20s",
-      "tags": ["Money mistakes", "Impulse buying", "Developer setup", "Lessons in your 20s", "Personal finance India", "Second-hand CPU"]
+      "tags": [
+        "Money mistakes",
+        "Impulse buying",
+        "Developer setup",
+        "Lessons in your 20s",
+        "Personal finance India",
+        "Second-hand CPU"
+      ]
     },
     {
       "slug": "suffering-without-generational-wealth",
@@ -395,7 +644,14 @@
       "meta": "7 min read · May 2025",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-suffering-without-generational-wealth-hits-different.webp",
       "imageAlt": "Struggling without generational wealth and a financial safety net",
-      "tags": ["Generational wealth", "Financial safety net", "First-generation earners", "Money mindset", "Personal finance India", "Financial pressure"]
+      "tags": [
+        "Generational wealth",
+        "Financial safety net",
+        "First-generation earners",
+        "Money mindset",
+        "Personal finance India",
+        "Financial pressure"
+      ]
     },
     {
       "slug": "working-for-others-but-born-to-build-my-own-kingdom",
@@ -409,7 +665,14 @@
       "meta": "10 min read · 29 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.webp",
       "imageAlt": "Developer working for others while dreaming of building their own startup",
-      "tags": ["Employee vs entrepreneur", "Starting your own business", "Side projects", "Startup dreams", "Career change", "Developers"]
+      "tags": [
+        "Employee vs entrepreneur",
+        "Starting your own business",
+        "Side projects",
+        "Startup dreams",
+        "Career change",
+        "Developers"
+      ]
     },
     {
       "slug": "childhood-mistake-changed-my-life",
@@ -423,7 +686,15 @@
       "meta": "9 min read · 27 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/forgiveness-and-personal-growth.webp",
       "imageAlt": "Forgiveness and personal growth after a childhood mistake",
-      "tags": ["Self-forgiveness", "Childhood mistakes", "Guilt", "Personal growth", "Forgiveness", "Life lessons", "Emotional healing"]
+      "tags": [
+        "Self-forgiveness",
+        "Childhood mistakes",
+        "Guilt",
+        "Personal growth",
+        "Forgiveness",
+        "Life lessons",
+        "Emotional healing"
+      ]
     },
     {
       "slug": "money-mistakes-20s",
@@ -437,7 +708,14 @@
       "meta": "7 min read · 25 June 2026",
       "image": "https://raw.githubusercontent.com/Veeresh36/bog_images/main/why-smart-people-stay-broke-in-their-20s.webp",
       "imageAlt": "Seven money mistakes smart people make in their 20s",
-      "tags": ["Money mistakes in your 20s", "Personal finance", "Saving money", "Financial habits", "Why people stay broke", "India"]
+      "tags": [
+        "Money mistakes in your 20s",
+        "Personal finance",
+        "Saving money",
+        "Financial habits",
+        "Why people stay broke",
+        "India"
+      ]
     },
     {
       "slug": "budgeting-for-beginners-india",
@@ -451,7 +729,14 @@
       "meta": "6 min read · 24 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp",
       "imageAlt": "3-bucket budgeting method for beginners in India",
-      "tags": ["Budgeting for beginners", "Budgeting India", "3 bucket method", "Personal finance India", "Salary management", "Saving money"]
+      "tags": [
+        "Budgeting for beginners",
+        "Budgeting India",
+        "3 bucket method",
+        "Personal finance India",
+        "Salary management",
+        "Saving money"
+      ]
     },
     {
       "slug": "first-project-failure-lessons",
@@ -465,7 +750,14 @@
       "meta": "7 min read · 20 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.webp",
       "imageAlt": "Code that worked but the project still failed quietly",
-      "tags": ["First project failure", "Project failure lessons", "Shipping software", "Side projects", "Developer lessons", "Startup lessons"]
+      "tags": [
+        "First project failure",
+        "Project failure lessons",
+        "Shipping software",
+        "Side projects",
+        "Developer lessons",
+        "Startup lessons"
+      ]
     },
     {
       "slug": "developer-setup-trap",
@@ -479,7 +771,14 @@
       "meta": "6 min read · 18 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/developer-setup-trap-why-better-hardware-wont-make-you-a-better-developer.webp",
       "imageAlt": "Developer setup trap: why better hardware won't make you a better developer",
-      "tags": ["Developer setup", "Better hardware", "Become a better developer", "Procrastination", "Coding habits", "Finish projects"]
+      "tags": [
+        "Developer setup",
+        "Better hardware",
+        "Become a better developer",
+        "Procrastination",
+        "Coding habits",
+        "Finish projects"
+      ]
     },
     {
       "slug": "30-day-rule-impulse-buying",
@@ -493,7 +792,14 @@
       "meta": "5 min read · 17 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.webp",
       "imageAlt": "30-day rule for impulse buying and smarter spending habits",
-      "tags": ["30 day rule", "Stop impulse buying", "Spending habits", "Save money", "Personal finance India", "Budgeting tips"]
+      "tags": [
+        "30 day rule",
+        "Stop impulse buying",
+        "Spending habits",
+        "Save money",
+        "Personal finance India",
+        "Budgeting tips"
+      ]
     },
     {
       "slug": "stop-comparing-yourself-social-media",
@@ -507,7 +813,14 @@
       "meta": "6 min read · 15 June 2026",
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/stop-comparing-your-chapter-1-to-someone-elses-chapter-10.webp",
       "imageAlt": "Stop comparing your chapter 1 to someone else's chapter 10 on social media",
-      "tags": ["Stop comparing yourself", "Social media comparison", "Self-worth", "Mental health", "Personal growth", "Life lessons"]
+      "tags": [
+        "Stop comparing yourself",
+        "Social media comparison",
+        "Self-worth",
+        "Mental health",
+        "Personal growth",
+        "Life lessons"
+      ]
     }
   ]
 }

@@ -30,6 +30,7 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
+import manifestData from "../../public/blogs/manifest.json"; // adjust path to your folder
 
 // ─── ICONS ──────────────────────────────────────────────────
 const PinIcon = ({ size = 18, className = "" }) => (
@@ -307,63 +308,45 @@ function parseGradientString(gradient) {
     return { background: `linear-gradient(135deg, ${match[1]}, ${match[2]})` };
 }
 
+function mapManifestToPosts(data) {
+    const rawPosts = Array.isArray(data) ? data : (data.posts || []);
+
+    const loaded = rawPosts.map((p, idx) => {
+        const { readingTime, date } = parseMetaString(p.meta);
+        return {
+            slug: p.slug,
+            title: p.title || p.slug,
+            excerpt: p.excerpt || p.description || "",
+            description: p.description || p.excerpt || "",
+            date: p.date || date,
+            modified: p.lastModified || p.date || date,
+            category: p.category || p.tag || "General",
+            tags: p.tag ? [p.tag] : [],
+            keywords: Array.isArray(p.tags) ? p.tags : [],
+            readingTime,
+            featured: p.featured === true || p.featured === "true",
+            emoji: p.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
+            gradientStyle: parseGradientString(p.gradient),
+            image: p.image || null,
+            author: p.author || "Veeresh Bashetti",
+            canonicalUrl: p.canonicalUrl || null,
+        };
+    });
+
+    loaded.sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return new Date(b.date) - new Date(a.date);
+    });
+
+    return loaded;
+}
+
+// Computed once at module load, so it runs at build time during prerender
+const ALL_POSTS = mapManifestToPosts(manifestData);
+
 function useBlogPosts() {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        let cancelled = false;
-        async function loadPosts() {
-            try {
-                const manifestRes = await fetch("/blogs/manifest.json");
-                if (!manifestRes.ok) throw new Error("manifest.json not found. See setup instructions.");
-                const manifestData = await manifestRes.json();
-
-                const rawPosts = Array.isArray(manifestData)
-                    ? manifestData
-                    : (manifestData.posts || []);
-
-                const loaded = rawPosts.map((p, idx) => {
-                    const { readingTime, date } = parseMetaString(p.meta);
-                    return {
-                        slug: p.slug,
-                        title: p.title || p.slug,
-                        excerpt: p.excerpt || p.description || "",
-                        description: p.description || p.excerpt || "",
-                        date: p.date || date,
-                        modified: p.lastModified || p.date || date,
-                        category: p.category || p.tag || "General",
-                        tags: p.tag ? [p.tag] : [],
-                        keywords: Array.isArray(p.tags) ? p.tags : [],
-                        readingTime,
-                        featured: p.featured === true || p.featured === "true",
-                        emoji: p.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
-                        gradientStyle: parseGradientString(p.gradient),
-                        image: p.image || null,
-                        author: p.author || "Veeresh Bashetti",
-                        canonicalUrl: p.canonicalUrl || null,
-                    };
-                });
-
-                loaded.sort((a, b) => {
-                    if (a.featured && !b.featured) return -1;
-                    if (!a.featured && b.featured) return 1;
-                    return new Date(b.date) - new Date(a.date);
-                });
-
-                if (!cancelled) setPosts(loaded);
-            } catch (err) {
-                if (!cancelled) setError(err.message);
-            } finally {
-                if (!cancelled) setLoading(false);
-            }
-        }
-        loadPosts();
-        return () => { cancelled = true; };
-    }, []);
-
-    return { posts, loading, error };
+    return { posts: ALL_POSTS, loading: false, error: null };
 }
 
 // ════════════════════════════════════════════════════════════
