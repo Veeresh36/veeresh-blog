@@ -1,3 +1,4 @@
+
 export const config = {
   matcher: "/((?!api|_next|assets|blogs|.*\\..*).*)",
 };
@@ -17,6 +18,7 @@ const BOT_USER_AGENTS = [
 
 export default async function middleware(request) {
   const userAgent = request.headers.get("user-agent") || "";
+
   const isBot = BOT_USER_AGENTS.some((bot) =>
     userAgent.toLowerCase().includes(bot)
   );
@@ -25,27 +27,46 @@ export default async function middleware(request) {
     return;
   }
 
-  // Prerender.io expects the FULL target URL appended after service.prerender.io/
-  const url = new URL(request.url);
-  const prerenderUrl = `https://service.prerender.io/${url.href}`;
+  const token = process.env.PRERENDER_TOKEN;
+
+  // If Prerender is not configured, serve the normal SPA.
+  if (!token) {
+    return;
+  }
+
+  const prerenderUrl = `https://service.prerender.io/${request.url}`;
 
   try {
     const prerenderResponse = await fetch(prerenderUrl, {
       headers: {
-        "X-Prerender-Token": process.env.PRERENDER_TOKEN,
+        "X-Prerender-Token": token,
         "User-Agent": userAgent,
       },
     });
 
-    const html = await prerenderResponse.text();
+    // Only return successful prerendered HTML.
+    if (prerenderResponse.ok) {
+      const html = await prerenderResponse.text();
 
-    return new Response(html, {
-      status: prerenderResponse.status,
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-    });
-  } catch (err) {
-    // If Prerender.io fails for any reason, fall back to normal SPA
-    // rather than showing a broken page to the bot
+      return new Response(html, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-store",
+        },
+      });
+    }
+
+    // On Prerender errors, fall back to the regular SPA.
+    console.error(
+      `Prerender failed: ${prerenderResponse.status} for ${request.url}`
+    );
+
+    return;
+  } catch (error) {
+    console.error("Prerender request failed:", error);
+
+    // Fall back to the regular SPA.
     return;
   }
 }
