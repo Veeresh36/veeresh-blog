@@ -3,48 +3,28 @@
  * Blog.jsx — Home Page (Dynamic .md file loading)
  * ============================================================
  * CHANGES IN THIS PASS:
- * - Removed the Pinterest board/shelf section entirely
- *   (PinterestSection, PinCard, PINS data, its nav links,
- *   command-palette entry, and related CSS).
- * - Fixed the "looks like an unfinished demo" stats problem:
- *   the hero used to render literal "0 Blog Posts / 0+ Pinterest
- *   Saves / 0+ Categories" the instant the page painted, before
- *   the manifest fetch resolved (and that's exactly what a static
- *   crawl / screenshot would see). The stats now show a shimmer
- *   skeleton while `loading` is true and only render real numbers
- *   pulled from posts.length / actual category count once the
- *   manifest has actually loaded. "Pinterest Saves" (a made-up
- *   number) is gone along with the section it described.
+ * - Removed the shimmer skeleton from the hero stats.
+ *   AnimatedStat no longer takes a `loading` prop. Instead the
+ *   stats row is hidden (visibility: hidden, space kept) until
+ *   the manifest has loaded, so "0 Blog Posts" never flashes.
  *
- * PRE-EXISTING FIXED BUGS (kept from earlier passes):
+ * PREVIOUS PASSES:
+ * - Removed the Pinterest board/shelf section entirely.
  * - Image fallback logic: always renders both, toggles display via state
  * - parseFrontmatter: handles inline array syntax tags: ["a","b"]
  * - Dynamic Tailwind gradient classes replaced with inline styles (JIT-safe)
- * - PinCard aspect ratios use inline style instead of dynamic Tailwind classes (n/a — PinCard removed)
  * - TopicsSection: no longer mutates array on every render
- * - Newsletter: clears input after submit
  * - PostRowItem: object-cover instead of object-contain
  * - Mobile navbar hamburger menu added
- * - Removed unused ArrowRight + SpinnerIcon imports
  * - will-change: transform on reveal elements to prevent layout shift
  *
  * SEO:
  * - JSON-LD structured data (Person + Blog schema)
- * - Twitter Card meta tags
- * - og:url, og:image, og:description
- * - Canonical link
- * - robots meta
- * - Article structured data per post card
+ * - Twitter Card meta tags, og tags, canonical, robots
  *
  * ANIMATIONS:
- * - Floating cards in hero (float up/down loop)
- * - Typewriter effect on hero headline
- * - Animated counters on stats (count up on mount, once loaded)
- * - Magnetic hover effect on CTA buttons
- * - Particle/sparkle trail on hero badge
- * - Smooth marquee tag strip
- * - Card tilt on mouse move (3D perspective)
- * - Gradient mesh background animation in hero
+ * - Floating cards, typewriter headline, animated counters,
+ *   magnetic CTA buttons, marquee strip, 3D card tilt, mesh background
  * ============================================================
  */
 
@@ -202,9 +182,6 @@ function parseFrontmatter(raw) {
 // ════════════════════════════════════════════════════════════
 //  HOOK — useScrollReveal
 //  FIX: checks if element is ALREADY in viewport on mount.
-//  This prevents invisible section headers when:
-//   - user navigates via nav clicks (section already visible)
-//   - component mounts AFTER posts load (already scrolled there)
 // ════════════════════════════════════════════════════════════
 function useScrollReveal(threshold = 0.1) {
     const ref = useRef(null);
@@ -239,8 +216,6 @@ function useScrollReveal(threshold = 0.1) {
 
 // ════════════════════════════════════════════════════════════
 //  HOOK — useRecentlyViewed
-//  Reads slugs from localStorage (written by the post page on
-//  view) and maps them back to full post objects, most-recent-first.
 // ════════════════════════════════════════════════════════════
 const RECENT_KEY = "recentlyViewedSlugs";
 const RECENT_LIMIT = 5;
@@ -393,9 +368,6 @@ function useBlogPosts() {
 
 // ════════════════════════════════════════════════════════════
 //  GLOBAL STYLES
-//  FIXED: removed @import url(...) font loading — that's
-//  render-blocking. Fonts (Outfit / DM Serif Display) should be
-//  loaded once via index.html <link rel="preload"> + async apply.
 // ════════════════════════════════════════════════════════════
 const GlobalStyles = () => (
     <style>{`
@@ -635,9 +607,6 @@ const MarqueeStrip = () => (
     </div>
 );
 
-// ════════════════════════════════════════════════════════════
-//  NAVBAR — with working mobile menu
-// ════════════════════════════════════════════════════════════
 // ─── BOOKMARK ICON ──────────────────────────────────────────
 const BookmarkIcon = ({ size = 20, filled = false }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -842,29 +811,10 @@ const Typewriter = ({ texts, speed = 70, pause = 2200 }) => {
 
 // ════════════════════════════════════════════════════════════
 //  ANIMATED STAT
-//  FIX: while the manifest is still loading, this renders a
-//  shimmer skeleton instead of a hardcoded "0" — a static
-//  crawl / first paint should never show a literal "0 Blog
-//  Posts", which reads as an unfinished demo site.
+//  The loading skeleton has been removed. The parent (Hero)
+//  hides the whole stats row until the manifest has loaded.
 // ════════════════════════════════════════════════════════════
-const AnimatedStat = ({ num, label, started, loading }) => {
-    if (loading) {
-        return (
-            <div className="flex flex-col gap-2">
-                <div
-                    className="h-8 w-14 rounded-md"
-                    style={{
-                        background: "linear-gradient(90deg,#F2EDE4 25%,#FAF8F4 50%,#F2EDE4 75%)",
-                        backgroundSize: "200% 100%",
-                        animation: "shimmer 1.5s infinite",
-                    }}
-                    aria-hidden="true"
-                />
-                <span className="text-[0.78rem] font-medium text-[#8C7E74] uppercase tracking-wider">{label}</span>
-            </div>
-        );
-    }
-
+const AnimatedStat = ({ num, label, started }) => {
     const isNumber = /^\d+/.test(String(num));
     const targetNum = isNumber ? parseInt(String(num)) : 0;
     const suffix = isNumber ? String(num).replace(/^\d+/, "") : num;
@@ -881,10 +831,6 @@ const AnimatedStat = ({ num, label, started, loading }) => {
 
 // ════════════════════════════════════════════════════════════
 //  HERO
-//  FIX: takes `loading` (from useBlogPosts) and no longer takes
-//  a fabricated "Pinterest Saves" number. Stats are: real post
-//  count and real category count, both sourced from the actual
-//  manifest data, with a skeleton shown until that data lands.
 // ════════════════════════════════════════════════════════════
 const Hero = ({
     totalPosts,
@@ -938,19 +884,21 @@ const Hero = ({
                         </a>
                     </div>
 
-                    {/* Animated stats — real data only, skeleton until loaded */}
-                    <div ref={statsRef} className="flex gap-8 mt-10 pt-8 border-t border-[#E8E0D5] animate-fadeUp delay-550">
+                    {/* Animated stats — hidden (space kept) until the manifest has loaded */}
+                    <div
+                        ref={statsRef}
+                        className="flex gap-8 mt-10 pt-8 border-t border-[#E8E0D5] animate-fadeUp delay-550"
+                        style={{ visibility: loading ? "hidden" : "visible" }}
+                    >
                         <AnimatedStat
                             num={`${totalPosts}+`}
                             label="Blog Posts"
                             started={statsVisible}
-                            loading={loading}
                         />
                         <AnimatedStat
                             num={`${categoriesCount}+`}
                             label="Categories"
                             started={statsVisible}
-                            loading={loading}
                         />
                     </div>
                 </div>
@@ -1717,7 +1665,6 @@ const PostRowItem = ({ post, index }) => {
             <div className="rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center text-3xl"
                 style={{ width: 120, aspectRatio: "4/3", background: "#F2EDE4", border: "1px solid #E8E0D5" }}>
                 {post.image && !imgError ? (
-                    // FIX: object-cover (was object-contain)
                     <img src={post.image} alt={post.title} className="w-full h-full" style={{ objectFit: "cover" }} loading="lazy" decoding="async"
                         fetchPriority="low" onError={() => setImgError(true)} />
                 ) : post.emoji}
@@ -1789,7 +1736,7 @@ const Footer = () => (
                     </div>
                 </div>
 
-                {/* Topics — your real tags */}
+                {/* Topics */}
                 <div>
                     <h4 className="text-[0.75rem] font-bold uppercase tracking-widest mb-5"
                         style={{ color: "rgba(255,255,255,0.4)" }}>
@@ -1908,9 +1855,7 @@ const Divider = () => (
 
 // ════════════════════════════════════════════════════════════
 //  NEW POSTS POPUP — wide carousel showing top 3 posts
-//  FIXED: no longer fetches manifest.json itself — receives
-//  already-loaded posts as a prop from the root Blog() component,
-//  eliminating a duplicate network request on every homepage load.
+//  Receives already-loaded posts as a prop (no duplicate fetch).
 // ════════════════════════════════════════════════════════════
 const NewPostsPopup = ({ posts }) => {
     const [visible, setVisible] = useState(false);
@@ -2112,7 +2057,7 @@ const CommandPalette = ({ open, onClose, posts }) => {
     const [query, setQuery] = useState("");
     const [activeIdx, setActiveIdx] = useState(0);
     const inputRef = useRef(null);
-    const recentPosts = useRecentlyViewed(posts); // ← new
+    const recentPosts = useRecentlyViewed(posts);
 
     useEffect(() => {
         if (open) {
@@ -2268,8 +2213,7 @@ const CommandPalette = ({ open, onClose, posts }) => {
 
 // ════════════════════════════════════════════════════════════
 //  AD SLOT — Google AdSense responsive unit
-//  The ref guard stops the double push in React StrictMode
-//  (which causes "already have ads in them" errors).
+//  The ref guard stops the double push in React StrictMode.
 // ════════════════════════════════════════════════════════════
 const AdSlot = ({ slot = "1507061897" }) => {
     const pushed = useRef(false);
