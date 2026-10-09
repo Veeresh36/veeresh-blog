@@ -2,29 +2,25 @@
  * ============================================================
  * AllBlogs.jsx — Pinterest-Style All Posts Page
  * ============================================================
- * Route: /blogs  (add to your router as shown at bottom)
+ * Route: /blog
  *
- * PERF FIXES APPLIED:
- * - useBlogPosts now reads fields straight from manifest.json
- *   instead of firing a separate fetch+parse for every post's
- *   .md file (was N+1 network waterfall — 40+ requests just to
- *   render the grid).
- * - Removed @import url(...) font-loading from GlobalStyles.
- *   That's render-blocking — move the font <link> to index.html
- *   using preload + async apply (same fix already done there for
- *   ReadBlog.jsx). If index.html already loads Outfit + DM Serif
- *   Display, this component gets it for free with zero extra cost.
+ * CHANGES IN THIS PASS:
+ * - Posts now come from the route loader via useLoaderData()
+ *   instead of a client-side fetch inside useEffect. The manifest
+ *   is therefore available at build time, so the prerendered HTML
+ *   contains real post titles/links instead of "Loading posts…"
+ *   and skeleton cards.
+ * - useBlogPosts(manifest) is now a pure useMemo mapper;
+ *   loading is always false and error is always null.
  *
- * ASSUMPTION: your manifest.json posts already carry title,
- * excerpt/description, category, tags, date, image, featured,
- * readingTime — same shape ReadBlog.jsx's `morePosts` expects.
- * If any field is missing in your actual manifest, adjust the
- * mapping in useBlogPosts below (marked with comments).
+ * PERF FIXES (kept from earlier):
+ * - Reads fields straight from manifest.json (no per-post .md fetch).
+ * - No @import url(...) font loading in GlobalStyles.
  * ============================================================
  */
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 
 // ─── Re-export SavedContext (or import from Blog.jsx if co-located) ──────────
 import { SavedContext, useSaved } from "../App";
@@ -116,72 +112,56 @@ function useScrollReveal(threshold = 0.08) {
 }
 
 /**
- * FIXED: reads everything straight off manifest.json.
- * No more per-post .md fetch — this was the N+1 waterfall
- * causing "network dependency tree" / unused-JS / main-thread flags.
+ * Maps the manifest (provided by the route loader) into post objects.
+ * Pure + synchronous, so it works during the static build.
  *
  * If your manifest.posts[] entries use different key names than
- * what's mapped below, adjust the right-hand side only — e.g. if
- * your manifest calls it `desc` instead of `excerpt`, change
- * `p.excerpt || p.description` to `p.desc`.
+ * what's mapped below, adjust the right-hand side only.
  */
-function useBlogPosts() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function useBlogPosts(manifest) {
+  const posts = useMemo(() => {
+    const rawPosts = Array.isArray(manifest)
+      ? manifest
+      : (manifest?.posts || []);
 
-  useEffect(() => {
-    let cancelled = false;
+    const loaded = rawPosts.map((p, idx) => ({
+      slug: p.slug,
+      title: p.title || p.slug,
+      excerpt: p.excerpt || p.description || "",
+      date: p.date || "",
+      category:
+        p.category ||
+        (Array.isArray(p.tags) ? p.tags[0] : "") ||
+        "General",
+      tags: Array.isArray(p.tags) ? p.tags : [],
+      readingTime: p.readingTime || p["reading-time"] || "5 min read",
+      featured: p.featured === true || p.featured === "true",
+      emoji: p.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
+      gradientStyle: GRADIENT_PRESETS[idx % GRADIENT_PRESETS.length],
+      image: p.image || null,
+      author: p.author || "Veeresh Bashetti",
+      heightPx: CARD_HEIGHTS[idx % CARD_HEIGHTS.length],
+    }));
 
-    async function load() {
-      try {
-        const res = await fetch("/blogs/manifest.json");
-        if (!res.ok) throw new Error("manifest.json not found");
-        const manifest = await res.json();
-        const rawPosts = Array.isArray(manifest) ? manifest : (manifest.posts || []);
+    loaded.sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return new Date(b.date) - new Date(a.date);
+    });
 
-        const loaded = rawPosts.map((p, idx) => ({
-          slug: p.slug,
-          title: p.title || p.slug,
-          excerpt: p.excerpt || p.description || "",
-          date: p.date || "",
-          category: p.category || (Array.isArray(p.tags) ? p.tags[0] : "") || "General",
-          tags: Array.isArray(p.tags) ? p.tags : [],
-          readingTime: p.readingTime || p["reading-time"] || "5 min read",
-          featured: p.featured === true || p.featured === "true",
-          emoji: p.emoji || EMOJI_PRESETS[idx % EMOJI_PRESETS.length],
-          gradientStyle: GRADIENT_PRESETS[idx % GRADIENT_PRESETS.length],
-          image: p.image || null,
-          author: p.author || "Veeresh Bashetti",
-          heightPx: CARD_HEIGHTS[idx % CARD_HEIGHTS.length],
-        }));
+    return loaded;
+  }, [manifest]);
 
-        loaded.sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return new Date(b.date) - new Date(a.date);
-        });
-
-        if (!cancelled) setPosts(loaded);
-      } catch (err) {
-        if (!cancelled) setError(err.message);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-
-    load();
-    return () => { cancelled = true; };
-  }, []);
-
-  return { posts, loading, error };
+  return {
+    posts,
+    loading: false,
+    error: null,
+  };
 }
 
 // ─── GLOBAL STYLES ──────────────────────────────────────────
-// FIXED: removed @import url(...) font loading — that's render-blocking.
-// Fonts should be loaded once via index.html <link rel="preload"> + async
-// apply. If Outfit / DM Serif Display are already loaded there (they should
-// be, from the ReadBlog.jsx fix), this component just inherits them free.
+// No @import url(...) font loading — that's render-blocking.
+// Fonts are loaded once via index.html.
 const GlobalStyles = () => (
   <style>{`
     *, *::before, *::after { box-sizing: border-box; }
@@ -561,7 +541,8 @@ const EmptyState = ({ query, onClear }) => (
 
 // ─── MAIN PAGE ───────────────────────────────────────────────
 export default function AllBlogs() {
-  const { posts, loading, error } = useBlogPosts();
+  const manifest = useLoaderData();
+  const { posts, loading, error } = useBlogPosts(manifest);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [query, setQuery] = useState(searchParams.get("q") || "");

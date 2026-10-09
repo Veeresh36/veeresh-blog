@@ -35,7 +35,13 @@ export const routes = [
         element: <App />,
         children: [
             { index: true, element: withSuspense(Blog) },
-            { path: "blog", element: withSuspense(AllBlogs) },
+            {
+                path: "blog",
+                element: withSuspense(AllBlogs),
+                loader: async () => {
+                    return await loadManifest();
+                },
+            },
             {
                 path: "blog/:slug",
                 element: withSuspense(ReadBlog),
