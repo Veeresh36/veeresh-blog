@@ -1,6 +1,34 @@
 {
   "posts": [
     {
+      "slug": "best-programming-languages-to-learn-for-different-careers",
+      "title": "Best Programming Languages to Learn by Career (2026 Guide)",
+      "description": "Which programming language should you learn for your career? Python, JavaScript, Java, C++, C#, Swift and more, matched to real jobs with 2026 data.",
+      "excerpt": "Most 'best language' lists rank languages. This one matches 11 of them to careers, from AI and web to Android, iOS, games and cloud, with 2026 data from TIOBE and Stack Overflow, code, free videos and a learning order.",
+      "author": "Veeresh Bashetti",
+      "date": "2026-10-11",
+      "lastModified": "2026-10-11",
+      "category": "tech",
+      "tag": "programming",
+      "emoji": "🗺️",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "readingTime": "14 min read",
+      "meta": "14 min read · 11 October 2026 · Checked against TIOBE, Stack Overflow and Android docs, sources linked",
+      "featured": false,
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Best%20Programming%20Languages_%202026%20Career%20Guide.webp",
+      "imageAlt": "Best programming languages to learn for different careers: Python, JavaScript, Java, C++, C#, Swift, Go, Rust, Kotlin, PHP and R matched to career goals",
+      "tags": [
+        "Best programming languages",
+        "Programming languages for careers",
+        "Python",
+        "JavaScript",
+        "Java",
+        "Learn to code",
+        "Students",
+        "2026"
+      ]
+    },
+    {
       "slug": "types-of-apis-and-their-use-cases-explained",
       "title": "Types of APIs and Their Use Cases (2026 Guide)",
       "description": "Types of APIs explained: Open, Internal and Partner APIs, plus REST, SOAP and GraphQL, with 9 real use cases, JavaScript code and a free video.",

@@ -96,7 +96,7 @@ const EMOJI_PRESETS = ["💻", "🌿", "🏠", "✈️", "🍛", "⚡", "🧠", 
 const TOPICS = [
     { icon: "🏠", name: "Home Decor" },
     { icon: "🌿", name: "Lifestyle" },
-    { icon: "📌", name: "Pinterest Picks" },
+    // { icon: "📌", name: "Pinterest Picks" },
     { icon: "✈️", name: "Travel" },
     { icon: "🍛", name: "Food & Recipes" },
     { icon: "⚡", name: "Productivity" },
@@ -107,7 +107,7 @@ const TOPICS = [
 ];
 
 // ─── MARQUEE TAGS ─────────────────────────────────────────────
-const MARQUEE_TAGS = ["Home Decor", "Lifestyle", "Travel", "Productivity", "Mindset", "Food & Recipes", "Pinterest Picks", "Career", "Tech", "Product Reviews", "Startup Life", "Personal Stories"];
+const MARQUEE_TAGS = ["Home Decor", "Lifestyle", "Travel", "Productivity", "Mindset", "Food & Recipes", "Career", "Tech", "Product Reviews", "Startup Life", "Personal Stories"];
 
 // ════════════════════════════════════════════════════════════
 //  FRONTMATTER PARSER — fixed: handles inline arrays ["a","b"]
@@ -549,11 +549,11 @@ const SEOHead = ({ posts = [] }) => {
             <meta name="description" content={DESCRIPTION} />
             <meta name="robots" content="index, follow" />
             <meta name="author" content="Veeresh Bashetti" />
-            <meta name="keywords" content="lifestyle blog, home decor, pinterest picks, startup life, productivity, mindset, product reviews, India blog" />
+            {/* <meta name="keywords" content="lifestyle blog, home decor, pinterest picks, startup life, productivity, mindset, product reviews, India blog" /> */}
 
             <link rel="canonical" href={SITE_URL} />
 
-            <meta property="og:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} />
+            {/* <meta property="og:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} /> */}
             <meta property="og:description" content={DESCRIPTION} />
             <meta property="og:type" content="website" />
             <meta property="og:url" content={SITE_URL} />
@@ -562,7 +562,7 @@ const SEOHead = ({ posts = [] }) => {
             <meta property="og:locale" content="en_IN" />
 
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} />
+            {/* <meta name="twitter:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} /> */}
             <meta name="twitter:description" content={DESCRIPTION} />
             <meta name="twitter:image" content={OG_IMAGE} />
             <meta name="twitter:creator" content="@veereshbashetti" />
@@ -1066,8 +1066,8 @@ const BlogSection = ({ posts, loading, error }) => {
 
     const FILTERS = [
         { id: "all", label: "All Posts", icon: "✦" },
-        { id: "pinterest", label: "Pinterest Picks", icon: "📌" },
-        { id: "life", label: "Life & Stories", icon: "🌿" },
+        // { id: "pinterest", label: "Pinterest Picks", icon: "📌" },
+        // { id: "life", label: "Life & Stories", icon: "🌿" },
     ];
 
     const filteredPosts = useMemo(() => {
@@ -1729,7 +1729,7 @@ const Footer = () => (
                         {[
                             { label: "Career", to: "/category/career" },
                             { label: "Life Lessons", to: "/category/life-lessons" },
-                            { label: "Pinterest Picks", to: "/category/pinterest-picks" },
+                            // { label: "Pinterest Picks", to: "/category/pinterest-picks" },
                             { label: "Finance", to: "/category/finance" },
                         ].map(item => (
                             <li key={item.label}>
