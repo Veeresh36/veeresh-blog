@@ -1,6 +1,34 @@
 {
   "posts": [
     {
+      "slug": "15-sql-queries-every-developer-should-know",
+      "title": "15 SQL Queries Every Developer Should Know (2026 Guide)",
+      "description": "The 15 SQL queries you will use again and again: SELECT, JOINs, GROUP BY, CTEs, window functions and more, with tested examples, output and common traps.",
+      "excerpt": "Most SQL cheat sheets show syntax and stop. This guide walks through 15 essential queries on one practice database, shows the actual output, and flags the traps that cause wrong results, plus best practices, free videos and a learning order.",
+      "author": "Veeresh Bashetti",
+      "date": "2026-10-15",
+      "lastModified": "2026-10-15",
+      "category": "tech",
+      "tag": "sql",
+      "emoji": "🗃️",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "readingTime": "16 min read",
+      "meta": "16 min read · 15 October 2026 · Examples tested in SQLite, sources linked",
+      "featured": false,
+      "image": "https://raw.githubusercontent.com/Veeresh36/bog_images/main/15-sql-queries-every-developer-should-know.webp",
+      "imageAlt": "15 SQL queries every developer should know: SELECT, WHERE, JOIN, GROUP BY, CTE and window functions explained with examples",
+      "tags": [
+        "SQL Queries",
+        "SQL for Beginners",
+        "SQL Joins",
+        "Window Functions",
+        "Backend",
+        "Learn to Code",
+        "Students",
+        "2026"
+      ]
+    },
+    {
       "slug": "best-programming-languages-to-learn-for-different-careers",
       "title": "Best Programming Languages to Learn by Career (2026 Guide)",
       "description": "Which programming language should you learn for your career? Python, JavaScript, Java, C++, C#, Swift and more, matched to real jobs with 2026 data.",
