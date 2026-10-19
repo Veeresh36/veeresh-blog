@@ -15,7 +15,7 @@ meta: "13 min read · 1 October 2026 · Checked against react.dev, sources linke
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/react-state-12-things-every-react-developer-should-know.webp"
 imageAlt: "12 things every React developer should know about state: local state, derived values, immutability, reducers, Context and global stores"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/react-state-12-things-every-developer-should-know"
 
 tags:
@@ -125,7 +125,7 @@ faqs:
 
 # 12 Things Every React Developer Should Know About State
 
-**Published:** October 1, 2026 · **Last updated:** October 1, 2026 · **13 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about) · Sources linked below
+**Published:** October 1, 2026 · **Last updated:** October 1, 2026 · **13 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about) · Sources linked below
 
 ---
 
@@ -555,7 +555,7 @@ Code examples are simplified for teaching. Library APIs such as TanStack Query, 
 
 ## About the Author
 
-**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://veereshbashetti.com/about).
+**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://www.veereshbashetti.com/about).
 ## More Useful Resources
 
 - [Frontend Developer Roadmap 2026: What to Learn, in Exactly This Order (12 Steps)](/blog/frontend-developer-roadmap-2026-learn-in-this-order)

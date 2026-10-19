@@ -15,7 +15,7 @@ meta: "11 min read · 22 August 2026 · Verified against Google's 2026 pricing p
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/gemini-ai-script-writer-guide-2026.webp"
 imageAlt: "A split-screen illustration of a script document turning into a storyboard, representing Gemini AI as a script writer"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/gemini-ai-script-writer-guide-2026"
 
 tags:
@@ -69,7 +69,7 @@ faqs:
 
 # Gemini AI as a Script Writer in 2026: The Overlooked Features, Real Pros & Cons, and How to Use It Free
 
-**Published:** August 22, 2026 · **11 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** August 22, 2026 · **11 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 ---
 

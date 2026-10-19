@@ -11,7 +11,7 @@
 //   tagline: "Writer & Curator",
 //   pinterestUrl: "https://in.pinterest.com/veereshbbashetti/",
 //   email: "veeresh.b.bashetti@gmail.com",
-//   baseUrl: "https://veereshbashetti.com",
+//   baseUrl: "https://www.veereshbashetti.com",
 //   locale: "en_IN",
 // };
 

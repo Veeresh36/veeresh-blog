@@ -7,18 +7,16 @@ import { Link } from "react-router-dom";
 const SITE = {
     name: "Veeresh Bashetti",
     email: "veeresh.b.bashetti@gmail.com",
-    pinterestUrl: "https://in.pinterest.com/veereshbbashetti/",
-    baseUrl: "https://veereshbashetti.com",
+    pinterestUrl: "https://github.com/Veeresh36",
+    baseUrl: "https://www.veereshbashetti.com",
     location: "Hubballi, Karnataka, India",
 };
 
 const AUTHOR_PHOTO_URL = "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp";
 
 const TOPICS = [
-    { emoji: "💰", label: "Finance", desc: "Personal finance, smart saving, and investment basics explained simply.", path: "/category/finance" },
-    { emoji: "📱", label: "Tech", desc: "Apps, tools, and technology that actually make life easier.", path: "/category/tech" },
-    { emoji: "🌿", label: "Lifestyle", desc: "Small habits and everyday choices that quietly change everything.", path: "/category/lifestyle" },
-    { emoji: "🧠", label: "Personal Growth", desc: "Learning, mindset, and becoming a slightly better version of yourself.", path: "/category/personal-growth" },
+    { emoji: "🐍", label: "Tech", desc: "Python, Django, React, SQL, APIs and the developer tools I actually use.", path: "/category/tech" },
+    { emoji: "💼", label: "Career", desc: "First projects, interviews, AI and the job market for beginner developers.", path: "/category/career" },
 ];
 
 const VALUES = [
@@ -30,7 +28,7 @@ const VALUES = [
     {
         icon: "M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
         label: "Honest over impressive",
-        text: "No affiliate-first listicles. If something is bad, I say so. I'd rather be useful than popular.",
+        text: "Code is tested before I publish it and sources are linked. If a tool or approach is bad, I say so. I'd rather be useful than popular.",
     },
     {
         icon: "M13 10V3L4 14h7v7l9-11h-7z",
@@ -170,7 +168,7 @@ const Navbar = ({ dark, toggleDark }) => {
                     <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
                         className="hidden sm:inline-flex items-center gap-1.5 text-[0.78rem] font-bold px-4 py-2 rounded-full transition-all duration-300 hover:-translate-y-px hover:opacity-90"
                         style={{ background: "#E60023", color: "#fff" }}>
-                        <PinterestIcon size={13} /> Follow
+                        Follow
                     </a>
                 </div>
             </div>
@@ -490,7 +488,7 @@ export default function About() {
     const border = dark ? "rgba(255,255,255,0.07)" : "#EAE4DC";
 
     useEffect(() => {
-        document.title = `About — ${SITE.name}`;
+        document.title = `About Veeresh Bashetti | Python Full Stack Developer`;
         let canonical = document.querySelector('link[rel="canonical"]');
         if (!canonical) {
             canonical = document.createElement("link");
@@ -641,7 +639,7 @@ export default function About() {
                                 <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1.5 text-[0.78rem] font-bold px-4 py-2 rounded-full transition-all duration-300 hover:-translate-y-px hover:opacity-90"
                                     style={{ background: "#E60023", color: "#fff" }}>
-                                    <PinterestIcon size={13} /> Pinterest
+                                    GitHub
                                 </a>
 
                                 <a href={`mailto:${SITE.email}`}
@@ -789,16 +787,16 @@ export default function About() {
                             </div>
                         </div>
 
-                        {/* Pinterest CTA */}
+                        {/* GitHub CTA */}
                         <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
                             className="flex items-center gap-4 p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
                             style={{ background: "#E60023", borderColor: "#E60023", textDecoration: "none" }}>
                             <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                                <PinterestIcon size={18} />
+                                <span className="text-white text-lg" aria-hidden="true">{"</>"}</span>
                             </div>
                             <div>
-                                <div className="text-[0.85rem] font-bold text-white mb-0.5">Follow on Pinterest</div>
-                                <div className="text-[0.73rem] text-white/70">Curated finds and visual inspiration</div>
+                                <div className="text-[0.85rem] font-bold text-white mb-0.5">Follow on GitHub</div>
+                                <div className="text-[0.73rem] text-white/70">Projects and code from my guides</div>
                             </div>
                         </a>
 
@@ -874,7 +872,7 @@ export default function About() {
                             <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 font-bold text-[0.85rem] px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-px hover:opacity-90"
                                 style={{ background: "#E60023", color: "#fff" }}>
-                                <PinterestIcon size={14} /> Follow on Pinterest
+                                Follow on GitHub
                             </a>
                         </div>
                     </div>

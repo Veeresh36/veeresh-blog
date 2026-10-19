@@ -13,7 +13,7 @@ meta: "14 min read · 23 July 2026"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/how-i-use-ai-daily-developer-workflow.webp"
 imageAlt: "A developer's desk with a laptop open to a code editor and an AI chat panel side by side"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/how-i-actually-use-ai-every-day-as-a-developer-2026"
 
 tags:
@@ -67,7 +67,7 @@ faqs:
 
 > *A tools list tells you what exists. It doesn't tell you what happens at 11 PM when the AI-generated fix breaks something else, and you're the one who has to notice.*
 
-**Published:** July 23, 2026 · **14 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 23, 2026 · **14 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

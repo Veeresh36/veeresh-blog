@@ -15,7 +15,7 @@ meta: "13 min read · 2 August 2026 · Tested for 30 days"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/18-free-websites-that-feel-illegal-to-know.webp"
 imageAlt: "A grid of browser windows showing free online tools for archiving, image editing, and research"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/18-free-websites-that-feel-illegal-to-know"
 
 tags:
@@ -62,7 +62,7 @@ faqs:
 
 # 18 Free Websites That Feel Illegal to Know (But Are 100% Legal) — I Tested Every One for 30 Days
 
-**Published:** August 2, 2026 · **13 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** August 2, 2026 · **13 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 ---
 

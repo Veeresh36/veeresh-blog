@@ -2259,7 +2259,7 @@ export default function ReadBlog() {
   const { slug } = useParams();
   const loaderData = useLoaderData();
   const initialPost = loaderData?.post;
-  const initialManifestPosts = loaderData?.manifest?.posts || [];
+  const initialManifestPosts = (loaderData?.manifest?.posts || []).filter((p) => !p.noindex);
 
   const [content, setContent] = useState(initialPost?.content || "");
   const [fm, setFm] = useState(initialPost?.frontmatter || {});
@@ -2350,7 +2350,7 @@ export default function ReadBlog() {
           if (manifestType.includes("text/html")) { setMorePosts([]); setAllPosts([]); return; }
 
           const manifest = await manifestRes.json();
-          const posts = manifest.posts || [];
+          const posts = (manifest.posts || []).filter((p) => !p.noindex);
           setAllPosts(posts);
           setMorePosts(posts.filter(p => p.slug && p.slug !== slug).slice(0, 6));
         } catch { setMorePosts([]); setAllPosts([]); }

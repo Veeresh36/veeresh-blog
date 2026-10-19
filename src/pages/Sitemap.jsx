@@ -8,7 +8,7 @@ const SITE = {
     name: "Veeresh Bashetti",
     email: "veeresh.b.bashetti@gmail.com",
     pinterestUrl: "https://in.pinterest.com/veereshbbashetti/",
-    baseUrl: "https://veereshbashetti.com",
+    baseUrl: "https://www.veereshbashetti.com",
 };
 
 // ═══════════════════════════════════════════════
@@ -29,10 +29,8 @@ const STATIC_SECTIONS = [
         label: "Categories",
         icon: "M7 20l4-16m2 16l4-16M6 9h14M4 15h14",
         pages: [
-            { label: "Finance", path: "/category/finance", description: "Money, investing, and personal finance" },
-            { label: "Tech", path: "/category/tech", description: "Apps, tools, and technology" },
-            { label: "Lifestyle", path: "/category/lifestyle", description: "Everyday habits and living well" },
-            { label: "Personal Growth", path: "/category/personal-growth", description: "Learning, mindset, and self-improvement" },
+            { label: "Tech", path: "/category/tech", description: "Python, Django, React, SQL and developer tools" },
+            { label: "Career", path: "/category/career", description: "Career advice for beginner developers" },
         ],
     },
     {
@@ -402,7 +400,7 @@ export default function Sitemap() {
                 const contentType = res.headers.get("content-type") || "";
                 if (contentType.includes("text/html")) throw new Error();
                 const manifest = await res.json();
-                const sorted = (manifest.posts || []).sort(
+                const sorted = (manifest.posts || []).filter((p) => !p.noindex).sort(
                     (a, b) => new Date(b.date || 0) - new Date(a.date || 0)
                 );
                 setPosts(sorted);

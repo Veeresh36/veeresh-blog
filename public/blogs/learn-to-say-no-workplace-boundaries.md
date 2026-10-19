@@ -12,8 +12,8 @@ readingTime: "15 min read"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/learn-to-say-no-workplace-boundaries.webp"
 imageAlt: "A young employee waiting outside a manager's cabin, illustrating the struggle to say no at work in India"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/learn-to-say-no-workplace-boundaries"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/learn-to-say-no-workplace-boundaries"
 
 tags:
   - Career
@@ -71,7 +71,7 @@ faqs:
 
 > *He didn't lose the meeting. He lost the one hour he had left to ask for the one thing he actually came for.*
 
-**Published:** July 12, 2026 · **15 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 12, 2026 · **15 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

@@ -15,7 +15,7 @@ meta: "12 min read · Updated 7 August 2026 · Verified on Chrome 151, Manifest 
 featured: false
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/best-chrome-extensions-for-developers-2026.webp"
 imageAlt: "Chrome DevTools panel open next to a code editor showing React component tree and JSON response"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026"
 
 tags:
@@ -59,7 +59,7 @@ faqs:
 
 # 15 Chrome Extensions Every Developer Should Have Installed in 2026
 
-**Published:** August 3, 2026 · **Updated:** August 7, 2026 · **12 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** August 3, 2026 · **Updated:** August 7, 2026 · **12 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 ---
 

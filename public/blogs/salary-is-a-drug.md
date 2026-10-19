@@ -26,7 +26,7 @@ featured: true
 seo:
   title: "Salary Is a Drug: The Comfort Trap Keeping You Stuck | Veeresh Bashetti"
   description: "Why does a monthly salary feel addictive, not empowering? A personal essay on the salary loop, golden handcuffs, and how to think clearly about money, comfort and freedom."
-  canonicalUrl: "https://veereshbashetti.com/blog/salary-is-a-drug"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/salary-is-a-drug"
   keywords:
     - salary is a drug
     - salary trap
@@ -55,14 +55,14 @@ schema:
   author:
     type: "Person"
     name: "Veeresh Bashetti"
-    url: "https://veereshbashetti.com"
+    url: "https://www.veereshbashetti.com"
   datePublished: "2026-07-03"
   dateModified: "2026-07-03"
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/salary-is-a-drug-comfort-trap.webp"
   publisher:
     type: "Person"
     name: "Veeresh Bashetti"
-  mainEntityOfPage: "https://veereshbashetti.com/blog/salary-is-a-drug"
+  mainEntityOfPage: "https://www.veereshbashetti.com/blog/salary-is-a-drug"
 
 faqSchema:
   - q: "Why does salary feel like an addiction?"
@@ -96,7 +96,7 @@ takeaways:
 
 > *For two or three days after salary hits your account, everything feels fine. Then, quietly, the same old anxiety creeps back in — and you start counting down to the next date all over again.*
 
-**Published:** July 3, 2026 · **16 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 3, 2026 · **16 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

@@ -15,7 +15,7 @@ meta: "21 min read · Updated 11 August 2026 · Practical, tested prompt templat
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/ai-prompts-marketers-2026.webp"
 imageAlt: "Marketer using AI prompt templates on a laptop to plan campaigns"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/8-ai-prompts-smart-marketers-2026"
 
 tags:

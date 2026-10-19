@@ -94,20 +94,12 @@ const EMOJI_PRESETS = ["💻", "🌿", "🏠", "✈️", "🍛", "⚡", "🧠", 
 
 // ─── TOPICS DATA ────────────────────────────────────────────
 const TOPICS = [
-    { icon: "🏠", name: "Home Decor" },
-    { icon: "🌿", name: "Lifestyle" },
-    // { icon: "📌", name: "Pinterest Picks" },
-    { icon: "✈️", name: "Travel" },
-    { icon: "🍛", name: "Food & Recipes" },
-    { icon: "⚡", name: "Productivity" },
-    { icon: "🧠", name: "Mindset" },
-    { icon: "⭐", name: "Product Reviews" },
-    { icon: "💻", name: "Career" },
     { icon: "🔧", name: "Tech" },
+    { icon: "💻", name: "Career" },
 ];
 
 // ─── MARQUEE TAGS ─────────────────────────────────────────────
-const MARQUEE_TAGS = ["Home Decor", "Lifestyle", "Travel", "Productivity", "Mindset", "Food & Recipes", "Career", "Tech", "Product Reviews", "Startup Life", "Personal Stories"];
+const MARQUEE_TAGS = ["Python", "Django", "React", "JavaScript", "SQL", "APIs", "Git", "Frontend Roadmap", "Interview Prep", "Beginner Projects", "Dev Tools", "Career for Freshers"];
 
 // ════════════════════════════════════════════════════════════
 //  FRONTMATTER PARSER — fixed: handles inline arrays ["a","b"]
@@ -309,7 +301,7 @@ function parseGradientString(gradient) {
 }
 
 function mapManifestToPosts(data) {
-    const rawPosts = Array.isArray(data) ? data : (data.posts || []);
+    const rawPosts = (Array.isArray(data) ? data : (data.posts || [])).filter((p) => !p.noindex);
 
     const loaded = rawPosts.map((p, idx) => {
         const { readingTime, date } = parseMetaString(p.meta);
@@ -506,9 +498,9 @@ const SITE_URL = "https://www.veereshbashetti.com";
 
 const SEOHead = ({ posts = [] }) => {
     const SITE_NAME = "Veeresh Bashetti";
-    const DESCRIPTION = "Personal blog by Veeresh Bashetti — startup life, lifestyle, home decor, curated Pinterest picks, product reviews & ideas that inspire.";
+    const DESCRIPTION = "Practical Python, Django, React and SQL guides for beginner developers in India. Tested code, real examples and free learning paths by Veeresh Bashetti.";
     const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
-    const TITLE = "Veeresh Bashetti — Blog & Pinterest Picks | Lifestyle, Products & Ideas";
+    const TITLE = "Veeresh Bashetti | Python, Django & React Guides for Beginner Developers";
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -518,7 +510,7 @@ const SEOHead = ({ posts = [] }) => {
                 "@id": `${SITE_URL}/#person`,
                 "name": "Veeresh Bashetti",
                 "url": SITE_URL,
-                "sameAs": ["https://in.pinterest.com/veereshbbashetti/"],
+                "sameAs": ["https://github.com/Veeresh36", "https://www.linkedin.com/in/veeresh-bashetti"],
                 "jobTitle": "Writer & Content Creator",
                 "description": DESCRIPTION,
             },
@@ -689,10 +681,10 @@ const Navbar = ({ onSearchOpen }) => {
                     </li>
 
                     <li>
-                        <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+                        <a href="https://github.com/Veeresh36" target="_blank" rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 bg-[#1A1612] text-[#FAF8F4] px-5 py-2 rounded-full text-xs font-semibold hover:bg-[#E60023] transition-all duration-300 hover:-translate-y-0.5"
-                            aria-label="Follow on Pinterest">
-                            <PinIcon size={14} /> Follow on Pinterest
+                            aria-label="Follow on GitHub">
+                            Follow on GitHub
                         </a>
                     </li>
                 </ul>
@@ -744,9 +736,9 @@ const Navbar = ({ onSearchOpen }) => {
                             </Link>
                         </li>
                     </ul>
-                    <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+                    <a href="https://github.com/Veeresh36" target="_blank" rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-[#1A1612] text-[#FAF8F4] px-5 py-2.5 rounded-full text-sm font-semibold w-full justify-center">
-                        <PinIcon size={14} /> Follow on Pinterest
+                        Follow on GitHub
                     </a>
                 </div>
             )}
@@ -805,7 +797,7 @@ const AnimatedStat = ({ num, label, started }) => {
     return (
         <div className="flex flex-col gap-0.5">
             <span className="font-display text-3xl text-[#1A1612]">
-                {isNumber ? `${count}${suffix}` : num}
+                {isNumber ? `${started ? count : targetNum}${suffix}` : num}
             </span>
             <span className="text-[0.78rem] font-medium text-[#8C7E74] uppercase tracking-wider">{label}</span>
         </div>
@@ -824,7 +816,7 @@ const Hero = ({
     const magBtn1 = useMagneticHover(0.25);
     const magBtn2 = useMagneticHover(0.25);
 
-    const TYPEWRITER_TEXTS = ["inspire.", "motivate.", "resonate.", "delight."];
+    const TYPEWRITER_TEXTS = ["build.", "ship.", "get hired.", "learn faster."];
 
     return (
         <header role="banner" className="animate-mesh relative overflow-hidden">
@@ -837,18 +829,18 @@ const Hero = ({
                     {/* Badge */}
                     <div className="inline-flex items-center gap-2 bg-[#F2EDE4] border border-[#E8E0D5] rounded-full px-4 py-1.5 text-xs font-bold text-[#8C7E74] uppercase tracking-widest mb-6 animate-fadeUp delay-100 relative">
                         <span className="w-2 h-2 rounded-full bg-[#E60023] animate-pulseDot" />
-                        Writer · Curator · Creator
+                        Developer · Writer · Learner
                     </div>
 
                     {/* Headline with typewriter */}
                     <h1 className="font-display text-[clamp(2.2rem,4vw,3.4rem)] leading-[1.08] tracking-tight mb-6 text-[#1A1612] animate-fadeUp delay-200">
-                        Startup life, personal stories<br />
-                        &amp; ideas that{" "}
+                        Practical dev guides<br />
+                        for beginners who want to{" "}
                         <Typewriter texts={TYPEWRITER_TEXTS} />
                     </h1>
 
                     <p className="text-[1.05rem] text-[#8C7E74] leading-[1.8] max-w-[460px] mb-10 font-light animate-fadeUp delay-300">
-                        A personal space for handpicked products, honest stories, and curated ideas — straight from my Pinterest boards and heart. Welcome.
+                        Step-by-step Python, Django, React and SQL tutorials with tested code, real examples and free resources, written by a working web developer from India.
                     </p>
 
                     {/* CTA buttons with magnetic effect */}
@@ -859,11 +851,11 @@ const Hero = ({
                             className="inline-flex items-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-7 py-[0.85rem] rounded-full hover:bg-[#E60023] shadow-sm">
                             <ArrowDown size={16} /> Read the Blog
                         </button>
-                        <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+                        <a href="https://github.com/Veeresh36" target="_blank" rel="noopener noreferrer"
                             {...magBtn2}
                             style={{ transition: "transform 0.2s ease, border-color 0.3s ease" }}
                             className="inline-flex items-center gap-2 text-[#1A1612] font-semibold text-sm px-7 py-[0.85rem] rounded-full border-[1.5px] border-[#E8E0D5] hover:border-[#1A1612]">
-                            <PinIcon size={16} /> Pinterest Profile
+                            About Me
                         </a>
                     </div>
 
@@ -889,20 +881,20 @@ const Hero = ({
                 {/* Floating preview cards */}
                 <div className="hidden lg:grid grid-cols-2 gap-4 relative" aria-hidden="true">
                     <div className="bg-white rounded-2xl overflow-hidden shadow-lg animate-floatA">
-                        <div className="w-full flex flex-col items-center justify-center text-5xl" style={{ aspectRatio: "3/4", background: "linear-gradient(135deg,#F2EDE4,#E8DDD0)" }}>🏡</div>
+                        <div className="w-full flex flex-col items-center justify-center text-5xl" style={{ aspectRatio: "3/4", background: "linear-gradient(135deg,#F2EDE4,#E8DDD0)" }}>🐍</div>
                         <div className="p-4">
-                            <p className="text-[0.78rem] font-bold text-[#8C7E74] uppercase tracking-wider">Home Decor</p>
-                            <p className="font-display text-base text-[#1A1612] leading-snug mt-1">Cozy living room ideas for every budget</p>
+                            <p className="text-[0.78rem] font-bold text-[#8C7E74] uppercase tracking-wider">Python</p>
+                            <p className="font-display text-base text-[#1A1612] leading-snug mt-1">Django mistakes beginners make</p>
                         </div>
                     </div>
                     <div className="bg-white rounded-2xl overflow-hidden shadow-lg mt-8 relative animate-floatB">
                         <span className="absolute -top-3 -right-3 z-10 bg-[#E60023] text-white rounded-full w-12 h-12 flex items-center justify-center text-[0.58rem] font-bold uppercase tracking-wide text-center leading-tight shadow-lg">
-                            Save<br />Idea
+                            New<br />Guide
                         </span>
-                        <div className="w-full flex flex-col items-center justify-center text-5xl" style={{ aspectRatio: "3/4", background: "linear-gradient(135deg,#EDE8F2,#D9D0E8)" }}>🌿</div>
+                        <div className="w-full flex flex-col items-center justify-center text-5xl" style={{ aspectRatio: "3/4", background: "linear-gradient(135deg,#EDE8F2,#D9D0E8)" }}>⚛️</div>
                         <div className="p-4">
-                            <p className="text-[0.78rem] font-bold text-[#8C7E74] uppercase tracking-wider">Lifestyle</p>
-                            <p className="font-display text-base text-[#1A1612] leading-snug mt-1">Morning routines that actually work</p>
+                            <p className="text-[0.78rem] font-bold text-[#8C7E74] uppercase tracking-wider">React</p>
+                            <p className="font-display text-base text-[#1A1612] leading-snug mt-1">12 state rules every developer should know</p>
                         </div>
                     </div>
                 </div>
@@ -1496,15 +1488,15 @@ const AboutSection = () => {
                         {/* Short Bio */}
                         <div className="space-y-4 mb-8">
                             <p className="text-[1rem] leading-[1.9] text-[#5D534E]">
-                                22-year-old web developer from India. I graduated in 2024, spent a year in sales,
-                                and eventually followed my real interest — building things on the internet.
+                                I'm a 22-year-old web developer from Hubballi, India. I graduated in 2024, spent a year in sales,
+                                then trained as a Python full-stack developer and started building real projects.
                             </p>
                             <p className="text-[1rem] leading-[1.9] text-[#5D534E]">
-                                This blog is where I share what I learn — from code and tools to mistakes,
-                                random ideas, and things I find genuinely interesting. No filter, no facade.
+                                This blog is where I turn what I learn into practical guides: Python, Django, React, SQL,
+                                developer tools and career advice for beginners. Code is tested and sources are linked.
                             </p>
                             <p className="text-[1rem] leading-[1.9] text-[#5D534E]">
-                                If you're someone who's still figuring things out, you'll feel at home here.
+                                If you're learning to code or looking for your first developer job, these guides are written for you.
                             </p>
                         </div>
 
@@ -1537,18 +1529,18 @@ const AboutSection = () => {
                         {/* CTA Buttons */}
                         <div className="flex flex-wrap gap-3">
                             <a
-                                href="https://in.pinterest.com/veereshbbashetti/"
+                                href="https://github.com/Veeresh36"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 rounded-full border border-[#E7DDD2] bg-white px-5 py-2.5 text-sm font-semibold text-[#2E2723] transition-all duration-300 hover:bg-[#E60023] hover:text-white hover:border-[#E60023]"
                             >
-                                <PinIcon size={15} /> Pinterest
+                                GitHub
                             </a>
                             <a
-                                href="mailto:hello@veereshbashetti.com"
+                                href="/contact"
                                 className="inline-flex items-center gap-2 rounded-full border border-[#E7DDD2] bg-white px-5 py-2.5 text-sm font-semibold text-[#2E2723] transition-all duration-300 hover:bg-[#1A1612] hover:text-white hover:border-[#1A1612]"
                             >
-                                <EmailIcon /> Say Hello
+                                <EmailIcon /> Contact
                             </a>
                             <a
                                 href="/blog"
@@ -1568,8 +1560,8 @@ const AboutSection = () => {
                             style={{ boxShadow: "0 24px 80px rgba(26,22,18,0.10)" }}
                         >
                             <img
-                                src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1200&auto=format&fit=crop"
-                                alt="Veeresh Bashetti writing at his desk"
+                                src="https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp"
+                                alt="Veeresh Bashetti, web developer and author of this blog"
                                 className="w-full"
                                 style={{ height: "460px", objectFit: "cover" }}
                                 loading="lazy"
@@ -1709,12 +1701,12 @@ const Footer = () => (
                     </Link>
                     <p className="mt-4 text-[0.88rem] leading-[1.75] max-w-[280px]"
                         style={{ color: "rgba(255,255,255,0.5)" }}>
-                        A personal blog about the small things that make life better.
+                        Practical Python, Django, React and SQL guides for beginner developers.
                     </p>
                     <div className="mt-6">
-                        <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+                        <a href="https://github.com/Veeresh36" target="_blank" rel="noopener noreferrer"
                             className="btn-shimmer inline-flex items-center gap-2 text-white font-bold text-xs px-5 py-2.5 rounded-full transition-all duration-300 hover:-translate-y-0.5">
-                            <PinIcon size={15} /> Follow on Pinterest
+                            Follow on GitHub
                         </a>
                     </div>
                 </div>
@@ -1775,10 +1767,10 @@ const Footer = () => (
                     </h4>
                     <ul className="space-y-2.5 list-none p-0 m-0">
                         <li>
-                            <a href="https://in.pinterest.com/veereshbbashetti/" target="_blank" rel="noopener noreferrer"
+                            <a href="https://github.com/Veeresh36" target="_blank" rel="noopener noreferrer"
                                 className="text-[0.88rem] hover:text-[#FF6B81] transition-colors duration-300"
                                 style={{ color: "rgba(255,255,255,0.65)", textDecoration: "none" }}>
-                                Pinterest ↗
+                                GitHub ↗
                             </a>
                         </li>
                         <li>

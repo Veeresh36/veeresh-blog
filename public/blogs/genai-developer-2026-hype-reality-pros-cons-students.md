@@ -15,7 +15,7 @@ meta: "14 min read · Updated 9 August 2026 · Research-backed, sources linked �
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/genai-developer-2026-guide.webp"
 imageAlt: "Indian computer science student learning Generative AI development with LLM code and a roadmap on screen"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/genai-developer-2026-hype-reality-pros-cons-students"
 
 tags:
@@ -62,7 +62,7 @@ faqs:
 
 # GenAI Developer in 2026: Real Career Wave or Just LinkedIn Hype?
 
-**Published:** August 7, 2026 · **Last updated:** August 9, 2026 · **14 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about) · Reviewed against 2026 hiring data
+**Published:** August 7, 2026 · **Last updated:** August 9, 2026 · **14 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about) · Reviewed against 2026 hiring data
 
 ---
 
@@ -308,7 +308,7 @@ Salary figures are directional ranges reported across multiple sources as of mid
 
 ## About the Author
 
-**Veeresh Bashetti** is a full-stack developer documenting his learning journey, experiments, tools, and real-world development experience. He publishes tutorials, reviews, productivity workflows, and practical, project-tested guides for developers — with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://veereshbashetti.com/about) or get in touch via the [Contact page](https://veereshbashetti.com/contact).
+**Veeresh Bashetti** is a full-stack developer documenting his learning journey, experiments, tools, and real-world development experience. He publishes tutorials, reviews, productivity workflows, and practical, project-tested guides for developers — with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://www.veereshbashetti.com/about) or get in touch via the [Contact page](https://www.veereshbashetti.com/contact).
 
 ## More Useful Resources
 

@@ -28,13 +28,13 @@ featured: true
 emoji: "🖥️"
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/developer-setup-trap-why-better-hardware-wont-make-you-a-better-developer.webp"
 imageAlt: "The Developer Setup Trap — Why Better Hardware Won't Make You a Better Developer India 2026"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/developer-setup-trap"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/developer-setup-trap"
 
 seo:
   title: "Developer Setup Trap: Why Hardware Won't Make You Better"
   description: "I spent Rs 13,000 chasing a setup upgrade and shipped nothing. Here's the real reason hardware doesn't fix stalled projects — and what budget gear is actually worth it in India, 2026."
-  canonicalUrl: "https://veereshbashetti.com/blog/developer-setup-trap"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/developer-setup-trap"
   keywords:
     - developer setup trap
     - best budget developer setup India 2026

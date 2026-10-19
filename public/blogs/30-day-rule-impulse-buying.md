@@ -26,13 +26,13 @@ featured: false
 emoji: "⏳"
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.webp"
 imageAlt: "The 30-Day Rule for Impulse Buying - Personal Finance Habit That Works for Indian Students and Developers"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/30-day-rule-impulse-buying"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/30-day-rule-impulse-buying"
 
 seo:
   title: "The 30-Day Rule: Stop Impulse Buying & Save Money | Veeresh Bashetti"
   description: "Discover how the 30-day rule stopped my impulse buying and saved ₹13,000. Real examples, psychology behind it, and practical tools for Indian students and developers in 2026."
-  canonicalUrl: "https://veereshbashetti.com/blog/30-day-rule-impulse-buying"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/30-day-rule-impulse-buying"
   keywords:
     - 30 day rule impulse buying India
     - how to stop impulse buying India 2026
@@ -50,7 +50,7 @@ og:
   description: "How the 30-day rule stopped my impulse buying and saved ₹13,000. Real examples, the psychology behind it, and practical tools for Indian students and developers."
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.webp"
   type: "article"
-  url: "https://veereshbashetti.com/blog/30-day-rule-impulse-buying"
+  url: "https://www.veereshbashetti.com/blog/30-day-rule-impulse-buying"
 
 twitter:
   card: "summary_large_image"
@@ -95,14 +95,14 @@ schema:
   author:
     type: "Person"
     name: "Veeresh Bashetti"
-    url: "https://veereshbashetti.com"
+    url: "https://www.veereshbashetti.com"
   datePublished: "2026-04-22"
   dateModified: "2026-06-01"
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.webp"
   publisher:
     type: "Person"
     name: "Veeresh Bashetti"
-  mainEntityOfPage: "https://veereshbashetti.com/blog/30-day-rule-impulse-buying"
+  mainEntityOfPage: "https://www.veereshbashetti.com/blog/30-day-rule-impulse-buying"
 ---
 
 <!--
@@ -121,7 +121,7 @@ schema:
     "author": {
       "@type": "Person",
       "name": "Veeresh Bashetti",
-      "url": "https://veereshbashetti.com"
+      "url": "https://www.veereshbashetti.com"
     },
     "publisher": {
       "@type": "Person",
@@ -131,7 +131,7 @@ schema:
     "dateModified": "2026-06-01",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://veereshbashetti.com/blog/30-day-rule-impulse-buying"
+      "@id": "https://www.veereshbashetti.com/blog/30-day-rule-impulse-buying"
     }
   },
   {
@@ -197,7 +197,7 @@ schema:
   <meta property="og:description" content="How the 30-day rule stopped my impulse buying and saved ₹13,000. Real examples, the psychology behind it, and practical tools for Indian students and developers." />
   <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/30-day-rule-the-only-spending-rule-that-changed-my-habits.webp" />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://veereshbashetti.com/blog/30-day-rule-impulse-buying" />
+  <meta property="og:url" content="https://www.veereshbashetti.com/blog/30-day-rule-impulse-buying" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The 30-Day Rule: Stop Impulse Buying & Save Money | Veeresh Bashetti" />
   <meta name="twitter:description" content="How the 30-day rule stopped my impulse buying and saved ₹13,000. Real examples, the psychology behind it, and practical tools for Indian students and developers." />
@@ -238,7 +238,7 @@ schema:
      Without og:image, Pinterest picks a random image or shows nothing.
 
   6. CANONICAL URL
-     <link rel="canonical" href="https://veereshbashetti.com/blog/30-day-rule-impulse-buying" />
+     <link rel="canonical" href="https://www.veereshbashetti.com/blog/30-day-rule-impulse-buying" />
      Already in frontmatter — make sure your layout is rendering it.
 
   7. INTERNAL LINKS — verify these slugs exist before publishing:
@@ -258,7 +258,7 @@ schema:
 
 # The 30-Day Rule: The Only Spending Habit That Has Actually Changed My Life (With Real Examples)
 
-**Published:** April 22, 2026 · **10 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** April 22, 2026 · **10 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 I have read personal finance advice for years.
 

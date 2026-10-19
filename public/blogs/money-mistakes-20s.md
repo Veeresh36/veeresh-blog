@@ -40,8 +40,8 @@ faqs:
     a: "Mostly emotions. Fear of falling behind, the need to belong, and the hope that a purchase will deliver an identity are usually driving the spending — discipline alone rarely fixes a pattern that starts with a feeling."
 
 author: "Veeresh Bashetti"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/money-mistakes-20s"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/money-mistakes-20s"
 ---
 
 # The Biggest Money Mistakes People Make in Their 20s (And Why We All Make Them)

@@ -15,7 +15,7 @@ meta: "16 min read · 30 September 2026 · Research-backed, sources linked"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/frontend-developer-roadmap-2026.webp"
 imageAlt: "Frontend developer roadmap 2026 showing 12 steps from HTML and CSS to React, testing and deployment"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/frontend-developer-roadmap-2026-learn-in-this-order"
 
 tags:
@@ -128,7 +128,7 @@ faqs:
 
 # Frontend Developer Roadmap 2026: What to Learn, in Exactly This Order
 
-**Published:** September 30, 2026 · **Last updated:** September 30, 2026 · **16 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about) · Sources linked below
+**Published:** September 30, 2026 · **Last updated:** September 30, 2026 · **16 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about) · Sources linked below
 
 ---
 
@@ -431,7 +431,7 @@ Salary figures are directional ranges from published guides, not guarantees, and
 
 ## About the Author
 
-**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://veereshbashetti.com/about).
+**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://www.veereshbashetti.com/about).
 ## More Useful Resources
 
 - [5 Django Mistakes I Made as a Beginner (and How to Avoid Them)](/blog/5-django-mistakes-i-made-as-a-beginner)

@@ -12,8 +12,8 @@ readingTime: "10 min read"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.webp"
 imageAlt: "A developer staring at a screen late at night — working for a startup but dreaming of building their own business from scratch in India"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/working-for-others-but-born-to-build-my-own-kingdom"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/working-for-others-but-born-to-build-my-own-kingdom"
 
 tags:
   - Entrepreneurship
@@ -72,7 +72,7 @@ faqs:
 
 > *Every commit I push moves someone else's company forward. Every night I lie awake wondering when I start moving mine.*
 
-**Published:** June 1, 2026 · **10 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** June 1, 2026 · **10 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

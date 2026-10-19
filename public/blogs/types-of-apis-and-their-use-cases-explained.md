@@ -15,7 +15,7 @@ meta: "14 min read · 9 October 2026 · Checked against GitHub Docs, OpenAPI and
 featured: false
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Types%20of%20APIs_%20A%20Developer%E2%80%99s%20Guide.webp"
 imageAlt: "Types of APIs and their use cases: open, internal and partner APIs with REST, SOAP, GraphQL, backend to backend, frontend to backend, B2B and affiliate examples"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/types-of-apis-and-their-use-cases-explained"
 
 tags:
@@ -120,7 +120,7 @@ faqs:
 
 # Types of APIs and Their Use Cases: Open, Internal and Partner APIs Explained
 
-**Published:** October 9, 2026 · **Last updated:** October 9, 2026 · **14 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about) · Sources linked below
+**Published:** October 9, 2026 · **Last updated:** October 9, 2026 · **14 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about) · Sources linked below
 
 ---
 
@@ -533,7 +533,7 @@ Code examples are simplified for teaching, and the URLs in them are placeholders
 
 ## About the Author
 
-**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://veereshbashetti.com/about).
+**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://www.veereshbashetti.com/about).
 
 ## More Useful Resources
 

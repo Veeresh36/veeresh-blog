@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Head } from "vite-react-ssg";
 
 /* ────────────────────────────────────────────────────────────
    DESIGN TOKENS (shared with the rest of the site)
@@ -13,8 +14,8 @@ import { Link, useParams } from "react-router-dom";
 // page feel like a specific place rather than an interchangeable filter view.
 const CATEGORY_META = {
     "career": {
-        title: "Career Strategy",
-        subtitle: "Software systems, team culture, and the growth frameworks that actually move the needle.",
+        title: "Career Advice for Developers",
+        subtitle: "Career advice for beginner developers: first projects, interviews, AI and the job market.",
         icon: "💼",
     },
     "life-lessons": {
@@ -34,7 +35,7 @@ const CATEGORY_META = {
     },
     "tech": {
         title: "Tech",
-        subtitle: "Tools, workflows, and dev write-ups grounded in things I actually built and broke.",
+        subtitle: "Python, Django, React, SQL and developer tool guides with tested code and real examples.",
         icon: "📱",
     },
     "lifestyle": {
@@ -266,7 +267,7 @@ export default function CategoryPage() {
                 const res = await fetch("/blogs/manifest.json");
                 if (!res.ok) throw new Error("request-failed");
                 const data = await res.json();
-                const manifestPosts = Array.isArray(data) ? data : data.posts || [];
+                const manifestPosts = (Array.isArray(data) ? data : data.posts || []).filter((post) => !post.noindex);
 
                 const filtered = manifestPosts.filter((post) => {
                     if (slugify(post.category) === categorySlug.toLowerCase().trim()) return true;
@@ -295,8 +296,16 @@ export default function CategoryPage() {
 
     const postCountLabel = loading ? "" : `${posts.length} ${posts.length === 1 ? "post" : "posts"}`;
 
+    const isCoreCategory = ["tech", "career"].includes(categorySlug);
+
     return (
         <div className="min-h-screen font-body antialiased" style={{ background: "#FAF9F5", color: "#1A1612" }}>
+            <Head>
+                <title>{`${meta.title} | Veeresh Bashetti`}</title>
+                <meta name="description" content={meta.subtitle} />
+                <meta name="robots" content={isCoreCategory ? "index, follow" : "noindex, follow"} />
+                <link rel="canonical" href={`https://www.veereshbashetti.com/category/${categorySlug}`} />
+            </Head>
             <style>{`
                 .font-display { font-family: 'DM Serif Display', serif; }
                 .font-body { font-family: 'Outfit', sans-serif; }

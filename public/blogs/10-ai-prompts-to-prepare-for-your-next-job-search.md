@@ -15,7 +15,7 @@ meta: "13 min read · 31 July 2026"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/10-ai-prompts-to-prepare-for-your-next-job-search.webp"
 imageAlt: "A laptop screen showing an AI chat window generating a resume and a professional headshot photo side by side"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/10-ai-prompts-to-prepare-for-your-next-job-search"
 
 tags:
@@ -62,7 +62,7 @@ faqs:
 
 # 10 AI Prompts Every Job Seeker Needs in 2026 (Photo, Resume, LinkedIn & Interview Prep)
 
-**Published:** July 31, 2026 · **13 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** July 31, 2026 · **13 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 ---
 

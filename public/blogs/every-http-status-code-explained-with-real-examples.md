@@ -15,7 +15,7 @@ meta: "19 min read · 28 July 2026"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/every-http-status-code-explained-with-real-examples.webp"
 imageAlt: "A developer's screen showing a network tab full of HTTP status codes like 200, 301, 404, and 500"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/every-http-status-code-explained-with-real-examples"
 
 tags:
@@ -63,7 +63,7 @@ faqs:
 
 # Every HTTP Status Code Explained with Real Examples (2026 Guide)
 
-**Published:** July 28, 2026 · **19 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** July 28, 2026 · **19 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 ---
 

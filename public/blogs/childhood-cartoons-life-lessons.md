@@ -28,7 +28,7 @@ featured: true
 seo:
   title: "Doraemon, Chhota Bheem, Shinchan & More: Life Lessons From Childhood Cartoons | Veeresh Bashetti"
   description: "A personal, first-hand essay on how childhood cartoons — Doraemon, Chhota Bheem, Shinchan, Oggy and the Cockroaches, Ben 10, Mr. Bean and Ninja Hattori — shaped curiosity, imagination and the way I think, build and create even today."
-  canonicalUrl: "https://veereshbashetti.com/blog/childhood-cartoons-life-lessons"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/childhood-cartoons-life-lessons"
   keywords:
     - cartoons that teach life lessons
     - Doraemon life lessons
@@ -53,14 +53,14 @@ schema:
   author:
     type: "Person"
     name: "Veeresh Bashetti"
-    url: "https://veereshbashetti.com"
+    url: "https://www.veereshbashetti.com"
   datePublished: "2026-06-30"
   dateModified: "2026-06-30"
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/childhood-cartoons-life-lessons-doraemon-chhota-bheem.webp"
   publisher:
     type: "Person"
     name: "Veeresh Bashetti"
-  mainEntityOfPage: "https://veereshbashetti.com/blog/childhood-cartoons-life-lessons"
+  mainEntityOfPage: "https://www.veereshbashetti.com/blog/childhood-cartoons-life-lessons"
 
 faqSchema:
   - q: "Why do childhood cartoons like Doraemon still feel meaningful as adults?"
@@ -89,7 +89,7 @@ takeaways:
 
 > *I still catch myself watching Doraemon on a random weeknight. Not for nostalgia. Because it still gives me ideas.*
 
-**Published:** June 30, 2026 · **11 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** June 30, 2026 · **11 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

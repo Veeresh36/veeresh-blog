@@ -14,7 +14,7 @@
       "gradient": "from-[#0D1321] to-[#1D2D50]",
       "readingTime": "16 min read",
       "meta": "16 min read · 15 October 2026 · Examples tested in SQLite, sources linked",
-      "featured": false,
+      "featured": true,
       "image": "https://raw.githubusercontent.com/Veeresh36/bog_images/main/15-sql-queries-every-developer-should-know.webp",
       "imageAlt": "15 SQL queries every developer should know: SELECT, WHERE, JOIN, GROUP BY, CTE and window functions explained with examples",
       "tags": [
@@ -42,7 +42,7 @@
       "gradient": "from-[#0D1321] to-[#1D2D50]",
       "readingTime": "14 min read",
       "meta": "14 min read · 11 October 2026 · Checked against TIOBE, Stack Overflow and Android docs, sources linked",
-      "featured": false,
+      "featured": true,
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Best%20Programming%20Languages_%202026%20Career%20Guide.webp",
       "imageAlt": "Best programming languages to learn for different careers: Python, JavaScript, Java, C++, C#, Swift, Go, Rust, Kotlin, PHP and R matched to career goals",
       "tags": [
@@ -70,7 +70,7 @@
       "gradient": "from-[#0D1321] to-[#1D2D50]",
       "readingTime": "14 min read",
       "meta": "14 min read · 9 October 2026 · Checked against GitHub Docs, OpenAPI and freeCodeCamp, sources linked",
-      "featured": false,
+      "featured": true,
       "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Types%20of%20APIs_%20A%20Developer%E2%80%99s%20Guide.webp",
       "imageAlt": "Types of APIs and their use cases: open, internal and partner APIs with REST, SOAP, GraphQL, backend to backend, frontend to backend, B2B and affiliate examples",
       "tags": [
@@ -141,7 +141,10 @@
         "Frontend Developer",
         "React best practices",
         "2026"
-      ]
+      ],
+      "date": "2026-10-01",
+      "lastModified": "2026-10-01",
+      "featured": false
     },
     {
       "slug": "frontend-developer-roadmap-2026-learn-in-this-order",
@@ -164,7 +167,10 @@
         "Beginner roadmap",
         "Free courses",
         "2026"
-      ]
+      ],
+      "date": "2026-09-30",
+      "lastModified": "2026-09-30",
+      "featured": false
     },
     {
       "slug": "indian-govt-websites-no-structure",
@@ -186,7 +192,10 @@
         "Digital India",
         "Web accessibility",
         "Public sector technology"
-      ]
+      ],
+      "date": "2026-08-30",
+      "lastModified": "2026-08-30",
+      "featured": false
     },
     {
       "slug": "toxic-movie-yash-2026-review",
@@ -208,7 +217,11 @@
         "Toxic box office",
         "Toxic certificate controversy",
         "2026 movies"
-      ]
+      ],
+      "date": "2026-08-29",
+      "lastModified": "2026-08-29",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "gemini-ai-script-writer-guide-2026",
@@ -230,7 +243,10 @@
         "AI writing tools",
         "Content creators",
         "2026"
-      ]
+      ],
+      "date": "2026-08-22",
+      "lastModified": "2026-08-22",
+      "featured": false
     },
     {
       "slug": "waiting-on-a-sinking-ship-delayed-salary",
@@ -252,7 +268,11 @@
         "Career advice",
         "Job switch",
         "Developers"
-      ]
+      ],
+      "date": "2026-08-17",
+      "lastModified": "2026-08-17",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "the-profit-of-a-moment",
@@ -274,7 +294,11 @@
         "Mindfulness",
         "Life lessons",
         "Mental wellbeing"
-      ]
+      ],
+      "date": "2026-08-16",
+      "lastModified": "2026-08-16",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "2026-tech-sector-layoffs-explained",
@@ -296,7 +320,10 @@
         "Layoff survival guide",
         "Job market 2026",
         "Software engineers"
-      ]
+      ],
+      "date": "2026-08-15",
+      "lastModified": "2026-08-15",
+      "featured": false
     },
     {
       "slug": "8-ai-prompts-smart-marketers-2026",
@@ -318,7 +345,10 @@
         "Marketing automation",
         "Prompt engineering",
         "2026"
-      ]
+      ],
+      "date": "2026-08-11",
+      "lastModified": "2026-08-11",
+      "featured": false
     },
     {
       "slug": "genai-developer-2026-hype-reality-pros-cons-students",
@@ -341,7 +371,10 @@
         "LLM developer",
         "Students",
         "2026"
-      ]
+      ],
+      "date": "2026-08-08",
+      "lastModified": "2026-08-09",
+      "featured": false
     },
     {
       "slug": "best-chrome-extensions-for-developers-2026",
@@ -363,7 +396,10 @@
         "React DevTools",
         "Django",
         "Productivity"
-      ]
+      ],
+      "date": "2026-08-03",
+      "lastModified": "2026-08-07",
+      "featured": false
     },
     {
       "slug": "18-free-websites-that-feel-illegal-to-know",
@@ -384,7 +420,10 @@
         "Legal free resources",
         "Productivity websites",
         "Free tools for students"
-      ]
+      ],
+      "date": "2026-08-02",
+      "lastModified": "2026-08-02",
+      "featured": false
     },
     {
       "slug": "10-ai-prompts-to-prepare-for-your-next-job-search",
@@ -406,7 +445,10 @@
         "Resume tips",
         "Job seekers",
         "2026"
-      ]
+      ],
+      "date": "2026-07-31",
+      "lastModified": "2026-07-31",
+      "featured": false
     },
     {
       "slug": "every-http-status-code-explained-with-real-examples",
@@ -428,7 +470,10 @@
         "Web development",
         "Backend",
         "API errors"
-      ]
+      ],
+      "date": "2026-07-28",
+      "lastModified": "2026-07-28",
+      "featured": false
     },
     {
       "slug": "10-productivity-habits-that-actually-changed-my-work",
@@ -449,7 +494,10 @@
         "Time management",
         "Focus",
         "Career growth"
-      ]
+      ],
+      "date": "2026-07-27",
+      "lastModified": "2026-07-27",
+      "featured": false
     },
     {
       "slug": "5-django-mistakes-i-made-as-a-beginner",
@@ -470,7 +518,10 @@
         "Django best practices",
         "Backend development",
         "Django tips"
-      ]
+      ],
+      "date": "2026-07-26",
+      "lastModified": "2026-07-26",
+      "featured": false
     },
     {
       "slug": "how-i-actually-use-ai-every-day-as-a-developer-2026",
@@ -491,7 +542,10 @@
         "AI tools 2026",
         "Coding assistants",
         "Software development"
-      ]
+      ],
+      "date": "2026-07-23",
+      "lastModified": "2026-07-23",
+      "featured": false
     },
     {
       "slug": "why-ai-tools-are-costly-2026",
@@ -513,7 +567,10 @@
         "GPU costs",
         "LLM pricing",
         "2026"
-      ]
+      ],
+      "date": "2026-07-21",
+      "lastModified": "2026-07-21",
+      "featured": false
     },
     {
       "slug": "are-ai-jobs-in-demand-2026",
@@ -535,7 +592,10 @@
         "Machine learning jobs",
         "Tech careers",
         "Hiring data"
-      ]
+      ],
+      "date": "2026-07-20",
+      "lastModified": "2026-07-20",
+      "featured": false
     },
     {
       "slug": "9-totally-free-ai-tools-for-developers-2026",
@@ -556,7 +616,39 @@
         "Free code assistants",
         "Developer tools",
         "Free tier"
-      ]
+      ],
+      "date": "2026-07-19",
+      "lastModified": "2026-07-19",
+      "featured": false
+    },
+    {
+      "slug": "learn-to-say-no-workplace-boundaries",
+      "title": "Not Saying 'No' Is Quietly Making You Poor — And You Won't Notice Until It's Too Late",
+      "description": "Every time you can't say no, someone else decides how your time, your money, and your self-respect get spent. A true office story, a practical framework, and an honest look at why saying no is the most underrated financial skill nobody teaches you.",
+      "excerpt": "Nobody warns you that not saying no has a price. You don't feel it that day. You feel it months later, when you add up every hour, every rupee, and every piece of yourself you handed over because refusing felt riskier than agreeing.",
+      "author": "Veeresh Bashetti",
+      "date": "2026-07-12",
+      "lastModified": "2026-07-12",
+      "category": "career",
+      "emoji": "🚫",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "readingTime": "15 min read",
+      "featured": false,
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/learn-to-say-no-workplace-boundaries.webp",
+      "imageAlt": "A young employee waiting outside a manager's cabin, illustrating the struggle to say no at work in India",
+      "tags": [
+        "Career",
+        "Life Lessons",
+        "Workplace Boundaries",
+        "Saying No",
+        "Indian Employee",
+        "Manager Manipulation",
+        "Self Respect",
+        "Internship Experience",
+        "how to say no at work India",
+        "workplace boundaries for freshers"
+      ],
+      "noindex": true
     },
     {
       "slug": "fear-makes-you-live-not-succeed",
@@ -578,7 +670,11 @@
         "Courage",
         "Life lessons",
         "Mindset"
-      ]
+      ],
+      "date": "2026-07-07",
+      "lastModified": "2026-07-09",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "http-query-method-explained",
@@ -600,7 +696,10 @@
         "Node.js",
         "HTTP methods",
         "Web development"
-      ]
+      ],
+      "date": "2026-07-05",
+      "lastModified": "2026-07-05",
+      "featured": false
     },
     {
       "slug": "salary-is-a-drug",
@@ -621,7 +720,11 @@
         "Comfort zone",
         "Personal finance India",
         "Career and money"
-      ]
+      ],
+      "date": "2026-07-03",
+      "lastModified": "2026-07-03",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "childhood-cartoons-life-lessons",
@@ -643,92 +746,11 @@
         "Oggy and the Cockroaches",
         "90s nostalgia",
         "Life lessons"
-      ]
-    },
-    {
-      "slug": "22-year-old-startup-developer-life",
-      "title": "22 Years Old, -₹400 in My Bank: A Startup Developer's Story",
-      "description": "At 22 with -₹400 in my bank account, I learned about money, pride and survival. A startup developer's honest story from India.",
-      "tag": "career",
-      "category": "career",
-      "excerpt": "At 22, staring at a balance of -₹400, I learned more about money, pride and survival than any finance course taught me. A startup developer's honest story.",
-      "emoji": "💻",
-      "gradient": "from-[#E8F0FE] to-[#D4E4FC]",
-      "meta": "8 min read · May 2026",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.webp",
-      "imageAlt": "22-year-old startup developer facing a negative bank balance of -₹400",
-      "tags": [
-        "Startup developer",
-        "Money struggles",
-        "Financial lessons",
-        "Early career",
-        "Personal finance India",
-        "Survival",
-        "Developer story"
-      ]
-    },
-    {
-      "slug": "13k-second-hand-cpu-mistake-in-20s",
-      "title": "The ₹13,000 Second-Hand CPU Mistake I Made in My 20s",
-      "description": "I spent ₹13,000 on a second-hand CPU hoping to become a serious developer. It didn't work, and the real lesson cost far more than the money.",
-      "tag": "Life Lessons",
-      "category": "Life Lessons",
-      "excerpt": "I spent ₹13,000 on a second-hand CPU, convinced it would make me a more serious developer. It didn't, and the real lesson cost more than the money.",
-      "emoji": "💸",
-      "gradient": "from-[#F5E8E8] to-[#E8D4D4]",
-      "meta": "8 min read · May 2026",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp",
-      "imageAlt": "₹13,000 second-hand CPU purchase mistake made in my 20s",
-      "tags": [
-        "Money mistakes",
-        "Impulse buying",
-        "Developer setup",
-        "Lessons in your 20s",
-        "Personal finance India",
-        "Second-hand CPU"
-      ]
-    },
-    {
-      "slug": "suffering-without-generational-wealth",
-      "title": "Struggling Without Generational Wealth: What It Teaches You",
-      "description": "Why struggling without a financial safety net hits differently: every setback feels heavier. What that pressure actually teaches you.",
-      "tag": "Finance",
-      "category": "Finance",
-      "excerpt": "Struggling without a financial safety net hits differently, because every setback feels heavier with no cushion behind you. Here is what that pressure teaches.",
-      "emoji": "💰",
-      "gradient": "from-[#F8F5F1] to-[#EDE7DF]",
-      "meta": "7 min read · May 2025",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-suffering-without-generational-wealth-hits-different.webp",
-      "imageAlt": "Struggling without generational wealth and a financial safety net",
-      "tags": [
-        "Generational wealth",
-        "Financial safety net",
-        "First-generation earners",
-        "Money mindset",
-        "Personal finance India",
-        "Financial pressure"
-      ]
-    },
-    {
-      "slug": "working-for-others-but-born-to-build-my-own-kingdom",
-      "title": "Building Someone Else's Dream While Planning My Own",
-      "description": "Building someone else's product by day while sketching your own by night: an honest take on employee life and the urge to build your own thing.",
-      "tag": "career",
-      "category": "career",
-      "excerpt": "I spend my days building someone else's product, but my mind keeps sketching blueprints for something entirely mine. An honest look at the pull between a job and your own venture.",
-      "emoji": "👑",
-      "gradient": "from-[#1A1612] to-[#2D2520]",
-      "meta": "10 min read · 29 June 2026",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.webp",
-      "imageAlt": "Developer working for others while dreaming of building their own startup",
-      "tags": [
-        "Employee vs entrepreneur",
-        "Starting your own business",
-        "Side projects",
-        "Startup dreams",
-        "Career change",
-        "Developers"
-      ]
+      ],
+      "date": "2026-06-30",
+      "lastModified": "2026-06-30",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "childhood-mistake-changed-my-life",
@@ -750,7 +772,86 @@
         "Forgiveness",
         "Life lessons",
         "Emotional healing"
-      ]
+      ],
+      "date": "2026-06-03",
+      "lastModified": "2026-06-03",
+      "featured": false,
+      "noindex": true
+    },
+    {
+      "slug": "working-for-others-but-born-to-build-my-own-kingdom",
+      "title": "Building Someone Else's Dream While Planning My Own",
+      "description": "Building someone else's product by day while sketching your own by night: an honest take on employee life and the urge to build your own thing.",
+      "tag": "career",
+      "category": "career",
+      "excerpt": "I spend my days building someone else's product, but my mind keeps sketching blueprints for something entirely mine. An honest look at the pull between a job and your own venture.",
+      "emoji": "👑",
+      "gradient": "from-[#1A1612] to-[#2D2520]",
+      "meta": "10 min read · 29 June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/working-for-others-building-my-own-kingdom.webp",
+      "imageAlt": "Developer working for others while dreaming of building their own startup",
+      "tags": [
+        "Employee vs entrepreneur",
+        "Starting your own business",
+        "Side projects",
+        "Startup dreams",
+        "Career change",
+        "Developers"
+      ],
+      "date": "2026-06-01",
+      "lastModified": "2026-06-03",
+      "featured": false,
+      "noindex": true
+    },
+    {
+      "slug": "22-year-old-startup-developer-life",
+      "title": "22 Years Old, -₹400 in My Bank: A Startup Developer's Story",
+      "description": "At 22 with -₹400 in my bank account, I learned about money, pride and survival. A startup developer's honest story from India.",
+      "tag": "career",
+      "category": "career",
+      "excerpt": "At 22, staring at a balance of -₹400, I learned more about money, pride and survival than any finance course taught me. A startup developer's honest story.",
+      "emoji": "💻",
+      "gradient": "from-[#E8F0FE] to-[#D4E4FC]",
+      "meta": "8 min read · May 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.webp",
+      "imageAlt": "22-year-old startup developer facing a negative bank balance of -₹400",
+      "tags": [
+        "Startup developer",
+        "Money struggles",
+        "Financial lessons",
+        "Early career",
+        "Personal finance India",
+        "Survival",
+        "Developer story"
+      ],
+      "date": "2026-05-27",
+      "lastModified": "2026-05-27",
+      "featured": false
+    },
+    {
+      "slug": "13k-second-hand-cpu-mistake-in-20s",
+      "title": "The ₹13,000 Second-Hand CPU Mistake I Made in My 20s",
+      "description": "I spent ₹13,000 on a second-hand CPU hoping to become a serious developer. It didn't work, and the real lesson cost far more than the money.",
+      "tag": "Life Lessons",
+      "category": "Life Lessons",
+      "excerpt": "I spent ₹13,000 on a second-hand CPU, convinced it would make me a more serious developer. It didn't, and the real lesson cost more than the money.",
+      "emoji": "💸",
+      "gradient": "from-[#F5E8E8] to-[#E8D4D4]",
+      "meta": "8 min read · May 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp",
+      "imageAlt": "₹13,000 second-hand CPU purchase mistake made in my 20s",
+      "tags": [
+        "Money mistakes",
+        "Impulse buying",
+        "Developer setup",
+        "Lessons in your 20s",
+        "Personal finance India",
+        "Second-hand CPU"
+      ],
+      "date": "2026-05-27",
+      "lastModified": "2026-06-28",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "money-mistakes-20s",
@@ -771,70 +872,11 @@
         "Financial habits",
         "Why people stay broke",
         "India"
-      ]
-    },
-    {
-      "slug": "budgeting-for-beginners-india",
-      "title": "Budgeting for Beginners in India: The 3-Bucket Method",
-      "description": "A simple 3-bucket budgeting method for beginners in India. No spreadsheets or jargon, just a system you can start using today.",
-      "tag": "Finance",
-      "category": "Finance",
-      "excerpt": "A simple 3-bucket method for splitting your income that actually sticks. No spreadsheets, no jargon, just a budgeting system beginners in India can start today.",
-      "emoji": "📊",
-      "gradient": "from-[#E8F5E9] to-[#C8E6C9]",
-      "meta": "6 min read · 24 June 2026",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp",
-      "imageAlt": "3-bucket budgeting method for beginners in India",
-      "tags": [
-        "Budgeting for beginners",
-        "Budgeting India",
-        "3 bucket method",
-        "Personal finance India",
-        "Salary management",
-        "Saving money"
-      ]
-    },
-    {
-      "slug": "first-project-failure-lessons",
-      "title": "Why My First Project Failed Quietly (Lessons Learned)",
-      "description": "My first project didn't crash loudly, it quietly failed. Lessons on shipping real work, validation and what silence teaches developers.",
-      "tag": "career",
-      "category": "career",
-      "excerpt": "My first project didn't crash loudly. It quietly failed, and no one noticed at first, including me. Here is what that silence taught me about shipping real work.",
-      "emoji": "🔧",
-      "gradient": "from-[#EDE7F6] to-[#D1C4E9]",
-      "meta": "7 min read · 20 June 2026",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.webp",
-      "imageAlt": "Code that worked but the project still failed quietly",
-      "tags": [
-        "First project failure",
-        "Project failure lessons",
-        "Shipping software",
-        "Side projects",
-        "Developer lessons",
-        "Startup lessons"
-      ]
-    },
-    {
-      "slug": "developer-setup-trap",
-      "title": "The Developer Setup Trap: Better Gear Won't Make You Better",
-      "description": "Why better hardware won't make you a better coder. I wasted ₹13,000 on a setup upgrade; here's what actually improves developers.",
-      "tag": "career",
-      "category": "career",
-      "excerpt": "I wasted ₹13,000 chasing a setup upgrade while my unfinished projects stayed unfinished. Here is what actually makes you a better developer.",
-      "emoji": "🖥️",
-      "gradient": "from-[#E3F2FD] to-[#BBDEFB]",
-      "meta": "6 min read · 18 June 2026",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/developer-setup-trap-why-better-hardware-wont-make-you-a-better-developer.webp",
-      "imageAlt": "Developer setup trap: why better hardware won't make you a better developer",
-      "tags": [
-        "Developer setup",
-        "Better hardware",
-        "Become a better developer",
-        "Procrastination",
-        "Coding habits",
-        "Finish projects"
-      ]
+      ],
+      "date": "2026-05-20",
+      "lastModified": "2026-06-28",
+      "featured": false,
+      "noindex": true
     },
     {
       "slug": "30-day-rule-impulse-buying",
@@ -855,7 +897,60 @@
         "Save money",
         "Personal finance India",
         "Budgeting tips"
-      ]
+      ],
+      "date": "2026-04-22",
+      "lastModified": "2026-06-01",
+      "featured": false,
+      "noindex": true
+    },
+    {
+      "slug": "budgeting-for-beginners-india",
+      "title": "Budgeting for Beginners in India: The 3-Bucket Method",
+      "description": "A simple 3-bucket budgeting method for beginners in India. No spreadsheets or jargon, just a system you can start using today.",
+      "tag": "Finance",
+      "category": "Finance",
+      "excerpt": "A simple 3-bucket method for splitting your income that actually sticks. No spreadsheets, no jargon, just a budgeting system beginners in India can start today.",
+      "emoji": "📊",
+      "gradient": "from-[#E8F5E9] to-[#C8E6C9]",
+      "meta": "6 min read · 24 June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp",
+      "imageAlt": "3-bucket budgeting method for beginners in India",
+      "tags": [
+        "Budgeting for beginners",
+        "Budgeting India",
+        "3 bucket method",
+        "Personal finance India",
+        "Salary management",
+        "Saving money"
+      ],
+      "date": "2026-04-15",
+      "lastModified": "2026-06-28",
+      "featured": false,
+      "noindex": true
+    },
+    {
+      "slug": "developer-setup-trap",
+      "title": "The Developer Setup Trap: Better Gear Won't Make You Better",
+      "description": "Why better hardware won't make you a better coder. I wasted ₹13,000 on a setup upgrade; here's what actually improves developers.",
+      "tag": "career",
+      "category": "career",
+      "excerpt": "I wasted ₹13,000 chasing a setup upgrade while my unfinished projects stayed unfinished. Here is what actually makes you a better developer.",
+      "emoji": "🖥️",
+      "gradient": "from-[#E3F2FD] to-[#BBDEFB]",
+      "meta": "6 min read · 18 June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/developer-setup-trap-why-better-hardware-wont-make-you-a-better-developer.webp",
+      "imageAlt": "Developer setup trap: why better hardware won't make you a better developer",
+      "tags": [
+        "Developer setup",
+        "Better hardware",
+        "Become a better developer",
+        "Procrastination",
+        "Coding habits",
+        "Finish projects"
+      ],
+      "date": "2026-04-01",
+      "lastModified": "2026-07-08",
+      "featured": false
     },
     {
       "slug": "stop-comparing-yourself-social-media",
@@ -876,7 +971,60 @@
         "Mental health",
         "Personal growth",
         "Life lessons"
-      ]
+      ],
+      "date": "2026-03-25",
+      "lastModified": "2026-06-28",
+      "featured": false,
+      "noindex": true
+    },
+    {
+      "slug": "first-project-failure-lessons",
+      "title": "Why My First Project Failed Quietly (Lessons Learned)",
+      "description": "My first project didn't crash loudly, it quietly failed. Lessons on shipping real work, validation and what silence teaches developers.",
+      "tag": "career",
+      "category": "career",
+      "excerpt": "My first project didn't crash loudly. It quietly failed, and no one noticed at first, including me. Here is what that silence taught me about shipping real work.",
+      "emoji": "🔧",
+      "gradient": "from-[#EDE7F6] to-[#D1C4E9]",
+      "meta": "7 min read · 20 June 2026",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.webp",
+      "imageAlt": "Code that worked but the project still failed quietly",
+      "tags": [
+        "First project failure",
+        "Project failure lessons",
+        "Shipping software",
+        "Side projects",
+        "Developer lessons",
+        "Startup lessons"
+      ],
+      "date": "2026-03-10",
+      "lastModified": "2026-06-28",
+      "featured": false
+    },
+    {
+      "slug": "suffering-without-generational-wealth",
+      "title": "Struggling Without Generational Wealth: What It Teaches You",
+      "description": "Why struggling without a financial safety net hits differently: every setback feels heavier. What that pressure actually teaches you.",
+      "tag": "Finance",
+      "category": "Finance",
+      "excerpt": "Struggling without a financial safety net hits differently, because every setback feels heavier with no cushion behind you. Here is what that pressure teaches.",
+      "emoji": "💰",
+      "gradient": "from-[#F8F5F1] to-[#EDE7DF]",
+      "meta": "7 min read · May 2025",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-suffering-without-generational-wealth-hits-different.webp",
+      "imageAlt": "Struggling without generational wealth and a financial safety net",
+      "tags": [
+        "Generational wealth",
+        "Financial safety net",
+        "First-generation earners",
+        "Money mindset",
+        "Personal finance India",
+        "Financial pressure"
+      ],
+      "date": "2025-05-30",
+      "lastModified": "2026-06-28",
+      "featured": false,
+      "noindex": true
     }
   ]
 }

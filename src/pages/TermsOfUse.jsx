@@ -8,7 +8,7 @@ const SITE = {
     name: "Veeresh Bashetti",
     email: "veeresh.b.bashetti@gmail.com",
     pinterestUrl: "https://in.pinterest.com/veereshbbashetti/",
-    baseUrl: "https://veereshbashetti.com",
+    baseUrl: "https://www.veereshbashetti.com",
 };
 
 const LAST_UPDATED = "May 31, 2025";

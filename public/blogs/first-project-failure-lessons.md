@@ -26,8 +26,8 @@ emoji: "🔧"
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/my-code-worked-but-the-project-still-failed.webp"
 imageAlt: "My Code Worked But The Project Still Failed — Freelance Lessons India"
 
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/first-project-failure-lessons"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/first-project-failure-lessons"
 
 takeaways:
   - "Research every cost before you quote it — one wrong number said with confidence can end a project that took months to build."

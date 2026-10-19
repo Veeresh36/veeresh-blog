@@ -12,7 +12,7 @@ readingTime: "13 min read"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/are-ai-jobs-in-demand-2026.webp"
 imageAlt: "A developer working at a dual-monitor setup with AI job market charts and dashboards on screen"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/are-ai-jobs-in-demand-2026"
 
 tags:
@@ -71,7 +71,7 @@ faqs:
 
 > *Two things are true about AI and jobs at the exact same time: it's eliminating some, and it's creating a hiring boom for others. Most people only see the headline that scares them.*
 
-**Published:** July 20, 2026 · **13 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 20, 2026 · **13 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

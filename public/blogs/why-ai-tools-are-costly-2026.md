@@ -12,7 +12,7 @@ readingTime: "11 min read"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-ai-tools-are-costly-2026.webp"
 imageAlt: "Rows of GPU servers in a data center with glowing blue lights, representing the compute cost behind AI tools"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/why-ai-tools-are-costly-2026"
 
 tags:
@@ -69,7 +69,7 @@ faqs:
 
 > *Every AI tool you use is quietly backed by a GPU somewhere in a data center, running hot, burning electricity, right now, while you read this sentence.*
 
-**Published:** July 21, 2026 · **11 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 21, 2026 · **11 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

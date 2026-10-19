@@ -15,7 +15,7 @@ meta: "15 min read · 2 October 2026 · Checked against MDN and react.dev, sourc
 featured: false
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Frontend%20DSA%20Study%20Setup.webp"
 imageAlt: "Do frontend developers need DSA? 12 concepts worth learning: arrays, hash maps, sets, stacks, queues, linked lists, recursion, search, sorting, trees, graphs and Big O"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/do-frontend-developers-need-dsa-12-concepts-worth-learning"
 
 tags:
@@ -120,7 +120,7 @@ faqs:
 
 # Do Frontend Developers Need DSA? 12 Concepts Worth Learning
 
-**Published:** October 2, 2026 · **Last updated:** October 2, 2026 · **15 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about) · Sources linked below
+**Published:** October 2, 2026 · **Last updated:** October 2, 2026 · **15 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about) · Sources linked below
 
 ---
 
@@ -585,7 +585,7 @@ Code examples are simplified for teaching. Performance claims depend on data siz
 
 ## About the Author
 
-**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://veereshbashetti.com/about).
+**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://www.veereshbashetti.com/about).
 
 ## More Useful Resources
 

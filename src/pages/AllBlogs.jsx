@@ -120,9 +120,9 @@ function useScrollReveal(threshold = 0.08) {
  */
 function useBlogPosts(manifest) {
   const posts = useMemo(() => {
-    const rawPosts = Array.isArray(manifest)
+    const rawPosts = (Array.isArray(manifest)
       ? manifest
-      : (manifest?.posts || []);
+      : (manifest?.posts || [])).filter((p) => !p.noindex);
 
     const loaded = rawPosts.map((p, idx) => ({
       slug: p.slug,

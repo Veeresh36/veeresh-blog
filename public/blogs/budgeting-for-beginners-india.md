@@ -25,13 +25,13 @@ featured: false
 emoji: "📊"
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp"
 imageAlt: "Budgeting for Beginners in India - The 3 Bucket Method"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/budgeting-for-beginners-india"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/budgeting-for-beginners-india"
 
 seo:
   title: "How I Finally Started Budgeting (And Why Everything Else Failed) | Veeresh Bashetti"
   description: "I downloaded four budgeting apps. Nothing stuck — until I stopped treating a budget as punishment and started treating it as permission. Here's the 3-bucket method that actually worked, and the tools that helped."
-  canonicalUrl: "https://veereshbashetti.com/blog/budgeting-for-beginners-india"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/budgeting-for-beginners-india"
   keywords:
     - budgeting for beginners India
     - how to budget as a student India
@@ -54,7 +54,7 @@ og:
   description: "The 3-bucket method that finally made budgeting stick — real examples, the psychology behind why budgets fail, and tools for Indian students and developers."
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp"
   type: "article"
-  url: "https://veereshbashetti.com/blog/budgeting-for-beginners-india"
+  url: "https://www.veereshbashetti.com/blog/budgeting-for-beginners-india"
 
 twitter:
   card: "summary_large_image"
@@ -99,14 +99,14 @@ schema:
   author:
     type: "Person"
     name: "Veeresh Bashetti"
-    url: "https://veereshbashetti.com"
+    url: "https://www.veereshbashetti.com"
   datePublished: "2026-04-15"
   dateModified: "2026-06-28"
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp"
   publisher:
     type: "Person"
     name: "Veeresh Bashetti"
-  mainEntityOfPage: "https://veereshbashetti.com/blog/budgeting-for-beginners-india"
+  mainEntityOfPage: "https://www.veereshbashetti.com/blog/budgeting-for-beginners-india"
 ---
 
 <!--
@@ -125,7 +125,7 @@ schema:
     "author": {
       "@type": "Person",
       "name": "Veeresh Bashetti",
-      "url": "https://veereshbashetti.com"
+      "url": "https://www.veereshbashetti.com"
     },
     "publisher": {
       "@type": "Person",
@@ -135,7 +135,7 @@ schema:
     "dateModified": "2026-06-28",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://veereshbashetti.com/blog/budgeting-for-beginners-india"
+      "@id": "https://www.veereshbashetti.com/blog/budgeting-for-beginners-india"
     }
   },
   {
@@ -201,7 +201,7 @@ schema:
   <meta property="og:description" content="The 3-bucket method that finally made budgeting stick — real examples, the psychology behind why budgets fail, and tools for Indian students and developers." />
   <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/budgeting-for-beginners-india-3-bucket-method.webp" />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://veereshbashetti.com/blog/budgeting-for-beginners-india" />
+  <meta property="og:url" content="https://www.veereshbashetti.com/blog/budgeting-for-beginners-india" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="How I Finally Started Budgeting (And Why Everything Else Failed) | Veeresh Bashetti" />
   <meta name="twitter:description" content="The 3-bucket method that finally made budgeting stick — for Indian students and developers." />
@@ -237,7 +237,7 @@ schema:
      Required for proper Pinterest previews.
 
   6. CANONICAL URL
-     <link rel="canonical" href="https://veereshbashetti.com/blog/budgeting-for-beginners-india" />
+     <link rel="canonical" href="https://www.veereshbashetti.com/blog/budgeting-for-beginners-india" />
 
   7. INTERNAL LINKS — verify these slugs exist before publishing:
      - /blog/13k-second-hand-cpu-mistake-in-20s   ← referenced twice in body
@@ -261,7 +261,7 @@ schema:
 
 # How I Finally Started Budgeting — And Why Everything I Tried Before Failed (A Student's Honest Guide)
 
-**Published:** April 15, 2026 · **11 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** April 15, 2026 · **11 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 I downloaded four different budgeting apps before I understood what was actually wrong.
 

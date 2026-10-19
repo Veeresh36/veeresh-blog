@@ -12,8 +12,8 @@ readingTime: "14 min read"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/top-9-free-ai-tools-for-developers-2026.webp"
 imageAlt: "A developer's dual-monitor coding setup with an AI assistant panel open next to the code editor"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/8-totally-free-ai-tools-for-developers-2026"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/8-totally-free-ai-tools-for-developers-2026"
 
 tags:
   - AI Tools
@@ -71,7 +71,7 @@ faqs:
 
 > *"Free tier" and "free" are not the same sentence. One of them has a countdown timer.*
 
-**Published:** July 19, 2026 · **14 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 19, 2026 · **14 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

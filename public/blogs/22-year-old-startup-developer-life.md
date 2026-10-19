@@ -28,7 +28,7 @@ featured: true
 seo:
   title: "Startup Salary Delayed 28 Days at 22 — Indian Developer's Story With -₹400 in Bank | Veeresh Bashetti"
   description: "An honest, personal account of working as a 22-year-old developer at an Indian startup with a 28-day salary delay, -₹400 balance, and hard lessons that no computer science degree teaches you."
-  canonicalUrl: "https://veereshbashetti.com/blog/22-year-old-startup-developer-life"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/22-year-old-startup-developer-life"
   keywords:
     - startup salary delay India
     - 22 year old software developer India
@@ -52,14 +52,14 @@ schema:
   author:
     type: "Person"
     name: "Veeresh Bashetti"
-    url: "https://veereshbashetti.com"
+    url: "https://www.veereshbashetti.com"
   datePublished: "2026-05-27"
   dateModified: "2026-05-27"
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.webp"
   publisher:
     type: "Person"
     name: "Veeresh Bashetti"
-  mainEntityOfPage: "https://veereshbashetti.com/blog/22-year-old-startup-developer-life"
+  mainEntityOfPage: "https://www.veereshbashetti.com/blog/22-year-old-startup-developer-life"
 
 faqSchema:
   - q: "Is it normal for startups to delay salaries in India?"
@@ -97,7 +97,7 @@ takeaways:
     "author": {
       "@type": "Person",
       "name": "Veeresh Bashetti",
-      "url": "https://veereshbashetti.com"
+      "url": "https://www.veereshbashetti.com"
     },
     "publisher": {
       "@type": "Person",
@@ -107,7 +107,7 @@ takeaways:
     "dateModified": "2026-05-27",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://veereshbashetti.com/blog/22-year-old-startup-developer-life"
+      "@id": "https://www.veereshbashetti.com/blog/22-year-old-startup-developer-life"
     }
   },
   {
@@ -169,7 +169,7 @@ takeaways:
 
 > *At 22, my bank balance showed -₹400. My startup salary was 28 days late. And every single morning, I still opened VS Code and kept building.*
 
-**Published:** May 27, 2026 · **9 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** May 27, 2026 · **9 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 
@@ -475,7 +475,7 @@ It depends on the pattern and the communication. A one-time delay with honest co
      <meta property="og:description" content="At 22, my startup salary was delayed 28 days and my bank showed -₹400. The honest reality of early startup developer life in India." />
      <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.webp" />
      <meta property="og:type" content="article" />
-     <meta property="og:url" content="https://veereshbashetti.com/blog/22-year-old-startup-developer-life" />
+     <meta property="og:url" content="https://www.veereshbashetti.com/blog/22-year-old-startup-developer-life" />
      <meta name="twitter:card" content="summary_large_image" />
      <meta name="twitter:title" content="Startup Salary Delayed 28 Days: My Life at 22 With -₹400 in the Bank" />
      <meta name="twitter:description" content="At 22, my startup salary was delayed 28 days and my bank showed -₹400. The honest reality of early startup developer life in India." />

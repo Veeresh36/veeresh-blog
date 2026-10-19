@@ -1,66 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Veeresh Bashetti — Blog &amp; Pinterest Picks</title>
+  <title>Veeresh Bashetti — Python, Django &amp; React Guides</title>
   <link>https://www.veereshbashetti.com</link>
-  <description>Personal blog by Veeresh Bashetti — startup life, lifestyle, home decor, curated Pinterest picks, product reviews &amp; ideas that inspire.</description>
+  <description>Practical Python, Django, React and SQL guides for beginner developers.</description>
   <language>en-in</language>
-  <lastBuildDate>Sun, 09 Aug 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 15 Oct 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://www.veereshbashetti.com/rss.xml" rel="self" type="application/rss+xml"/>
 
   <item>
-    <title>GenAI Developer in 2026: Real Career Wave or Just LinkedIn Hype? Full Guide for Students</title>
+    <title>15 SQL Queries Every Developer Should Know (2026 Guide)</title>
+    <link>https://www.veereshbashetti.com/blog/15-sql-queries-every-developer-should-know</link>
+    <guid>https://www.veereshbashetti.com/blog/15-sql-queries-every-developer-should-know</guid>
+    <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
+    <description>The 15 SQL queries you will use again and again: SELECT, JOINs, GROUP BY, CTEs, window functions and more, with tested examples, output and common traps.</description>
+  </item>
+
+  <item>
+    <title>Best Programming Languages to Learn by Career (2026 Guide)</title>
+    <link>https://www.veereshbashetti.com/blog/best-programming-languages-to-learn-for-different-careers</link>
+    <guid>https://www.veereshbashetti.com/blog/best-programming-languages-to-learn-for-different-careers</guid>
+    <pubDate>Sun, 11 Oct 2026 00:00:00 GMT</pubDate>
+    <description>Which programming language should you learn for your career? Python, JavaScript, Java, C++, C#, Swift and more, matched to real jobs with 2026 data.</description>
+  </item>
+
+  <item>
+    <title>Types of APIs and Their Use Cases (2026 Guide)</title>
+    <link>https://www.veereshbashetti.com/blog/types-of-apis-and-their-use-cases-explained</link>
+    <guid>https://www.veereshbashetti.com/blog/types-of-apis-and-their-use-cases-explained</guid>
+    <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+    <description>Types of APIs explained: Open, Internal and Partner APIs, plus REST, SOAP and GraphQL, with 9 real use cases, JavaScript code and a free video.</description>
+  </item>
+
+  <item>
+    <title>Do Frontend Developers Need DSA? 12 Concepts to Learn (2026)</title>
+    <link>https://www.veereshbashetti.com/blog/do-frontend-developers-need-dsa-12-concepts-worth-learning</link>
+    <guid>https://www.veereshbashetti.com/blog/do-frontend-developers-need-dsa-12-concepts-worth-learning</guid>
+    <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
+    <description>Do frontend developers need DSA? Yes, but not all of it. Learn 12 concepts that show up in real UI work, with JavaScript code, free videos and a study order.</description>
+  </item>
+
+  <item>
+    <title>React State Explained: 12 Rules Every Developer Should Know (2026)</title>
+    <link>https://www.veereshbashetti.com/blog/react-state-12-things-every-developer-should-know</link>
+    <guid>https://www.veereshbashetti.com/blog/react-state-12-things-every-developer-should-know</guid>
+    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    <description>Most React bugs are state bugs. Learn 12 rules on where state lives, how updates work, and when to use Context, reducers, server-state tools or a global store.</description>
+  </item>
+
+  <item>
+    <title>Frontend Developer Roadmap 2026: 12 Steps, in Order</title>
+    <link>https://www.veereshbashetti.com/blog/frontend-developer-roadmap-2026-learn-in-this-order</link>
+    <guid>https://www.veereshbashetti.com/blog/frontend-developer-roadmap-2026-learn-in-this-order</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <description>A 12-step frontend developer roadmap for 2026: what to learn in order, what to skip, realistic timelines, projects to build, free courses and salary data.</description>
+  </item>
+
+  <item>
+    <title>Why Indian Government Websites Have a Structure Problem</title>
+    <link>https://www.veereshbashetti.com/blog/indian-govt-websites-no-structure</link>
+    <guid>https://www.veereshbashetti.com/blog/indian-govt-websites-no-structure</guid>
+    <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Indian government websites don&apos;t just have a design problem. Explore the missing design systems, outdated data models and post-launch neglect behind them, and how to fix it.</description>
+  </item>
+
+  <item>
+    <title>Gemini AI Script Writer Guide 2026: Features, Pros, Cons</title>
+    <link>https://www.veereshbashetti.com/blog/gemini-ai-script-writer-guide-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/gemini-ai-script-writer-guide-2026</guid>
+    <pubDate>Sat, 22 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Use Gemini AI as a script writer in 2026: lesser-known features like storyboarding, honest pros and cons, the CLI change for developers, and how to use it free.</description>
+  </item>
+
+  <item>
+    <title>2026 Tech Layoffs: Data-Backed Breakdown by Company</title>
+    <link>https://www.veereshbashetti.com/blog/2026-tech-sector-layoffs-explained</link>
+    <guid>https://www.veereshbashetti.com/blog/2026-tech-sector-layoffs-explained</guid>
+    <pubDate>Sat, 15 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Trackers show 126,000 to 205,000+ tech jobs cut in 2026. See which companies cut most, the India IT angle, whether AI is to blame, and a playbook if affected.</description>
+  </item>
+
+  <item>
+    <title>8 AI Prompts for Marketers in 2026 (Copy-Paste Templates)</title>
+    <link>https://www.veereshbashetti.com/blog/8-ai-prompts-smart-marketers-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/8-ai-prompts-smart-marketers-2026</guid>
+    <pubDate>Tue, 11 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Save these 8 AI prompts for marketers in 2026: seven full templates, common mistakes that ruin AI output, and how to turn prompts into a repeatable system.</description>
+  </item>
+
+  <item>
+    <title>GenAI Developer Career in 2026: Hype vs Reality for Students</title>
     <link>https://www.veereshbashetti.com/blog/genai-developer-2026-hype-reality-pros-cons-students</link>
     <guid>https://www.veereshbashetti.com/blog/genai-developer-2026-hype-reality-pros-cons-students</guid>
-    <description>Is 'GenAI Developer' a real career or marketing noise? A research-backed, honest breakdown of what the role actually is, real 2026 India salary data, the entry-level job crunch nobody talks about, and a step-by-step roadmap for students.</description>
     <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
-    <category>career</category>
+    <description>Is a GenAI developer career real or LinkedIn hype? Honest pros, cons, salary reality and how Indian students can start in 2026, with sources linked.</description>
   </item>
 
   <item>
-    <title>15 Chrome Extensions Every Developer Should Have Installed in 2026</title>
+    <title>15 Best Chrome Extensions for Developers in 2026</title>
     <link>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</link>
     <guid>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</guid>
-    <description>The Chrome extensions actually worth installing as a developer in 2026, based on daily use.</description>
     <pubDate>Mon, 03 Aug 2026 00:00:00 GMT</pubDate>
-    <category>developer-tools</category>
+    <description>The 15 best Chrome extensions for developers in 2026, all verified for Manifest V3 and used daily for Django and React work. Abandoned tools cut.</description>
   </item>
 
   <item>
-    <title>18 Free Websites That Feel Illegal to Know (But Are 100% Legal) — 2026 Edition</title>
+    <title>18 Free Websites That Feel Illegal (But Are Legal) in 2026</title>
     <link>https://www.veereshbashetti.com/blog/18-free-websites-that-feel-illegal-to-know</link>
     <guid>https://www.veereshbashetti.com/blog/18-free-websites-that-feel-illegal-to-know</guid>
-    <description>A curated list of genuinely useful free websites and tools worth knowing about in 2026.</description>
     <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
-    <category>tech</category>
+    <description>18 genuinely free, 100% legal websites that still work in 2026. No piracy, every entry checked, plus lesser-known tools I use weekly.</description>
   </item>
 
   <item>
-    <title>10 AI Prompts Every Job Seeker Needs in 2026 (Photo, Resume, LinkedIn &amp; Interview Prep)</title>
+    <title>10 AI Prompts for Job Seekers in 2026: Resume to Interview</title>
     <link>https://www.veereshbashetti.com/blog/10-ai-prompts-to-prepare-for-your-next-job-search</link>
     <guid>https://www.veereshbashetti.com/blog/10-ai-prompts-to-prepare-for-your-next-job-search</guid>
-    <description>Practical AI prompts to help with photos, resumes, LinkedIn profiles, and interview preparation.</description>
     <pubDate>Fri, 31 Jul 2026 00:00:00 GMT</pubDate>
-    <category>career</category>
+    <description>10 AI prompts for your job search in 2026: profile photo, resume, LinkedIn and interview prep. Specific enough to give usable results the same day.</description>
   </item>
 
   <item>
-    <title>Every HTTP Status Code Explained with Real Examples (2026 Guide)</title>
+    <title>HTTP Status Codes Explained with Real Code Examples (2026)</title>
     <link>https://www.veereshbashetti.com/blog/every-http-status-code-explained-with-real-examples</link>
     <guid>https://www.veereshbashetti.com/blog/every-http-status-code-explained-with-real-examples</guid>
-    <description>A practical, example-driven walkthrough of HTTP status codes for developers.</description>
     <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
-    <category>tech</category>
+    <description>Every HTTP status code that matters, explained with real code: 401 vs 403, 301 vs 302, 404, 500 and more, so your APIs behave predictably.</description>
   </item>
 
   <item>
-    <title>Doraemon, Chhota Bheem, Shinchan, Oggy: The Cartoons That Quietly Taught Me How to Think</title>
-    <link>https://www.veereshbashetti.com/blog/childhood-cartoons-life-lessons</link>
-    <guid>https://www.veereshbashetti.com/blog/childhood-cartoons-life-lessons</guid>
-    <description>A personal, honest account of how childhood cartoons shaped the way I think, create and solve problems today.</description>
-    <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
-    <category>life-lessons</category>
+    <title>10 Productivity Habits for Developers That Actually Work</title>
+    <link>https://www.veereshbashetti.com/blog/10-productivity-habits-that-actually-changed-my-work</link>
+    <guid>https://www.veereshbashetti.com/blog/10-productivity-habits-that-actually-changed-my-work</guid>
+    <pubDate>Mon, 27 Jul 2026 00:00:00 GMT</pubDate>
+    <description>10 real productivity habits that changed how I work, from a developer with a manager checking numbers at 6 PM. No generic 5 AM advice.</description>
   </item>
 
+  <item>
+    <title>5 Common Django Mistakes Beginners Make (and Fixes)</title>
+    <link>https://www.veereshbashetti.com/blog/5-django-mistakes-i-made-as-a-beginner</link>
+    <guid>https://www.veereshbashetti.com/blog/5-django-mistakes-i-made-as-a-beginner</guid>
+    <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+    <description>5 Django beginner mistakes that break projects, why they happen to almost everyone, and the exact fix for each one, from real experience.</description>
+  </item>
+
+  <item>
+    <title>How I Use AI Every Day as a Developer: My Real Workflow</title>
+    <link>https://www.veereshbashetti.com/blog/how-i-actually-use-ai-every-day-as-a-developer-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/how-i-actually-use-ai-every-day-as-a-developer-2026</guid>
+    <pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate>
+    <description>A real developer&apos;s AI workflow in 2026: how tools fit into a workday, where they save time and where they quietly waste it. Not another tools list.</description>
+  </item>
+
+  <item>
+    <title>Why Are AI Tools So Expensive in 2026? Real Cost Breakdown</title>
+    <link>https://www.veereshbashetti.com/blog/why-ai-tools-are-costly-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/why-ai-tools-are-costly-2026</guid>
+    <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Why do ChatGPT, Claude and other AI tools cost so much in 2026? GPUs, electricity and per-message compute explained with real numbers.</description>
+  </item>
+
+  <item>
+    <title>Are AI Jobs in Demand in 2026? What Hiring Data Shows</title>
+    <link>https://www.veereshbashetti.com/blog/are-ai-jobs-in-demand-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/are-ai-jobs-in-demand-2026</guid>
+    <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Are AI jobs in demand in 2026? Role-by-role and region-by-region hiring data, so you can stop guessing and plan your career.</description>
+  </item>
+
+  <item>
+    <title>9 Truly Free AI Tools for Developers in 2026 (Verified)</title>
+    <link>https://www.veereshbashetti.com/blog/9-totally-free-ai-tools-for-developers-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/9-totally-free-ai-tools-for-developers-2026</guid>
+    <pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
+    <description>9 AI tools that are actually free for developers in 2026, re-checked against current vendor pricing pages. No free-for-now traps.</description>
+  </item>
+
+  <item>
+    <title>HTTP QUERY Method Explained: Python &amp; Node.js Examples</title>
+    <link>https://www.veereshbashetti.com/blog/http-query-method-explained</link>
+    <guid>https://www.veereshbashetti.com/blog/http-query-method-explained</guid>
+    <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+    <description>What is the new HTTP QUERY method? A beginner&apos;s guide to the safe, cacheable alternative to GET and POST for complex searches, with Python and Node.js code.</description>
+  </item>
+
+  <item>
+    <title>22 Years Old, -₹400 in My Bank: A Startup Developer&apos;s Story</title>
+    <link>https://www.veereshbashetti.com/blog/22-year-old-startup-developer-life</link>
+    <guid>https://www.veereshbashetti.com/blog/22-year-old-startup-developer-life</guid>
+    <pubDate>Wed, 27 May 2026 00:00:00 GMT</pubDate>
+    <description>At 22 with -₹400 in my bank account, I learned about money, pride and survival. A startup developer&apos;s honest story from India.</description>
+  </item>
+
+  <item>
+    <title>The Developer Setup Trap: Better Gear Won&apos;t Make You Better</title>
+    <link>https://www.veereshbashetti.com/blog/developer-setup-trap</link>
+    <guid>https://www.veereshbashetti.com/blog/developer-setup-trap</guid>
+    <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+    <description>Why better hardware won&apos;t make you a better coder. I wasted ₹13,000 on a setup upgrade; here&apos;s what actually improves developers.</description>
+  </item>
+
+  <item>
+    <title>Why My First Project Failed Quietly (Lessons Learned)</title>
+    <link>https://www.veereshbashetti.com/blog/first-project-failure-lessons</link>
+    <guid>https://www.veereshbashetti.com/blog/first-project-failure-lessons</guid>
+    <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
+    <description>My first project didn&apos;t crash loudly, it quietly failed. Lessons on shipping real work, validation and what silence teaches developers.</description>
+  </item>
 </channel>
 </rss>

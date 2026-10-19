@@ -26,7 +26,7 @@ featured: true
 seo:
   title: "HTTP QUERY Method Explained Simply (2026) | Python & Node.js Examples"
   description: "A hands-on walkthrough of the new HTTP QUERY method (RFC 10008) — what it solves, how it works, and working Python and Node.js code you can run today."
-  canonicalUrl: "https://veereshbashetti.com/blog/http-query-method-explained"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/http-query-method-explained"
   keywords:
     - http query method
     - what is http query method
@@ -57,14 +57,14 @@ schema:
   author:
     type: "Person"
     name: "Veeresh Bashetti"
-    url: "https://veereshbashetti.com"
+    url: "https://www.veereshbashetti.com"
   datePublished: "2026-07-05"
   dateModified: "2026-07-05"
   image: "https://raw.githubusercontent.com/Veeresh36/bog_images/main/http-query-method-explained.webp"
   publisher:
     type: "Person"
     name: "Veeresh Bashetti"
-  mainEntityOfPage: "https://veereshbashetti.com/blog/http-query-method-explained"
+  mainEntityOfPage: "https://www.veereshbashetti.com/blog/http-query-method-explained"
 
 faqs:
   - q: "What is the HTTP QUERY method in simple words?"
@@ -101,7 +101,7 @@ takeaways:
 
 > *For years, I quietly wrote "// yes this is technically a GET" as a comment above POST endpoints that only ever searched for things. In June 2026, that hack finally got an official name.*
 
-**Published:** July 5, 2026 · **15 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 5, 2026 · **15 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

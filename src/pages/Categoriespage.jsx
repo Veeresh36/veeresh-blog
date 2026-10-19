@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import manifestData from "../../public/blogs/manifest.json";
 import { Link } from "react-router-dom";
 
 const SITE = {
@@ -8,56 +9,16 @@ const SITE = {
 };
 
 // ─── REAL POSTS (hardcoded from your manifest) ───────────────────────
-const REAL_POSTS = [
-  {
-    slug: "22-year-old-startup-developer-life",
-    title: "22 Years Old, -₹400 in My Bank Account...",
-    tag: "Career",
-    emoji: "💻",
-    meta: "8 min read · May 2026",
-    image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/22-year-old-startup-developer-bank-account-struggle.png",
-  },
-  {
-    slug: "13k-second-hand-cpu-mistake-in-20s",
-    title: "The ₹13,000 Mistake I Made in My 20s",
-    tag: "Life Lessons",
-    emoji: "💸",
-    meta: "8 min read · May 2026",
-    image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.png",
-  },
-  {
-    slug: "toycills-vintage-toy-car-review",
-    title: "Toycills Vintage 1:24 Die-Cast Car — Honest Review",
-    tag: "Pinterest Picks",
-    emoji: "🚗",
-    meta: "5 min read · May 2026",
-    image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/toycills-vintage-124-die-cast-car-review.png",
-  },
-  {
-    slug: "redragon-k630-dragonborn-review",
-    title: "Redragon K630 Dragonborn — Best Budget 60% Keyboard?",
-    tag: "Pinterest Picks",
-    emoji: "⌨️",
-    meta: "7 min read · May 2026",
-    image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/redragon-k630-dragonborn-review-banner.png",
-  },
-  {
-    slug: "minimal-gaming-setup-ideas",
-    title: "Minimal Gaming Setup Ideas That Look Expensive",
-    tag: "Pinterest Picks",
-    emoji: "🎮",
-    meta: "6 min read · May 2026",
-    image: "https://raw.githubusercontent.com/Veeresh36/bog_images/main/minimal-gaming-controller-setup-2026.png",
-  },
-  {
-    slug: "suffering-without-generational-wealth",
-    title: "Why Suffering Without Generational Wealth Hits Different",
-    tag: "Finance",
-    emoji: "💰",
-    meta: "7 min read · May 2025",
-    image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/why-suffering-without-generational-wealth-hits-different.png",
-  },
-];
+const REAL_POSTS = (manifestData.posts || [])
+  .filter((p) => !p.noindex)
+  .map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    tag: p.tag || p.category,
+    emoji: p.emoji || "📝",
+    meta: p.meta || p.readingTime || "",
+    image: p.image,
+  }));
 
 // ─── CATEGORY STYLE MAP (exactly your 4 real tags) ───────────────────
 const CATEGORY_META = {
@@ -449,7 +410,7 @@ export default function CategoriesPage() {
         const ct = res.headers.get("content-type") || "";
         if (!res.ok || ct.includes("text/html")) return;
         const data = await res.json();
-        if (Array.isArray(data.posts) && data.posts.length) setPosts(data.posts);
+        if (Array.isArray(data.posts) && data.posts.length) setPosts(data.posts.filter((p) => !p.noindex).map((p) => ({ ...p, tag: p.tag || p.category })));
       } catch { /* use hardcoded fallback */ }
     })();
   }, []);

@@ -13,7 +13,7 @@ meta: "12 min read · 26 July 2026"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/5-django-mistakes-beginner-thumbnail.webp"
 imageAlt: "A beginner developer looking at Django error messages on a laptop screen"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/5-django-mistakes-i-made-as-a-beginner"
 
 tags:
@@ -68,7 +68,7 @@ faqs:
 
 > *Django doesn't actually punish beginners. It just has strong opinions about how things should be done — and it tells you exactly when you've ignored one of them, usually in red text, usually at 11 PM.*
 
-**Published:** July 26, 2026 · **12 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 26, 2026 · **12 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

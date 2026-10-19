@@ -24,8 +24,8 @@ image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/stop-comparing-you
 imageAlt: "Stop Comparing Your Chapter 1 to Someone Else's Chapter 10 — Social Media and Mental Health India"
 
 author: "Veeresh Bashetti"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/stop-comparing-yourself-social-media"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/stop-comparing-yourself-social-media"
 
 takeaways:
   - "The comparison feed is not real life — you are watching an edited highlight reel made by someone who is also doing the same comparison you are."

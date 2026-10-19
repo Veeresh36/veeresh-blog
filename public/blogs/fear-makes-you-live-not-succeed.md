@@ -22,13 +22,13 @@ featured: true
 emoji: "🧭"
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/fear-makes-you-live-not-succeed.webp"
 imageAlt: "Fear Makes You Live, But It Won't Make You Succeed — How to Take the Step Anyway"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/fear-makes-you-live-not-succeed"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/fear-makes-you-live-not-succeed"
 
 seo:
   title: "Fear Makes You Live, Not Succeed — Take the Step Anyway"
   description: "Learn to tell protective fear from limiting fear, then use a 5-step framework to overcome fear and succeed — even while you're still afraid."
-  canonicalUrl: "https://veereshbashetti.com/blog/fear-makes-you-live-not-succeed"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/fear-makes-you-live-not-succeed"
   ogTitle: "Fear Makes You Live, But It Won't Make You Succeed"
   ogDescription: "The instinct that keeps you safe is the same one keeping you stuck. Here's how to tell the difference — and a 5-step framework to act anyway."
   twitterCard: "summary_large_image"

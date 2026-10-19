@@ -12,50 +12,52 @@ const OUTPUT = path.join(__dirname, "public", "sitemap.xml");
 
 // Keep this in sync with the staticCategorySlugs list in vite.config.js and
 // with any new categories introduced in post frontmatter.
-const CATEGORY_SLUGS = [
-    "career",
-    "life-lessons",
-    "pinterest-picks",
-    "finance",
-    "tech",
-    "lifestyle",
-    "personal-growth",
-];
+const CATEGORY_SLUGS = ["tech", "career"];
+
+// Only these categories are indexable (see CategoryPage.jsx). Thin or off-niche
+// categories are noindex and kept out of the sitemap.
+const INDEXABLE_CATEGORIES = new Set(CATEGORY_SLUGS);
 
 const staticRoutes = [
     {
         url: "/",
-        lastmod: "2026-08-07",
+        lastmod: "2026-10-19",
         priority: "1.0",
         changefreq: "daily",
     },
     {
         url: "/blog",
-        lastmod: "2026-08-07",
+        lastmod: "2026-10-19",
         priority: "0.9",
         changefreq: "daily",
     },
     {
         url: "/categories",
-        lastmod: "2026-08-07",
+        lastmod: "2026-10-19",
         priority: "0.8",
         changefreq: "weekly",
     },
     {
         url: "/about",
-        lastmod: "2026-08-07",
+        lastmod: "2026-10-19",
         priority: "0.6",
         changefreq: "monthly",
     },
     {
+        url: "/contact",
+        lastmod: "2026-10-19",
+        priority: "0.5",
+        changefreq: "yearly",
+    },
+    {
         url: "/privacy-policy",
-        lastmod: "2026-08-07",
+        lastmod: "2026-10-19",
         priority: "0.3",
         changefreq: "yearly",
     },
     {
         url: "/terms",
-        lastmod: "2026-08-07",
+        lastmod: "2026-10-19",
         priority: "0.3",
         changefreq: "yearly",
     },
@@ -143,6 +145,12 @@ function getLastModified(filePath) {
     return formatDate(fs.statSync(filePath).mtime);
 }
 
+const NOINDEX_SLUGS = new Set();
+if (fs.existsSync(MANIFEST_PATH)) {
+    const m = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+    (m.posts || []).filter((p) => p.noindex).forEach((p) => NOINDEX_SLUGS.add(p.slug));
+}
+
 const urls = [];
 
 // Generate static page URLs
@@ -162,18 +170,19 @@ let categorySlugs = [...CATEGORY_SLUGS];
 if (fs.existsSync(MANIFEST_PATH)) {
     const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
     const postCategorySlugs = (manifest.posts || [])
+        .filter((post) => !post.noindex)
         .map((post) => post.category)
         .filter(Boolean)
         .map((category) => category.toLowerCase().replace(/\s+/g, "-"));
 
-    categorySlugs = [...new Set([...categorySlugs, ...postCategorySlugs])];
+    categorySlugs = [...new Set([...categorySlugs, ...postCategorySlugs])].filter((slug) => INDEXABLE_CATEGORIES.has(slug));
 }
 
 for (const slug of categorySlugs) {
     urls.push(`
     <url>
         <loc>${DOMAIN}/category/${escapeXml(slug)}</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-10-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>`);
@@ -188,6 +197,7 @@ if (fs.existsSync(BLOGS_DIR)) {
 
     for (const file of blogFiles) {
         const slug = file.replace(/\.md$/, "");
+        if (NOINDEX_SLUGS.has(slug)) continue;
         const filePath = path.join(BLOGS_DIR, file);
         const lastModified = getLastModified(filePath);
 
@@ -217,3 +227,45 @@ fs.writeFileSync(OUTPUT, sitemap, "utf8");
 console.log("✅ Sitemap generated successfully");
 console.log(`📄 Total URLs: ${urls.length}`);
 console.log(`📍 Saved to: ${OUTPUT}`);
+
+// ───────────────────────────────────────────────────────────
+// RSS feed — built from the manifest, indexable posts only
+// ───────────────────────────────────────────────────────────
+if (fs.existsSync(MANIFEST_PATH)) {
+    const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+    const feedPosts = (manifest.posts || [])
+        .filter((post) => !post.noindex && post.date)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 30);
+
+    const items = feedPosts
+        .map((post) => `
+  <item>
+    <title>${escapeXml(post.title)}</title>
+    <link>${DOMAIN}/blog/${escapeXml(post.slug)}</link>
+    <guid>${DOMAIN}/blog/${escapeXml(post.slug)}</guid>
+    <pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate>
+    <description>${escapeXml(post.description || post.excerpt || "")}</description>
+  </item>`)
+        .join("\n");
+
+    const lastBuild = feedPosts.length
+        ? new Date(`${feedPosts[0].date}T00:00:00Z`).toUTCString()
+        : new Date().toUTCString();
+
+    const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Veeresh Bashetti — Python, Django &amp; React Guides</title>
+  <link>${DOMAIN}</link>
+  <description>Practical Python, Django, React and SQL guides for beginner developers.</description>
+  <language>en-in</language>
+  <lastBuildDate>${lastBuild}</lastBuildDate>
+  <atom:link href="${DOMAIN}/rss.xml" rel="self" type="application/rss+xml"/>
+${items}
+</channel>
+</rss>
+`;
+    fs.writeFileSync(path.join(__dirname, "public", "rss.xml"), rss, "utf8");
+    console.log(`📡 RSS feed generated (${feedPosts.length} posts)`);
+}

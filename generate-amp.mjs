@@ -173,7 +173,17 @@ function ampPageTemplate({ slug, frontmatter, htmlBody }) {
 `;
 }
 
+async function loadNoindexSlugs() {
+    try {
+        const raw = await readFile(path.join(POSTS_DIR, "manifest.json"), "utf-8");
+        return new Set((JSON.parse(raw).posts || []).filter((p) => p.noindex).map((p) => p.slug));
+    } catch {
+        return new Set();
+    }
+}
+
 async function main() {
+    const noindexSlugs = await loadNoindexSlugs();
     let files;
     try {
         files = (await readdir(POSTS_DIR)).filter((f) => f.toLowerCase().endsWith(".md"));
@@ -195,6 +205,7 @@ async function main() {
         const raw = await readFile(path.join(POSTS_DIR, filename), "utf-8");
         const { data: frontmatter, content } = matter(raw);
         const slug = resolveSlug(frontmatter, filename);
+        if (noindexSlugs.has(slug)) continue;
 
         const strippedContent = stripLeadingH1(content);
         const rawHtml = marked.parse(strippedContent);

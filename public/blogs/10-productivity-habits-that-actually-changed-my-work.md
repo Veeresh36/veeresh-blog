@@ -15,7 +15,7 @@ meta: "15 min read · 27 July 2026"
 featured: true
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/10-productivity-habits-that-actually-changed-my-work.webp"
 imageAlt: "A focused developer working at a clean desk with a laptop and notebook, representing a real productivity workflow"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/10-productivity-habits-that-actually-changed-my-work"
 
 tags:
@@ -63,7 +63,7 @@ faqs:
 
 > *Most productivity advice online is written by people who've never had a manager checking their numbers at 6 PM. Mine did — for almost two years, before I moved into development. That changes what you actually learn about getting things done.*
 
-**Published:** July 27, 2026 · **15 min read** · By [Veeresh Bashetti](https://veereshbashetti.com)
+**Published:** July 27, 2026 · **15 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com)
 
 ---
 

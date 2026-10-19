@@ -15,7 +15,7 @@ meta: "16 min read · 15 October 2026 · Examples tested in SQLite, sources link
 featured: false
 image: "https://raw.githubusercontent.com/Veeresh36/bog_images/main/15-sql-queries-every-developer-should-know.webp"
 imageAlt: "15 SQL queries every developer should know: SELECT, WHERE, JOIN, GROUP BY, CTE and window functions explained with examples"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/15-sql-queries-every-developer-should-know"
 
 tags:
@@ -116,7 +116,7 @@ faqs:
 
 # 15 SQL Queries Every Developer Should Know (2026 Guide)
 
-**Published:** October 15, 2026 · **Last updated:** October 15, 2026 · **16 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about) · Sources linked below
+**Published:** October 15, 2026 · **Last updated:** October 15, 2026 · **16 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about) · Sources linked below
 
 ---
 
@@ -663,7 +663,7 @@ SQL dialects differ between database engines, and documentation changes with eac
 
 ## About the Author
 
-**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://veereshbashetti.com/about).
+**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://www.veereshbashetti.com/about).
 
 ## More Useful Resources
 

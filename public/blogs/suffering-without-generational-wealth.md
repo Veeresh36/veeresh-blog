@@ -55,7 +55,7 @@ seo:
     - money mindset India
     - starting from zero financially
     - building wealth without family support India
-canonicalUrl: "https://veereshbashetti.com/blog/suffering-without-generational-wealth"
+canonicalUrl: "https://www.veereshbashetti.com/blog/suffering-without-generational-wealth"
 ---
 
 # Why Suffering Without Generational Wealth Hits Different

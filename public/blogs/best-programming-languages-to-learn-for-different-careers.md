@@ -15,7 +15,7 @@ meta: "14 min read · 11 October 2026 · Checked against TIOBE, Stack Overflow a
 featured: false
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/Best%20Programming%20Languages_%202026%20Career%20Guide.webp"
 imageAlt: "Best programming languages to learn for different careers: Python, JavaScript, Java, C++, C#, Swift, Go, Rust, Kotlin, PHP and R matched to career goals"
-authorUrl: "https://veereshbashetti.com/about"
+authorUrl: "https://www.veereshbashetti.com/about"
 canonicalUrl: "https://www.veereshbashetti.com/blog/best-programming-languages-to-learn-for-different-careers"
 
 tags:
@@ -116,7 +116,7 @@ faqs:
 
 # Best Programming Languages to Learn for Different Careers (2026 Guide)
 
-**Published:** October 11, 2026 · **Last updated:** October 11, 2026 · **14 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about) · Sources linked below
+**Published:** October 11, 2026 · **Last updated:** October 11, 2026 · **14 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about) · Sources linked below
 
 ---
 
@@ -509,7 +509,7 @@ Language rankings and survey numbers change monthly or yearly, so confirm curren
 
 ## About the Author
 
-**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://veereshbashetti.com/about).
+**Veeresh Bashetti** is a full-stack developer who builds Django and React applications and writes practical, project-tested guides for developers and students, with a focus on separating genuine industry trends from marketing hype. Read more on the [About page](https://www.veereshbashetti.com/about).
 
 ## More Useful Resources
 

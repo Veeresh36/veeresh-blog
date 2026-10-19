@@ -25,13 +25,13 @@ featured: true
 emoji: "💸"
 image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
 imageAlt: "A second-hand CPU sitting unused in a corner — a symbol of impulsive buying regret in your 20s"
-authorUrl: "https://veereshbashetti.com/about"
-canonicalUrl: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
+authorUrl: "https://www.veereshbashetti.com/about"
+canonicalUrl: "https://www.veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
 
 seo:
   title: "I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti"
   description: "A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings. What happened next — and the 5 questions that now protect me from spending I'll regret."
-  canonicalUrl: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
+  canonicalUrl: "https://www.veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
   keywords:
     - money mistakes in 20s
     - how to stop impulsive buying
@@ -54,7 +54,7 @@ og:
   description: "A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings. What happened next — and the 5 questions that now protect me from spending I'll regret."
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
   type: "article"
-  url: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
+  url: "https://www.veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
 
 twitter:
   card: "summary_large_image"
@@ -99,14 +99,14 @@ schema:
   author:
     type: "Person"
     name: "Veeresh Bashetti"
-    url: "https://veereshbashetti.com"
+    url: "https://www.veereshbashetti.com"
   datePublished: "2026-05-27"
   dateModified: "2026-06-28"
   image: "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp"
   publisher:
     type: "Person"
     name: "Veeresh Bashetti"
-  mainEntityOfPage: "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
+  mainEntityOfPage: "https://www.veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
 ---
 
 <!--
@@ -125,7 +125,7 @@ schema:
     "author": {
       "@type": "Person",
       "name": "Veeresh Bashetti",
-      "url": "https://veereshbashetti.com"
+      "url": "https://www.veereshbashetti.com"
     },
     "publisher": {
       "@type": "Person",
@@ -135,7 +135,7 @@ schema:
     "dateModified": "2026-06-28",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
+      "@id": "https://www.veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s"
     }
   },
   {
@@ -201,7 +201,7 @@ schema:
   <meta property="og:description" content="A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings. What happened next — and the 5 questions that now protect me from spending I'll regret." />
   <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/13k-cpu-mistake-in-20s-emotional-startup-story.webp" />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s" />
+  <meta property="og:url" content="https://www.veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="I Wasted ₹13,000 of Scholarship Money on a CPU I Never Used | Veeresh Bashetti" />
   <meta name="twitter:description" content="A brutally honest story about buying a second-hand CPU on impulse with scholarship money and my mother's savings." />
@@ -239,7 +239,7 @@ schema:
      Without og:image, Pinterest picks a random image or shows nothing.
 
   6. CANONICAL URL
-     <link rel="canonical" href="https://veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s" />
+     <link rel="canonical" href="https://www.veereshbashetti.com/blog/13k-second-hand-cpu-mistake-in-20s" />
      Already in frontmatter — make sure your layout is rendering it.
 
   7. INTERNAL LINKS — verify these slugs exist before publishing:
@@ -269,7 +269,7 @@ schema:
 
 # I Spent ₹13,000 of My Scholarship Money on a CPU. It's Still Sitting in the Corner of My Room.
 
-**Published:** May 27, 2026 · **10 min read** · By [Veeresh Bashetti](https://veereshbashetti.com/about)
+**Published:** May 27, 2026 · **10 min read** · By [Veeresh Bashetti](https://www.veereshbashetti.com/about)
 
 There is a specific kind of regret that does not go away.
 
