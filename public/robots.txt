@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /blog?q=
+Disallow: /blogs/
+
+# AdSense crawler must be able to see every page
+User-agent: Mediapartners-Google
+Allow: /
+
+Sitemap: https://www.veereshbashetti.com/sitemap.xml

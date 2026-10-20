@@ -1,0 +1,46 @@
+# Veeresh Bashetti
+
+> Practical Python, Django, React and SQL guides for beginner developers, written by Veeresh Bashetti, a web developer based in Hubballi, Karnataka, India. Guides include tested code, real examples, linked sources and free learning paths.
+
+## Site
+
+- URL: https://www.veereshbashetti.com
+- Author: Veeresh Bashetti
+- Topics: Python, Django, React, JavaScript, SQL, APIs, developer tools, career advice for beginner developers
+
+## Pages
+
+- [Home](https://www.veereshbashetti.com/): Latest developer guides.
+- [Blog](https://www.veereshbashetti.com/blog): All published guides.
+- [About](https://www.veereshbashetti.com/about): Background on the author.
+- [Contact](https://www.veereshbashetti.com/contact): Corrections, topic requests and collaboration.
+- [Privacy Policy](https://www.veereshbashetti.com/privacy-policy)
+- [Terms](https://www.veereshbashetti.com/terms)
+
+## Guides
+
+- [15 SQL Queries Every Developer Should Know (2026 Guide)](https://www.veereshbashetti.com/blog/15-sql-queries-every-developer-should-know): The 15 SQL queries you will use again and again: SELECT, JOINs, GROUP BY, CTEs, window functions and more, with tested examples, output and common traps.
+- [Best Programming Languages to Learn by Career (2026 Guide)](https://www.veereshbashetti.com/blog/best-programming-languages-to-learn-for-different-careers): Which programming language should you learn for your career? Python, JavaScript, Java, C++, C#, Swift and more, matched to real jobs with 2026 data.
+- [Types of APIs and Their Use Cases (2026 Guide)](https://www.veereshbashetti.com/blog/types-of-apis-and-their-use-cases-explained): Types of APIs explained: Open, Internal and Partner APIs, plus REST, SOAP and GraphQL, with 9 real use cases, JavaScript code and a free video.
+- [Do Frontend Developers Need DSA? 12 Concepts to Learn (2026)](https://www.veereshbashetti.com/blog/do-frontend-developers-need-dsa-12-concepts-worth-learning): Do frontend developers need DSA? Yes, but not all of it. Learn 12 concepts that show up in real UI work, with JavaScript code, free videos and a study order.
+- [React State Explained: 12 Rules Every Developer Should Know (2026)](https://www.veereshbashetti.com/blog/react-state-12-things-every-developer-should-know): Most React bugs are state bugs. Learn 12 rules on where state lives, how updates work, and when to use Context, reducers, server-state tools or a global store.
+- [Frontend Developer Roadmap 2026: 12 Steps, in Order](https://www.veereshbashetti.com/blog/frontend-developer-roadmap-2026-learn-in-this-order): A 12-step frontend developer roadmap for 2026: what to learn in order, what to skip, realistic timelines, projects to build, free courses and salary data.
+- [Why Indian Government Websites Have a Structure Problem](https://www.veereshbashetti.com/blog/indian-govt-websites-no-structure): Indian government websites don't just have a design problem. Explore the missing design systems, outdated data models and post-launch neglect behind them, and how to fix it.
+- [Gemini AI Script Writer Guide 2026: Features, Pros, Cons](https://www.veereshbashetti.com/blog/gemini-ai-script-writer-guide-2026): Use Gemini AI as a script writer in 2026: lesser-known features like storyboarding, honest pros and cons, the CLI change for developers, and how to use it free.
+- [2026 Tech Layoffs: Data-Backed Breakdown by Company](https://www.veereshbashetti.com/blog/2026-tech-sector-layoffs-explained): Trackers show 126,000 to 205,000+ tech jobs cut in 2026. See which companies cut most, the India IT angle, whether AI is to blame, and a playbook if affected.
+- [8 AI Prompts for Marketers in 2026 (Copy-Paste Templates)](https://www.veereshbashetti.com/blog/8-ai-prompts-smart-marketers-2026): Save these 8 AI prompts for marketers in 2026: seven full templates, common mistakes that ruin AI output, and how to turn prompts into a repeatable system.
+- [GenAI Developer Career in 2026: Hype vs Reality for Students](https://www.veereshbashetti.com/blog/genai-developer-2026-hype-reality-pros-cons-students): Is a GenAI developer career real or LinkedIn hype? Honest pros, cons, salary reality and how Indian students can start in 2026, with sources linked.
+- [15 Best Chrome Extensions for Developers in 2026](https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026): The 15 best Chrome extensions for developers in 2026, all verified for Manifest V3 and used daily for Django and React work. Abandoned tools cut.
+- [18 Free Websites That Feel Illegal (But Are Legal) in 2026](https://www.veereshbashetti.com/blog/18-free-websites-that-feel-illegal-to-know): 18 genuinely free, 100% legal websites that still work in 2026. No piracy, every entry checked, plus lesser-known tools I use weekly.
+- [10 AI Prompts for Job Seekers in 2026: Resume to Interview](https://www.veereshbashetti.com/blog/10-ai-prompts-to-prepare-for-your-next-job-search): 10 AI prompts for your job search in 2026: profile photo, resume, LinkedIn and interview prep. Specific enough to give usable results the same day.
+- [HTTP Status Codes Explained with Real Code Examples (2026)](https://www.veereshbashetti.com/blog/every-http-status-code-explained-with-real-examples): Every HTTP status code that matters, explained with real code: 401 vs 403, 301 vs 302, 404, 500 and more, so your APIs behave predictably.
+- [10 Productivity Habits for Developers That Actually Work](https://www.veereshbashetti.com/blog/10-productivity-habits-that-actually-changed-my-work): 10 real productivity habits that changed how I work, from a developer with a manager checking numbers at 6 PM. No generic 5 AM advice.
+- [5 Common Django Mistakes Beginners Make (and Fixes)](https://www.veereshbashetti.com/blog/5-django-mistakes-i-made-as-a-beginner): 5 Django beginner mistakes that break projects, why they happen to almost everyone, and the exact fix for each one, from real experience.
+- [How I Use AI Every Day as a Developer: My Real Workflow](https://www.veereshbashetti.com/blog/how-i-actually-use-ai-every-day-as-a-developer-2026): A real developer's AI workflow in 2026: how tools fit into a workday, where they save time and where they quietly waste it. Not another tools list.
+- [Why Are AI Tools So Expensive in 2026? Real Cost Breakdown](https://www.veereshbashetti.com/blog/why-ai-tools-are-costly-2026): Why do ChatGPT, Claude and other AI tools cost so much in 2026? GPUs, electricity and per-message compute explained with real numbers.
+- [Are AI Jobs in Demand in 2026? What Hiring Data Shows](https://www.veereshbashetti.com/blog/are-ai-jobs-in-demand-2026): Are AI jobs in demand in 2026? Role-by-role and region-by-region hiring data, so you can stop guessing and plan your career.
+- [9 Truly Free AI Tools for Developers in 2026 (Verified)](https://www.veereshbashetti.com/blog/9-totally-free-ai-tools-for-developers-2026): 9 AI tools that are actually free for developers in 2026, re-checked against current vendor pricing pages. No free-for-now traps.
+- [HTTP QUERY Method Explained: Python & Node.js Examples](https://www.veereshbashetti.com/blog/http-query-method-explained): What is the new HTTP QUERY method? A beginner's guide to the safe, cacheable alternative to GET and POST for complex searches, with Python and Node.js code.
+- [22 Years Old, -₹400 in My Bank: A Startup Developer's Story](https://www.veereshbashetti.com/blog/22-year-old-startup-developer-life): At 22 with -₹400 in my bank account, I learned about money, pride and survival. A startup developer's honest story from India.
+- [The Developer Setup Trap: Better Gear Won't Make You Better](https://www.veereshbashetti.com/blog/developer-setup-trap): Why better hardware won't make you a better coder. I wasted ₹13,000 on a setup upgrade; here's what actually improves developers.
+- [Why My First Project Failed Quietly (Lessons Learned)](https://www.veereshbashetti.com/blog/first-project-failure-lessons): My first project didn't crash loudly, it quietly failed. Lessons on shipping real work, validation and what silence teaches developers.
