@@ -1,7 +1,6 @@
 {
   "posts": [
     {
-<<<<<<< HEAD
       "slug": "12-ways-to-build-faster-react-apps",
       "title": "12 Practical Ways to Build Faster React Apps (2026 Guide)",
       "description": "12 practical React performance tips: measure first, keep state local, memo, useCallback, useMemo, code splitting, list virtualization, Server Components and the React Compiler, with code and common traps.",
@@ -30,8 +29,6 @@
       ]
     },
     {
-=======
->>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
       "slug": "15-sql-queries-every-developer-should-know",
       "title": "15 SQL Queries Every Developer Should Know (2026 Guide)",
       "description": "The 15 SQL queries you will use again and again: SELECT, JOINs, GROUP BY, CTEs, window functions and more, with tested examples, output and common traps.",
@@ -528,12 +525,8 @@
       ],
       "date": "2026-07-27",
       "lastModified": "2026-07-27",
-<<<<<<< HEAD
       "featured": false,
       "noindex": true
-=======
-      "featured": false
->>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
     },
     {
       "slug": "5-django-mistakes-i-made-as-a-beginner",
@@ -606,12 +599,8 @@
       ],
       "date": "2026-07-21",
       "lastModified": "2026-07-21",
-<<<<<<< HEAD
       "featured": false,
       "noindex": true
-=======
-      "featured": false
->>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
     },
     {
       "slug": "are-ai-jobs-in-demand-2026",

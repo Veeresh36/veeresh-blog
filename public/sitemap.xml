@@ -72,13 +72,8 @@
     </url>
 
     <url>
-<<<<<<< HEAD
         <loc>https://www.veereshbashetti.com/blog/12-ways-to-build-faster-react-apps</loc>
         <lastmod>2026-10-20</lastmod>
-=======
-        <loc>https://www.veereshbashetti.com/blog/10-productivity-habits-that-actually-changed-my-work</loc>
-        <lastmod>2026-07-27</lastmod>
->>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -141,11 +136,7 @@
 
     <url>
         <loc>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</loc>
-<<<<<<< HEAD
         <lastmod>2026-10-20</lastmod>
-=======
-        <lastmod>2026-08-03</lastmod>
->>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -240,14 +231,4 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-<<<<<<< HEAD
-=======
-
-    <url>
-        <loc>https://www.veereshbashetti.com/blog/why-ai-tools-are-costly-2026</loc>
-        <lastmod>2026-07-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
->>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
 </urlset>
