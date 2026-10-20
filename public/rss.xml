@@ -5,6 +5,7 @@
   <link>https://www.veereshbashetti.com</link>
   <description>Practical Python, Django, React and SQL guides for beginner developers.</description>
   <language>en-in</language>
+<<<<<<< HEAD
   <lastBuildDate>Tue, 20 Oct 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://www.veereshbashetti.com/rss.xml" rel="self" type="application/rss+xml"/>
 
@@ -17,6 +18,12 @@
   </item>
 
   <item>
+=======
+  <lastBuildDate>Thu, 15 Oct 2026 00:00:00 GMT</lastBuildDate>
+  <atom:link href="https://www.veereshbashetti.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+  <item>
+>>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
     <title>15 SQL Queries Every Developer Should Know (2026 Guide)</title>
     <link>https://www.veereshbashetti.com/blog/15-sql-queries-every-developer-should-know</link>
     <guid>https://www.veereshbashetti.com/blog/15-sql-queries-every-developer-should-know</guid>
@@ -137,6 +144,17 @@
   </item>
 
   <item>
+<<<<<<< HEAD
+=======
+    <title>10 Productivity Habits for Developers That Actually Work</title>
+    <link>https://www.veereshbashetti.com/blog/10-productivity-habits-that-actually-changed-my-work</link>
+    <guid>https://www.veereshbashetti.com/blog/10-productivity-habits-that-actually-changed-my-work</guid>
+    <pubDate>Mon, 27 Jul 2026 00:00:00 GMT</pubDate>
+    <description>10 real productivity habits that changed how I work, from a developer with a manager checking numbers at 6 PM. No generic 5 AM advice.</description>
+  </item>
+
+  <item>
+>>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
     <title>5 Common Django Mistakes Beginners Make (and Fixes)</title>
     <link>https://www.veereshbashetti.com/blog/5-django-mistakes-i-made-as-a-beginner</link>
     <guid>https://www.veereshbashetti.com/blog/5-django-mistakes-i-made-as-a-beginner</guid>
@@ -153,6 +171,17 @@
   </item>
 
   <item>
+<<<<<<< HEAD
+=======
+    <title>Why Are AI Tools So Expensive in 2026? Real Cost Breakdown</title>
+    <link>https://www.veereshbashetti.com/blog/why-ai-tools-are-costly-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/why-ai-tools-are-costly-2026</guid>
+    <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Why do ChatGPT, Claude and other AI tools cost so much in 2026? GPUs, electricity and per-message compute explained with real numbers.</description>
+  </item>
+
+  <item>
+>>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
     <title>Are AI Jobs in Demand in 2026? What Hiring Data Shows</title>
     <link>https://www.veereshbashetti.com/blog/are-ai-jobs-in-demand-2026</link>
     <guid>https://www.veereshbashetti.com/blog/are-ai-jobs-in-demand-2026</guid>

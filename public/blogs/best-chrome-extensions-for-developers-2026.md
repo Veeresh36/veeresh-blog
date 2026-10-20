@@ -464,6 +464,7 @@ Pick any color from any webpage and generate CSS gradients directly from what yo
 
 ---
 
+<<<<<<< HEAD
 *This list reflects extensions actively in use on real Django and React projects, re-verified on Chrome 151 (current stable, early August 2026). If something here stops being maintained, gets flagged for security issues, or a better alternative comes along, I'll update this post rather than let it go stale — as the ModHeader correction above shows.*
 
 
@@ -1009,3 +1010,6 @@ Pick any color from any webpage and generate CSS gradients directly from what yo
 ---
 
 *This list reflects extensions actively in use on real Django and React projects, re-verified on Chrome 151 (current stable, early August 2026). The Pixel Perfect Pro bonus entry was added on October 20, 2026, after I tested it in my Figma-to-code workflow. If something here stops being maintained, gets flagged for security issues, or a better alternative comes along, I'll update this post rather than let it go stale — as the ModHeader correction above shows.* -->
+=======
+*This list reflects extensions actively in use on real Django and React projects, re-verified on Chrome 151 (current stable, early August 2026). If something here stops being maintained, gets flagged for security issues, or a better alternative comes along, I'll update this post rather than let it go stale — as the ModHeader correction above shows.*
+>>>>>>> 5005be4676fd9db9b932b972f8c9f1b00149b265
