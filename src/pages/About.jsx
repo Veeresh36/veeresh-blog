@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { Head } from "vite-react-ssg";
 
 // ═══════════════════════════════════════════════
 // CONFIG
@@ -7,7 +8,8 @@ import { Link } from "react-router-dom";
 const SITE = {
     name: "Veeresh Bashetti",
     email: "veeresh.b.bashetti@gmail.com",
-    pinterestUrl: "https://github.com/Veeresh36",
+    pinterestUrl: "https://github.com/Veeresh36", // GitHub profile (name kept so the rest of the file is unchanged)
+    linkedinUrl: "https://www.linkedin.com/in/veeresh-bashetti",
     baseUrl: "https://www.veereshbashetti.com",
     location: "Hubballi, Karnataka, India",
 };
@@ -59,6 +61,55 @@ const TIMELINE = [
         event: "Always curious about how things work, even when I didn't know where that curiosity would lead."
     }
 ];
+
+const RIGHT_NOW = [
+    {
+        icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+        label: "Learning",
+        value: "Advanced Django, REST APIs and React state management",
+    },
+    {
+        icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 1 1 3.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z",
+        label: "Writing",
+        value: "Beginner guides on Python, Django, React and SQL",
+    },
+    {
+        icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0zM15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z",
+        label: "Based in",
+        value: "Hubballi, Karnataka",
+    },
+];
+
+// ═══════════════════════════════════════════════
+// SEO SCHEMA (rendered inside <Head> so it is in the prerendered HTML)
+// ═══════════════════════════════════════════════
+const PAGE_TITLE = "About Veeresh Bashetti | Python Full Stack Developer";
+const PAGE_DESC = "Veeresh Bashetti is a 22-year-old Python full-stack developer from Hubballi, India. Read his story, what he writes about, and how to get in touch.";
+
+const profileJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "url": `${SITE.baseUrl}/about`,
+    "name": "About Veeresh Bashetti",
+    "mainEntity": {
+        "@type": "Person",
+        "@id": `${SITE.baseUrl}/#person`,
+        "name": "Veeresh Bashetti",
+        "alternateName": ["Veeresh B", "Veeresh36"],
+        "jobTitle": "Python Full Stack Developer",
+        "description": "Python full-stack developer from Hubballi, India who writes practical Python, Django, React and SQL guides for beginners.",
+        "url": SITE.baseUrl,
+        "image": AUTHOR_PHOTO_URL,
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hubballi",
+            "addressRegion": "Karnataka",
+            "addressCountry": "IN",
+        },
+        "knowsAbout": ["Python", "Django", "React", "JavaScript", "SQL", "Web Development"],
+        "sameAs": [SITE.pinterestUrl, SITE.linkedinUrl],
+    },
+};
 
 // ═══════════════════════════════════════════════
 // ICONS
@@ -165,7 +216,7 @@ const Navbar = ({ dark, toggleDark }) => {
                         aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}>
                         {dark ? <SunIcon /> : <MoonIcon />}
                     </button>
-                    <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
+                    <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer me"
                         className="hidden sm:inline-flex items-center gap-1.5 text-[0.78rem] font-bold px-4 py-2 rounded-full transition-all duration-300 hover:-translate-y-px hover:opacity-90"
                         style={{ background: "#E60023", color: "#fff" }}>
                         Follow
@@ -177,9 +228,6 @@ const Navbar = ({ dark, toggleDark }) => {
 };
 
 // Large, animated author photo panel for the hero's right column.
-// Rotating gradient halo + 3D tilt-on-hover + corner frame accents + shine sweep.
-// Padding is reserved deliberately so badges/halo never overlap the caption or get clipped,
-// and the whole block is centered instead of pinned to a narrow fixed column.
 const BigAuthorPhoto = ({ dark, border }) => {
     const [imgFailed, setImgFailed] = useState(false);
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -198,7 +246,7 @@ const BigAuthorPhoto = ({ dark, border }) => {
     return (
         <div className="relative w-full max-w-[460px] mx-auto px-6 pt-10 pb-4" style={{ perspective: "1400px" }}>
 
-            {/* Rotating conic-gradient halo, blurred, spinning slowly behind the card */}
+            {/* Rotating conic-gradient halo */}
             <div
                 className="absolute inset-6 rounded-[40%] blur-3xl pointer-events-none opacity-70"
                 style={{
@@ -207,7 +255,7 @@ const BigAuthorPhoto = ({ dark, border }) => {
                 }}
             />
 
-            {/* Secondary soft blob for extra depth */}
+            {/* Secondary soft blob */}
             <div
                 className="absolute rounded-full blur-3xl pointer-events-none"
                 style={{
@@ -219,7 +267,7 @@ const BigAuthorPhoto = ({ dark, border }) => {
                 }}
             />
 
-            {/* Top floating badges — kept inside the reserved padding, never over the caption */}
+            {/* Top floating badges */}
             <div className="absolute top-0 left-2 z-20 hidden sm:block" style={{ animation: "badgeFloat 4.5s ease-in-out infinite" }}>
                 <span
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.7rem] font-bold whitespace-nowrap select-none"
@@ -273,7 +321,7 @@ const BigAuthorPhoto = ({ dark, border }) => {
                 {AUTHOR_PHOTO_URL && !imgFailed ? (
                     <img
                         src={AUTHOR_PHOTO_URL}
-                        alt="Veeresh Bashetti — web developer and writer"
+                        alt="Veeresh Bashetti, web developer and writer"
                         loading="eager"
                         onError={() => setImgFailed(true)}
                         className="w-full h-full object-cover select-none"
@@ -290,7 +338,7 @@ const BigAuthorPhoto = ({ dark, border }) => {
                     </div>
                 )}
 
-                {/* Corner frame brackets — viewfinder-style accents */}
+                {/* Corner frame brackets */}
                 {[
                     { top: 14, left: 14, borderWidth: "3px 0 0 3px", radius: "10px 0 0 0" },
                     { top: 14, right: 14, borderWidth: "3px 3px 0 0", radius: "0 10px 0 0" },
@@ -398,7 +446,7 @@ const ValueCard = ({ item, dark, border, delay }) => {
     );
 };
 
-// Recent posts fetched from manifest
+// Recent posts fetched from manifest (supports array or { posts: [] })
 const RecentPosts = ({ dark, border }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -409,7 +457,9 @@ const RecentPosts = ({ dark, border }) => {
                 const res = await fetch("/blogs/manifest.json");
                 if (!res.ok) throw new Error();
                 const manifest = await res.json();
-                const sorted = (manifest.posts || [])
+                const list = Array.isArray(manifest) ? manifest : (manifest.posts || []);
+                const sorted = list
+                    .filter((p) => !p.noindex)
                     .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
                     .slice(0, 4);
                 setPosts(sorted);
@@ -439,7 +489,7 @@ const RecentPosts = ({ dark, border }) => {
     }
 
     if (!posts.length) return (
-        <p className="text-[0.84rem] font-light" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
+        <p className="text-[0.84rem] font-light py-3" style={{ color: dark ? "rgba(250,248,244,0.65)" : "#9C8E84" }}>
             No posts yet.
         </p>
     );
@@ -464,13 +514,12 @@ const RecentPosts = ({ dark, border }) => {
                         </div>
                         <div className="text-[0.72rem] mt-0.5 font-light"
                             style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84" }}>
-                            {post.category && <span className="font-semibold" style={{ color: "#E60023" }}>{post.category} · </span>}
+                            {(post.category || post.tag) && <span className="font-semibold" style={{ color: "#E60023" }}>{post.category || post.tag} · </span>}
                             {post.date && new Date(post.date).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}
                         </div>
                     </div>
                     <Icon d="M9 18l6-6-6-6" size={14}
-                        className="flex-shrink-0 mt-1 opacity-0 group-hover:opacity-40 transition-opacity"
-                        style={{ color: dark ? "#FAF8F4" : "#1A1612" }} />
+                        className="flex-shrink-0 mt-1 opacity-0 group-hover:opacity-40 transition-opacity" />
                 </Link>
             ))}
         </div>
@@ -487,19 +536,41 @@ export default function About() {
     const bg = dark ? "#0F0E0D" : "#FAF8F4";
     const border = dark ? "rgba(255,255,255,0.07)" : "#EAE4DC";
 
-    useEffect(() => {
-        document.title = `About Veeresh Bashetti | Python Full Stack Developer`;
-        let canonical = document.querySelector('link[rel="canonical"]');
-        if (!canonical) {
-            canonical = document.createElement("link");
-            canonical.rel = "canonical";
-            document.head.appendChild(canonical);
-        }
-        canonical.href = `${SITE.baseUrl}/about`;
-    }, []);
+    const pillStyle = {
+        borderColor: dark ? "rgba(255,255,255,0.12)" : "#DDD7CE",
+        color: dark ? "rgba(250,248,244,0.75)" : "#3D3530",
+        background: dark ? "rgba(255,255,255,0.04)" : "#F5F1EB",
+    };
+
+    const bodyText = {
+        color: dark ? "rgba(250,248,244,0.7)" : "#3D3530",
+    };
 
     return (
         <>
+            <Head>
+                <title>{PAGE_TITLE}</title>
+                <meta name="description" content={PAGE_DESC} />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href={`${SITE.baseUrl}/about`} />
+
+                <meta property="og:title" content={PAGE_TITLE} />
+                <meta property="og:description" content="Python full-stack developer from Hubballi, India, writing practical Python, Django, React and SQL guides." />
+                <meta property="og:type" content="profile" />
+                <meta property="og:url" content={`${SITE.baseUrl}/about`} />
+                <meta property="og:image" content={AUTHOR_PHOTO_URL} />
+                <meta property="og:site_name" content="Veeresh Bashetti" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={PAGE_TITLE} />
+                <meta name="twitter:description" content={PAGE_DESC} />
+                <meta name="twitter:image" content={AUTHOR_PHOTO_URL} />
+
+                <script type="application/ld+json">
+                    {JSON.stringify(profileJsonLd)}
+                </script>
+            </Head>
+
             <style>{`
 
         @keyframes fadeUp {
@@ -556,9 +627,7 @@ export default function About() {
                     <span style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>About</span>
                 </nav>
 
-                {/* ══════════════════════════════════════
-            HERO — name, photo, intro, social links
-        ══════════════════════════════════════ */}
+                {/* ══════════ HERO ══════════ */}
                 <section ref={heroRef} className="max-w-[1280px] mx-auto px-6 pt-10 pb-20">
                     <div className="flex flex-col lg:flex-row lg:items-center gap-12">
 
@@ -576,52 +645,25 @@ export default function About() {
                             </h1>
 
                             <div className="space-y-4 max-w-[650px]">
-                                <p
-                                    className="text-[1rem] leading-[1.85] font-light"
-                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
-                                >
-                                    Hi, I'm Veeresh, a 22-year-old web developer from India who loves building things, learning new skills, and exploring how technology works.
+                                <p className="text-[1rem] leading-[1.85] font-light" style={bodyText}>
+                                    Hi, I'm Veeresh, a 22-year-old Python full-stack developer from Hubballi, India who loves building things, learning new skills, and exploring how technology works.
                                 </p>
-
-                                <p
-                                    className="text-[1rem] leading-[1.85] font-light"
-                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
-                                >
+                                <p className="text-[1rem] leading-[1.85] font-light" style={bodyText}>
                                     I graduated from college in 2024.
                                 </p>
-
-                                <p
-                                    className="text-[1rem] leading-[1.85] font-light"
-                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
-                                >
+                                <p className="text-[1rem] leading-[1.85] font-light" style={bodyText}>
                                     Like many people in their early twenties, I wasn't completely sure what path I wanted to follow. After graduation, I spent about a year working in sales. That experience taught me a lot about communication, people, confidence, and solving real-world problems.
                                 </p>
-
-                                <p
-                                    className="text-[1rem] leading-[1.85] font-light"
-                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
-                                >
+                                <p className="text-[1rem] leading-[1.85] font-light" style={bodyText}>
                                     But deep down, I was always curious about technology, websites, software, and how digital products are built. That curiosity eventually led me to web development.
                                 </p>
-
-                                <p
-                                    className="text-[1rem] leading-[1.85] font-light"
-                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
-                                >
+                                <p className="text-[1rem] leading-[1.85] font-light" style={bodyText}>
                                     I joined a web development course and started learning seriously. Since then, I've spent countless hours building projects, fixing bugs, experimenting with new technologies, and improving my skills one step at a time.
                                 </p>
-
-                                <p
-                                    className="text-[1rem] leading-[1.85] font-light"
-                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
-                                >
+                                <p className="text-[1rem] leading-[1.85] font-light" style={bodyText}>
                                     This blog is where I document that journey. I share things I learn, projects I build, useful tools I discover, mistakes I make, and experiences that help me grow both professionally and personally.
                                 </p>
-
-                                <p
-                                    className="text-[1rem] leading-[1.85] font-light"
-                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}
-                                >
+                                <p className="text-[1rem] leading-[1.85] font-light" style={bodyText}>
                                     I'm still learning, still building, and still figuring things out. That's what makes the journey exciting.
                                 </p>
                             </div>
@@ -636,22 +678,28 @@ export default function About() {
 
                                 <div className="w-px h-4" style={{ background: border }} />
 
-                                <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
+                                <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer me"
                                     className="inline-flex items-center gap-1.5 text-[0.78rem] font-bold px-4 py-2 rounded-full transition-all duration-300 hover:-translate-y-px hover:opacity-90"
                                     style={{ background: "#E60023", color: "#fff" }}>
                                     GitHub
                                 </a>
 
+                                <a href={SITE.linkedinUrl} target="_blank" rel="noopener noreferrer me"
+                                    className="inline-flex items-center gap-1.5 text-[0.78rem] font-semibold px-4 py-2 rounded-full border transition-all duration-200 hover:opacity-70"
+                                    style={pillStyle}>
+                                    LinkedIn
+                                </a>
+
                                 <a href={`mailto:${SITE.email}`}
                                     className="inline-flex items-center gap-1.5 text-[0.78rem] font-semibold px-4 py-2 rounded-full border transition-all duration-200 hover:opacity-70"
-                                    style={{ borderColor: dark ? "rgba(255,255,255,0.12)" : "#DDD7CE", color: dark ? "rgba(250,248,244,0.75)" : "#3D3530", background: dark ? "rgba(255,255,255,0.04)" : "#F5F1EB" }}>
+                                    style={pillStyle}>
                                     <Icon d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z" size={13} />
                                     Email me
                                 </a>
 
                                 <Link to="/blog"
                                     className="inline-flex items-center gap-1.5 text-[0.78rem] font-semibold px-4 py-2 rounded-full border transition-all duration-200 hover:opacity-70"
-                                    style={{ borderColor: dark ? "rgba(255,255,255,0.12)" : "#DDD7CE", color: dark ? "rgba(250,248,244,0.75)" : "#3D3530", background: dark ? "rgba(255,255,255,0.04)" : "#F5F1EB" }}>
+                                    style={pillStyle}>
                                     Read the blog →
                                 </Link>
                             </div>
@@ -669,9 +717,7 @@ export default function About() {
                     <div className="h-px w-full" style={{ background: border }} />
                 </div>
 
-                {/* ══════════════════════════════════════
-            TWO-COLUMN: What I write about + Sidebar
-        ══════════════════════════════════════ */}
+                {/* ══════════ TWO-COLUMN ══════════ */}
                 <div className="max-w-[1280px] mx-auto px-6 pt-20 pb-10 flex flex-col lg:flex-row gap-16 items-start">
 
                     {/* LEFT — main content */}
@@ -679,7 +725,7 @@ export default function About() {
 
                         {/* Topics */}
                         <section className="mb-20">
-                            <SectionHeading eyebrow="What I write about" title="The four things I keep coming back to." dark={dark} />
+                            <SectionHeading eyebrow="What I write about" title="The two things I keep coming back to." dark={dark} />
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {TOPICS.map((topic, i) => (
                                     <TopicCard key={topic.label} topic={topic} dark={dark} border={border} delay={i * 70} />
@@ -701,13 +747,11 @@ export default function About() {
                         <section className="mb-20">
                             <SectionHeading eyebrow="A short backstory" title="How I got here." dark={dark} />
                             <div className="relative">
-                                {/* Vertical line */}
                                 <div className="absolute left-[19px] top-2 bottom-2 w-px"
                                     style={{ background: dark ? "rgba(255,255,255,0.07)" : "#EAE4DC" }} />
                                 <div className="space-y-0">
                                     {TIMELINE.map((item, i) => (
                                         <div key={i} className="flex gap-6 pb-8 relative">
-                                            {/* Dot */}
                                             <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 z-10"
                                                 style={{
                                                     background: i === 0 ? "#E60023" : (dark ? "#1A1815" : "#F5F1EB"),
@@ -723,8 +767,7 @@ export default function About() {
                                                     style={{ color: i === 0 ? "#E60023" : (dark ? "rgba(250,248,244,0.3)" : "#AAA09A") }}>
                                                     {item.year}
                                                 </div>
-                                                <p className="text-[0.9rem] leading-relaxed font-light"
-                                                    style={{ color: dark ? "rgba(250,248,244,0.7)" : "#3D3530" }}>
+                                                <p className="text-[0.9rem] leading-relaxed font-light" style={bodyText}>
                                                     {item.event}
                                                 </p>
                                             </div>
@@ -734,15 +777,11 @@ export default function About() {
                             </div>
                         </section>
 
-                        {/* Currently section */}
+                        {/* Right now */}
                         <section className="mb-10">
                             <SectionHeading eyebrow="Right now" title="What I'm up to these days." dark={dark} />
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                {[
-                                    { icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", label: "Reading", value: "Indian Ocean — a history of monsoon traders" },
-                                    { icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 1 1 3.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z", label: "Writing", value: "A series on low-effort money habits" },
-                                    { icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0zM15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z", label: "Based in", value: "Hubballi, Karnataka" },
-                                ].map((item) => (
+                                {RIGHT_NOW.map((item) => (
                                     <div key={item.label} className="p-5 rounded-2xl border flex flex-col gap-2"
                                         style={{ background: dark ? "rgba(255,255,255,0.02)" : "#FFFFFF", borderColor: border }}>
                                         <div className="flex items-center gap-2">
@@ -788,7 +827,7 @@ export default function About() {
                         </div>
 
                         {/* GitHub CTA */}
-                        <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
+                        <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer me"
                             className="flex items-center gap-4 p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
                             style={{ background: "#E60023", borderColor: "#E60023", textDecoration: "none" }}>
                             <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
@@ -828,9 +867,10 @@ export default function About() {
                                 style={{ color: dark ? "rgba(250,248,244,0.6)" : "#9C8E84", borderBottom: `1px solid ${border}` }}>
                                 Pages
                             </div>
-                            <nav className="p-2">
+                            <nav className="p-2" aria-label="Site pages">
                                 {[
                                     { label: "Blog", path: "/blog", icon: "M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" },
+                                    { label: "Contact", path: "/contact", icon: "M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z" },
                                     { label: "Privacy Policy", path: "/privacy-policy", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
                                     { label: "Terms of Use", path: "/terms", icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 1 4.438 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 3.138 3.138 3.42 3.42 0 0 0 .806 1.946 3.42 3.42 0 0 1 0 4.438 3.42 3.42 0 0 0-.806 1.946 3.42 3.42 0 0 1-3.138 3.138 3.42 3.42 0 0 0-1.946.806 3.42 3.42 0 0 1-4.438 0 3.42 3.42 0 0 0-1.946-.806 3.42 3.42 0 0 1-3.138-3.138 3.42 3.42 0 0 0-.806-1.946 3.42 3.42 0 0 1 0-4.438 3.42 3.42 0 0 0 .806-1.946 3.42 3.42 0 0 1 3.138-3.138z" },
                                     { label: "Sitemap", path: "/sitemap", icon: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" },
@@ -847,9 +887,7 @@ export default function About() {
                     </aside>
                 </div>
 
-                {/* ══════════════════════════════════════
-            CLOSING CTA BAND
-        ══════════════════════════════════════ */}
+                {/* ══════════ CLOSING CTA ══════════ */}
                 <section className="max-w-[1280px] mx-auto px-6 pb-24">
                     <div className="rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
                         style={{ background: dark ? "rgba(255,255,255,0.03)" : "#FFFFFF", border: `1px solid ${border}` }}>
@@ -860,7 +898,7 @@ export default function About() {
                             </h2>
                             <p className="text-[0.9rem] leading-relaxed font-light"
                                 style={{ color: dark ? "rgba(250,248,244,0.5)" : "#7A6E64" }}>
-                                Browse everything I've written — or pick a topic that interests you and start there.
+                                Browse everything I've written, or pick a topic that interests you and start there.
                             </p>
                         </div>
                         <div className="flex flex-wrap gap-3">
@@ -869,7 +907,7 @@ export default function About() {
                                 style={{ background: "#1A1612", color: "#FAF8F4" }}>
                                 Browse all posts
                             </Link>
-                            <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer"
+                            <a href={SITE.pinterestUrl} target="_blank" rel="noopener noreferrer me"
                                 className="inline-flex items-center gap-2 font-bold text-[0.85rem] px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-px hover:opacity-90"
                                 style={{ background: "#E60023", color: "#fff" }}>
                                 Follow on GitHub
@@ -895,6 +933,8 @@ export default function About() {
                         <div className="flex items-center gap-4 text-[0.78rem]"
                             style={{ color: "rgba(250,248,244,0.65)" }}>
                             <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
+                            <span style={{ color: "rgba(250,248,244,0.15)" }}>·</span>
+                            <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
                             <span style={{ color: "rgba(250,248,244,0.15)" }}>·</span>
                             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
                             <span style={{ color: "rgba(250,248,244,0.15)" }}>·</span>

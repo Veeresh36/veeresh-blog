@@ -102,40 +102,12 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap"
     />
 
-    <!-- Schema: Person -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Veeresh Bashetti",
-        "url": "https://www.veereshbashetti.com",
-        "image": "https://www.veereshbashetti.com/og-image.png",
-        "jobTitle": "Python Full Stack Developer",
-        "sameAs": [
-          "https://github.com/Veeresh36",
-          "https://in.pinterest.com/veereshbbashetti/"
-        ]
-      }
-    </script>
-
     <!--
-      Schema: Website
-      NOTE: potentialAction/SearchAction intentionally removed.
-      There is no real /search route in this app, so declaring it here
-      caused Googlebot to crawl the literal template URL
-      (/search?q={search_term_string}), which fell through to the
-      catch-all 404 route and got flagged "Excluded by noindex tag"
-      in Search Console. Re-add SearchAction only after a real
-      /search page exists.
+      Structured data (Person, WebSite, Blog, ProfilePage) is NOT defined here.
+      It is rendered per page via <Head> in Blog.jsx and About.jsx so there is
+      a single Person entity (@id: https://www.veereshbashetti.com/#person).
+      Do not add a second Person/WebSite block in this file.
     -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "url": "https://www.veereshbashetti.com/",
-        "name": "Veeresh Bashetti"
-      }
-    </script>
   </head>
 
   <body>
@@ -148,16 +120,6 @@
         style="display:none;visibility:hidden"
       ></iframe>
     </noscript>
-
-    <!--
-      NOTE: <amp-auto-ads> was removed here.
-      That tag only works on a real AMP HTML document (<html amp>,
-      AMP boilerplate CSS, the amp-auto-ads-0.1.js library, etc).
-      This is a normal React/Vite SPA, not an AMP page, so the tag
-      did nothing (or could throw a console error). The regular
-      adsbygoogle.js script above + the <ins class="adsbygoogle">
-      units already in the React components are all this site needs.
-    -->
 
     <div id="root"></div>
 
