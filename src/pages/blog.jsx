@@ -541,15 +541,24 @@ const SEOHead = ({ posts = [] }) => {
                 "url": SITE_URL,
                 "description": DESCRIPTION,
                 "author": { "@id": `${SITE_URL}/#person` },
-                "blogPost": posts.slice(0, 10).map(p => ({
+                "blogPost": posts.map(p => ({
                     "@type": "BlogPosting",
                     "headline": p.title,
                     "description": p.description || p.excerpt,
+                    "image": p.image
+                        ? (p.image.startsWith("http") ? p.image : `${SITE_URL}${p.image}`)
+                        : OG_IMAGE,
                     "datePublished": p.date,
                     "dateModified": p.modified || p.date,
                     "keywords": (p.keywords || []).join(", "),
                     "url": `${SITE_URL}/blog/${p.slug}`,
-                    "author": { "@id": `${SITE_URL}/#person` },
+                    "mainEntityOfPage": `${SITE_URL}/blog/${p.slug}`,
+                    "author": {
+                        "@type": "Person",
+                        "@id": `${SITE_URL}/#person`,
+                        "name": "Veeresh Bashetti",
+                        "url": SITE_URL,
+                    },
                 })),
             },
         ],
