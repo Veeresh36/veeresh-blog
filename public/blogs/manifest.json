@@ -1,6 +1,31 @@
 {
   "posts": [
     {
+      "slug": "best-chrome-extensions-for-developers-2026",
+      "title": "15 Best Chrome Extensions for Developers in 2026",
+      "description": "The 15 best Chrome extensions for developers in 2026, all verified for Manifest V3 and used daily for Django and React work. Abandoned tools cut.",
+      "tag": "tech",
+      "category": "tech",
+      "excerpt": "Most 'best extensions for developers' lists are copy-pasted since 2021, with half the tools abandoned since Manifest V3. These are the 15 extensions I use daily building Django and React apps, with anything outdated cut.",
+      "emoji": "🛠️",
+      "gradient": "from-[#0D1321] to-[#1D2D50]",
+      "meta": "10 min read · 3 August 2026 · Verified for Manifest V3",
+      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/best-chrome-extensions-for-developers-2026.webp",
+      "imageAlt": "Best Chrome extensions for developers in 2026 compatible with Manifest V3",
+      "tags": [
+        "Best Chrome extensions for developers",
+        "Chrome extensions 2026",
+        "Manifest V3",
+        "Web developer tools",
+        "React DevTools",
+        "Django",
+        "Productivity"
+      ],
+      "date": "2026-10-24",
+      "lastModified": "2026-10-24",
+      "featured": true
+    },
+    {
       "slug": "12-ways-to-build-faster-react-apps",
       "title": "12 Practical Ways to Build Faster React Apps (2026 Guide)",
       "description": "12 practical React performance tips: measure first, keep state local, memo, useCallback, useMemo, code splitting, list virtualization, Server Components and the React Compiler, with code and common traps.",
@@ -402,31 +427,6 @@
       ],
       "date": "2026-08-08",
       "lastModified": "2026-08-09",
-      "featured": false
-    },
-    {
-      "slug": "best-chrome-extensions-for-developers-2026",
-      "title": "15 Best Chrome Extensions for Developers in 2026",
-      "description": "The 15 best Chrome extensions for developers in 2026, all verified for Manifest V3 and used daily for Django and React work. Abandoned tools cut.",
-      "tag": "tech",
-      "category": "tech",
-      "excerpt": "Most 'best extensions for developers' lists are copy-pasted since 2021, with half the tools abandoned since Manifest V3. These are the 15 extensions I use daily building Django and React apps, with anything outdated cut.",
-      "emoji": "🛠️",
-      "gradient": "from-[#0D1321] to-[#1D2D50]",
-      "meta": "10 min read · 3 August 2026 · Verified for Manifest V3",
-      "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/best-chrome-extensions-for-developers-2026.webp",
-      "imageAlt": "Best Chrome extensions for developers in 2026 compatible with Manifest V3",
-      "tags": [
-        "Best Chrome extensions for developers",
-        "Chrome extensions 2026",
-        "Manifest V3",
-        "Web developer tools",
-        "React DevTools",
-        "Django",
-        "Productivity"
-      ],
-      "date": "2026-08-03",
-      "lastModified": "2026-08-07",
       "featured": false
     },
     {

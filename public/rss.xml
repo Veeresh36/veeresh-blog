@@ -5,8 +5,24 @@
   <link>https://www.veereshbashetti.com</link>
   <description>Practical Python, Django, React and SQL guides for beginner developers.</description>
   <language>en-in</language>
-  <lastBuildDate>Thu, 15 Oct 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Sat, 24 Oct 2026 00:00:00 GMT</lastBuildDate>
   <atom:link href="https://www.veereshbashetti.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+  <item>
+    <title>15 Best Chrome Extensions for Developers in 2026</title>
+    <link>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</link>
+    <guid>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</guid>
+    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
+    <description>The 15 best Chrome extensions for developers in 2026, all verified for Manifest V3 and used daily for Django and React work. Abandoned tools cut.</description>
+  </item>
+
+  <item>
+    <title>12 Practical Ways to Build Faster React Apps (2026 Guide)</title>
+    <link>https://www.veereshbashetti.com/blog/12-ways-to-build-faster-react-apps</link>
+    <guid>https://www.veereshbashetti.com/blog/12-ways-to-build-faster-react-apps</guid>
+    <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+    <description>12 practical React performance tips: measure first, keep state local, memo, useCallback, useMemo, code splitting, list virtualization, Server Components and the React Compiler, with code and common traps.</description>
+  </item>
 
   <item>
     <title>15 SQL Queries Every Developer Should Know (2026 Guide)</title>
@@ -94,14 +110,6 @@
     <guid>https://www.veereshbashetti.com/blog/genai-developer-2026-hype-reality-pros-cons-students</guid>
     <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
     <description>Is a GenAI developer career real or LinkedIn hype? Honest pros, cons, salary reality and how Indian students can start in 2026, with sources linked.</description>
-  </item>
-
-  <item>
-    <title>15 Best Chrome Extensions for Developers in 2026</title>
-    <link>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</link>
-    <guid>https://www.veereshbashetti.com/blog/best-chrome-extensions-for-developers-2026</guid>
-    <pubDate>Mon, 03 Aug 2026 00:00:00 GMT</pubDate>
-    <description>The 15 best Chrome extensions for developers in 2026, all verified for Manifest V3 and used daily for Django and React work. Abandoned tools cut.</description>
   </item>
 
   <item>
