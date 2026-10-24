@@ -496,6 +496,14 @@ import { Head } from "vite-react-ssg";
 
 const SITE_URL = "https://www.veereshbashetti.com";
 
+// Google wants full datetimes with a timezone (e.g. 2026-10-02T00:00:00+05:30)
+const toIsoDate = (d) => {
+    if (!d) return undefined;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) return `${d}T00:00:00+05:30`; // IST
+    const t = new Date(d);
+    return isNaN(t.getTime()) ? undefined : t.toISOString();
+};
+
 const SEOHead = ({ posts = [] }) => {
     const SITE_NAME = "Veeresh Bashetti";
     const DESCRIPTION = "Veeresh Bashetti is a Python full-stack developer from Hubballi, India. Practical Python, Django, React and SQL guides for beginners.";
@@ -548,8 +556,8 @@ const SEOHead = ({ posts = [] }) => {
                     "image": p.image
                         ? (p.image.startsWith("http") ? p.image : `${SITE_URL}${p.image}`)
                         : OG_IMAGE,
-                    "datePublished": p.date,
-                    "dateModified": p.modified || p.date,
+                    "datePublished": toIsoDate(p.date),
+                    "dateModified": toIsoDate(p.modified || p.date),
                     "keywords": (p.keywords || []).join(", "),
                     "url": `${SITE_URL}/blog/${p.slug}`,
                     "mainEntityOfPage": `${SITE_URL}/blog/${p.slug}`,
