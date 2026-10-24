@@ -498,9 +498,9 @@ const SITE_URL = "https://www.veereshbashetti.com";
 
 const SEOHead = ({ posts = [] }) => {
     const SITE_NAME = "Veeresh Bashetti";
-    const DESCRIPTION = "Practical Python, Django, React and SQL guides for beginner developers in India. Tested code, real examples and free learning paths by Veeresh Bashetti.";
+    const DESCRIPTION = "Veeresh Bashetti is a Python full-stack developer from Hubballi, India. Practical Python, Django, React and SQL guides for beginners.";
     const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
-    const TITLE = "Veeresh Bashetti | Python, Django & React Guides for Beginner Developers";
+    const TITLE = "Veeresh Bashetti | Python Full Stack Developer";
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -509,10 +509,30 @@ const SEOHead = ({ posts = [] }) => {
                 "@type": "Person",
                 "@id": `${SITE_URL}/#person`,
                 "name": "Veeresh Bashetti",
+                "alternateName": ["Veeresh B", "Veeresh36"],
                 "url": SITE_URL,
-                "sameAs": ["https://github.com/Veeresh36", "https://www.linkedin.com/in/veeresh-bashetti"],
-                "jobTitle": "Writer & Content Creator",
-                "description": DESCRIPTION,
+                "image": "https://cdn.jsdelivr.net/gh/Veeresh36/bog_images@main/veeresh_abt.webp",
+                "jobTitle": "Python Full Stack Developer",
+                "description": "Python full-stack developer from Hubballi, India who writes practical Python, Django, React and SQL guides for beginners.",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Hubballi",
+                    "addressRegion": "Karnataka",
+                    "addressCountry": "IN",
+                },
+                "knowsAbout": ["Python", "Django", "React", "JavaScript", "SQL", "Web Development"],
+                "sameAs": [
+                    "https://github.com/Veeresh36",
+                    "https://www.linkedin.com/in/veeresh-bashetti",
+                    // add X, YouTube, dev.to, Instagram here if you have them
+                ],
+            },
+            {
+                "@type": "WebSite",
+                "@id": `${SITE_URL}/#website`,
+                "url": SITE_URL,
+                "name": SITE_NAME,
+                "publisher": { "@id": `${SITE_URL}/#person` },
             },
             {
                 "@type": "Blog",
@@ -541,11 +561,10 @@ const SEOHead = ({ posts = [] }) => {
             <meta name="description" content={DESCRIPTION} />
             <meta name="robots" content="index, follow" />
             <meta name="author" content="Veeresh Bashetti" />
-            {/* <meta name="keywords" content="lifestyle blog, home decor, pinterest picks, startup life, productivity, mindset, product reviews, India blog" /> */}
 
             <link rel="canonical" href={SITE_URL} />
 
-            {/* <meta property="og:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} /> */}
+            <meta property="og:title" content={TITLE} />
             <meta property="og:description" content={DESCRIPTION} />
             <meta property="og:type" content="website" />
             <meta property="og:url" content={SITE_URL} />
@@ -554,7 +573,7 @@ const SEOHead = ({ posts = [] }) => {
             <meta property="og:locale" content="en_IN" />
 
             <meta name="twitter:card" content="summary_large_image" />
-            {/* <meta name="twitter:title" content={`${SITE_NAME} — Blog & Pinterest Picks`} /> */}
+            <meta name="twitter:title" content={TITLE} />
             <meta name="twitter:description" content={DESCRIPTION} />
             <meta name="twitter:image" content={OG_IMAGE} />
             <meta name="twitter:creator" content="@veereshbashetti" />
@@ -597,7 +616,7 @@ import { useSaved } from "../App";
 // ════════════════════════════════════════════════════════════
 //  NAVBAR — with saved icon
 // ════════════════════════════════════════════════════════════
-const NAV_SECTIONS = ["blog", "topics", "about"];
+const NAV_SECTIONS = ["blog", "topics"];
 
 const Navbar = ({ onSearchOpen }) => {
     const [scrolled, setScrolled] = useState(false);
@@ -655,6 +674,17 @@ const Navbar = ({ onSearchOpen }) => {
                             </button>
                         </li>
                     ))}
+
+                    <li>
+                        <Link to="/about" className="font-body text-sm font-medium tracking-wide text-[#3D3530] hover:text-[#E60023] transition-colors duration-300">
+                            About Me
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/contact" className="font-body text-sm font-medium tracking-wide text-[#3D3530] hover:text-[#E60023] transition-colors duration-300">
+                            Contact
+                        </Link>
+                    </li>
 
                     {/* ── Quick search trigger ── */}
                     <li>
@@ -727,6 +757,20 @@ const Navbar = ({ onSearchOpen }) => {
                                 </button>
                             </li>
                         ))}
+                        <li>
+                            <Link to="/about" onClick={() => setMobileOpen(false)}
+                                className="font-body text-base font-medium text-[#3D3530]"
+                                style={{ textDecoration: "none" }}>
+                                About Me
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/contact" onClick={() => setMobileOpen(false)}
+                                className="font-body text-base font-medium text-[#3D3530]"
+                                style={{ textDecoration: "none" }}>
+                                Contact
+                            </Link>
+                        </li>
                         <li>
                             <Link to="/saved" onClick={() => setMobileOpen(false)}
                                 className="font-body text-base font-medium text-[#3D3530] flex items-center gap-2"
@@ -851,12 +895,12 @@ const Hero = ({
                             className="inline-flex items-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-7 py-[0.85rem] rounded-full hover:bg-[#E60023] shadow-sm">
                             <ArrowDown size={16} /> Read the Blog
                         </button>
-                        <a href="https://github.com/Veeresh36" target="_blank" rel="noopener noreferrer"
+                        <Link to="/about"
                             {...magBtn2}
                             style={{ transition: "transform 0.2s ease, border-color 0.3s ease" }}
                             className="inline-flex items-center gap-2 text-[#1A1612] font-semibold text-sm px-7 py-[0.85rem] rounded-full border-[1.5px] border-[#E8E0D5] hover:border-[#1A1612]">
                             About Me
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Animated stats — hidden (space kept) until the manifest has loaded */}
@@ -1536,18 +1580,18 @@ const AboutSection = () => {
                             >
                                 GitHub
                             </a>
-                            <a
-                                href="/contact"
+                            <Link
+                                to="/contact"
                                 className="inline-flex items-center gap-2 rounded-full border border-[#E7DDD2] bg-white px-5 py-2.5 text-sm font-semibold text-[#2E2723] transition-all duration-300 hover:bg-[#1A1612] hover:text-white hover:border-[#1A1612]"
                             >
                                 <EmailIcon /> Contact
-                            </a>
-                            <a
-                                href="/blog"
+                            </Link>
+                            <Link
+                                to="/blog"
                                 className="inline-flex items-center gap-2 rounded-full bg-[#1A1612] text-[#FAF8F4] px-5 py-2.5 text-sm font-semibold transition-all duration-300 hover:bg-[#E60023] hover:-translate-y-0.5"
                             >
                                 Read the Blog →
-                            </a>
+                            </Link>
                         </div>
                     </div>
 
@@ -1872,18 +1916,22 @@ const NewPostsPopup = ({ posts }) => {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white overflow-hidden w-full relative max-w-[900px] max-h-[92vh] overflow-y-auto"
+                className="bg-white w-full relative overflow-hidden"
                 style={{
-                    borderRadius: "26px",
+                    /* Width is capped so image (16:9) + ~300px of details always fit the screen height */
+                    maxWidth: "min(680px, calc((100dvh - 340px) * 1.7778))",
+                    minWidth: "min(100%, 320px)",
+                    borderRadius: "24px",
                     boxShadow: "0 40px 100px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)",
                     animation: closing ? "popupScaleOut 0.25s ease both" : "popupScaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both",
                 }}
             >
+                {/* Close */}
                 <button
                     type="button"
                     onClick={close}
                     aria-label="Close popup"
-                    className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+                    className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
                     style={{
                         background: "rgba(255,255,255,0.95)",
                         border: "1px solid rgba(0,0,0,0.06)",
@@ -1893,63 +1941,61 @@ const NewPostsPopup = ({ posts }) => {
                     <CloseIcon />
                 </button>
 
-                <div className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr]">
-                    {/* ── Image side ── */}
-                    <div className="relative w-full h-[220px] md:h-[480px] overflow-hidden" style={{ background: "#1A1612" }}>
-                        {active.image && (
-                            <img
-                                key={active.slug}
-                                src={active.image}
-                                alt={active.title}
-                                className="w-full h-full"
-                                style={{ objectFit: "cover", animation: "popupImgFade 0.5s ease both" }}
-                            />
-                        )}
-                        {/* Gradient scrim for legibility + richness */}
-                        <div
-                            className="absolute inset-0 pointer-events-none"
-                            style={{ background: "linear-gradient(180deg, rgba(26,22,18,0.35) 0%, rgba(26,22,18,0) 30%, rgba(26,22,18,0) 60%, rgba(26,22,18,0.55) 100%)" }}
+                {/* Full thumbnail (16:9, never cropped) */}
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9", background: "#1A1612" }}>
+                    {active.image && (
+                        <img
+                            key={active.slug}
+                            src={active.image}
+                            alt={active.title}
+                            className="w-full h-full"
+                            style={{ objectFit: "contain", animation: "popupImgFade 0.5s ease both" }}
                         />
-                        {/* Badge */}
-                        <span
-                            className="absolute top-5 left-5 inline-flex items-center gap-1.5 text-white text-[0.66rem] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full"
-                            style={{
-                                background: "#E60023",
-                                boxShadow: "0 6px 20px rgba(230,0,35,0.45)",
-                            }}
-                        >
-                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulseDot" />
-                            {activeIdx === 0 ? "Newest Post" : "Also New"}
-                        </span>
-                    </div>
+                    )}
+                    <span
+                        className="absolute top-3 left-3 inline-flex items-center gap-1.5 text-white text-[0.62rem] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                        style={{ background: "#E60023", boxShadow: "0 6px 20px rgba(230,0,35,0.45)" }}
+                    >
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulseDot" />
+                        {activeIdx === 0 ? "Newest Post" : "Also New"}
+                    </span>
+                </div>
 
-                    {/* ── Content side ── */}
-                    <div className="p-6 sm:p-9 flex flex-col">
-                        <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[#E60023] mb-3">
-                            Fresh off the press
-                        </p>
+                {/* Details */}
+                <div className="px-5 pt-4 pb-5 sm:px-6">
+                    <p className="text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#E60023] mb-1.5">
+                        Fresh off the press
+                    </p>
 
-                        <h3
-                            id="new-posts-popup-heading"
-                            className="font-display text-[1.4rem] sm:text-[1.85rem] leading-[1.2] text-[#1A1612] mb-3 pr-6 md:pr-0"
-                        >
-                            {active.title}
-                        </h3>
+                    <h3
+                        id="new-posts-popup-heading"
+                        className="font-display text-[1.15rem] sm:text-[1.45rem] leading-[1.2] text-[#1A1612] mb-2 line-clamp-2"
+                    >
+                        {active.title}
+                    </h3>
 
+                    <div className="flex items-center gap-3 text-[0.78rem] text-[#8C7E74] font-medium mb-3 flex-wrap">
+                        {active.category && (
+                            <span className="px-2.5 py-0.5 rounded-full bg-[#F2EDE4] text-[0.68rem] font-semibold text-[#5A5046]">
+                                {active.category}
+                            </span>
+                        )}
                         {active.readingTime && (
-                            <p className="text-[0.82rem] text-[#8C7E74] font-medium mb-6 flex items-center gap-2">
+                            <span className="inline-flex items-center gap-1.5">
                                 <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" />
                                 </svg>
                                 {active.readingTime}
-                            </p>
+                            </span>
                         )}
+                    </div>
 
+                    <div className="flex items-center gap-3">
                         <Link
                             to={`/blog/${active.slug}`}
                             onClick={close}
-                            className="group inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-6 py-3.5 rounded-full transition-all duration-300 hover:bg-[#E60023] hover:-translate-y-0.5 mb-7 w-full sm:w-auto"
-                            style={{ textDecoration: "none", boxShadow: "0 10px 30px rgba(26,22,18,0.18)" }}
+                            className="group flex-1 inline-flex items-center justify-center gap-2 bg-[#1A1612] text-[#FAF8F4] font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:bg-[#E60023]"
+                            style={{ textDecoration: "none" }}
                         >
                             Read it now
                             <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
@@ -1958,39 +2004,28 @@ const NewPostsPopup = ({ posts }) => {
                             </svg>
                         </Link>
 
-                        {/* Thumbnail strip */}
+                        {/* Compact switcher */}
                         {top3.length > 1 && (
-                            <div className="mt-auto pt-6" style={{ borderTop: "1px solid #EFE8DE" }}>
-                                <p className="text-[0.65rem] font-bold uppercase tracking-widest text-[#8C7E74] mb-3">
-                                    More new posts
-                                </p>
-                                <div className="flex gap-3">
-                                    {top3.map((p, i) => (
-                                        <button
-                                            key={p.slug}
-                                            type="button"
-                                            onClick={() => setActiveIdx(i)}
-                                            aria-label={`View ${p.title}`}
-                                            aria-pressed={i === activeIdx}
-                                            className="flex-1 text-left rounded-xl overflow-hidden transition-all duration-250"
-                                            style={{
-                                                border: i === activeIdx ? "2px solid #E60023" : "2px solid transparent",
-                                                opacity: i === activeIdx ? 1 : 0.55,
-                                                transform: i === activeIdx ? "translateY(-2px)" : "none",
-                                                boxShadow: i === activeIdx ? "0 8px 18px rgba(230,0,35,0.18)" : "none",
-                                            }}
-                                        >
-                                            {p.image && (
-                                                <div className="h-14 overflow-hidden relative">
-                                                    <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
-                                                    {i === activeIdx && (
-                                                        <span className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent, rgba(0,0,0,0.35))" }} />
-                                                    )}
-                                                </div>
-                                            )}
-                                        </button>
-                                    ))}
-                                </div>
+                            <div className="flex gap-2 flex-shrink-0">
+                                {top3.map((p, i) => (
+                                    <button
+                                        key={p.slug}
+                                        type="button"
+                                        onClick={() => setActiveIdx(i)}
+                                        aria-label={`View ${p.title}`}
+                                        aria-pressed={i === activeIdx}
+                                        className="rounded-lg overflow-hidden transition-all duration-200"
+                                        style={{
+                                            width: 64,
+                                            aspectRatio: "16 / 9",
+                                            background: "#1A1612",
+                                            border: i === activeIdx ? "2px solid #E60023" : "2px solid transparent",
+                                            opacity: i === activeIdx ? 1 : 0.55,
+                                        }}
+                                    >
+                                        {p.image && <img src={p.image} alt="" className="w-full h-full" style={{ objectFit: "cover" }} />}
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>
